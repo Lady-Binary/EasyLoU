@@ -1,0 +1,10 @@
+file = io.open ("c:\\lua\\rail.txt", "a")
+file.write(CHARPOSX .. "\n")
+print("CHARPOSX: " .. tostring(CHARPOSX))
+file.write(CHARPOSY .. "\n")
+print("CHARPOSY: " .. tostring(CHARPOSY))
+file.write(CHARPOSZ .. "\n")
+print("CHARPOSZ: " .. tostring(CHARPOSZ))
+file.write("\n")
+file.close()
+
