@@ -71,7 +71,7 @@ Assembly-CSharp-firstpass.dll
 Assembly-CSharp.dll  
 CoreUtil.dll  
 MessageCore.dll  
-protobuf-net.dll
+protobuf-net.dll  
 UnityEngine.CoreModule.dll  
 UnityEngine.InputLegacyModule.dll  
 UnityEngine.InputModule.dll  

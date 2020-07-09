@@ -1,7 +1,7 @@
 # Table of Contents
 
-[Commands](COMMANDS.MD)  
-[Variables](VARIABLES.MD)  
+[Commands](COMMANDS.md)  
+[Variables](VARIABLES.md)  
 
 # Commands
 
