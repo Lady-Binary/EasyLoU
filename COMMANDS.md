@@ -56,7 +56,11 @@ If Item is a string, FindItem will search for all the dynamic objects whose Name
 
 If ContainerID is given, FindItem will only search within the container having the given ObjectId.
 
-##FindPermanent
+### Examples
+  - FindItem("hatchet") *finds all viewable hatchets*
+  - FindItem("hatchet",tonumber(BACKPACKID)) *finds a hatchet in your backpack*
+
+## FindPermanent
 
 Parameters:  
 
