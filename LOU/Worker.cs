@@ -59,11 +59,19 @@ namespace LOU
             this.ClientStatusMemoryMapName = "ELOU_CS_" + this.ProcessId.ToString();
             this.ClientStatusMemoryMapSize = 1024 * 1024 * 10;
             this.ClientStatusMemoryMap = new MemoryMap(this.ClientStatusMemoryMapName, this.ClientStatusMemoryMapSize, this.ClientStatusMemoryMapMutexName);
+            if (!ClientStatusMemoryMap.OpenOrCreate())
+            {
+                throw new Exception("Could not open or create Client Status MemoryMap!");
+            }
 
             this.ClientCommandsMemoryMapMutexName = "ELOU_CC_MX_" + this.ProcessId.ToString();
             this.ClientCommandsMemoryMapName = "ELOU_CC_" + this.ProcessId.ToString();
             this.ClientCommandsMemoryMapSize = 1024 * 1024;
             this.ClientCommandsMemoryMap = new MemoryMap(this.ClientCommandsMemoryMapName, this.ClientCommandsMemoryMapSize, this.ClientCommandsMemoryMapMutexName);
+            if (!ClientCommandsMemoryMap.OpenOrCreate())
+            {
+                throw new Exception("Could not open or create Client Commands MemoryMap!");
+            }
         }
 
         public void OnDestroy()
