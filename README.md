@@ -30,7 +30,7 @@ EasyLOU may or may not work with official Legends of Aria servers run by Citadel
 
 ## Why is EasyLOU not working with the new version of Legends of Aria?
 Some Legends of Aria client updates may break the compatibility with EasyLOU.  
-As of today, EasyLOU is compatible with Legends of Aria 0.9.7 and we do not know if we will be able to always keep EasyLOU up-to-date with the latest client patch.  
+As of today, EasyLOU is compatible with Legends of Aria 10.0.0.2 and we do not know if we will be able to always keep EasyLOU up-to-date with the latest client patch.  
 Volunteers are always welcome :)
 
 ## How does it work?
