@@ -281,14 +281,14 @@ namespace EasyLOU
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBoxEx.Show(MainForm.TheMainForm, ex.ToString());
             }
 
         }
 
         private void DoReopen()
         {
-            MessageBox.Show("Not implemented!");
+            MessageBoxEx.Show(MainForm.TheMainForm, "Not implemented!");
         }
 
         private void DoSave()
@@ -308,7 +308,7 @@ namespace EasyLOU
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBoxEx.Show(MainForm.TheMainForm, ex.ToString());
                 }
             }
         }
@@ -332,7 +332,7 @@ namespace EasyLOU
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBoxEx.Show(MainForm.TheMainForm, ex.ToString());
             }
         }
 
@@ -359,7 +359,7 @@ namespace EasyLOU
 
             if (UnsavedChanges)
             {
-                if (MessageBox.Show("You have unsaved changes. Are you sure you want to close the current script?", "Close script with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBoxEx.Show(MainForm.TheMainForm, "You have unsaved changes. Are you sure you want to close the current script?", "Close script with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return;
                 }
@@ -389,7 +389,7 @@ namespace EasyLOU
 
             if (UnsavedChanges)
             {
-                if (MessageBox.Show("You have unsaved changes. Are you sure you want to close all the open scripts?", "Close all script with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBoxEx.Show(MainForm.TheMainForm, "You have unsaved changes. Are you sure you want to close all the open scripts?", "Close all script with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return;
                 }
@@ -424,7 +424,7 @@ namespace EasyLOU
 
             if (UnsavedChanges)
             {
-                if (MessageBox.Show("You have unsaved changes. Are you sure you want to close all the open scripts?", "Close all but this script with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBoxEx.Show(MainForm.TheMainForm, "You have unsaved changes. Are you sure you want to close all the open scripts?", "Close all but this script with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return;
                 }
@@ -463,7 +463,7 @@ namespace EasyLOU
 
             if (UnsavedChanges)
             {
-                if (MessageBox.Show("You have unsaved changes. Are you sure you want to exit?", "Exit with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBoxEx.Show(MainForm.TheMainForm, "You have unsaved changes. Are you sure you want to exit?", "Exit with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return;
                 }
@@ -546,12 +546,12 @@ namespace EasyLOU
 
         private void DoManageVarList()
         {
-            MessageBox.Show("Not implemented!");
+            MessageBoxEx.Show(MainForm.TheMainForm, "Not implemented!");
         }
 
         private void DoDontMoveCursor()
         {
-            MessageBox.Show("Not implemented!");
+            MessageBoxEx.Show(MainForm.TheMainForm, "Not implemented!");
         }
 
         private void DoHelp()
@@ -597,7 +597,7 @@ namespace EasyLOU
 
                 if (WindowTitle.ToString() != "Legends of Aria")
                 {
-                    MessageBox.Show("The selected window is not a Legends of Aria client!");
+                    MessageBoxEx.Show(MainForm.TheMainForm, "The selected window is not a Legends of Aria client!");
                     return true;
                 }
 
@@ -1125,7 +1125,7 @@ namespace EasyLOU
                 return;
             }
 
-            if (MessageBox.Show("Client " + ProcessId.ToString() + " not yet injected. Inject now?", "Client not yet injected", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            if (MessageBoxEx.Show(MainForm.TheMainForm, "Client " + ProcessId.ToString() + " not yet injected. Inject now?", "Client not yet injected", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
                 MainStatusLabel.Text = "Connection aborted.";
                 return;

@@ -193,11 +193,11 @@ namespace EasyLOU
                             }
                             catch (SyntaxErrorException ex)
                             {
-                                MessageBox.Show(ex.DecoratedMessage);
+                                MessageBoxEx.Show(MainForm.TheMainForm, ex.DecoratedMessage);
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show(ex.Message);
+                                MessageBoxEx.Show(MainForm.TheMainForm, ex.Message);
                             }
                             finally
                             {
@@ -272,7 +272,7 @@ namespace EasyLOU
 
         public bool SignalRuntimeException(ScriptRuntimeException ex)
         {
-            MessageBox.Show(ex.ToString());
+            MessageBoxEx.Show(MainForm.TheMainForm, ex.ToString());
             throw ex;
         }
 
