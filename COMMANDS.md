@@ -57,8 +57,8 @@ If Item is a string, FindItem will search for all the dynamic objects whose Name
 If ContainerID is given, FindItem will only search within the container having the given ObjectId.
 
 ### Examples
-  - FindItem("hatchet") *finds all viewable hatchets*
-  - FindItem("hatchet",tonumber(BACKPACKID)) *finds a hatchet in your backpack*
+  - FindItem("hatchet") *finds all hatchets and stores the result in FINDITEMID*
+  - FindItem("hatchet",tonumber(BACKPACKID)) *finds all hatchet in your backpack and stores the result in FINDITEMID*
 
 ## FindPermanent
 
@@ -70,6 +70,9 @@ Parameters:
 Useful for trees, rocks, etc.
 If Permanent is a number, FindPermanent will search for a permanent object having the given PermanentID.
 If Permanent is a string, FindPermanent will search for all the permanent objects whose Name contains the given string.
+
+### Examples
+  - FindPermanent("tree") *finds all trees and stores the result in FINDITEMID*
 
 ## Key
 
@@ -89,6 +92,7 @@ or alternatively
 Character will attempt to move at the given location x, y, and z, or if an ObjectID was provided, will attempt to move at the location of the given ObjectID.  
 Please note that pathfinding will be used, but if there are obstacles such as doors the action will probably fail and character will stay at the original position.  
 Likewise, if the location is too far from the current position than just a couple of screens, the action will probably fail and character will stay at the original position.  
+A sleep() command may be desired after the call to Move() to allow the character time to walk to the location.
 
 ## Stop
 
