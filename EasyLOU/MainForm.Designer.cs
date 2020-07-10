@@ -67,8 +67,7 @@ namespace EasyLOU
             this.stepOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stepIntoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.swapToNextClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectToClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.varDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageVarListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -98,8 +97,7 @@ namespace EasyLOU
             this.StopToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.StopAllToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.NewCliToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SwapCliToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.connectToClientiToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.HelpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.HomeToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -128,6 +126,8 @@ namespace EasyLOU
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.TargetAriaClientPanel = new System.Windows.Forms.Panel();
+            this.TargetAriaClientLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -149,6 +149,7 @@ namespace EasyLOU
             this.StatusTreeViewContextMenu.SuspendLayout();
             this.ScriptsTabContextMenu.SuspendLayout();
             this.VarsTreeViewContextMenu.SuspendLayout();
+            this.TargetAriaClientPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -162,7 +163,8 @@ namespace EasyLOU
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(533, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -181,7 +183,7 @@ namespace EasyLOU
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 29);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 22);
             this.toolStripMenuItem1.Text = "File";
             // 
             // newToolStripMenuItem
@@ -189,7 +191,7 @@ namespace EasyLOU
             this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -198,7 +200,7 @@ namespace EasyLOU
             this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -206,28 +208,28 @@ namespace EasyLOU
             // 
             this.reopenToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reopenToolStripMenuItem.Image")));
             this.reopenToolStripMenuItem.Name = "reopenToolStripMenuItem";
-            this.reopenToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.reopenToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.reopenToolStripMenuItem.Text = "Reopen";
             this.reopenToolStripMenuItem.Click += new System.EventHandler(this.reopenToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(249, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -235,7 +237,7 @@ namespace EasyLOU
             // 
             this.saveAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllToolStripMenuItem.Image")));
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveAllToolStripMenuItem.Text = "Save all";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
@@ -243,27 +245,27 @@ namespace EasyLOU
             // 
             this.closeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("closeToolStripMenuItem.Image")));
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // cloaseAllToolStripMenuItem
             // 
             this.cloaseAllToolStripMenuItem.Name = "cloaseAllToolStripMenuItem";
-            this.cloaseAllToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.cloaseAllToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.cloaseAllToolStripMenuItem.Text = "Close all";
             this.cloaseAllToolStripMenuItem.Click += new System.EventHandler(this.cloaseAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(249, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -282,34 +284,34 @@ namespace EasyLOU
             this.findToolStripMenuItem,
             this.replaceToolStripMenuItem});
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(39, 22);
             this.undoToolStripMenuItem.Text = "Edit";
             // 
             // undoToolStripMenuItem1
             // 
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             this.undoToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
-            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(203, 30);
+            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(145, 22);
             this.undoToolStripMenuItem1.Text = "Undo";
             this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(200, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(142, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripMenuItem.Image")));
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
@@ -317,7 +319,7 @@ namespace EasyLOU
             // 
             this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -325,34 +327,34 @@ namespace EasyLOU
             // 
             this.pateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pateToolStripMenuItem.Image")));
             this.pateToolStripMenuItem.Name = "pateToolStripMenuItem";
-            this.pateToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.pateToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.pateToolStripMenuItem.Text = "Paste";
             this.pateToolStripMenuItem.Click += new System.EventHandler(this.pateToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(200, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(142, 6);
             // 
             // findToolStripMenuItem
             // 
             this.findToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("findToolStripMenuItem.Image")));
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.findToolStripMenuItem.Text = "Find...";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
             // 
@@ -360,7 +362,7 @@ namespace EasyLOU
             // 
             this.replaceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("replaceToolStripMenuItem.Image")));
             this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
-            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
+            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.replaceToolStripMenuItem.Text = "Replace...";
             this.replaceToolStripMenuItem.Click += new System.EventHandler(this.replaceToolStripMenuItem_Click);
             // 
@@ -376,115 +378,105 @@ namespace EasyLOU
             this.stepOutToolStripMenuItem,
             this.stepIntoToolStripMenuItem});
             this.controlsToolStripMenuItem.Name = "controlsToolStripMenuItem";
-            this.controlsToolStripMenuItem.Size = new System.Drawing.Size(83, 29);
+            this.controlsToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
             this.controlsToolStripMenuItem.Text = "Control";
             // 
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startToolStripMenuItem.Image")));
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.startToolStripMenuItem.Text = "Start";
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pauseToolStripMenuItem.Image")));
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.pauseToolStripMenuItem.Text = "Pause";
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopToolStripMenuItem.Image")));
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stopToolStripMenuItem.Text = "Stop";
             // 
             // stopAllToolStripMenuItem
             // 
             this.stopAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopAllToolStripMenuItem.Image")));
             this.stopAllToolStripMenuItem.Name = "stopAllToolStripMenuItem";
-            this.stopAllToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
+            this.stopAllToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stopAllToolStripMenuItem.Text = "Stop All";
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(185, 6);
             // 
             // stepOverToolStripMenuItem
             // 
             this.stepOverToolStripMenuItem.Name = "stepOverToolStripMenuItem";
-            this.stepOverToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
+            this.stepOverToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stepOverToolStripMenuItem.Text = "Step Over";
             // 
             // stepOutToolStripMenuItem
             // 
             this.stepOutToolStripMenuItem.Name = "stepOutToolStripMenuItem";
-            this.stepOutToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
+            this.stepOutToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stepOutToolStripMenuItem.Text = "Step Out";
             // 
             // stepIntoToolStripMenuItem
             // 
             this.stepIntoToolStripMenuItem.Name = "stepIntoToolStripMenuItem";
-            this.stepIntoToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
+            this.stepIntoToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stepIntoToolStripMenuItem.Text = "Step Into";
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newClientToolStripMenuItem,
-            this.swapToNextClientToolStripMenuItem,
+            this.connectToClientToolStripMenuItem,
             this.varDumpToolStripMenuItem,
             this.manageVarListToolStripMenuItem,
             this.toolStripMenuItem2,
             this.dontMoveCursorToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 22);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
-            // newClientToolStripMenuItem
+            // connectToClientToolStripMenuItem
             // 
-            this.newClientToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newClientToolStripMenuItem.Image")));
-            this.newClientToolStripMenuItem.Name = "newClientToolStripMenuItem";
-            this.newClientToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt)
+            this.connectToClientToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("connectToClientToolStripMenuItem.Image")));
+            this.connectToClientToolStripMenuItem.Name = "connectToClientToolStripMenuItem";
+            this.connectToClientToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.N)));
-            this.newClientToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
-            this.newClientToolStripMenuItem.Text = "New Client";
-            this.newClientToolStripMenuItem.Click += new System.EventHandler(this.newClientToolStripMenuItem_Click);
-            // 
-            // swapToNextClientToolStripMenuItem
-            // 
-            this.swapToNextClientToolStripMenuItem.Name = "swapToNextClientToolStripMenuItem";
-            this.swapToNextClientToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt)
-            | System.Windows.Forms.Keys.S)));
-            this.swapToNextClientToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
-            this.swapToNextClientToolStripMenuItem.Text = "Swap To Next Client";
-            this.swapToNextClientToolStripMenuItem.Click += new System.EventHandler(this.swapToNextClientToolStripMenuItem_Click);
+            this.connectToClientToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.connectToClientToolStripMenuItem.Text = "Connect to client";
+            this.connectToClientToolStripMenuItem.Click += new System.EventHandler(this.connectToClientToolStripMenuItem_Click);
             // 
             // varDumpToolStripMenuItem
             // 
             this.varDumpToolStripMenuItem.Name = "varDumpToolStripMenuItem";
-            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
+            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
             this.varDumpToolStripMenuItem.Text = "VarDump";
             this.varDumpToolStripMenuItem.Click += new System.EventHandler(this.varDumpToolStripMenuItem_Click);
             // 
             // manageVarListToolStripMenuItem
             // 
             this.manageVarListToolStripMenuItem.Name = "manageVarListToolStripMenuItem";
-            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
+            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
             this.manageVarListToolStripMenuItem.Text = "Manage VarList";
             this.manageVarListToolStripMenuItem.Click += new System.EventHandler(this.manageVarListToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(344, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(236, 6);
             // 
             // dontMoveCursorToolStripMenuItem
             // 
             this.dontMoveCursorToolStripMenuItem.Name = "dontMoveCursorToolStripMenuItem";
-            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
+            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
             this.dontMoveCursorToolStripMenuItem.Text = "Don\'t Move Cursor";
             this.dontMoveCursorToolStripMenuItem.Click += new System.EventHandler(this.dontMoveCursorToolStripMenuItem_Click);
             // 
@@ -494,14 +486,14 @@ namespace EasyLOU
             this.helpToolStripMenuItem1,
             this.websiteToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripMenuItem1.Image")));
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(171, 30);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
             this.helpToolStripMenuItem1.Text = "Help...";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
@@ -509,7 +501,7 @@ namespace EasyLOU
             // 
             this.websiteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("websiteToolStripMenuItem.Image")));
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
-            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(171, 30);
+            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.websiteToolStripMenuItem.Text = "Website...";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
             // 
@@ -531,9 +523,9 @@ namespace EasyLOU
             this.toolStripSeparator5,
             this.FindToolStripButton,
             this.ReplaceToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 33);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(533, 31);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -657,16 +649,17 @@ namespace EasyLOU
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 420);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 270);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 30);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 9, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(533, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "MainStatusStrip";
             // 
             // MainStatusLabel
             // 
             this.MainStatusLabel.Name = "MainStatusLabel";
-            this.MainStatusLabel.Size = new System.Drawing.Size(129, 25);
+            this.MainStatusLabel.Size = new System.Drawing.Size(86, 17);
             this.MainStatusLabel.Text = "Not connected";
             // 
             // toolStrip2
@@ -679,14 +672,13 @@ namespace EasyLOU
             this.StopToolStripButton,
             this.StopAllToolStripButton,
             this.toolStripSeparator6,
-            this.NewCliToolStripButton,
-            this.SwapCliToolStripButton,
+            this.connectToClientiToolStripButton,
             this.toolStripSeparator7,
             this.HelpToolStripButton,
             this.HomeToolStripButton});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 64);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 55);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(800, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(533, 31);
             this.toolStrip2.TabIndex = 3;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -739,25 +731,15 @@ namespace EasyLOU
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 31);
             // 
-            // NewCliToolStripButton
+            // connectToClientiToolStripButton
             // 
-            this.NewCliToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.NewCliToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("NewCliToolStripButton.Image")));
-            this.NewCliToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NewCliToolStripButton.Name = "NewCliToolStripButton";
-            this.NewCliToolStripButton.Size = new System.Drawing.Size(28, 28);
-            this.NewCliToolStripButton.Text = "New Client";
-            this.NewCliToolStripButton.Click += new System.EventHandler(this.NewCliToolStripButton_Click);
-            // 
-            // SwapCliToolStripButton
-            // 
-            this.SwapCliToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SwapCliToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("SwapCliToolStripButton.Image")));
-            this.SwapCliToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SwapCliToolStripButton.Name = "SwapCliToolStripButton";
-            this.SwapCliToolStripButton.Size = new System.Drawing.Size(28, 28);
-            this.SwapCliToolStripButton.Text = "Swap To Next Client";
-            this.SwapCliToolStripButton.Click += new System.EventHandler(this.SwapCliToolStripButton_Click);
+            this.connectToClientiToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.connectToClientiToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("connectToClientiToolStripButton.Image")));
+            this.connectToClientiToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.connectToClientiToolStripButton.Name = "connectToClientiToolStripButton";
+            this.connectToClientiToolStripButton.Size = new System.Drawing.Size(28, 28);
+            this.connectToClientiToolStripButton.Text = "Connect to client";
+            this.connectToClientiToolStripButton.Click += new System.EventHandler(this.connectToClientToolStripButton_Click);
             // 
             // toolStripSeparator7
             // 
@@ -787,10 +769,11 @@ namespace EasyLOU
             // ScriptTab
             // 
             this.ScriptTab.Controls.Add(this.ScriptSplit);
-            this.ScriptTab.Location = new System.Drawing.Point(4, 29);
+            this.ScriptTab.Location = new System.Drawing.Point(4, 22);
+            this.ScriptTab.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptTab.Name = "ScriptTab";
-            this.ScriptTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ScriptTab.Size = new System.Drawing.Size(492, 292);
+            this.ScriptTab.Padding = new System.Windows.Forms.Padding(2);
+            this.ScriptTab.Size = new System.Drawing.Size(325, 158);
             this.ScriptTab.TabIndex = 0;
             this.ScriptTab.Tag = "new";
             this.ScriptTab.Text = "new1";
@@ -799,7 +782,8 @@ namespace EasyLOU
             // ScriptSplit
             // 
             this.ScriptSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ScriptSplit.Location = new System.Drawing.Point(3, 3);
+            this.ScriptSplit.Location = new System.Drawing.Point(2, 2);
+            this.ScriptSplit.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptSplit.Name = "ScriptSplit";
             this.ScriptSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -810,8 +794,9 @@ namespace EasyLOU
             // ScriptSplit.Panel2
             // 
             this.ScriptSplit.Panel2.Controls.Add(this.ScriptOutput);
-            this.ScriptSplit.Size = new System.Drawing.Size(486, 286);
-            this.ScriptSplit.SplitterDistance = 143;
+            this.ScriptSplit.Size = new System.Drawing.Size(321, 154);
+            this.ScriptSplit.SplitterDistance = 77;
+            this.ScriptSplit.SplitterWidth = 3;
             this.ScriptSplit.TabIndex = 1;
             // 
             // ScriptTextArea
@@ -823,8 +808,9 @@ namespace EasyLOU
             this.ScriptTextArea.FoldingStrategy = "Indent";
             this.ScriptTextArea.Font = new System.Drawing.Font("Courier New", 10F);
             this.ScriptTextArea.Location = new System.Drawing.Point(0, 0);
+            this.ScriptTextArea.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptTextArea.Name = "ScriptTextArea";
-            this.ScriptTextArea.Size = new System.Drawing.Size(486, 143);
+            this.ScriptTextArea.Size = new System.Drawing.Size(321, 77);
             this.ScriptTextArea.SyntaxHighlighting = "Lua";
             this.ScriptTextArea.TabIndex = 0;
             this.ScriptTextArea.Tag = "new";
@@ -834,18 +820,20 @@ namespace EasyLOU
             // 
             this.ScriptOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ScriptOutput.Location = new System.Drawing.Point(0, 0);
+            this.ScriptOutput.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptOutput.Multiline = true;
             this.ScriptOutput.Name = "ScriptOutput";
             this.ScriptOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutput.Size = new System.Drawing.Size(486, 139);
+            this.ScriptOutput.Size = new System.Drawing.Size(321, 74);
             this.ScriptOutput.TabIndex = 0;
             // 
             // StatusTreeView
             // 
             this.StatusTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StatusTreeView.Location = new System.Drawing.Point(0, 0);
+            this.StatusTreeView.Margin = new System.Windows.Forms.Padding(2);
             this.StatusTreeView.Name = "StatusTreeView";
-            this.StatusTreeView.Size = new System.Drawing.Size(296, 162);
+            this.StatusTreeView.Size = new System.Drawing.Size(197, 91);
             this.StatusTreeView.TabIndex = 6;
             this.StatusTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.StatusTreeView_NodeMouseClick);
             this.StatusTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.StatusTreeView_NodeMouseDoubleClick);
@@ -856,18 +844,20 @@ namespace EasyLOU
             this.ScriptsTab.Controls.Add(this.NewScriptTabPage);
             this.ScriptsTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ScriptsTab.Location = new System.Drawing.Point(0, 0);
+            this.ScriptsTab.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptsTab.Name = "ScriptsTab";
             this.ScriptsTab.SelectedIndex = 0;
-            this.ScriptsTab.Size = new System.Drawing.Size(500, 325);
+            this.ScriptsTab.Size = new System.Drawing.Size(333, 184);
             this.ScriptsTab.TabIndex = 4;
             this.ScriptsTab.SelectedIndexChanged += new System.EventHandler(this.ScriptsTab_SelectedIndexChanged);
             this.ScriptsTab.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ScriptsTab_MouseClick);
             // 
             // NewScriptTabPage
             // 
-            this.NewScriptTabPage.Location = new System.Drawing.Point(4, 29);
+            this.NewScriptTabPage.Location = new System.Drawing.Point(4, 22);
+            this.NewScriptTabPage.Margin = new System.Windows.Forms.Padding(2);
             this.NewScriptTabPage.Name = "NewScriptTabPage";
-            this.NewScriptTabPage.Size = new System.Drawing.Size(492, 292);
+            this.NewScriptTabPage.Size = new System.Drawing.Size(325, 158);
             this.NewScriptTabPage.TabIndex = 1;
             this.NewScriptTabPage.Text = "    +";
             this.NewScriptTabPage.ToolTipText = "Add new script";
@@ -882,7 +872,8 @@ namespace EasyLOU
             // MainSplit
             // 
             this.MainSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainSplit.Location = new System.Drawing.Point(0, 95);
+            this.MainSplit.Location = new System.Drawing.Point(0, 86);
+            this.MainSplit.Margin = new System.Windows.Forms.Padding(2);
             this.MainSplit.Name = "MainSplit";
             // 
             // MainSplit.Panel1
@@ -892,14 +883,16 @@ namespace EasyLOU
             // MainSplit.Panel2
             // 
             this.MainSplit.Panel2.Controls.Add(this.VersSplitContainer);
-            this.MainSplit.Size = new System.Drawing.Size(800, 325);
-            this.MainSplit.SplitterDistance = 500;
+            this.MainSplit.Size = new System.Drawing.Size(533, 184);
+            this.MainSplit.SplitterDistance = 333;
+            this.MainSplit.SplitterWidth = 3;
             this.MainSplit.TabIndex = 5;
             // 
             // VersSplitContainer
             // 
             this.VersSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.VersSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.VersSplitContainer.Margin = new System.Windows.Forms.Padding(2);
             this.VersSplitContainer.Name = "VersSplitContainer";
             this.VersSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -910,16 +903,18 @@ namespace EasyLOU
             // VersSplitContainer.Panel2
             // 
             this.VersSplitContainer.Panel2.Controls.Add(this.VarsTreeView);
-            this.VersSplitContainer.Size = new System.Drawing.Size(296, 325);
-            this.VersSplitContainer.SplitterDistance = 162;
+            this.VersSplitContainer.Size = new System.Drawing.Size(197, 184);
+            this.VersSplitContainer.SplitterDistance = 91;
+            this.VersSplitContainer.SplitterWidth = 3;
             this.VersSplitContainer.TabIndex = 7;
             // 
             // VarsTreeView
             // 
             this.VarsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.VarsTreeView.Location = new System.Drawing.Point(0, 0);
+            this.VarsTreeView.Margin = new System.Windows.Forms.Padding(2);
             this.VarsTreeView.Name = "VarsTreeView";
-            this.VarsTreeView.Size = new System.Drawing.Size(296, 159);
+            this.VarsTreeView.Size = new System.Drawing.Size(197, 90);
             this.VarsTreeView.TabIndex = 0;
             this.VarsTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.VarsTreeView_NodeMouseClick);
             this.VarsTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.VarsTreeView_NodeMouseDoubleClick);
@@ -943,24 +938,24 @@ namespace EasyLOU
             this.toolStripMenuItem3,
             this.copyValueToolStripMenuItem});
             this.StatusTreeViewContextMenu.Name = "StatusTreeViewContextMenu";
-            this.StatusTreeViewContextMenu.Size = new System.Drawing.Size(179, 70);
+            this.StatusTreeViewContextMenu.Size = new System.Drawing.Size(138, 54);
             // 
             // copyNameToolStripMenuItem
             // 
             this.copyNameToolStripMenuItem.Name = "copyNameToolStripMenuItem";
-            this.copyNameToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.copyNameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.copyNameToolStripMenuItem.Text = "Copy Name";
             this.copyNameToolStripMenuItem.Click += new System.EventHandler(this.copyNameToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(175, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(134, 6);
             // 
             // copyValueToolStripMenuItem
             // 
             this.copyValueToolStripMenuItem.Name = "copyValueToolStripMenuItem";
-            this.copyValueToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.copyValueToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.copyValueToolStripMenuItem.Text = "Copy Value";
             this.copyValueToolStripMenuItem.Click += new System.EventHandler(this.copyValueToolStripMenuItem_Click);
             // 
@@ -972,26 +967,26 @@ namespace EasyLOU
             this.closeAllScriptsToolStripMenuItem,
             this.closeAllScriptsButThisToolStripMenuItem});
             this.ScriptsTabContextMenu.Name = "ScriptsTabContextMenu";
-            this.ScriptsTabContextMenu.Size = new System.Drawing.Size(278, 94);
+            this.ScriptsTabContextMenu.Size = new System.Drawing.Size(204, 70);
             // 
             // closeThisToolStripMenuItem
             // 
             this.closeThisToolStripMenuItem.Name = "closeThisToolStripMenuItem";
-            this.closeThisToolStripMenuItem.Size = new System.Drawing.Size(277, 30);
+            this.closeThisToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.closeThisToolStripMenuItem.Text = "Close This";
             this.closeThisToolStripMenuItem.Click += new System.EventHandler(this.closeThisToolStripMenuItem_Click);
             // 
             // closeAllScriptsToolStripMenuItem
             // 
             this.closeAllScriptsToolStripMenuItem.Name = "closeAllScriptsToolStripMenuItem";
-            this.closeAllScriptsToolStripMenuItem.Size = new System.Drawing.Size(277, 30);
+            this.closeAllScriptsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.closeAllScriptsToolStripMenuItem.Text = "Close All Scripts";
             this.closeAllScriptsToolStripMenuItem.Click += new System.EventHandler(this.closeAllScriptsToolStripMenuItem_Click);
             // 
             // closeAllScriptsButThisToolStripMenuItem
             // 
             this.closeAllScriptsButThisToolStripMenuItem.Name = "closeAllScriptsButThisToolStripMenuItem";
-            this.closeAllScriptsButThisToolStripMenuItem.Size = new System.Drawing.Size(277, 30);
+            this.closeAllScriptsButThisToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.closeAllScriptsButThisToolStripMenuItem.Text = "Close All Scripts But This";
             this.closeAllScriptsButThisToolStripMenuItem.Click += new System.EventHandler(this.closeAllScriptsButThisToolStripMenuItem_Click);
             // 
@@ -1003,32 +998,53 @@ namespace EasyLOU
             this.toolStripSeparator11,
             this.toolStripMenuItem5});
             this.VarsTreeViewContextMenu.Name = "StatusTreeViewContextMenu";
-            this.VarsTreeViewContextMenu.Size = new System.Drawing.Size(179, 70);
+            this.VarsTreeViewContextMenu.Size = new System.Drawing.Size(138, 54);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(178, 30);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(137, 22);
             this.toolStripMenuItem4.Text = "Copy Name";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(175, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(134, 6);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(178, 30);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(137, 22);
             this.toolStripMenuItem5.Text = "Copy Value";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
+            // TargetAriaClientPanel
+            // 
+            this.TargetAriaClientPanel.Controls.Add(this.TargetAriaClientLabel);
+            this.TargetAriaClientPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TargetAriaClientPanel.Location = new System.Drawing.Point(0, 170);
+            this.TargetAriaClientPanel.Name = "TargetAriaClientPanel";
+            this.TargetAriaClientPanel.Size = new System.Drawing.Size(533, 100);
+            this.TargetAriaClientPanel.TabIndex = 6;
+            this.TargetAriaClientPanel.Visible = false;
+            // 
+            // TargetAriaClientLabel
+            // 
+            this.TargetAriaClientLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TargetAriaClientLabel.Location = new System.Drawing.Point(0, 0);
+            this.TargetAriaClientLabel.Name = "TargetAriaClientLabel";
+            this.TargetAriaClientLabel.Size = new System.Drawing.Size(533, 100);
+            this.TargetAriaClientLabel.TabIndex = 0;
+            this.TargetAriaClientLabel.Text = "Click the window of the Legends of Aria Client you want to connect to";
+            this.TargetAriaClientLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(533, 292);
+            this.Controls.Add(this.TargetAriaClientPanel);
             this.Controls.Add(this.MainSplit);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.statusStrip1);
@@ -1036,6 +1052,7 @@ namespace EasyLOU
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "EasyLOU";
             this.menuStrip1.ResumeLayout(false);
@@ -1064,6 +1081,7 @@ namespace EasyLOU
             this.StatusTreeViewContextMenu.ResumeLayout(false);
             this.ScriptsTabContextMenu.ResumeLayout(false);
             this.VarsTreeViewContextMenu.ResumeLayout(false);
+            this.TargetAriaClientPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1129,8 +1147,7 @@ namespace EasyLOU
         private System.Windows.Forms.ToolStripButton StopToolStripButton;
         private System.Windows.Forms.ToolStripButton StopAllToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripButton NewCliToolStripButton;
-        private System.Windows.Forms.ToolStripButton SwapCliToolStripButton;
+        private System.Windows.Forms.ToolStripButton connectToClientiToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton HelpToolStripButton;
         private System.Windows.Forms.ToolStripButton HomeToolStripButton;
@@ -1143,8 +1160,7 @@ namespace EasyLOU
         private System.Windows.Forms.TabPage NewScriptTabPage;
         private System.Windows.Forms.ToolStripStatusLabel MainStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newClientToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem swapToNextClientToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectToClientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem varDumpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageVarListToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
@@ -1167,6 +1183,8 @@ namespace EasyLOU
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.Panel TargetAriaClientPanel;
+        private System.Windows.Forms.Label TargetAriaClientLabel;
     }
 }
 

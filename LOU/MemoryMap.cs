@@ -18,7 +18,52 @@ namespace LOU
             this.MapName = MapName;
             this.MapSize = MapSize;
             this.MutexName = MutexName;
+        }
 
+        public bool OpenExisting()
+        {
+            using (var mutex = new Mutex(false, this.MutexName))
+            {
+                var mutexAcquired = false;
+                try
+                {
+                    mutexAcquired = mutex.WaitOne(1000);
+                }
+                catch (AbandonedMutexException)
+                {
+                    mutexAcquired = true;
+                }
+                if (!mutexAcquired)
+                {
+                    throw new Exception("Mutex " + this.MutexName + " not acquired!");
+                }
+                try
+                {
+                    //Try to open an existing memory map
+                    try
+                    {
+                        m_memMap = MemoryMappedFile.OpenExisting(this.MapName);
+                        return true;
+                    }
+                    catch (FileNotFoundException ex)
+                    {
+                        m_memMap = null;
+                        return false;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Cannot open memory map " + this.MapName + ": " + ex.ToString());
+                    }
+                }
+                finally
+                {
+                    mutex.ReleaseMutex();
+                }
+            }
+        }
+
+        public bool OpenOrCreate()
+        {
             using (var mutex = new Mutex(false, this.MutexName))
             {
                 var mutexAcquired = false;
@@ -55,6 +100,7 @@ namespace LOU
                     {
                         if (m_memMap == null)
                             m_memMap = MemoryMappedFile.CreateNew(this.MapName, this.MapSize);
+                        return true;
                     }
                     catch (Exception ex)
                     {

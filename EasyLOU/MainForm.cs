@@ -5,9 +5,11 @@ using SharpMonoInjector;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace EasyLOU
@@ -536,75 +538,6 @@ namespace EasyLOU
             }
             RefreshToolStripStatus();
         }
-        private void DoNewClient()
-        {
-            Object KeyValue = GetKey("ExePath");
-            String ExePath = KeyValue != null ? KeyValue.ToString() : "";
-
-            if (ExePath == "" || !File.Exists(ExePath))
-            {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Application|*.exe";
-                openFileDialog.Multiselect = false;
-                if (openFileDialog.ShowDialog() == DialogResult.OK &&
-                            openFileDialog.FileNames.Length > 0)
-                {
-                    ExePath = openFileDialog.FileName;
-                    SetKey("ExePath", ExePath);
-
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            bool started = false;
-
-            try
-            {
-                var p = new Process();
-
-                p.StartInfo.FileName = ExePath;
-                p.StartInfo.WorkingDirectory = Path.GetDirectoryName(ExePath);
-
-                MainStatusLabel.Text = ExePath + " starting...";
-
-                started = p.Start();
-
-                if (MessageBox.Show("Please press ok when the login screen is ready.", "Ready to inject", MessageBoxButtons.OKCancel) != DialogResult.OK)
-                {
-                    MainStatusLabel.Text = "Injection aborted.";
-                    return;
-                }
-
-                System.Threading.Thread.Sleep(1000);
-
-                var procId = p.Id;
-                MainStatusLabel.Text = ExePath + " started, pid=" + procId.ToString();
-
-                var monoModule = GetMonoModule(procId);
-
-                Inject(procId, monoModule);
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.ToString());
-                SetKey("ExePath", "");
-                started = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                SetKey("ExePath", "");
-                started = false;
-            }
-        }
-
-        private void DoSwapToNextClient()
-        {
-            ConnectFirstClientAfter(MainForm.CurrentClientProcessId);
-        }
 
         private void DoVarDump()
         {
@@ -629,6 +562,72 @@ namespace EasyLOU
         private void DoWebsite()
         {
             System.Diagnostics.Process.Start("https://lmgtfy.com/?q=easylou+website");
+        }
+
+        private void DoConnectToClient()
+        {
+            TargetAriaClientPanel.Dock = DockStyle.Fill;
+            TargetAriaClientPanel.Visible = true;
+
+            MouseEventCallback handler = null;
+            handler = (MouseEventType type, int x, int y) => {
+                // Restore cursors
+                // see https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa
+                // and also https://autohotkey.com/board/topic/32608-changing-the-system-cursor/
+                MouseHook.SystemParametersInfo(0x57, 0, (IntPtr)0, 0);
+                TargetAriaClientPanel.Visible = false;
+                Cursor.Current = Cursors.Arrow;
+
+                // Stop global hook
+                MouseHook.HookEnd();
+                MouseHook.MouseDown -= handler;
+
+                // Get clicked coord
+                MouseHook.POINT p;
+                p.x = x;
+                p.y = y;
+                Debug.WriteLine("Clicked x=" + x.ToString() + " y=" + y.ToString());
+
+                // Get clicked window handler, window title
+                IntPtr hWnd = MouseHook.WindowFromPoint(p);
+                int WindowTitleLength = MouseHook.GetWindowTextLength(hWnd);
+                StringBuilder WindowTitle = new StringBuilder(WindowTitleLength + 1);
+                MouseHook.GetWindowText(hWnd, WindowTitle, WindowTitle.Capacity);
+                Debug.WriteLine("Clicked handle=" + hWnd.ToString() + " title=" + WindowTitle);
+
+                if (WindowTitle.ToString() != "Legends of Aria")
+                {
+                    MessageBox.Show("The selected window is not a Legends of Aria client!");
+                    return true;
+                }
+
+                // Get the processId, and connect
+                uint processId;
+                MouseHook.GetWindowThreadProcessId(hWnd, out processId);
+                Debug.WriteLine("Clicked pid=" + processId.ToString());
+
+                // Attempt connection (or injection, if needed)
+                ConnectToClient((int)processId);
+                return true;
+            };
+
+            // Prepare cursor image
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            Bitmap image = ((System.Drawing.Bitmap)(resources.GetObject("connectToClientToolStripMenuItem.Image")));
+
+            // Set all cursors
+            // see https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setsystemcursor
+            // and also https://autohotkey.com/board/topic/32608-changing-the-system-cursor/
+            Cursor cursor = new Cursor(image.GetHicon());
+            uint[] cursors = new uint[] { 32512, 32513, 32514, 32515, 32516, 32640, 32641, 32642, 32643, 32644, 32645, 32646, 32648, 32649, 32650, 32651 };
+            foreach (uint i in cursors)
+            {
+                MouseHook.SetSystemCursor(cursor.Handle, i);
+            }
+
+            // Start mouse global hook
+            MouseHook.MouseDown += handler;
+            MouseHook.HookStart();
         }
 
         #endregion Actions
@@ -761,14 +760,9 @@ namespace EasyLOU
             DoWebsite();
         }
 
-        private void newClientToolStripMenuItem_Click(object sender, EventArgs e)
+        private void connectToClientToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DoNewClient();
-        }
-
-        private void swapToNextClientToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DoSwapToNextClient();
+            DoConnectToClient();
         }
 
         private void varDumpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -958,14 +952,9 @@ namespace EasyLOU
             RefreshToolStripStatus();
         }
 
-        private void SwapCliToolStripButton_Click(object sender, EventArgs e)
+        private void connectToClientToolStripButton_Click(object sender, EventArgs e)
         {
-            DoSwapToNextClient();
-        }
-
-        private void NewCliToolStripButton_Click(object sender, EventArgs e)
-        {
-            DoNewClient();
+            DoConnectToClient();
         }
 
         private void HelpToolStripButton_Click(object sender, EventArgs e)
@@ -1014,8 +1003,10 @@ namespace EasyLOU
             return MonoModule;
         }
 
-        private void Inject(int ProcessId, IntPtr MonoModule)
+        private void Inject(int ProcessId)
         {
+            var MonoModule = GetMonoModule(ProcessId);
+
             String AssemblyPath = "LOU.dll";
 
             IntPtr handle = Native.OpenProcess(ProcessAccessRights.PROCESS_ALL_ACCESS, false, ProcessId);
@@ -1046,7 +1037,6 @@ namespace EasyLOU
                 {
                     IntPtr asm = injector.Inject(file, "LOU", "Loader", "Load");
                     MainStatusLabel.Text = "Injection on " + ProcessId.ToString() + " successful";
-                    ConnectToClient(ProcessId);
                 }
                 catch (InjectorException ie)
                 {
@@ -1127,6 +1117,34 @@ namespace EasyLOU
             MainForm.ClientCommandsMemoryMapName = "ELOU_CC_" + ProcessId.ToString();
             MainForm.ClientCommandsMemoryMapSize = 1024 * 1024;
             MainForm.ClientCommandsMemoryMap = new MemoryMap(MainForm.ClientCommandsMemoryMapName, MainForm.ClientCommandsMemoryMapSize, MainForm.ClientCommandsMemoryMapMutexName);
+
+            if (MainForm.ClientStatusMemoryMap.OpenExisting() && MainForm.ClientCommandsMemoryMap.OpenExisting())
+            {
+                // Client already patched, memorymaps open already all good
+                MainStatusLabel.Text = "Connection successful.";
+                return;
+            }
+
+            if (MessageBox.Show("Client " + ProcessId.ToString() + " not yet injected. Inject now?", "Client not yet injected", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            {
+                MainStatusLabel.Text = "Connection aborted.";
+                return;
+            }
+
+            MainStatusLabel.Text = "Connecting, please wait ...";
+
+            Inject(ProcessId);
+
+            System.Threading.Thread.Sleep(1000);
+
+            if (MainForm.ClientStatusMemoryMap.OpenExisting() && MainForm.ClientCommandsMemoryMap.OpenExisting())
+            {
+                // Client already patched, memorymaps open already all good
+                MainStatusLabel.Text = "Connection successful.";
+                return;
+            }
+
+            MainStatusLabel.Text = "Connection failed.";
         }
         #endregion
 
