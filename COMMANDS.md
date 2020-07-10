@@ -99,7 +99,7 @@ A sleep() command may be desired after the call to Move() to allow the character
 Parameters:  
 None.
 
-If character is moving, it will stop.
+If the character is moving, it will stop.
 
 ## ScanJournal
 
@@ -148,12 +148,20 @@ Parameters:
 
 Targets a dynamic object (i.e. an item, or a mobile).
 
+### Examples
+  - FindItem("bear") 
+  - TargetDynamic(tonumber(FINDITEMID))
+
 ## TargetPermanent
 
 Parameters:
 - id: the PermanentID to target.
 
 Targets a permanent object (i.e. a rock, or a tree).
+
+### Examples
+  - FindPermanent("tree") 
+  - TargetPermanent(tonumber(FINDITEMID))
 
 ## TargetLoc
 
@@ -208,6 +216,11 @@ Parameters:
 
 To be used in conjunction with Drag.  
 Drops the currently dragged item into the given ContainerID.
+
+### Example
+   
+  - Drag(itemId)
+  - Dropc(tonumber(BACKPACKID))
 
 ## Dropg
 
@@ -277,13 +290,22 @@ Parameters:
 
 FindPanel will search for all the panels whose Name contains the given string.
 
+### Example
+
+  - FindPanel("Tracking") *result is stored in FINDPANELID*
+
 ## ClickButton
 
 Parameters:
 - PanelName: a string.
 - ButtonName: a string.
 
-Trigger a click event on the button having the name specified and contained in the specified panel.
+Trigger a click event on the button having the name specified and contained in the specified panel.  Mouse over the button needed, and the ButtonName will be stored in the MOUSEOVERUINAME variable
+
+### Example
+
+  - FindPanel("Tracking")
+  - ClickButton(FINDPANELID, "0")
 
 ## SetInput
 
