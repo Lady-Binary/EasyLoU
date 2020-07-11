@@ -56,7 +56,11 @@ If Item is a string, FindItem will search for all the dynamic objects whose Name
 
 If ContainerID is given, FindItem will only search within the container having the given ObjectId.
 
-##FindPermanent
+### Examples
+  - FindItem("hatchet") *finds all hatchets and stores the result in FINDITEMID*
+  - FindItem("hatchet",tonumber(BACKPACKID)) *finds all hatchet in your backpack and stores the result in FINDITEMID*
+
+## FindPermanent
 
 Parameters:  
 
@@ -66,6 +70,9 @@ Parameters:
 Useful for trees, rocks, etc.
 If Permanent is a number, FindPermanent will search for a permanent object having the given PermanentID.
 If Permanent is a string, FindPermanent will search for all the permanent objects whose Name contains the given string.
+
+### Examples
+  - FindPermanent("tree") *finds all trees and stores the result in FINDITEMID*
 
 ## Key
 
@@ -85,13 +92,14 @@ or alternatively
 Character will attempt to move at the given location x, y, and z, or if an ObjectID was provided, will attempt to move at the location of the given ObjectID.  
 Please note that pathfinding will be used, but if there are obstacles such as doors the action will probably fail and character will stay at the original position.  
 Likewise, if the location is too far from the current position than just a couple of screens, the action will probably fail and character will stay at the original position.  
+A sleep() command may be desired after the call to Move() to allow the character time to walk to the location.
 
 ## Stop
 
 Parameters:  
 None.
 
-If character is moving, it will stop.
+If the character is moving, it will stop.
 
 ## ScanJournal
 
@@ -140,12 +148,20 @@ Parameters:
 
 Targets a dynamic object (i.e. an item, or a mobile).
 
+### Examples
+  - FindItem("bear") 
+  - TargetDynamic(tonumber(FINDITEMID))
+
 ## TargetPermanent
 
 Parameters:
 - id: the PermanentID to target.
 
 Targets a permanent object (i.e. a rock, or a tree).
+
+### Examples
+  - FindPermanent("tree") 
+  - TargetPermanent(tonumber(FINDITEMID))
 
 ## TargetLoc
 
@@ -200,6 +216,11 @@ Parameters:
 
 To be used in conjunction with Drag.  
 Drops the currently dragged item into the given ContainerID.
+
+### Example
+   
+  - Drag(itemId)
+  - Dropc(tonumber(BACKPACKID))
 
 ## Dropg
 
@@ -269,13 +290,22 @@ Parameters:
 
 FindPanel will search for all the panels whose Name contains the given string.
 
+### Example
+
+  - FindPanel("Tracking") *result is stored in FINDPANELID*
+
 ## ClickButton
 
 Parameters:
 - PanelName: a string.
 - ButtonName: a string.
 
-Trigger a click event on the button having the name specified and contained in the specified panel.
+Trigger a click event on the button having the name specified and contained in the specified panel.  Mouse over the button needed, and the ButtonName will be stored in the MOUSEOVERUINAME variable
+
+### Example
+
+  - FindPanel("Tracking")
+  - ClickButton(FINDPANELID, "0")
 
 ## SetInput
 
