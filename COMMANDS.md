@@ -291,6 +291,10 @@ Parameters:
 
 FindPanel will search for all the panels whose Name contains the given string.
 
+### Example
+
+FindPanel("Tracking") *result is stored in FINDPANELID*
+
 ## FindButton
 
 Parameters:
@@ -306,7 +310,9 @@ If X and Y are provided, FindButton will search within the provided Panel all th
 
 ### Example
 
-  - FindPanel("Tracking") *result is stored in FINDPANELID*
+  - FindButton("CraftingWindow", "favorites")
+  - ClickButton("CraftingWindow", FINDBUTTONNAME)
+
 
 ## ClickButton
 
