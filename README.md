@@ -99,12 +99,13 @@ Also: don't be evil.
 
 # CREDITS
 
-LadyBinary is a tribute to Lord Binary, who was very much active in the UO hacking scene (see for example [UO_RICE](https://github.com/necr0potenc3/UO_RICE)).  
-EasyLOU is of course inspired from the great [EasyUO](http://www.easyuo.com/).  
-EasyLOU is a tribute to [Legends Of Ultima Online](https://www.legendsofultima.online/), whose passionate staff have dedicated so much effort in putting together a wonderful product based off of [Legends of Aria](https://www.legendsofaria.com/).  
-The LUA engine is based on [MoonSharp](https://github.com/moonsharp-devs/moonsharp/), commit 4e748a7.  
-The Text editor is based on [ICSharpCode.TextEditorEx](https://github.com/StefH/ICSharpCode.TextEditorEx.git), commit 1934da7.  
-The Mono Injection is based on [SharpMonoInjector](https://github.com/warbler/SharpMonoInjector), commit 73566c1.  
+Legends of Aria is copyright of [Citadel Studios](https://citadelstudios.net/).  
+LadyBinary is a tribute to Lord Binary, who was very active in the UO hacking scene (see for example [UO_RICE](https://github.com/necr0potenc3/UO_RICE)).  
+EasyLOU is of course inspired by the great [EasyUO](http://www.easyuo.com/).  
+The LOU part of EasyLOU is a tribute to [Legends Of Ultima Online](https://www.legendsofultima.online/), whose passionate staff have dedicated so much effort in putting together a wonderful product based off of [Legends of Aria](https://www.legendsofaria.com/).  
+The Lua engine is based on [MoonSharp](https://github.com/moonsharp-devs/moonsharp/), commit 4e748a7 plus minor enhancements.  
+The Text editor is based on [ICSharpCode.TextEditorEx](https://github.com/StefH/ICSharpCode.TextEditorEx), commit 1934da7 plus minor enhancements.  
+The Mono Injection code is based on [SharpMonoInjector](https://github.com/warbler/SharpMonoInjector), commit 73566c1.  
 
 # CONTACTS
 
@@ -113,5 +114,4 @@ You can contact me at ladybinary@protonmail.com
 License
 -------
 
-This project is licensed under the MIT license, which can be found in the file
-[LICENSE](LICENSE) in the root of the project source code.  
+This project is licensed under a 3-clause BSD license, which can be found in the [LICENSE](LICENSE) file.  
