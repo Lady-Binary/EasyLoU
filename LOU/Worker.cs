@@ -553,14 +553,12 @@ namespace LOU
 
                     case CommandType.TargetLoc:
                         {
-                            string _convert = ExtractParam(ClientCommand.CommandParams, 0);
-                            string _x = ExtractParam(ClientCommand.CommandParams, 1);
-                            string _y = ExtractParam(ClientCommand.CommandParams, 2);
-                            string _z = ExtractParam(ClientCommand.CommandParams, 3);
-                            string _objectId = ExtractParam(ClientCommand.CommandParams, 4);
+                            string _x = ExtractParam(ClientCommand.CommandParams, 0);
+                            string _y = ExtractParam(ClientCommand.CommandParams, 1);
+                            string _z = ExtractParam(ClientCommand.CommandParams, 2);
+                            string _objectId = ExtractParam(ClientCommand.CommandParams, 3);
 
-                            if (bool.TryParse(_convert, out bool convert) &&
-                                float.TryParse(_x, out float x) &&
+                            if (float.TryParse(_x, out float x) &&
                                 float.TryParse(_y, out float y) &&
                                 float.TryParse(_z, out float z))
                             {
