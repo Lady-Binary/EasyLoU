@@ -160,6 +160,8 @@
         <Key word = "FINDPERMANAME" />
         <Key word = "FINDPERMADIST" />
         <Key word = "FINDPANELID" />
+        <Key word = "FINDBUTTONNAME" />
+        <Key word = "FINDBUTTONTEXT" />
         <Key word = "FINDGAMEOBJECTID" />
         <Key word = "FINDMOBILEID" />
         <Key word = "FINDMOBILENAME" />
@@ -189,6 +191,8 @@
         <Key word = "MOUSEOVEROBJNAME" />
         <Key word = "MOUSEOVEROBJCNTID" />
         <Key word = "MOUSEOVERUINAME" />
+        <Key word = "MOUSEOVERUIX" />
+        <Key word = "MOUSEOVERUIY" />
         <Key word = "CLICKWINDOWX" />
         <Key word = "CLICKWINDOWY" />
         <Key word = "CLICKWINDOWZ" />
@@ -240,6 +244,7 @@
         <Key word = "SelectServer" />
         <Key word = "CharacterSelect" />
         <Key word = "FindPanel" />
+        <Key word = "FindButton" />
         <Key word = "ClickButton" />
         <Key word = "SetInput" />
         <Key word = "SetTargetFrameRate" />

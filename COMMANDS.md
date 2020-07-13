@@ -36,6 +36,7 @@ Commands are not in alphabetic order. Rather, they are (somewhat) grouped by fun
 - [SelectServer](#SelectServer)
 - [CharacterSelect](#CharacterSelect)
 - [FindPanel](#FindPanel)
+- [FindButton](#FindButton)
 - [ClickButton](#ClickButton)
 - [SetInput](#SetInput)
 - [SetTargetFrameRate](#SetTargetFrameRate)
@@ -289,6 +290,19 @@ Parameters:
 - Name: a string.
 
 FindPanel will search for all the panels whose Name contains the given string.
+
+## FindButton
+
+Parameters:
+- Panel: a string.
+- Name: a string.
+or
+- Panel: a string.
+- x: a GUI x coordinate.
+- y: a GUI y coordinate.
+
+If Name is provided, FindButton will search within the provided Panel all the buttons whose Name/Tooltip/Command contains the given Name string.  
+If X and Y are provided, FindButton will search within the provided Panel all the buttons that are clickable at the given GUI coordinates X and Y.  
 
 ### Example
 

@@ -18,7 +18,7 @@ With EasyLOU you can write [Lua 5.2](https://www.lua.org/manual/5.2/) scripts th
 Download the pre-built binary from the Releases tab, and place it in the same folder where your Assembly-CSharp.dll resides (usually something like C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed).  
 Launch EasyLOU.exe. On Windows 10, you might get a "Microsoft Defender SmartScreen prevented an unrecognised app from starting." error message. If you know what you're doing, open the properties menu of EasyLOU.exe, and check the "Unblock" click apply, click OK, and relaunch EasyLOU.exe.  
 Once EasyLOU is launched, launch your Legends of Aria Client.  
-Once your Legends of Aria Client is fully loaded, on EasyLOU click on the Connect To Client Icon ![icon](EasyLOU\icons\uo.ico?raw=true "EasyLOU Screenshot").  
+Once your Legends of Aria Client is fully loaded, on EasyLOU click on the Connect To Client Icon ![icon](EasyLOU/icons/uo.ico?raw=true "Connect to Client Icon").  
 The mouse cursor should turn into a beautiful UO icon; click on the Legends of Aria Client you want to connect to, then click OK to inject.  
 Take a look at the scripts that can be found in the [Examples/](Examples/) folder.  
 Take a look at the available [Commands](COMMANDS.md) and [Variables](VARIABLES.md).  

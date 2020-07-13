@@ -1,5 +1,6 @@
 ﻿using CoreUtil;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace LOU
         private bool Intercepting = false;
 
         private int ProcessId = -1;
+
+        private Assembly AssemblyCSharp = null;
 
         private String ClientStatusMemoryMapMutexName;
         private String ClientStatusMemoryMapName;
@@ -33,6 +36,7 @@ namespace LOU
         private Dictionary<String, DynamicObject> FindItemResults;
         private Dictionary<String, ClientObject> FindPermanentResults;
         private Dictionary<String, FloatingPanel> FindPanelResults;
+        private Dictionary<int, String> FindButtonResults;
         private Dictionary<String, GameObject> FindGameObjectResults;
         private List<MobileInstance> FindMobileResults;
         private List<MobileInstance> NearbyMonsters;
@@ -72,6 +76,27 @@ namespace LOU
             {
                 throw new Exception("Could not open or create Client Commands MemoryMap!");
             }
+
+            // Cache AssemblyCSharp assembly, it will come handy for dynamic types resolution and other shenanigans
+            Utils.Log("Loading Assemblies");
+            Assembly[] Assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (Assembly Assembly in Assemblies)
+            {
+                try
+                {
+                    if (Assembly.GetName().Name == "Assembly-CSharp")
+                    {
+                        Utils.Log("Assembly-CSharp found.");
+                        this.AssemblyCSharp = Assembly;
+                        break;
+                    }
+                }
+                catch { }
+            }
+            if (AssemblyCSharp == null)
+            {
+                Utils.Log("Assembly-CSharp not found!");
+            }
         }
 
         public void OnDestroy()
@@ -85,6 +110,7 @@ namespace LOU
             this.FindItemResults = null;
             this.FindPermanentResults = null;
             this.FindPanelResults = null;
+            this.FindButtonResults = null;
             this.FindGameObjectResults = null;
             this.FindMobileResults = null;
             this.lastMouseClickClientObject = null;
@@ -215,6 +241,135 @@ namespace LOU
                             }
                             watch.Stop();
                             Utils.Log("FindPanel took " + watch.ElapsedMilliseconds.ToString() + "ms");
+                            break;
+                        }
+
+                    case CommandType.FindButton:
+                        {
+                            var watch = new System.Diagnostics.Stopwatch();
+                            watch.Start();
+                            this.FindButtonResults = new Dictionary<int, string>();
+
+                            string _containerName = ExtractParam(ClientCommand.CommandParams, 0);
+
+                            string _buttonName = ExtractParam(ClientCommand.CommandParams, 1);
+                            string _x = ExtractParam(ClientCommand.CommandParams, 1);
+                            string _y = ExtractParam(ClientCommand.CommandParams, 2);
+
+                            FloatingPanelManager fpm = FloatingPanelManager.DJCGIMIDOPB;
+                            if (fpm != null)
+                            {
+                                FloatingPanel floatingPanel = fpm.GetPanel(_containerName);
+                                if (floatingPanel != null)
+                                {
+                                    DynamicWindow dynamicWindow = floatingPanel.GetComponent<DynamicWindow>();
+                                    if (dynamicWindow != null)
+                                    {
+                                        if (int.TryParse(_x, out int x) && int.TryParse(_y, out int y))
+                                        {
+                                            //////// Coordinates Search: find collider by coordinate
+
+                                            BoxCollider[] Colliders = dynamicWindow.GetComponentsInChildren<BoxCollider>();
+
+                                            foreach (BoxCollider Collider in Colliders)
+                                            {
+                                                float ColliderX1 = Collider.transform.localPosition.x;
+                                                float ColliderX2 = Collider.transform.localPosition.x + Collider.size.x;
+                                                float ColliderY1 = Collider.transform.localPosition.y;
+                                                float ColliderY2 = Collider.transform.localPosition.y - Collider.size.y;
+                                                if (ColliderX1 <= x && x <= ColliderX2 &&
+                                                    ColliderY2 <= y && y <= ColliderY1)
+                                                {
+                                                    if (int.TryParse(Collider.name, out int ButtonID))
+                                                    {
+                                                        Utils.Log("Collider " + Collider.name + " found by coordinates!");
+                                                        this.FindButtonResults[ButtonID] = x.ToString() + "-" + y.ToString();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //////// Textual Search 1: find label containing text, and corresponding collider
+
+                                            UILabel[] Labels = dynamicWindow.GetComponentsInChildren<UILabel>();
+                                            BoxCollider[] Colliders = dynamicWindow.GetComponentsInChildren<BoxCollider>();
+
+                                            // Let's search for a label containing the given text
+                                            foreach (UILabel Label in Labels)
+                                            {
+                                                if (Label.FJNGNLHHOEI.ToLower().Contains(_buttonName.ToLower()))
+                                                {
+                                                    Utils.Log("Label " + Label.FJNGNLHHOEI + " found! Searching for collider...");
+
+                                                    // Calculate the label's center
+                                                    float LabelCenterX = Label.transform.localPosition.x + Label.IOGCKBNELGA.x;
+                                                    float LabelCenterY = Label.transform.localPosition.y + Label.IOGCKBNELGA.y;
+
+                                                    // And search for a collider that is colliding with the label's center
+                                                    foreach (BoxCollider Collider in Colliders)
+                                                    {
+                                                        float ColliderX1 = Collider.transform.localPosition.x;
+                                                        float ColliderX2 = Collider.transform.localPosition.x + Collider.size.x;
+                                                        float ColliderY1 = Collider.transform.localPosition.y;
+                                                        float ColliderY2 = Collider.transform.localPosition.y - Collider.size.y;
+                                                        if (ColliderX1 <= LabelCenterX && LabelCenterX <= ColliderX2 &&
+                                                            ColliderY2 <= LabelCenterY && LabelCenterY <= ColliderY1)
+                                                        {
+                                                            if (int.TryParse(Collider.name, out int ButtonID))
+                                                            {
+                                                                Utils.Log("Collider " + Collider.name + " found!");
+                                                                this.FindButtonResults[ButtonID] = Label.FJNGNLHHOEI;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            //////// Textual Search 2: find action containing text, and corresponding action id
+
+                                            // KAAFKBBECEF is an internal type, we need to use reflection
+                                            Type KAAFKBBECEF = AssemblyCSharp.GetType("KAAFKBBECEF");
+
+                                            object HGBANEEHBLH = Utils.GetInstanceField(dynamicWindow, "HGBANEEHBLH");
+
+                                            int i = 0;
+                                            foreach (object o in (HGBANEEHBLH as IEnumerable))
+                                            {
+                                                object casted = Convert.ChangeType(o, KAAFKBBECEF);
+
+                                                Utils.LogProps(casted);
+
+                                                string KFBLLAJBKAD = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "KFBLLAJBKAD");
+                                                if (KFBLLAJBKAD != null && KFBLLAJBKAD.ToLower().Contains(_buttonName.ToLower()))
+                                                {
+                                                    Utils.Log("Found DynamicWindow Action by KFBLLAJBKAD!");
+                                                    this.FindButtonResults[i] = KFBLLAJBKAD;
+                                                }
+
+                                                string ELGLAFGJGAO = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "ELGLAFGJGAO");
+                                                if (ELGLAFGJGAO != null && ELGLAFGJGAO.ToLower().Contains(_buttonName.ToLower()))
+                                                {
+                                                    Utils.Log("Found DynamicWindow Action by ELGLAFGJGAO!");
+                                                    this.FindButtonResults[i] = ELGLAFGJGAO;
+                                                }
+
+                                                string OEFOJOODPBK = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "OEFOJOODPBK");
+                                                if (OEFOJOODPBK != null && OEFOJOODPBK.ToLower().Contains(_buttonName.ToLower()))
+                                                {
+                                                    Utils.Log("Found DynamicWindow Action by OEFOJOODPBK!");
+                                                    this.FindButtonResults[i] = OEFOJOODPBK;
+                                                }
+
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            watch.Stop();
+                            Utils.Log("FindButton took " + watch.ElapsedMilliseconds.ToString() + "ms");
                             break;
                         }
 
@@ -842,6 +997,25 @@ namespace LOU
                 ClientStatus.Find["FINDPANELID"] = "N/A";
             }
 
+            if (this.FindButtonResults != null && this.FindButtonResults.Count > 0)
+            {
+                try
+                {
+                    ClientStatus.Find["FINDBUTTONNAME"] = String.Join(",", this.FindButtonResults.Keys);
+                    ClientStatus.Find["FINDBUTTONTEXT"] = String.Join(",", this.FindButtonResults.Values);
+                }
+                catch (Exception e)
+                {
+                    Utils.Log(e.ToString());
+                    this.FindButtonResults = new Dictionary<int, string>();
+                }
+            }
+            else
+            {
+                ClientStatus.Find["FINDBUTTONNAME"] = "N/A";
+                ClientStatus.Find["FINDBUTTONTEXT"] = "N/A";
+            }
+
             if (this.FindGameObjectResults != null && this.FindGameObjectResults.Count > 0)
             {
                 try
@@ -973,10 +1147,14 @@ namespace LOU
                 if (UICamera.EHDALGCGPEK != null)
                 {
                     ClientStatus.Miscellaneous["MOUSEOVERUINAME"] = UICamera.EHDALGCGPEK.name != null ? UICamera.EHDALGCGPEK.name : "N/A";
+                    ClientStatus.Miscellaneous["MOUSEOVERUIX"] = UICamera.EHDALGCGPEK?.transform?.localPosition.x != null ? UICamera.EHDALGCGPEK?.transform?.localPosition.x.ToString() : "N/A";
+                    ClientStatus.Miscellaneous["MOUSEOVERUIY"] = UICamera.EHDALGCGPEK?.transform?.localPosition.y != null ? UICamera.EHDALGCGPEK?.transform?.localPosition.y.ToString() : "N/A";
                 }
                 else
                 {
                     ClientStatus.Miscellaneous["MOUSEOVERUINAME"] = "N/A";
+                    ClientStatus.Miscellaneous["MOUSEOVERUIX"] = "N/A";
+                    ClientStatus.Miscellaneous["MOUSEOVERUIY"] = "N/A";
                 }
             }
             else
@@ -1106,15 +1284,6 @@ namespace LOU
                         {
                             this.lastMouseClickPosition = Input.mousePosition;
                             this.lastMouseClickClientObject = this.inputController != null && this.inputController.ObjectPicker != null ? this.inputController.ObjectPicker.HFHBOINDMAJ : null;
-
-                            List<EquipmentObject> ICGEHBHPFOA = (List<EquipmentObject>)Utils.GetInstanceField(this.player, "ICGEHBHPFOA");
-                            if (ICGEHBHPFOA != null)
-                            {
-                                foreach (EquipmentObject obj in ICGEHBHPFOA)
-                                {
-                                    Utils.Log(obj.EquipmentSlot + "=" + obj.name);
-                                }
-                            }
                         }
                         this.leftMouseDown = true;
                     }
