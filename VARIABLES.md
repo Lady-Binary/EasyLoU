@@ -103,6 +103,10 @@ FINDITEMCNTID: Comma separated list of the ObjectID of the containers of all the
 
 FINDPANELID: Comma separated list of the PanelID of all the panels found.  
 
+FINDBUTTONNAME: Comma separated list of the Names of all the buttons found.  
+
+FINDBUTTONID: Comma separated list of the Texts of all the buttons found.  
+
 FINDGAMEOBJECTID: Comma separated list of the ID of all the panels found.  
 
 FINDMOBILEID: Comma separated list of the ObjectID of all the found mobiles.  
@@ -195,6 +199,10 @@ MOUSEWORLDY: Current mouse Y world position.
 MOUSEWORLDZ: Current mouse Z world position.  
 
 MOUSEOVERUINAME: Name of the UI element at the current mouse position.  
+
+MOUSEOVERUIX: X coordinate of the UI element at the current mouse position.  
+
+MOUSEOVERUIY: Y coordinate of the UI element at the current mouse position.  
 
 CLICKPERID: ObjectID of the permanent object last clicked. Useful for Trees and Rocks.  
 

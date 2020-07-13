@@ -159,7 +159,8 @@ public class MessageBoxEx
     {
         if (_hHook != IntPtr.Zero)
         {
-            throw new NotSupportedException("multiple calls are not supported");
+            MessageBox.Show("multiple calls are not supported");
+            return;
         }
 
         if (_owner != null)

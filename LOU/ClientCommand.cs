@@ -262,6 +262,7 @@ namespace LOU
         SelectServer,
         CharacterSelect,
         FindPanel,  // Newly introduced
+        FindButton, // Newly introduced
         ClickButton,
         SetInput,
         SetTargetFrameRate,
