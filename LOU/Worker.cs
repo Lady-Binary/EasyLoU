@@ -937,7 +937,18 @@ namespace LOU
                     (this.player.PLFMFNKLBON == CoreUtil.ShardShared.MobileFrozenState.MoveFrozen || this.player.PLFMFNKLBON == CoreUtil.ShardShared.MobileFrozenState.MoveAndTurnFrozen ? "A" : "");
                 ClientStatus.CharacterInfo["CHARGHOST"] = this.player.GetObjectProperty("IsDead") != null ? this.player.GetObjectProperty("IsDead").ToString() : "N/A";
                 ClientStatus.CharacterInfo["BACKPACKID"] = this.player.GetEquippedObject("Backpack") != null ? this.player.GetEquippedObject("Backpack").DMCIODGEHCN.ToString() : "N/A";
-                ClientStatus.CharacterInfo["BACKPACKWEIGHT"] = this.player.GetEquippedObject("Backpack") != null && this.player.GetEquippedObject("Backpack").GetComponent<DynamicObject>() != null && this.player.GetEquippedObject("Backpack").GetComponent<DynamicObject>().GetObjectProperty("Weight") != null ? this.player.GetEquippedObject("Backpack").GetComponent<DynamicObject>().GetObjectProperty("Weight").ToString() : "N/A";
+
+                DynamicObject Backpack = this.player.GetEquippedObject("Backpack").GetComponent<DynamicObject>();
+                int BackPackWeight = 0;
+                if (Backpack != null)
+                {
+                    foreach (DynamicObject dynamicObject in ClientObjectManager.DJCGIMIDOPB.GetObjectsInContainer(Backpack.ObjectId))
+                    {
+                        BackPackWeight += (int)dynamicObject.IAIEDKKKPPK;
+                    }
+                }
+                ClientStatus.CharacterInfo["BACKPACKWEIGHT"] = BackPackWeight != 0 ? BackPackWeight.ToString() : "N/A";
+
                 ClientStatus.CharacterInfo["HEADID"] = this.player.GetEquippedObject("Head") != null ? this.player.GetEquippedObject("Head").DMCIODGEHCN.ToString() : "N/A";
                 ClientStatus.CharacterInfo["HEADNAME"] = this.player.GetEquippedObject("Head") != null ? this.player.GetEquippedObject("Head").name.ToString() : "N/A";
                 ClientStatus.CharacterInfo["CHESTID"] = this.player.GetEquippedObject("Chest") != null ? this.player.GetEquippedObject("Chest").DMCIODGEHCN.ToString() : "N/A";
