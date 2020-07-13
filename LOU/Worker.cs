@@ -338,13 +338,18 @@ namespace LOU
                                             {
                                                 object casted = Convert.ChangeType(o, KAAFKBBECEF);
 
-                                                Utils.LogProps(casted);
-
                                                 string KFBLLAJBKAD = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "KFBLLAJBKAD");
                                                 if (KFBLLAJBKAD != null && KFBLLAJBKAD.ToLower().Contains(_buttonName.ToLower()))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by KFBLLAJBKAD!");
                                                     this.FindButtonResults[i] = KFBLLAJBKAD;
+                                                }
+
+                                                string KFFEBNDBIPA = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "KFFEBNDBIPA");
+                                                if (KFFEBNDBIPA != null && KFFEBNDBIPA.ToLower().Contains(_buttonName.ToLower()))
+                                                {
+                                                    Utils.Log("Found DynamicWindow Action by KFFEBNDBIPA!");
+                                                    this.FindButtonResults[i] = KFFEBNDBIPA;
                                                 }
 
                                                 string ELGLAFGJGAO = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "ELGLAFGJGAO");
@@ -354,11 +359,25 @@ namespace LOU
                                                     this.FindButtonResults[i] = ELGLAFGJGAO;
                                                 }
 
+                                                string PDENMACFHFK = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "PDENMACFHFK");
+                                                if (PDENMACFHFK != null && PDENMACFHFK.ToLower().Contains(_buttonName.ToLower()))
+                                                {
+                                                    Utils.Log("Found DynamicWindow Action by PDENMACFHFK!");
+                                                    this.FindButtonResults[i] = PDENMACFHFK;
+                                                }
+
                                                 string OEFOJOODPBK = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "OEFOJOODPBK");
                                                 if (OEFOJOODPBK != null && OEFOJOODPBK.ToLower().Contains(_buttonName.ToLower()))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by OEFOJOODPBK!");
                                                     this.FindButtonResults[i] = OEFOJOODPBK;
+                                                }
+
+                                                string JCIPDLPHPFB = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "JCIPDLPHPFB");
+                                                if (JCIPDLPHPFB != null && ELGLAFGJGAO.ToLower().Contains(_buttonName.ToLower()))
+                                                {
+                                                    Utils.Log("Found DynamicWindow Action by JCIPDLPHPFB!");
+                                                    this.FindButtonResults[i] = JCIPDLPHPFB;
                                                 }
 
                                                 i++;
