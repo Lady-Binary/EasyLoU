@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/slacd3eo77qmy1fp/branch/master?svg=true)](https://ci.appveyor.com/project/Lady-Binary/easylou/branch/master)
+
 # Easy LOU
 
 ![EasyLOU Screenshot](Screenshot.png?raw=true "EasyLOU Screenshot")
