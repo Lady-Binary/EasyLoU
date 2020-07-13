@@ -167,11 +167,10 @@ Targets a permanent object (i.e. a rock, or a tree).
 ## TargetLoc
 
 Parameters:
-- convert (boolean): unknown.
 - x (number): x coordinate to target.
-- y (number): x coordinate to target.
-- z (number): x coordinate to target.
-- objectId (number): unknown.
+- y (number): y coordinate to target.
+- z (number): z coordinate to target.
+- objectId (number): not sure, may not be needed. it looks like an object with a given objectId can be targeted at the given coords.
 
 Targets the given location.
 
