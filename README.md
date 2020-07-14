@@ -19,6 +19,7 @@ For two reasons:
 With EasyLOU you can write [Lua 5.2](https://www.lua.org/manual/5.2/) scripts that will make your Legends of Ultima character perform pretty much anything you want them to.
 
 ## How do I get started?
+
 Download the pre-built binary from the Releases tab, and place it in the same folder where your Assembly-CSharp.dll resides (usually something like C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed).  
 Launch EasyLOU.exe. On Windows 10, you might get a "Microsoft Defender SmartScreen prevented an unrecognised app from starting." error message. If you know what you're doing, open the properties menu of EasyLOU.exe, and check the "Unblock" click apply, click OK, and relaunch EasyLOU.exe.  
 Once EasyLOU is launched, launch your Legends of Aria Client.  
