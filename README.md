@@ -62,7 +62,6 @@ EasyLOU.exe acts as the GUI while LOU.dll acts as the commands engine, and they 
 - A ClientStatus memory map, where LOU.dll updates the status of the LoA Client and the answers to various commands by populating a bunch of variables  
 Credits for various components and implementations can be found at the bottom of this page.  
 
-
 ## Can I run multiple scripts in parallel?
 
 Yes, but it has not been extensively tested yet.
