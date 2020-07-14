@@ -20,35 +20,39 @@ With EasyLOU you can write [Lua 5.2](https://www.lua.org/manual/5.2/) scripts th
 
 ## How do I get started?
 
-Download the pre-built binary from the Releases tab, and place it in the same folder where your Assembly-CSharp.dll resides (usually something like C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed).  
-Launch EasyLOU.exe. On Windows 10, you might get a "Microsoft Defender SmartScreen prevented an unrecognised app from starting." error message. If you know what you're doing, open the properties menu of EasyLOU.exe, and check the "Unblock" click apply, click OK, and relaunch EasyLOU.exe.  
-Once EasyLOU is launched, launch your Legends of Aria Client.  
-Once your Legends of Aria Client is fully loaded, on EasyLOU click on the Connect To Client Icon ![icon](EasyLOU/icons/uo.ico?raw=true "Connect to Client Icon").  
-The mouse cursor should turn into a beautiful UO icon; click on the Legends of Aria Client you want to connect to, then click OK to inject.  
-Take a look at the scripts that can be found in the [Examples/](Examples/) folder.  
-Take a look at the available [Commands](COMMANDS.md) and [Variables](VARIABLES.md).  
-Learn some [Lua](https://www.lua.org/manual/5.2/).  
-Enjoy.
+- Read the [Instructions](#how-does-it-work) below in order to learn how to launch EasyLOU and connect it to Aria
+- Take a look at the scripts provided with the [Examples/](Examples/) folder
+- Take a look at the available [Commands](COMMANDS.md) and [Variables](VARIABLES.md)
+- Learn some [Lua](https://www.lua.org/manual/5.2/)
+- Enjoy!
 
 ## Is EasyLOU compatible with the official Legends of Aria servers?
 
 The community server Legends of Ultima is the reason why this tool exists: we enjoy this community server and have decided to write this tool and name EasyLOU after it.  
-EasyLOU has only been tested with the Legends of Ultima Community Server as of today.  
+EasyLOU has only been tested with the Legends of Ultima Community Server only as of today.  
 EasyLOU may or may not work with official Legends of Aria servers run by Citadel Studios.  
 
 ## Why is EasyLOU not working with the new version of Legends of Aria?
+
 Some Legends of Aria client updates may break the compatibility with EasyLOU.  
-As of today, EasyLOU is compatible with Legends of Aria 10.0.0.2 and we do not know if we will be able to always keep EasyLOU up-to-date with the latest client patch.  
+When you download the latest EasyLOU release archive, double check the release notes: there is usually an indication of which version of Legends of Aria client the release is compatible with.  
+Upon the release of a new Legends of Aria Client, it may take some time before we update EasyLOU to be compatible with the latest Legends of Aria client.  
 Volunteers are always welcome :)
 
 ## How does it work?
 
-Launch EasyLOU.  
-Click on the "New Client" icon on the toolbar and select the "Legends of Aria.exe" file which is usually installed under C:\Program Files\Legends of Aria Launcher\Legends of Aria.  
-Wait for Legends of Aria Client to be loaded and for the Login page to appear.  
-Click on the "OK" button on EasyLOU and make sure the status bar at the bottom of the EasyLOU window says "Connected".  
-Load a script.  
-Enjoy :)
+- Download the latest build from the Releases tab here on GitHub
+- Extract it and place its content in the folder where the file Assembly-CSharp.dll resides (usually C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed)
+- Launch EasyLOU.exe
+- Once EasyLOU is launched, launch your Legends of Aria Client
+- Wait for your Legends of Aria Client login page to show up
+- On EasyLOU click on the Connect To Client Icon ![icon](EasyLOU/icons/uo.ico?raw=true "Connect to Client Icon"); the mouse cursor should turn into a beautiful UO icon
+- Click on the Legends of Aria Client you want to connect to
+- When asked, click OK to inject
+- Load a script
+- Enjoy!
+
+*Note*: On Windows 10, upon launcing EasyLOU.exe you might get a "Microsoft Defender SmartScreen prevented an unrecognised app from starting." error message. If you know what you're doing, open the properties menu of EasyLOU.exe, and check the "Unblock" click apply, click OK, and relaunch EasyLOU.exe.  
 
 ## Yes, ok, but how does it *really* work?
 
@@ -59,21 +63,21 @@ EasyLOU.exe acts as the GUI while LOU.dll acts as the commands engine, and they 
 Credits for various components and implementations can be found at the bottom of this page.  
 
 
-## Can I run multiple scripts at the same time?
+## Can I run multiple scripts in parallel?
 
 Yes, but it has not been extensively tested yet.
 
 ## Can I multibox?
 
 Yes.  
-You need to open one instance of EasyLOU, lunch a client, inject it, and wait for EasyLOU to connect to it.  
-Then you can open another instance of EasyLOU, lunch another client, inject it, and wait for EasyLOU to connect to it.  
+You need to open one instance of EasyLOU, lunch a client, and conect EasyLOU to it.  
+Then you can open another instance of EasyLOU, lunch another client, and connect EasyLOU to it.  
 Rinse, and repeat.  
 
 ## How can I build EasyLOU?
 
-EasyLOU has been compiled and tested with .NETFramework Version v4.7.2.
-In order to build it, you need a copy of the Legends of Aria client, and you need to copy into the LOU\libs\ folder the following libraries from the C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed folder (or whatever path you have installed your client to):
+EasyLOU has been compiled with Visual Studio Community 2017 and .NETFramework Version v4.7.2.  
+In order to build it, you need to own a copy of the Legends of Aria client, and you need to copy into the LOU\libs\ folder the following libraries which you can take from the C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed folder (or whatever path you have installed your client into):
 
 Assembly-CSharp-firstpass.dll  
 Assembly-CSharp.dll  
@@ -86,6 +90,14 @@ UnityEngine.InputModule.dll
 UnityEngine.PhysicsModule.dll  
 UnityEngine.UI.dll  
 
+## How can I contribute?
+
+Please Star this repository, Fork it, and engage.  
+If you are a developer, GitHub Issues and GitHub PRs are always welcome.  
+If you have scripts you want to share with the community, please feel free to reach out, or just create a GitHub Issue and attach the script to it.  
+
+We are hoping to create a new community around this tool, so any form of contribution is more than welcome!
+
 # IMPORTANT DISCLAIMER
 
 By using EasyLOU you may be breaching the Terms and Conditions of Citadel Studios, Legends of Aria, Legends of Ultima, or whatever community server you are playing on or service you are using.
@@ -97,7 +109,7 @@ By using EasyLOU you may be breaching the Terms and Conditions of Citadel Studio
 ONLY download EasyLOU from its official repository: NEVER accept a copy of EasyLOU from other people.  
 ONLY run scripts that you can understand: NEVER accept scripts from people you do not know and trust.  
 
-Keep in mind, there is always a possibility that a malicious version of EasyLOU or a malicious script will steal your LOU/LOA or Steam credentials.
+Keep in mind, there is always a possibility that a malicious version of EasyLOU or a malicious script will steal your LOU/LOA or Steam credentials or cause other damage. You assume the risk and full responsibility for all of your actions.  
 
 Also: don't be evil.
 
