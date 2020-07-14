@@ -4,7 +4,6 @@
 
 ![EasyLOU Screenshot](Screenshot.png?raw=true "EasyLOU Screenshot")
 
-
 ## So what is EasyLOU?
 EasyLOU is a totally free tool inspired by EasyUO, the popular premiere macroing tool for Ultima Online. 
 
