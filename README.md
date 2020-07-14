@@ -15,6 +15,7 @@ For two reasons:
 - As a tribute to the [Legends of Ultima](https://www.legendsofultima.online/) community server.    
 
 ## What can I do with EasyLOU?
+
 With EasyLOU you can write [Lua 5.2](https://www.lua.org/manual/5.2/) scripts that will make your Legends of Ultima character perform pretty much anything you want them to.
 
 ## How do I get started?
