@@ -31,6 +31,7 @@ Learn some [Lua](https://www.lua.org/manual/5.2/).
 Enjoy.
 
 ## Is EasyLOU compatible with the official Legends of Aria servers?
+
 The community server Legends of Ultima is the reason why this tool exists: we enjoy this community server and have decided to write this tool and name EasyLOU after it.  
 EasyLOU has only been tested with the Legends of Ultima Community Server as of today.  
 EasyLOU may or may not work with official Legends of Aria servers run by Citadel Studios.  
