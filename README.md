@@ -9,6 +9,7 @@
 EasyLOU is a totally free tool inspired by EasyUO, the popular premiere macroing tool for Ultima Online. 
 
 ## Why EasyLOU and not EasyLOA?
+
 For two reasons:  
 - The name EasyLOA was already taken by https://github.com/MythikGN/EasyLoA :)
 - As a tribute to the [Legends of Ultima](https://www.legendsofultima.online/) community server.    
