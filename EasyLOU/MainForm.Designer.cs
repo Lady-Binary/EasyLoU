@@ -385,51 +385,51 @@ namespace EasyLOU
             // 
             this.startToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startToolStripMenuItem.Image")));
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.startToolStripMenuItem.Text = "Start";
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pauseToolStripMenuItem.Image")));
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopToolStripMenuItem.Image")));
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             // 
             // stopAllToolStripMenuItem
             // 
             this.stopAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopAllToolStripMenuItem.Image")));
             this.stopAllToolStripMenuItem.Name = "stopAllToolStripMenuItem";
-            this.stopAllToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.stopAllToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.stopAllToolStripMenuItem.Text = "Stop All";
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(122, 6);
             // 
             // stepOverToolStripMenuItem
             // 
             this.stepOverToolStripMenuItem.Name = "stepOverToolStripMenuItem";
-            this.stepOverToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.stepOverToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.stepOverToolStripMenuItem.Text = "Step Over";
             // 
             // stepOutToolStripMenuItem
             // 
             this.stepOutToolStripMenuItem.Name = "stepOutToolStripMenuItem";
-            this.stepOutToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.stepOutToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.stepOutToolStripMenuItem.Text = "Step Out";
             // 
             // stepIntoToolStripMenuItem
             // 
             this.stepIntoToolStripMenuItem.Name = "stepIntoToolStripMenuItem";
-            this.stepIntoToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.stepIntoToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.stepIntoToolStripMenuItem.Text = "Step Into";
             // 
             // toolsToolStripMenuItem
@@ -450,33 +450,33 @@ namespace EasyLOU
             this.connectToClientToolStripMenuItem.Name = "connectToClientToolStripMenuItem";
             this.connectToClientToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.N)));
-            this.connectToClientToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.connectToClientToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.connectToClientToolStripMenuItem.Text = "Connect to client";
             this.connectToClientToolStripMenuItem.Click += new System.EventHandler(this.connectToClientToolStripMenuItem_Click);
             // 
             // varDumpToolStripMenuItem
             // 
             this.varDumpToolStripMenuItem.Name = "varDumpToolStripMenuItem";
-            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.varDumpToolStripMenuItem.Text = "VarDump";
             this.varDumpToolStripMenuItem.Click += new System.EventHandler(this.varDumpToolStripMenuItem_Click);
             // 
             // manageVarListToolStripMenuItem
             // 
             this.manageVarListToolStripMenuItem.Name = "manageVarListToolStripMenuItem";
-            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.manageVarListToolStripMenuItem.Text = "Manage VarList";
             this.manageVarListToolStripMenuItem.Click += new System.EventHandler(this.manageVarListToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(236, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(228, 6);
             // 
             // dontMoveCursorToolStripMenuItem
             // 
             this.dontMoveCursorToolStripMenuItem.Name = "dontMoveCursorToolStripMenuItem";
-            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.dontMoveCursorToolStripMenuItem.Text = "Don\'t Move Cursor";
             this.dontMoveCursorToolStripMenuItem.Click += new System.EventHandler(this.dontMoveCursorToolStripMenuItem_Click);
             // 
@@ -1055,6 +1055,7 @@ namespace EasyLOU
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "EasyLOU";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

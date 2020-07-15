@@ -40,7 +40,11 @@ namespace EasyLOU
             MainForm.TheMainForm = this;
             InitializeComponent();
             this.Text = "EasyLOU - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            ConnectFirstClientAfter(-1);
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            SearchClientAndConnect();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -1082,24 +1086,15 @@ namespace EasyLOU
         #endregion Injection
 
         #region Multiple Clients
-        private void ConnectFirstClientAfter(int CurrentProcessId)
+        private void SearchClientAndConnect()
         {
-            List<int> pids = new List<int>();
-
             foreach (Process p in Process.GetProcesses())
             {
                 if (p.ProcessName.Contains("Legends of Aria"))
                 {
-                    pids.Add(p.Id);
+                    ConnectToClient(p.Id);
+                    return;
                 }
-            }
-
-            pids.Sort();
-
-            if (pids.Count > 0)
-            {
-                int next = (pids.IndexOf(CurrentProcessId) + 1) % pids.Count;
-                ConnectToClient(pids.ElementAt(next));
             }
         }
 
