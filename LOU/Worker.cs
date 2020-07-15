@@ -916,9 +916,16 @@ namespace LOU
                             if (_objectId != null && _objectId != "" && ulong.TryParse(_objectId, out objectId))
                             {
                                 DynamicObject dynamicObject = Utils.FindDynamicObject(objectId);
-                                ttText = dynamicObject.GetTooltip();
+                                if (dynamicObject != null)
+                                {
+                                    ttText = dynamicObject.GetTooltip();
+                                    if (ttText != null)
+                                    {
+                                        ttText = ttText.Replace('\n', '|');
+                                    }
+                                }
                             }
-                            ttText = ttText.Replace('\n', '|');
+
                             this.tooltipText = ttText;
                         }
                     break;
@@ -1302,7 +1309,7 @@ namespace LOU
             ClientStatus.Miscellaneous["SCANJOURNALMESSAGE"] = this.ScanJournalMessage ?? "N/A";
 
             ClientStatus.Miscellaneous["COMMANDID"] = this.ClientCommandId.ToString();
-            ClientStatus.Miscellaneous["TOOLTIPTEXT"] = this.tooltipText;
+            ClientStatus.Miscellaneous["TOOLTIPTEXT"] = this.tooltipText ?? "N/A";
 
             //Utils.Log("UpdateStatus!");
             if (this.ProcessId != -1 && ClientStatusMemoryMap != null)
