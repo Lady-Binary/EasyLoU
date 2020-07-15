@@ -110,7 +110,7 @@
         <Key word = "CHARSTATUS" />
         <Key word = "CHARGHOST" />
         <Key word = "BACKPACKID" />
-        <Key word = "BACKPACKWEIGHT" />
+        <Key word = "CHARWEIGHT" />
         <Key word = "HEADID" />
         <Key word = "HEADNAME" />
         <Key word = "CHESTID" />
@@ -130,7 +130,7 @@
         <Key word = "CHARSTATUS" />
         <Key word = "CHARGHOST" />
         <Key word = "BACKPACKID" />
-        <Key word = "BACKPACKWEIGHT" />
+        <Key word = "CHARWEIGHT" />
         <Key word = "HEADID" />
         <Key word = "HEADNAME" />
         <Key word = "CHESTID" />
