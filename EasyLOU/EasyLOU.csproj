@@ -61,6 +61,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>EasyLOU.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
       <HintPath>..\LOU\libs\protobuf-net.dll</HintPath>
@@ -138,6 +141,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EasyLOU.ico" />
     <Content Include="icons\clinew.ico" />
     <Content Include="icons\cliswap.ico" />
     <Content Include="icons\close.ico" />
