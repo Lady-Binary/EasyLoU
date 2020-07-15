@@ -1,0 +1,9 @@
+{
+  "General": {
+    "InputAssemblies": [
+      "ICSharpCode.TextEditorEx.dll",
+      "MoonSharp.Interpreter.dll",
+      "SharpMonoInjector.dll"
+    ]
+  }
+}
