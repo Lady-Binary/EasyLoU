@@ -936,16 +936,16 @@ namespace LOU
                 ClientStatus.CharacterInfo["CHARGHOST"] = this.player.GetObjectProperty("IsDead") != null ? this.player.GetObjectProperty("IsDead").ToString() : "N/A";
                 ClientStatus.CharacterInfo["BACKPACKID"] = this.player.GetEquippedObject("Backpack") != null ? this.player.GetEquippedObject("Backpack").DMCIODGEHCN.ToString() : "N/A";
 
-                DynamicObject Backpack = this.player.GetEquippedObject("Backpack").GetComponent<DynamicObject>();
-                int BackPackWeight = 0;
-                if (Backpack != null)
+                int CharWeight = 0;
+                List<EquipmentObject> ICGEHBHPFOA = (List<EquipmentObject>)Utils.GetInstanceField(this.player, "ICGEHBHPFOA");
+                if (ICGEHBHPFOA != null)
                 {
-                    foreach (DynamicObject dynamicObject in ClientObjectManager.DJCGIMIDOPB.GetObjectsInContainer(Backpack.ObjectId))
+                    foreach (EquipmentObject obj in ICGEHBHPFOA)
                     {
-                        BackPackWeight += (int)dynamicObject.IAIEDKKKPPK;
+                        CharWeight += (int)obj.GetComponent<DynamicObject>().IAIEDKKKPPK;
                     }
                 }
-                ClientStatus.CharacterInfo["BACKPACKWEIGHT"] = BackPackWeight != 0 ? BackPackWeight.ToString() : "N/A";
+                ClientStatus.CharacterInfo["CHARWEIGHT"] = CharWeight != 0 ? CharWeight.ToString() : "N/A";
 
                 ClientStatus.CharacterInfo["HEADID"] = this.player.GetEquippedObject("Head") != null ? this.player.GetEquippedObject("Head").DMCIODGEHCN.ToString() : "N/A";
                 ClientStatus.CharacterInfo["HEADNAME"] = this.player.GetEquippedObject("Head") != null ? this.player.GetEquippedObject("Head").name.ToString() : "N/A";
