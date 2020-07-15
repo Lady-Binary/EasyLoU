@@ -326,6 +326,19 @@ Trigger a click event on the button having the name specified and contained in t
   - FindPanel("Tracking")
   - ClickButton(FINDPANELID, "0")
 
+## GetTooltip
+
+Parameters:
+  - id: the ObjectID to examine
+
+Gets the tooltip data of an object.  Each line of the tooltip is split with a '|' character and stored in the TOOLTIPTEXT variable.
+
+### Example
+
+  - FindItem("Chest");
+  - GetTooltip(FINDITEMID);
+
+  
 ## SetInput
 
 Parameters:
