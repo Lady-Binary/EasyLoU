@@ -208,7 +208,9 @@
         <Key word = "TIME" />
         <Key word = "SCANJOURNALTIME" />
         <Key word = "SCANJOURNALMESSAGE" />
-        <Key word = "COMMANDID" />      
+        <Key word = "COMMANDID" /> 
+        <Key word = "TOOLTIPTEXT" />      
+        
       </KeyWords>
 
       <KeyWords name = "EasyLOUCommands"
@@ -250,6 +252,7 @@
         <Key word = "SetTargetFrameRate" />
         <Key word = "SetVSyncCount" />
         <Key word = "SetMainCameraMask" />
+        <Key word = "GetTooltip" />
       </KeyWords>
 
     </RuleSet>

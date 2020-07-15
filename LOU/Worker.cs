@@ -51,6 +51,7 @@ namespace LOU
 
         private Vector3 lastMouseClickPosition;
         private ClientObject lastMouseClickClientObject;
+        private string tooltipText;
 
         public void Start()
         {
@@ -906,9 +907,27 @@ namespace LOU
                         }
                         break;
 
+                    case CommandType.GetTooltip:
+                        {
+                            string _objectId = ExtractParam(ClientCommand.CommandParams, 0);
+                            ulong objectId;
+                            string ttText = "N/A";
+
+                            if (_objectId != null && _objectId != "" && ulong.TryParse(_objectId, out objectId))
+                            {
+                                DynamicObject dynamicObject = Utils.FindDynamicObject(objectId);
+                                ttText = dynamicObject.GetTooltip();
+                            }
+                            ttText = ttText.Replace('\n', '|');
+                            this.tooltipText = ttText;
+                        }
+                    break;
+                    
                     default:
                         Utils.Log("Not Implemented!");
                         break;
+
+                    
                 }
             }
         }
@@ -1283,6 +1302,7 @@ namespace LOU
             ClientStatus.Miscellaneous["SCANJOURNALMESSAGE"] = this.ScanJournalMessage ?? "N/A";
 
             ClientStatus.Miscellaneous["COMMANDID"] = this.ClientCommandId.ToString();
+            ClientStatus.Miscellaneous["TOOLTIPTEXT"] = this.tooltipText;
 
             //Utils.Log("UpdateStatus!");
             if (this.ProcessId != -1 && ClientStatusMemoryMap != null)
