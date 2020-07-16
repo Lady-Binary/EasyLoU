@@ -966,12 +966,12 @@ namespace EasyLOU
 
         private void HelpToolStripButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://lmgtfy.com/?q=easylou+help");
+            System.Diagnostics.Process.Start("https://github.com/Lady-Binary/EasyLOU/issues");
         }
 
         private void HomeToolStripButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://lmgtfy.com/?q=easylou+website");
+            System.Diagnostics.Process.Start("https://github.com/Lady-Binary/EasyLOU");
         }
 
         #endregion SecondaryToolbar
