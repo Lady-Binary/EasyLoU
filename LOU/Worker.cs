@@ -230,11 +230,11 @@ namespace LOU
                                         {
                                             Utils.Log("Panel " + floatingPanel.PanelId + " matches!");
                                             this.FindPanelResults.Add(floatingPanel.PanelId, floatingPanel);
-                                            if (this.FindPanelResults.Count == 20)
-                                            {
-                                                Utils.Log("Breaking at 20, too many.");
-                                                break;
-                                            }
+                                            //if (this.FindPanelResults.Count == 20)
+                                            //{
+                                            //    Utils.Log("Breaking at 20, too many.");
+                                            //    break;
+                                            //}
                                         }
 
                                     }
