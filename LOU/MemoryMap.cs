@@ -9,9 +9,12 @@ namespace LOU
     public class MemoryMap
     {
         private String MapName = "";
-        private Int32 MapSize = 0;
+        public Int32 MapSize { get; set; } = 0;
         private String MutexName = "";
         private MemoryMappedFile m_memMap = null;
+
+        public int LastMemoryOccupation { get; set; } = 0;
+        public double LastMemoryOccupationPerc { get => Math.Round((double)LastMemoryOccupation / (double)MapSize * 100D, 2); }
 
         public MemoryMap(string MapName, Int32 MapSize, string MutexName)
         {
@@ -119,6 +122,7 @@ namespace LOU
             if (m_memMap == null)
             {
                 Object = default(T);
+                this.LastMemoryOccupation = -1;
                 return;
             }
 
@@ -135,6 +139,7 @@ namespace LOU
                 }
                 if (!mutexAcquired)
                 {
+                    this.LastMemoryOccupation = -1;
                     throw new Exception("Mutex " + this.MutexName + " not acquired!");
                 }
                 try
@@ -142,17 +147,27 @@ namespace LOU
                     //Create the view stream
                     using (var memStream = m_memMap.CreateViewStream())
                     {
+                        //Seek to start of memory (i.e. start of object)
                         memStream.Seek(0, SeekOrigin.Begin);
 
-                        //And try to read
+                        //Try to read length first
+                        Serializer.TryReadLengthPrefix(memStream, PrefixStyle.Fixed32, out int length);
+
+                        //Seek to start of memory (i.e. start of object)
+                        memStream.Seek(0, SeekOrigin.Begin);
+
+                        //Then try to read
                         try
                         {
                             Object = Serializer.DeserializeWithLengthPrefix<T>(memStream, PrefixStyle.Fixed32);
                         }
                         catch (Exception ex)
                         {
+                            this.LastMemoryOccupation = -1;
                             throw new Exception("Cannot read from memory map " + this.MapName + " object of type " + typeof(T).ToString() + ": " + ex.ToString());
                         }
+
+                        this.LastMemoryOccupation = 4 + length;
                     }
                 }
                 finally
@@ -168,6 +183,7 @@ namespace LOU
             {
                 Object1 = default(T1);
                 Object2 = default(T2);
+                this.LastMemoryOccupation = -1;
                 return;
             }
 
@@ -184,6 +200,7 @@ namespace LOU
                 }
                 if (!mutexAcquired)
                 {
+                    this.LastMemoryOccupation = -1;
                     throw new Exception("Mutex " + this.MutexName + " not acquired!");
                 }
                 try
@@ -191,25 +208,46 @@ namespace LOU
                     //Create the view stream
                     using (var memStream = m_memMap.CreateViewStream())
                     {
+                        //Seek to start of memory (i.e. start of first object)
                         memStream.Seek(0, SeekOrigin.Begin);
 
-                        //And try to read
+                        //Try to read first object's length
+                        Serializer.TryReadLengthPrefix(memStream, PrefixStyle.Fixed32, out int length1);
+
+                        //Seek to start of memory (i.e. start of first object)
+                        memStream.Seek(0, SeekOrigin.Begin);
+
+                        //Then try to read first object
                         try
                         {
                             Object1 = Serializer.DeserializeWithLengthPrefix<T1>(memStream, PrefixStyle.Fixed32);
                         }
                         catch (Exception ex)
                         {
+                            this.LastMemoryOccupation = -1;
                             throw new Exception("Cannot read from memory map " + this.MapName + " object of type " + typeof(T1).ToString() + ": " + ex.ToString());
                         }
+
+                        // Store position of second object's length
+                        long Position = memStream.Position;
+
+                        //Try to read second length
+                        Serializer.TryReadLengthPrefix(memStream, PrefixStyle.Fixed32, out int length2);
+
+                        //Seek to beginning of second object
+                        memStream.Seek(Position, SeekOrigin.Begin);
+
                         try
                         {
                             Object2 = Serializer.DeserializeWithLengthPrefix<T2>(memStream, PrefixStyle.Fixed32);
                         }
                         catch (Exception ex)
                         {
+                            this.LastMemoryOccupation = -1;
                             throw new Exception("Cannot read from memory map " + this.MapName + " object of type " + typeof(T2).ToString() + ": " + ex.ToString());
                         }
+
+                        this.LastMemoryOccupation = 4 + length1 + 4 + length2;
                     }
                 }
                 finally

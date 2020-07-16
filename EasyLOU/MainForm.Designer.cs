@@ -164,7 +164,7 @@ namespace EasyLOU
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(533, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -525,7 +525,7 @@ namespace EasyLOU
             this.ReplaceToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(533, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(784, 31);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -649,10 +649,10 @@ namespace EasyLOU
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 270);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 9, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(533, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "MainStatusStrip";
             // 
@@ -678,7 +678,7 @@ namespace EasyLOU
             this.HomeToolStripButton});
             this.toolStrip2.Location = new System.Drawing.Point(0, 55);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(533, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(784, 31);
             this.toolStrip2.TabIndex = 3;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -773,7 +773,7 @@ namespace EasyLOU
             this.ScriptTab.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptTab.Name = "ScriptTab";
             this.ScriptTab.Padding = new System.Windows.Forms.Padding(2);
-            this.ScriptTab.Size = new System.Drawing.Size(325, 158);
+            this.ScriptTab.Size = new System.Drawing.Size(481, 427);
             this.ScriptTab.TabIndex = 0;
             this.ScriptTab.Tag = "new";
             this.ScriptTab.Text = "new1";
@@ -794,8 +794,8 @@ namespace EasyLOU
             // ScriptSplit.Panel2
             // 
             this.ScriptSplit.Panel2.Controls.Add(this.ScriptOutput);
-            this.ScriptSplit.Size = new System.Drawing.Size(321, 154);
-            this.ScriptSplit.SplitterDistance = 77;
+            this.ScriptSplit.Size = new System.Drawing.Size(477, 423);
+            this.ScriptSplit.SplitterDistance = 211;
             this.ScriptSplit.SplitterWidth = 3;
             this.ScriptSplit.TabIndex = 1;
             // 
@@ -810,7 +810,7 @@ namespace EasyLOU
             this.ScriptTextArea.Location = new System.Drawing.Point(0, 0);
             this.ScriptTextArea.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptTextArea.Name = "ScriptTextArea";
-            this.ScriptTextArea.Size = new System.Drawing.Size(321, 77);
+            this.ScriptTextArea.Size = new System.Drawing.Size(477, 211);
             this.ScriptTextArea.SyntaxHighlighting = "Lua";
             this.ScriptTextArea.TabIndex = 0;
             this.ScriptTextArea.Tag = "new";
@@ -824,7 +824,7 @@ namespace EasyLOU
             this.ScriptOutput.Multiline = true;
             this.ScriptOutput.Name = "ScriptOutput";
             this.ScriptOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutput.Size = new System.Drawing.Size(321, 74);
+            this.ScriptOutput.Size = new System.Drawing.Size(477, 209);
             this.ScriptOutput.TabIndex = 0;
             // 
             // StatusTreeView
@@ -833,7 +833,7 @@ namespace EasyLOU
             this.StatusTreeView.Location = new System.Drawing.Point(0, 0);
             this.StatusTreeView.Margin = new System.Windows.Forms.Padding(2);
             this.StatusTreeView.Name = "StatusTreeView";
-            this.StatusTreeView.Size = new System.Drawing.Size(197, 91);
+            this.StatusTreeView.Size = new System.Drawing.Size(292, 224);
             this.StatusTreeView.TabIndex = 6;
             this.StatusTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.StatusTreeView_NodeMouseClick);
             this.StatusTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.StatusTreeView_NodeMouseDoubleClick);
@@ -847,7 +847,7 @@ namespace EasyLOU
             this.ScriptsTab.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptsTab.Name = "ScriptsTab";
             this.ScriptsTab.SelectedIndex = 0;
-            this.ScriptsTab.Size = new System.Drawing.Size(333, 184);
+            this.ScriptsTab.Size = new System.Drawing.Size(489, 453);
             this.ScriptsTab.TabIndex = 4;
             this.ScriptsTab.SelectedIndexChanged += new System.EventHandler(this.ScriptsTab_SelectedIndexChanged);
             this.ScriptsTab.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ScriptsTab_MouseClick);
@@ -883,8 +883,8 @@ namespace EasyLOU
             // MainSplit.Panel2
             // 
             this.MainSplit.Panel2.Controls.Add(this.VersSplitContainer);
-            this.MainSplit.Size = new System.Drawing.Size(533, 184);
-            this.MainSplit.SplitterDistance = 333;
+            this.MainSplit.Size = new System.Drawing.Size(784, 453);
+            this.MainSplit.SplitterDistance = 489;
             this.MainSplit.SplitterWidth = 3;
             this.MainSplit.TabIndex = 5;
             // 
@@ -903,8 +903,8 @@ namespace EasyLOU
             // VersSplitContainer.Panel2
             // 
             this.VersSplitContainer.Panel2.Controls.Add(this.VarsTreeView);
-            this.VersSplitContainer.Size = new System.Drawing.Size(197, 184);
-            this.VersSplitContainer.SplitterDistance = 91;
+            this.VersSplitContainer.Size = new System.Drawing.Size(292, 453);
+            this.VersSplitContainer.SplitterDistance = 224;
             this.VersSplitContainer.SplitterWidth = 3;
             this.VersSplitContainer.TabIndex = 7;
             // 
@@ -914,7 +914,7 @@ namespace EasyLOU
             this.VarsTreeView.Location = new System.Drawing.Point(0, 0);
             this.VarsTreeView.Margin = new System.Windows.Forms.Padding(2);
             this.VarsTreeView.Name = "VarsTreeView";
-            this.VarsTreeView.Size = new System.Drawing.Size(197, 90);
+            this.VarsTreeView.Size = new System.Drawing.Size(292, 226);
             this.VarsTreeView.TabIndex = 0;
             this.VarsTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.VarsTreeView_NodeMouseClick);
             this.VarsTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.VarsTreeView_NodeMouseDoubleClick);
@@ -1023,9 +1023,9 @@ namespace EasyLOU
             // 
             this.TargetAriaClientPanel.Controls.Add(this.TargetAriaClientLabel);
             this.TargetAriaClientPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TargetAriaClientPanel.Location = new System.Drawing.Point(0, 170);
+            this.TargetAriaClientPanel.Location = new System.Drawing.Point(0, 439);
             this.TargetAriaClientPanel.Name = "TargetAriaClientPanel";
-            this.TargetAriaClientPanel.Size = new System.Drawing.Size(533, 100);
+            this.TargetAriaClientPanel.Size = new System.Drawing.Size(784, 100);
             this.TargetAriaClientPanel.TabIndex = 6;
             this.TargetAriaClientPanel.Visible = false;
             // 
@@ -1034,7 +1034,7 @@ namespace EasyLOU
             this.TargetAriaClientLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TargetAriaClientLabel.Location = new System.Drawing.Point(0, 0);
             this.TargetAriaClientLabel.Name = "TargetAriaClientLabel";
-            this.TargetAriaClientLabel.Size = new System.Drawing.Size(533, 100);
+            this.TargetAriaClientLabel.Size = new System.Drawing.Size(784, 100);
             this.TargetAriaClientLabel.TabIndex = 0;
             this.TargetAriaClientLabel.Text = "Click the window of the Legends of Aria Client you want to connect to";
             this.TargetAriaClientLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1043,7 +1043,7 @@ namespace EasyLOU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 292);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.TargetAriaClientPanel);
             this.Controls.Add(this.MainSplit);
             this.Controls.Add(this.toolStrip2);

@@ -111,7 +111,15 @@ namespace EasyLOU
                 UpdateAttribute("Debug Info", "Timestamp", ClientStatus.TimeStamp.ToString());
                 if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 5000)
                 {
-                    MainStatusLabel.Text = "Connected to " + MainForm.CurrentClientProcessId.ToString() + ".";
+                    MainStatusLabel.Text = string.Format(
+                        "Connected to {0}.  ClientStatus MemMap: {1}/{2} ({3:0.00}%). ClientCommands MemMap: {4}/{5} ({6:0.00}%).",
+                        MainForm.CurrentClientProcessId.ToString(),
+                        ClientStatusMemoryMap.LastMemoryOccupation,
+                        ClientStatusMemoryMap.MapSize,
+                        ClientStatusMemoryMap.LastMemoryOccupationPerc,
+                        ClientCommandsMemoryMap.LastMemoryOccupation,
+                        ClientCommandsMemoryMap.MapSize,
+                        ClientCommandsMemoryMap.LastMemoryOccupationPerc);
                     UpdateAttributesGroup(ClientStatus.CharacterInfo, "Character Info");
                     UpdateAttributesGroup(ClientStatus.StatusBar, "Status Bar");
                     UpdateAttributesGroup(ClientStatus.ContainerInfo, "Container Info");
