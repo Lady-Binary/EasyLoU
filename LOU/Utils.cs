@@ -18,6 +18,37 @@ namespace LOU
                    o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
         }
 
+        public static Dictionary<string, FloatingPanel> FindPanelByName(String name)
+        {
+            Dictionary<string, FloatingPanel> FoundPanels = new Dictionary<string, FloatingPanel>();
+
+            FloatingPanelManager fpm = FloatingPanelManager.DJCGIMIDOPB;
+            if (fpm != null)
+            {
+                List<FloatingPanel> AGLMPFPPEDK = (List<FloatingPanel>)Utils.GetInstanceField(fpm, "AGLMPFPPEDK");
+                if (AGLMPFPPEDK != null)
+                {
+                    foreach (FloatingPanel floatingPanel in AGLMPFPPEDK)
+                    {
+                        Utils.Log("Panel " + floatingPanel.PanelId);
+                        if (name == null || name == "" || floatingPanel.PanelId.Contains(name))
+                        {
+                            Utils.Log("Panel " + floatingPanel.PanelId + " matches!");
+                            FoundPanels.Add(floatingPanel.PanelId, floatingPanel);
+                            //if (this.FindPanelResults.Count == 20)
+                            //{
+                            //    Utils.Log("Breaking at 20, too many.");
+                            //    break;
+                            //}
+                        }
+
+                    }
+                }
+            }
+
+            Log("Found total of " + FoundPanels.Count.ToString() + " panels.");
+            return FoundPanels;
+        }
 
         public static Dictionary<string, DynamicObject> FindDynamicObjectsByName(String name)
         {
