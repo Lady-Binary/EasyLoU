@@ -41,7 +41,7 @@ Volunteers are always welcome :)
 
 ## How does it work?
 
-- From the [Releases](/releases/latest) tab here on GitHub, download the archive containing latest build and extract it
+- From the [Releases](https://github.com/Lady-Binary/EasyLOU/releases) tab here on GitHub, download the archive containing latest build and extract it
 - Place the two extracted files EasyLOU.exe and LOU.dll in the folder where the file Assembly-CSharp.dll resides (usually C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed)
 - Launch EasyLOU.exe
 - Launch your Legends of Aria Client
