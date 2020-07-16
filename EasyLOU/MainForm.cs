@@ -42,11 +42,6 @@ namespace EasyLOU
             this.Text = "EasyLOU - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
-            SearchClientAndConnect();
-        }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.N))
