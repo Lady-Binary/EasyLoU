@@ -214,32 +214,11 @@ namespace LOU
                         {
                             var watch = new System.Diagnostics.Stopwatch();
                             watch.Start();
-                            this.FindPanelResults = new Dictionary<string, FloatingPanel>();
 
                             string _panelName = ExtractParam(ClientCommand.CommandParams, 0);
-                            FloatingPanelManager fpm = FloatingPanelManager.DJCGIMIDOPB;
-                            if (fpm != null)
-                            {
-                                List<FloatingPanel> AGLMPFPPEDK = (List<FloatingPanel>)Utils.GetInstanceField(fpm, "AGLMPFPPEDK");
-                                if (AGLMPFPPEDK != null)
-                                {
-                                    foreach (FloatingPanel floatingPanel in AGLMPFPPEDK)
-                                    {
-                                        Utils.Log("Panel " + floatingPanel.PanelId);
-                                        if (_panelName == null || _panelName == "" || floatingPanel.PanelId.Contains(_panelName))
-                                        {
-                                            Utils.Log("Panel " + floatingPanel.PanelId + " matches!");
-                                            this.FindPanelResults.Add(floatingPanel.PanelId, floatingPanel);
-                                            //if (this.FindPanelResults.Count == 20)
-                                            //{
-                                            //    Utils.Log("Breaking at 20, too many.");
-                                            //    break;
-                                            //}
-                                        }
 
-                                    }
-                                }
-                            }
+                            this.FindPanelResults = Utils.FindPanelByName(_panelName);
+
                             watch.Stop();
                             Utils.Log("FindPanel took " + watch.ElapsedMilliseconds.ToString() + "ms");
                             break;
