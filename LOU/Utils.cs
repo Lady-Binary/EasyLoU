@@ -32,11 +32,11 @@ namespace LOU
                     Log("Found " + obj.name);
                     FoundObjects.Add(obj.ObjectId.ToString(), obj);
                 }
-                if (FoundObjects.Count == 20)
-                {
-                    Log("Breaking at 20, too many.");
-                    break;
-                }
+                //if (FoundObjects.Count == 20)
+                //{
+                //    Log("Breaking at 20, too many.");
+                //    break;
+                //}
             }
             Log("Found total of " + FoundObjects.Count.ToString() + " items.");
             return FoundObjects;
@@ -54,11 +54,11 @@ namespace LOU
                     Log("Found " + obj.name);
                     FoundObjects.Add(obj.ObjectId.ToString(), obj);
                 }
-                if (FoundObjects.Count == 20)
-                {
-                    Log("Breaking at 20, too many.");
-                    break;
-                }
+                //if (FoundObjects.Count == 20)
+                //{
+                //    Log("Breaking at 20, too many.");
+                //    break;
+                //}
             }
             Log("Found total of " + FoundObjects.Count.ToString() + " items.");
             return FoundObjects;
@@ -136,11 +136,11 @@ namespace LOU
                     Log("Found " + obj.name);
                     FoundPermanents.Add(obj.PermanentId.ToString(), obj);
                 }
-                if (FoundPermanents.Count == 20)
-                {
-                    Log("Breaking at 20, too many.");
-                    break;
-                }
+                //if (FoundPermanents.Count == 20)
+                //{
+                //    Log("Breaking at 20, too many.");
+                //    break;
+                //}
             }
             Log("Found total of " + FoundPermanents.Count.ToString() + " permanents.");
             return FoundPermanents;
@@ -224,11 +224,11 @@ namespace LOU
                         foundMobiles.Add(mobile);
                     }
                 }
-                if (foundMobiles.Count == 20)
-                {
-                    Log("Breaking at 20, too many.");
-                    break;
-                }
+                //if (foundMobiles.Count == 20)
+                //{
+                //    Log("Breaking at 20, too many.");
+                //    break;
+                //}
             }
             return foundMobiles;
         }
