@@ -41,18 +41,20 @@ Volunteers are always welcome :)
 
 ## How does it work?
 
-- Download the latest build from the Releases tab here on GitHub
-- Extract it and place its content in the folder where the file Assembly-CSharp.dll resides (usually C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed)
+- From the [Releases](/releases/latest) tab here on GitHub, download the archive containing latest build and extract it
+- Place the two extracted files EasyLOU.exe and LOU.dll in the folder where the file Assembly-CSharp.dll resides (usually C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed)
 - Launch EasyLOU.exe
-- Once EasyLOU is launched, launch your Legends of Aria Client
+- Launch your Legends of Aria Client
 - Wait for your Legends of Aria Client login page to show up
-- On EasyLOU click on the Connect To Client Icon ![icon](EasyLOU/icons/uo.ico?raw=true "Connect to Client Icon"); the mouse cursor should turn into a beautiful UO icon
+- On EasyLOU click on the Connect To Client Icon ![icon](EasyLOU/icons/uo.ico?raw=true "Connect to Client Icon"); the mouse cursor should turn into a beautiful UO hand
 - Click on the Legends of Aria Client you want to connect to
 - When asked, click OK to inject
 - Load a script
 - Enjoy!
 
-*Note*: On Windows 10, upon launcing EasyLOU.exe you might get a "Microsoft Defender SmartScreen prevented an unrecognised app from starting." error message. If you know what you're doing, open the properties menu of EasyLOU.exe, and check the "Unblock" click apply, click OK, and relaunch EasyLOU.exe.  
+*Note 1*: On Windows 10, upon launcing EasyLOU.exe you might get a "Microsoft Defender SmartScreen prevented an unrecognised app from starting." error message. If you know what you're doing then open the properties menu of EasyLOU.exe, check the "Unblock" box, click apply, click OK, and relaunch EasyLOU.exe.  
+
+*Note 2*: EasyLOU requires Administrative Privileges in order to be able to inject into the Legends of Aria Client running process.  
 
 ## Yes, ok, but how does it *really* work?
 
