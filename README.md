@@ -29,7 +29,7 @@ With EasyLOU you can write [Lua 5.2](https://www.lua.org/manual/5.2/) scripts th
 ## Is EasyLOU compatible with the official Legends of Aria servers?
 
 The community server Legends of Ultima is the reason why this tool exists: we enjoy this community server and have decided to write this tool and name EasyLOU after it.  
-EasyLOU has only been tested with the Legends of Ultima Community Server only as of today.  
+As of today, EasyLOU has only been tested with the Legends of Ultima Community Server.  
 EasyLOU may or may not work with official Legends of Aria servers run by Citadel Studios.  
 
 ## Why is EasyLOU not working with the new version of Legends of Aria?
@@ -77,7 +77,7 @@ Rinse, and repeat.
 
 ## How can I build EasyLOU?
 
-EasyLOU has been compiled with Visual Studio Community 2017 and .NETFramework Version v4.7.2.  
+EasyLOU has been compiled for x64 architevture with Visual Studio Community 2017 and .NETFramework Version v4.7.2.  
 In order to build it, you need to own a copy of the Legends of Aria client, and you need to copy into the LOU\libs\ folder the following libraries which you can take from the C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed folder (or whatever path you have installed your client into):
 
 Assembly-CSharp-firstpass.dll  
@@ -121,7 +121,7 @@ Also: don't be evil.
 Legends of Aria is copyright of [Citadel Studios](https://citadelstudios.net/).  
 LadyBinary is a tribute to Lord Binary, who was very active in the UO hacking scene (see for example [UO_RICE](https://github.com/necr0potenc3/UO_RICE)).  
 EasyLOU is of course inspired by the great [EasyUO](http://www.easyuo.com/).  
-The LOU part of EasyLOU is a tribute to [Legends Of Ultima Online](https://www.legendsofultima.online/), whose passionate staff have dedicated so much effort in putting together a wonderful product based off of [Legends of Aria](https://www.legendsofaria.com/).  
+The LOU part of EasyLOU is a tribute to [Legends Of Ultima](https://www.legendsofultima.online/), whose passionate staff have dedicated so much effort in putting together a wonderful product based off of [Legends of Aria](https://www.legendsofaria.com/).  
 The Lua engine is based on [MoonSharp](https://github.com/moonsharp-devs/moonsharp/), commit 4e748a7 plus minor enhancements.  
 The Text editor is based on [ICSharpCode.TextEditorEx](https://github.com/StefH/ICSharpCode.TextEditorEx), commit 1934da7 plus minor enhancements.  
 The Mono Injection code is based on [SharpMonoInjector](https://github.com/warbler/SharpMonoInjector), commit 73566c1.  
