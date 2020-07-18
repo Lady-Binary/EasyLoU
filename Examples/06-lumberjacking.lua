@@ -115,13 +115,13 @@ function doTree(x,y,z)
 	sleep(1000)
 	repeat
 		defend() -- checks for nearby monsters and defends
-		startWeight = BACKPACKWEIGHT  
+		startWeight = CHARWEIGHT
 		FindItem("prospector", BACKPACKID)
 		prospectId = ExtractFirstId(FINDITEMID)
 		UseSelected(prospectId)  -- uses prospecting tool from pack on tree
 		TargetPermanent(closestId)
 		sleep(4000)
-		endWeight = BACKPACKWEIGHT
+		endWeight = CHARWEIGHT
 		print('start/end weight: ' .. startWeight .. ','..endWeight)
 	until startWeight == endWeight  -- will move to next tree if, within 4 seconds-ish, weight didn't change (as in the tree is gone)
 	if tonumber(endWeight) > 300 then -- getting full, dropoff time!
