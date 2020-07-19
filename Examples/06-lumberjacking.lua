@@ -1,10 +1,11 @@
 --[[
 Fully automated harvesting script.  Needs to be customized for your uses.
 
-MoveEx() - gets you to a spot reliably.
+MoveEx()  - gets you to a spot reliably.
 dropoff() - casts Gate to get you to your dropoff spot and back and NOT mess up the current "rail" of harvesting
-defend() - if attacked, it'll move away, make pets attack, and spam fireball.  Once done, it'll move back and equip hatchet again.  Customize how you need it.
-doTree() - harvests tree, uses prospect tool, and watches for mobs. Will move on after backpack weight stops increasing
+defend()  - if attacked, it'll move away, make pets attack, and spam fireball.  Once done, it'll move back and equip hatchet again.  Customize how you need it.
+doTree()  - harvests tree, uses prospect tool, and watches for mobs. Will move on after backpack weight stops increasing.
+	    X, Y and Z decimal separator must be a comma and values must be sent as strings e.g. doTree("420,0", "420,1", "420,2")
 ]]--
 
 
