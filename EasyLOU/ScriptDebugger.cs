@@ -121,19 +121,22 @@ namespace EasyLOU
                 lock (MainForm.ClientStatusLock)
                 {
                     string value;
-                    if (MainForm.ClientStatus.CharacterInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.CharacterInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.StatusBar.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.ContainerInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.LastAction.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.Find.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.ShopInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.ExtendedInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.ClientInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.CombatInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.TileInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.TimeInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                    else if (MainForm.ClientStatus.Miscellaneous.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                    if (MainForm.ClientStatus != null)
+                    {
+                        if (MainForm.ClientStatus.CharacterInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.CharacterInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.StatusBar.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.ContainerInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.LastAction.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.Find.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.ShopInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.ExtendedInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.ClientInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.CombatInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.TileInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.TimeInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.Miscellaneous.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                    }
                 }
             }
             return DynValue.Nil;
@@ -193,11 +196,15 @@ namespace EasyLOU
                             }
                             catch (SyntaxErrorException ex)
                             {
-                                MessageBoxEx.Show(MainForm.TheMainForm, ex.DecoratedMessage);
+                                MainForm.TheMainForm.Invoke(new Action(() => { MessageBoxEx.Show(MainForm.TheMainForm, ex.DecoratedMessage); }));
+                            }
+                            catch (ScriptRuntimeException ex)
+                            {
+                                MainForm.TheMainForm.Invoke(new Action(() => { MessageBoxEx.Show(MainForm.TheMainForm, ex.DecoratedMessage); }));
                             }
                             catch (Exception ex)
                             {
-                                MessageBoxEx.Show(MainForm.TheMainForm, ex.Message);
+                                MainForm.TheMainForm.Invoke(new Action(() => { MessageBoxEx.Show(MainForm.TheMainForm, ex.Message); }));
                             }
                             finally
                             {
@@ -272,8 +279,7 @@ namespace EasyLOU
 
         public bool SignalRuntimeException(ScriptRuntimeException ex)
         {
-            MessageBoxEx.Show(MainForm.TheMainForm, ex.ToString());
-            throw ex;
+            return true;
         }
 
         public DebuggerAction GetAction(int ip, SourceRef sourceref)
