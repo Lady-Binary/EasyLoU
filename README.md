@@ -2,6 +2,8 @@
 
 # Easy LOU
 
+Discord server: https://discord.gg/RWAqYcV
+
 ![EasyLOU Screenshot](Screenshot.png?raw=true "EasyLOU Screenshot")
 
 ## So what is EasyLOU?
@@ -128,7 +130,7 @@ The Mono Injection code is based on [SharpMonoInjector](https://github.com/warbl
 
 # CONTACTS
 
-You can contact me at ladybinary@protonmail.com
+You can contact me at ladybinary@protonmail.com, or you can also find me on the EasyLOU discord server https://discord.gg/RWAqYcV
 
 License
 -------
