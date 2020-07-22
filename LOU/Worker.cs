@@ -37,6 +37,7 @@ namespace LOU
         private Dictionary<String, ClientObject> FindPermanentResults;
         private Dictionary<String, FloatingPanel> FindPanelResults;
         private Dictionary<int, String> FindButtonResults;
+        private Dictionary<int, String> FindLabelResults;
         private Dictionary<String, GameObject> FindGameObjectResults;
         private List<MobileInstance> FindMobileResults;
         private List<MobileInstance> NearbyMonsters;
@@ -112,6 +113,7 @@ namespace LOU
             this.FindPermanentResults = null;
             this.FindPanelResults = null;
             this.FindButtonResults = null;
+            this.FindLabelResults = null;
             this.FindGameObjectResults = null;
             this.FindMobileResults = null;
             this.lastMouseClickClientObject = null;
@@ -369,6 +371,176 @@ namespace LOU
 
                             watch.Stop();
                             Utils.Log("FindButton took " + watch.ElapsedMilliseconds.ToString() + "ms");
+                            break;
+                        }
+
+                    case CommandType.FindLabel:
+                        {
+                            var watch = new System.Diagnostics.Stopwatch();
+                            watch.Start();
+                            this.FindLabelResults = new Dictionary<int, string>();
+
+                            string _containerName = ExtractParam(ClientCommand.CommandParams, 0);
+
+                            string _labelText = ExtractParam(ClientCommand.CommandParams, 1);
+                            string _labelName = ExtractParam(ClientCommand.CommandParams, 1);
+                            string _x = ExtractParam(ClientCommand.CommandParams, 1);
+                            string _y = ExtractParam(ClientCommand.CommandParams, 2);
+
+                            FloatingPanelManager fpm = FloatingPanelManager.DJCGIMIDOPB;
+                            if (fpm != null)
+                            {
+                                FloatingPanel floatingPanel = fpm.GetPanel(_containerName);
+                                if (floatingPanel != null)
+                                {
+                                    UILabel[] Labels = floatingPanel.GetComponentsInChildren<UILabel>();
+                                    BoxCollider[] Colliders = floatingPanel.GetComponentsInChildren<BoxCollider>();
+
+                                    if (int.TryParse(_x, out int x) && int.TryParse(_y, out int y))
+                                    {
+                                        //////// Coordinates Search: find collider by coordinate
+
+                                        foreach (BoxCollider Collider in Colliders)
+                                        {
+                                            float ColliderX1 = Collider.transform.localPosition.x;
+                                            float ColliderX2 = Collider.transform.localPosition.x + Collider.size.x;
+                                            float ColliderY1 = Collider.transform.localPosition.y;
+                                            float ColliderY2 = Collider.transform.localPosition.y - Collider.size.y;
+                                            if (ColliderX1 <= x && x <= ColliderX2 &&
+                                                ColliderY2 <= y && y <= ColliderY1)
+                                            {
+                                                if (int.TryParse(Collider.name, out int ButtonID))
+                                                {
+                                                    Utils.Log("Collider " + Collider.name + " found by coordinates! Searching all labels within this collider...");
+
+                                                    String FullLabelText = "";
+
+                                                    // Now search ALL labels within this collider, so that we have the complete text
+                                                    foreach (UILabel PartialLabel in Labels)
+                                                    {
+                                                        // Calculate the label's center
+                                                        float PartialLabelCenterX = PartialLabel.transform.localPosition.x + PartialLabel.IOGCKBNELGA.x;
+                                                        float PartialLabelCenterY = PartialLabel.transform.localPosition.y + PartialLabel.IOGCKBNELGA.y;
+
+                                                        if (ColliderX1 <= PartialLabelCenterX && PartialLabelCenterX <= ColliderX2 &&
+                                                            ColliderY2 <= PartialLabelCenterY && PartialLabelCenterY <= ColliderY1)
+                                                        {
+                                                            Utils.Log("Found partial label:" + PartialLabel.FJNGNLHHOEI);
+                                                            if (!FullLabelText.Contains(PartialLabel.FJNGNLHHOEI))
+                                                            {
+                                                                FullLabelText += PartialLabel.FJNGNLHHOEI;
+                                                            }
+                                                        }
+                                                    }
+
+                                                    this.FindLabelResults[ButtonID] = FullLabelText;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else if (int.TryParse(_labelName, out int labelName)) {
+                                        //////// Textual Search 1: find collider with given name, and corresponding labels
+
+                                        // Let's search for a collider with the given name
+                                        foreach (BoxCollider Collider in Colliders)
+                                        {
+                                            float ColliderX1 = Collider.transform.localPosition.x;
+                                            float ColliderX2 = Collider.transform.localPosition.x + Collider.size.x;
+                                            float ColliderY1 = Collider.transform.localPosition.y;
+                                            float ColliderY2 = Collider.transform.localPosition.y - Collider.size.y;
+
+                                            if (int.TryParse(Collider.name, out int ButtonID) && ButtonID == labelName)
+                                            {
+                                                Utils.Log("Collider " + Collider.name + " found! Searching all labels within this collider...");
+
+                                                String FullLabelText = "";
+
+                                                // Now search ALL labels within this collider, so that we have the complete text
+                                                foreach (UILabel PartialLabel in Labels)
+                                                {
+                                                    // Calculate the label's center
+                                                    float PartialLabelCenterX = PartialLabel.transform.localPosition.x + PartialLabel.IOGCKBNELGA.x;
+                                                    float PartialLabelCenterY = PartialLabel.transform.localPosition.y + PartialLabel.IOGCKBNELGA.y;
+
+                                                    if (ColliderX1 <= PartialLabelCenterX && PartialLabelCenterX <= ColliderX2 &&
+                                                        ColliderY2 <= PartialLabelCenterY && PartialLabelCenterY <= ColliderY1)
+                                                    {
+                                                        Utils.Log("Found partial label:" + PartialLabel.FJNGNLHHOEI);
+                                                        if (!FullLabelText.Contains(PartialLabel.FJNGNLHHOEI))
+                                                        {
+                                                            FullLabelText += PartialLabel.FJNGNLHHOEI;
+                                                        }
+                                                    }
+                                                }
+
+                                                this.FindLabelResults[ButtonID] = FullLabelText;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //////// Textual Search 2: find label containing text, and corresponding collider
+
+                                        // Let's search for a label containing the given text
+                                        foreach (UILabel Label in Labels)
+                                        {
+                                            if (Label.FJNGNLHHOEI.ToLower().Contains(_labelText.ToLower()))
+                                            {
+                                                Utils.Log("Label " + Label.FJNGNLHHOEI + " found! Searching for collider...");
+
+                                                // Calculate the label's center
+                                                float LabelCenterX = Label.transform.localPosition.x + Label.IOGCKBNELGA.x;
+                                                float LabelCenterY = Label.transform.localPosition.y + Label.IOGCKBNELGA.y;
+
+                                                // And search for a collider that is colliding with the label's center
+                                                foreach (BoxCollider Collider in Colliders)
+                                                {
+                                                    float ColliderX1 = Collider.transform.localPosition.x;
+                                                    float ColliderX2 = Collider.transform.localPosition.x + Collider.size.x;
+                                                    float ColliderY1 = Collider.transform.localPosition.y;
+                                                    float ColliderY2 = Collider.transform.localPosition.y - Collider.size.y;
+                                                    if (ColliderX1 <= LabelCenterX && LabelCenterX <= ColliderX2 &&
+                                                        ColliderY2 <= LabelCenterY && LabelCenterY <= ColliderY1)
+                                                    {
+                                                        if (int.TryParse(Collider.name, out int ButtonID))
+                                                        {
+                                                            Utils.Log("Collider " + Collider.name + " found! Searching all labels within this collider...");
+
+                                                            String FullLabelText = "";
+
+                                                            // Now search ALL labels within this collider, so that we have the complete text
+                                                            foreach (UILabel PartialLabel in Labels)
+                                                            {
+                                                                // Calculate the label's center
+                                                                float PartialLabelCenterX = PartialLabel.transform.localPosition.x + PartialLabel.IOGCKBNELGA.x;
+                                                                float PartialLabelCenterY = PartialLabel.transform.localPosition.y + PartialLabel.IOGCKBNELGA.y;
+
+                                                                if (ColliderX1 <= PartialLabelCenterX && PartialLabelCenterX <= ColliderX2 &&
+                                                                    ColliderY2 <= PartialLabelCenterY && PartialLabelCenterY <= ColliderY1)
+                                                                {
+                                                                    Utils.Log("Found partial label:" + PartialLabel.FJNGNLHHOEI);
+                                                                    if (!FullLabelText.Contains(PartialLabel.FJNGNLHHOEI))
+                                                                    {
+                                                                        FullLabelText += PartialLabel.FJNGNLHHOEI;
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            this.FindLabelResults[ButtonID] = FullLabelText;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            watch.Stop();
+                            Utils.Log("FindLabel took " + watch.ElapsedMilliseconds.ToString() + "ms");
                             break;
                         }
 
@@ -1049,6 +1221,25 @@ namespace LOU
                 ClientStatus.Find["FINDBUTTONTEXT"] = "N/A";
             }
 
+            if (this.FindLabelResults != null && this.FindLabelResults.Count > 0)
+            {
+                try
+                {
+                    ClientStatus.Find["FINDLABELNAME"] = String.Join(",", this.FindLabelResults.Keys);
+                    ClientStatus.Find["FINDLABELTEXT"] = String.Join(",", this.FindLabelResults.Values);
+                }
+                catch (Exception e)
+                {
+                    Utils.Log(e.ToString());
+                    this.FindLabelResults = new Dictionary<int, string>();
+                }
+            }
+            else
+            {
+                ClientStatus.Find["FINDLABELNAME"] = "N/A";
+                ClientStatus.Find["FINDLABELTEXT"] = "N/A";
+            }
+
             if (this.FindGameObjectResults != null && this.FindGameObjectResults.Count > 0)
             {
                 try
@@ -1328,6 +1519,16 @@ namespace LOU
 
                     if (Input.GetMouseButtonDown(1))
                     {
+                        if (!this.rightMouseDown)
+                        {
+                            Utils.Log("Props:");
+                            Utils.LogProps(this.player);
+                            Dictionary<string, object> EBNBHBHNCFC = (Dictionary<string, object>)Utils.GetInstanceField(this.player, "EBNBHBHNCFC");
+                            foreach(string key in EBNBHBHNCFC.Keys)
+                            {
+                                Utils.Log(key + "=" + EBNBHBHNCFC[key]);
+                            }
+                        }
                         this.rightMouseDown = true;
                     }
                     else
