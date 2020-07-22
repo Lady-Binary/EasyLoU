@@ -162,6 +162,8 @@
         <Key word = "FINDPANELID" />
         <Key word = "FINDBUTTONNAME" />
         <Key word = "FINDBUTTONTEXT" />
+        <Key word = "FINDLABELNAME" />
+        <Key word = "FINDLABELTEXT" />
         <Key word = "FINDGAMEOBJECTID" />
         <Key word = "FINDMOBILEID" />
         <Key word = "FINDMOBILENAME" />
@@ -247,6 +249,7 @@
         <Key word = "CharacterSelect" />
         <Key word = "FindPanel" />
         <Key word = "FindButton" />
+        <Key word = "FindLabel" />
         <Key word = "ClickButton" />
         <Key word = "SetInput" />
         <Key word = "SetTargetFrameRate" />

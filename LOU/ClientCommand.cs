@@ -263,6 +263,7 @@ namespace LOU
         CharacterSelect,
         FindPanel,  // Newly introduced
         FindButton, // Newly introduced
+        FindLabel, // Newly introduced
         ClickButton,
         SetInput,
         SetTargetFrameRate,

@@ -107,6 +107,10 @@ FINDBUTTONNAME: Comma separated list of the Names of all the buttons found.
 
 FINDBUTTONID: Comma separated list of the Texts of all the buttons found.  
 
+FINDLABELNAME: Comma separated list of the Names of all the labels found.  
+
+FINDLABELID: Comma separated list of the Texts of all the labels found.  
+
 FINDGAMEOBJECTID: Comma separated list of the ID of all the panels found.  
 
 FINDMOBILEID: Comma separated list of the ObjectID of all the found mobiles.  
