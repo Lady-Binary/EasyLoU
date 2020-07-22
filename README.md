@@ -23,7 +23,7 @@ With EasyLOU you can write [Lua 5.2](https://www.lua.org/manual/5.2/) scripts th
 ## How do I get started?
 
 - Read the [Instructions](#how-does-it-work) below in order to learn how to launch EasyLOU and connect it to Aria
-- Take a look at the scripts provided with the [Examples/](Examples/) folder
+- Take a look at the scripts provided with the [Examples/](Examples/) folder extracted from the zipped release archive
 - Take a look at the available [Commands](COMMANDS.md) and [Variables](VARIABLES.md)
 - Learn some [Lua](https://www.lua.org/manual/5.2/)
 - Enjoy!
