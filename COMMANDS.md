@@ -25,6 +25,7 @@ Commands are not in alphabetic order. Rather, they are (somewhat) grouped by fun
 - [TargetSelf](#TargetSelf)
 - [AttackSelected](#AttackSelected)
 - [UseSelected](#UseSelected)
+- [ContextMenu](#ContextMenu)
 - [Drag](#Drag)
 - [Dropc](#Dropc)
 - [Dropg](#Dropg)
@@ -201,6 +202,21 @@ Parameters:
 - id: the ObjectID to use.
 
 Use the given ObjectID.
+
+## ContextMenu
+
+Parameters:
+- id: the ObjectID to trigger the command on.
+- command: the Context Menu command to trigger.
+
+Triggers the given Context Menu command on the given object.
+
+### Examples
+   
+  - ContextMenu(CHARID,"Dismount")
+  - ContextMenu(CHARID,"Power Hour")
+  - ContextMenu(FINDITEMID,"Split Stack")
+  - ContextMenu(id,"Stack Contents")
 
 ## Drag
 

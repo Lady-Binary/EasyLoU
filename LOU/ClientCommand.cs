@@ -235,6 +235,7 @@ namespace LOU
         //SelectNearest,
         AttackSelected,
         UseSelected,
+        ContextMenu, // Newly Introduced
         //CurrentTarget,
         //TargetingSystemOnOff,
         //ToggleBuffWindow,
