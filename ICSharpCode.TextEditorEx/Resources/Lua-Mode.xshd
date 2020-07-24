@@ -237,6 +237,7 @@
         <Key word = "TargetSelf" />
         <Key word = "AttackSelected" />
         <Key word = "UseSelected" />
+        <Key word = "ContextMenu" />
         <Key word = "Drag" />
         <Key word = "Dropc" />
         <Key word = "Dropg" />

@@ -764,6 +764,7 @@ namespace LOU
                             }
                         }
                         break;
+
                     case CommandType.UseSelected:
                         {
                             string _objectId = ExtractParam(ClientCommand.CommandParams, 0);
@@ -776,6 +777,19 @@ namespace LOU
                                     dynamicObject.DoDoubleClickAction();
                                 }
                             }
+                        }
+                        break;
+
+                    case CommandType.ContextMenu:
+                        {
+                            string _objectId = ExtractParam(ClientCommand.CommandParams, 0);
+                            string _command = ExtractParam(ClientCommand.CommandParams, 1);
+
+                            string FullCommand = String.Format(".x use {0} {1}",
+                                    _objectId,
+                                    _command);
+
+                            this.applicationController.GPLIHPHPNKL.SendChat(FullCommand);
                         }
                         break;
 
