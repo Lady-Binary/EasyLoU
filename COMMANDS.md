@@ -201,7 +201,7 @@ Attack the given ObjectID.
 Parameters:
 - id: the ObjectID to use.
 
-Use the given ObjectID.
+Use the given ObjectID. It is the equivalent of Double Clicking the object.
 
 ## ContextMenu
 
