@@ -203,6 +203,14 @@ Parameters:
 
 Use the given ObjectID. It is the equivalent of Double Clicking the object.
 
+### Examples
+
+```lua
+FindItem("cotton")
+local cotton_id = ExtractFirstId(FINDITEMID)
+UseSelected(cotton_id)
+```
+
 ## ContextMenu
 
 Parameters:
@@ -213,10 +221,22 @@ Triggers the given Context Menu command on the given object.
 
 ### Examples
    
-  - ContextMenu(CHARID,"Dismount")
-  - ContextMenu(CHARID,"Power Hour")
-  - ContextMenu(FINDITEMID,"Split Stack")
-  - ContextMenu(id,"Stack Contents")
+ ```lua
+ContextMenu(CHARID,"Dismount")
+```
+
+ ```lua
+ ContextMenu(CHARID,"Power Hour")
+```
+
+ ```lua
+ ContextMenu(FINDITEMID,"Split Stack")
+```
+
+ ```lua
+ ContextMenu(FINDITEMCNTID,"Stack Contents")
+```
+
 
 ## Drag
 
