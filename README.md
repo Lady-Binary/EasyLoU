@@ -4,6 +4,8 @@
 
 Discord server: https://discord.gg/RWAqYcV
 
+Public Scripts Library: https://easylou.boards.net/
+
 ![EasyLOU Screenshot](Screenshot.png?raw=true "EasyLOU Screenshot")
 
 ## So what is EasyLOU?
