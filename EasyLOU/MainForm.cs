@@ -104,8 +104,9 @@ namespace EasyLOU
             {
                 StatusTreeView.BeginUpdate();
                 UpdateAttribute("Debug Info", "Timestamp", ClientStatus.TimeStamp.ToString());
-                if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 5000)
+                if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 10000)
                 {
+                    MainStatusLabel.ForeColor = Color.Green;
                     MainStatusLabel.Text = string.Format(
                         "Connected to {0}.  ClientStatus MemMap: {1}/{2} ({3:0.00}%). ClientCommands MemMap: {4}/{5} ({6:0.00}%).",
                         MainForm.CurrentClientProcessId.ToString(),
@@ -131,7 +132,13 @@ namespace EasyLOU
                 }
                 else
                 {
-                    MainStatusLabel.Text = "Client " + MainForm.CurrentClientProcessId.ToString() + " not responding!";
+                    if (MainStatusLabel.Text.StartsWith("Connected to"))
+                    {
+                        MessageBoxEx.Show("Client disconnected!");
+                        MainStatusLabel.ForeColor = Color.Red;
+                        MainStatusLabel.Text = "Client " + MainForm.CurrentClientProcessId.ToString() + " not responding!";
+                        DoStopAll();
+                    }
                 }
                 StatusTreeView.EndUpdate();
             }
@@ -955,6 +962,13 @@ namespace EasyLOU
 
         private void PlayToolStripButton_Click(object sender, EventArgs e)
         {
+            if (!MainStatusLabel.Text.StartsWith("Connected to"))
+            {
+                if (MessageBoxEx.Show(MainForm.TheMainForm, "EasyLOU not connected to any client. Run this script anyway?", "Client not connected", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                {
+                    return;
+                }
+            }
             DoPlay();
             RefreshToolStripStatus();
         }
@@ -980,6 +994,7 @@ namespace EasyLOU
 
         private IntPtr GetMonoModule(int ProcessId)
         {
+            MainStatusLabel.ForeColor = Color.Orange;
             MainStatusLabel.Text = "Getting Mono Module...";
 
             IntPtr MonoModule = new IntPtr();
@@ -1005,6 +1020,7 @@ namespace EasyLOU
                 }
             }
 
+            MainStatusLabel.ForeColor = Color.Orange;
             MainStatusLabel.Text = "Process refreshed";
 
             return MonoModule;
@@ -1020,6 +1036,7 @@ namespace EasyLOU
 
             if (handle == IntPtr.Zero)
             {
+                MainStatusLabel.ForeColor = Color.Red;
                 MainStatusLabel.Text = "Failed to open process";
                 return;
             }
@@ -1032,6 +1049,7 @@ namespace EasyLOU
             }
             catch (IOException)
             {
+                MainStatusLabel.ForeColor = Color.Red;
                 MainStatusLabel.Text = "Failed to read the file " + AssemblyPath;
                 return;
             }
@@ -1043,14 +1061,17 @@ namespace EasyLOU
                 try
                 {
                     IntPtr asm = injector.Inject(file, "LOU", "Loader", "Load");
+                    MainStatusLabel.ForeColor = Color.Orange;
                     MainStatusLabel.Text = "Injection on " + ProcessId.ToString() + " successful";
                 }
                 catch (InjectorException ie)
                 {
+                    MainStatusLabel.ForeColor = Color.Red;
                     MainStatusLabel.Text = "Injection on " + ProcessId.ToString() + " failed: " + ie.Message;
                 }
                 catch (Exception e)
                 {
+                    MainStatusLabel.ForeColor = Color.Red;
                     MainStatusLabel.Text = "Injection failed (unknown error): " + e.Message;
                 }
             }
@@ -1103,6 +1124,7 @@ namespace EasyLOU
 
         private void ConnectToClient(int ProcessId)
         {
+            MainStatusLabel.ForeColor = Color.Orange;
             MainStatusLabel.Text += " Connecting to " + ProcessId.ToString() + "...";
             MainForm.CurrentClientProcessId = ProcessId;
 
@@ -1119,16 +1141,19 @@ namespace EasyLOU
             if (MainForm.ClientStatusMemoryMap.OpenExisting() && MainForm.ClientCommandsMemoryMap.OpenExisting())
             {
                 // Client already patched, memorymaps open already all good
+                MainStatusLabel.ForeColor = Color.Green;
                 MainStatusLabel.Text = "Connection successful.";
                 return;
             }
 
             if (MessageBoxEx.Show(MainForm.TheMainForm, "Client " + ProcessId.ToString() + " not yet injected. Inject now?", "Client not yet injected", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
+                MainStatusLabel.ForeColor = Color.Red;
                 MainStatusLabel.Text = "Connection aborted.";
                 return;
             }
 
+            MainStatusLabel.ForeColor = Color.Orange;
             MainStatusLabel.Text = "Connecting, please wait ...";
 
             Inject(ProcessId);
@@ -1138,10 +1163,12 @@ namespace EasyLOU
             if (MainForm.ClientStatusMemoryMap.OpenExisting() && MainForm.ClientCommandsMemoryMap.OpenExisting())
             {
                 // Client already patched, memorymaps open already all good
+                MainStatusLabel.ForeColor = Color.Green;
                 MainStatusLabel.Text = "Connection successful.";
                 return;
             }
 
+            MainStatusLabel.ForeColor = Color.Red;
             MainStatusLabel.Text = "Connection failed.";
         }
         #endregion

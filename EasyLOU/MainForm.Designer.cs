@@ -658,8 +658,10 @@ namespace EasyLOU
             // 
             // MainStatusLabel
             // 
+            this.MainStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.MainStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.MainStatusLabel.Name = "MainStatusLabel";
-            this.MainStatusLabel.Size = new System.Drawing.Size(86, 17);
+            this.MainStatusLabel.Size = new System.Drawing.Size(90, 17);
             this.MainStatusLabel.Text = "Not connected";
             // 
             // toolStrip2
@@ -795,7 +797,7 @@ namespace EasyLOU
             // 
             this.ScriptSplit.Panel2.Controls.Add(this.ScriptOutput);
             this.ScriptSplit.Size = new System.Drawing.Size(477, 423);
-            this.ScriptSplit.SplitterDistance = 211;
+            this.ScriptSplit.SplitterDistance = 210;
             this.ScriptSplit.SplitterWidth = 3;
             this.ScriptSplit.TabIndex = 1;
             // 
@@ -810,7 +812,7 @@ namespace EasyLOU
             this.ScriptTextArea.Location = new System.Drawing.Point(0, 0);
             this.ScriptTextArea.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptTextArea.Name = "ScriptTextArea";
-            this.ScriptTextArea.Size = new System.Drawing.Size(477, 211);
+            this.ScriptTextArea.Size = new System.Drawing.Size(477, 210);
             this.ScriptTextArea.SyntaxHighlighting = "Lua";
             this.ScriptTextArea.TabIndex = 0;
             this.ScriptTextArea.Tag = "new";
@@ -824,7 +826,7 @@ namespace EasyLOU
             this.ScriptOutput.Multiline = true;
             this.ScriptOutput.Name = "ScriptOutput";
             this.ScriptOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutput.Size = new System.Drawing.Size(477, 209);
+            this.ScriptOutput.Size = new System.Drawing.Size(477, 210);
             this.ScriptOutput.TabIndex = 0;
             // 
             // StatusTreeView
@@ -857,7 +859,7 @@ namespace EasyLOU
             this.NewScriptTabPage.Location = new System.Drawing.Point(4, 22);
             this.NewScriptTabPage.Margin = new System.Windows.Forms.Padding(2);
             this.NewScriptTabPage.Name = "NewScriptTabPage";
-            this.NewScriptTabPage.Size = new System.Drawing.Size(325, 158);
+            this.NewScriptTabPage.Size = new System.Drawing.Size(481, 427);
             this.NewScriptTabPage.TabIndex = 1;
             this.NewScriptTabPage.Text = "    +";
             this.NewScriptTabPage.ToolTipText = "Add new script";
