@@ -22,14 +22,6 @@ For two reasons:
 
 With EasyLOU you can write [Lua 5.2](https://www.lua.org/manual/5.2/) scripts that will make your Legends of Ultima character perform pretty much anything you want them to.
 
-## How do I get started?
-
-- Read the [Instructions](#how-does-it-work) below in order to learn how to launch EasyLOU and connect it to Aria
-- Take a look at the scripts provided with the [Examples/](Examples/) folder extracted from the zipped release archive
-- Take a look at the available [Commands](COMMANDS.md) and [Variables](VARIABLES.md)
-- Learn some [Lua](https://www.lua.org/manual/5.2/)
-- Enjoy!
-
 ## Is EasyLOU compatible with the official Legends of Aria servers?
 
 The community server Legends of Ultima is the reason why this tool exists: we enjoy this community server and have decided to write this tool and name EasyLOU after it.  
@@ -44,23 +36,6 @@ Upon the release of a new Legends of Aria Client, it may take some time before w
 Volunteers are always welcome :)
 
 ## How does it work?
-
-- From the [Releases](https://github.com/Lady-Binary/EasyLOU/releases) tab here on GitHub, download the archive containing latest build and extract it
-- Place the two extracted files EasyLOU.exe and LOU.dll in the folder where the file Assembly-CSharp.dll resides (usually C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed)
-- Launch EasyLOU.exe
-- Launch your Legends of Aria Client
-- Wait for your Legends of Aria Client login page to show up
-- On EasyLOU click on the Connect To Client Icon ![icon](EasyLOU/icons/uo.ico?raw=true "Connect to Client Icon"); the mouse cursor should turn into a beautiful UO hand
-- Click on the Legends of Aria Client you want to connect to
-- When asked, click OK to inject
-- Load a script
-- Enjoy!
-
-*Note 1*: On Windows 10, upon launcing EasyLOU.exe you might get a "Microsoft Defender SmartScreen prevented an unrecognised app from starting." error message. If you know what you're doing then open the properties menu of EasyLOU.exe, check the "Unblock" box, click apply, click OK, and relaunch EasyLOU.exe.  
-
-*Note 2*: EasyLOU requires Administrative Privileges in order to be able to inject into the Legends of Aria Client running process.  
-
-## Yes, ok, but how does it *really* work?
 
 EasyLOU.exe injects LOU.dll into the Legends of Aria client process, using a well known technique for injecting assemblies into Mono embedded applications, commonly Unity Engine based games.  
 EasyLOU.exe acts as the GUI while LOU.dll acts as the commands engine, and they communicate via two shared memory maps:  
