@@ -2,6 +2,8 @@
 
 # Easy LOU
 
+Instructions: [Wiki](https://github.com/Lady-Binary/EasyLOU/wiki/Instrutions)
+
 Discord server: https://discord.gg/RWAqYcV
 
 Public Scripts Library: https://easylou.boards.net/
