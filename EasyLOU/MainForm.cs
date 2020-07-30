@@ -134,10 +134,10 @@ namespace EasyLOU
                 {
                     if (MainStatusLabel.Text.StartsWith("Connected to"))
                     {
-                        MessageBoxEx.Show("Client disconnected!");
                         MainStatusLabel.ForeColor = Color.Red;
                         MainStatusLabel.Text = "Client " + MainForm.CurrentClientProcessId.ToString() + " not responding!";
                         DoStopAll();
+                        MessageBoxEx.Show("Client disconnected!");
                     }
                 }
                 StatusTreeView.EndUpdate();
