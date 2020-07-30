@@ -128,7 +128,6 @@ namespace EasyLOU
                         else if (MainForm.ClientStatus.StatusBar.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.ContainerInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.LastAction.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.Find.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.ShopInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.ExtendedInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.ClientInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
@@ -136,6 +135,11 @@ namespace EasyLOU
                         else if (MainForm.ClientStatus.TileInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.TimeInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.Miscellaneous.TryGetValue(index.String, out value)) return DynValue.NewString(value);
+                        else if (MainForm.ClientStatus.Find.TryGetValue(index.String, out value))
+                        {
+                            string[] values = value.Split(',');
+                            return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, DynValue.NewString));
+                        }
                     }
                 }
             }

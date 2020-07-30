@@ -1453,36 +1453,36 @@ namespace LOU
                 {
                     try
                     {
-                        ClientStatus.Miscellaneous["MONSTERSID"] = String.Join(",", this.NearbyMonsters.Select(v => v.ObjectId));
-                        ClientStatus.Miscellaneous["MONSTERSNAME"] = String.Join(",", this.NearbyMonsters.Select(v => v.name));
-                        ClientStatus.Miscellaneous["MONSTERSHP"] = String.Join(",", this.NearbyMonsters.Select(v => v.GetStatByName("Health")));
-                        ClientStatus.Miscellaneous["MONSTERSDIST"] = String.Join(",", this.NearbyMonsters.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
+                        ClientStatus.Find["MONSTERSID"] = String.Join(",", this.NearbyMonsters.Select(v => v.ObjectId));
+                        ClientStatus.Find["MONSTERSNAME"] = String.Join(",", this.NearbyMonsters.Select(v => v.name));
+                        ClientStatus.Find["MONSTERSHP"] = String.Join(",", this.NearbyMonsters.Select(v => v.GetStatByName("Health")));
+                        ClientStatus.Find["MONSTERSDIST"] = String.Join(",", this.NearbyMonsters.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
                     }
                     catch (Exception e)
                     {
                         Utils.Log(e.ToString());
                         this.NearbyMonsters = new List<MobileInstance>();
-                        ClientStatus.Miscellaneous["MONSTERSID"] = "N/A";
-                        ClientStatus.Miscellaneous["MONSTERSNAME"] = "N/A";
-                        ClientStatus.Miscellaneous["MONSTERSHP"] = "N/A";
-                        ClientStatus.Miscellaneous["MONSTERSDIST"] = "N/A";
+                        ClientStatus.Find["MONSTERSID"] = "N/A";
+                        ClientStatus.Find["MONSTERSNAME"] = "N/A";
+                        ClientStatus.Find["MONSTERSHP"] = "N/A";
+                        ClientStatus.Find["MONSTERSDIST"] = "N/A";
 
                     }
                 }
                 else
                 {
-                    ClientStatus.Miscellaneous["MONSTERSID"] = "N/A";
-                    ClientStatus.Miscellaneous["MONSTERSNAME"] = "N/A";
-                    ClientStatus.Miscellaneous["MONSTERSHP"] = "N/A";
-                    ClientStatus.Miscellaneous["MONSTERSDIST"] = "N/A";
+                    ClientStatus.Find["MONSTERSID"] = "N/A";
+                    ClientStatus.Find["MONSTERSNAME"] = "N/A";
+                    ClientStatus.Find["MONSTERSHP"] = "N/A";
+                    ClientStatus.Find["MONSTERSDIST"] = "N/A";
                 }
             }
             else
             {
-                ClientStatus.Miscellaneous["MONSTERSID"] = "N/A";
-                ClientStatus.Miscellaneous["MONSTERSNAME"] = "N/A";
-                ClientStatus.Miscellaneous["MONSTERSHP"] = "N/A";
-                ClientStatus.Miscellaneous["MONSTERSDIST"] = "N/A";
+                ClientStatus.Find["MONSTERSID"] = "N/A";
+                ClientStatus.Find["MONSTERSNAME"] = "N/A";
+                ClientStatus.Find["MONSTERSHP"] = "N/A";
+                ClientStatus.Find["MONSTERSDIST"] = "N/A";
             }
 
             ClientStatus.Miscellaneous["RANDOM"] = new System.Random().Next(0, 1000).ToString();
