@@ -99,8 +99,10 @@ Also: don't be evil.
 
 # CREDITS
 
+Ultima Online is copyright of [Electronic Arts Inc](https://uo.com/).  
 Legends of Aria is copyright of [Citadel Studios](https://citadelstudios.net/).  
-LadyBinary is a tribute to Lord Binary, who was very active in the UO hacking scene (see for example [UO_RICE](https://github.com/necr0potenc3/UO_RICE)).  
+Legends of Ultima is copyright of [Legends of Ultima](https://www.legendsofultima.online/).  
+Lady Binary is a tribute to Lord Binary, who was very active in the UO hacking scene (see for example [UO_RICE](https://github.com/necr0potenc3/UO_RICE)).  
 EasyLOU is of course inspired by the great [EasyUO](http://www.easyuo.com/).  
 The LOU part of EasyLOU is a tribute to [Legends Of Ultima](https://www.legendsofultima.online/), whose passionate staff have dedicated so much effort in putting together a wonderful product based off of [Legends of Aria](https://www.legendsofaria.com/).  
 The Lua engine is based on [MoonSharp](https://github.com/moonsharp-devs/moonsharp/), commit 4e748a7 plus minor enhancements.  
