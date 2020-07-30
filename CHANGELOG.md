@@ -1,5 +1,10 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.0.0.28 (30/07/2020)
+*No changelog for this release.*
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.27 (30/07/2020)
 
 #### Enhancements:
