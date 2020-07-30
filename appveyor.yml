@@ -109,6 +109,6 @@ after_deploy:
 
     git add ./*AssemblyInfo.cs
 
-    git commit "changelog"
+    git commit -m "changelog"
 
     git push
