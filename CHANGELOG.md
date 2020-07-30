@@ -1,5 +1,13 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.0.0.27 (30/07/2020)
+
+#### Enhancements:
+
+- Add CHANGELOG [#58](https://github.com/Lady-Binary/EasyLOU/issues/58)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.26 (29/07/2020)
 
 #### Enhancements:
