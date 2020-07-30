@@ -104,6 +104,8 @@ after_deploy:
     git config --global user.email "ladybinary@protonmail.com"
 
     git config --global user.name "AppVeyor"
+    
+    git checkout master
 
     git add CHANGELOG.md
 
