@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/slacd3eo77qmy1fp/branch/master?svg=true)](https://ci.appveyor.com/project/Lady-Binary/easylou/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/slacd3eo77qmy1fp/branch/master?svg=true)](https://ci.appveyor.com/project/Lady-Binary/easylou/branch/master) [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
 # Easy LOU
 
