@@ -101,7 +101,7 @@ after_deploy:
 
     Add-Content -Path "$HOME\.git-credentials" -Value "https://$($env:GITHUB_TOKEN):x-oauth-basic@github.com`n" -NoNewline
 
-    git config --global user.email ""
+    git config --global user.email "ladybinary@protonmail.com"
 
     git config --global user.name "AppVeyor"
 
