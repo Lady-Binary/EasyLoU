@@ -1,0 +1,114 @@
+version: 1.0.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - master
+skip_tags: true
+skip_commits:
+  message: /changelog/
+image: Visual Studio 2017
+configuration: Release
+clone_folder: c:\EasyLOU
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+environment:
+  LOA_VERSION: 1.0.0.4
+  GITHUB_TOKEN:
+    secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
+  nodejs_version: 10.21.0
+cache: c:\downloads
+before_build:
+- ps: >-
+    if (!(Test-Path "c:\downloads")) {
+      mkdir c:\downloads
+    }
+
+
+    ls c:\downloads
+
+
+    $url = "https://cdn.legendsofaria.com/LegendsOfAria-$env:LOA_VERSION.zip"
+
+    $file = "c:\downloads\LegendsOfAria-$env:LOA_VERSION.zip"
+
+
+    # check if we ever downloaded dlls for the current loa version
+
+    if (!(Test-Path $file)) {
+
+      # if not, let's clean up the downloads folder
+      del c:\downloads\*.*
+
+      # and download the new client
+      Start-FileDownload $url $file
+
+      # extract dlls
+      7z e $file -oC:\downloads\ *.dll -r
+
+      # delete the original zip (too big to fit appveyor's cache)
+      del $file
+
+      # and recreate the zip with just the dlls, so that appveyor can cache it for subsequent builds
+      7z a -tzip $file c:\downloads\*.dll
+    }
+
+
+    # copy dlls to the libs folder
+
+    cp c:\downloads\*.dll $pwd\LOU\libs\
+
+    ls $pwd\LOU\libs\
+
+
+    # nuget restore needed for some projects
+
+    nuget restore
+build:
+  project: c:\EasyLOU\EasyLOU.sln
+  verbosity: minimal
+after_build:
+- ps: >-
+    $artifact = "EasyLOU-$env:APPVEYOR_BUILD_VERSION.zip"
+
+
+    7z a -tzip $artifact $pwd\Examples\ $pwd\EasyLOU\bin\Release\ILMerge\EasyLOU.exe $pwd\EasyLOU\bin\Release\LOU.dll
+artifacts:
+- path: EasyLOU-$(APPVEYOR_BUILD_VERSION).zip
+deploy:
+- provider: GitHub
+  tag: $(APPVEYOR_BUILD_VERSION)
+  release: EasyLOU v$(APPVEYOR_BUILD_VERSION) - Client v$(LOA_VERSION)
+  auth_token:
+    secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
+  artifact: EasyLOU-$(APPVEYOR_BUILD_VERSION).zip
+  on:
+    branch: master
+after_deploy:
+- ps: >-
+    npm install github-release-notes -g
+
+    gren release --token $env:GITHUB_TOKEN --override
+
+    gren changelog --token $env:GITHUB_TOKEN --override
+
+
+    git config --global credential.helper store
+
+    Add-Content -Path "$HOME\.git-credentials" -Value "https://$($env:GITHUB_TOKEN):x-oauth-basic@github.com`n" -NoNewline
+
+    git config --global user.email ""
+
+    git config --global user.name "AppVeyor"
+
+    git add CHANGELOG.md
+
+    git add ./*AssemblyInfo.cs
+
+    git commit "changelog"
+
+    git push
