@@ -6,7 +6,7 @@ branches:
   - master
 skip_tags: true
 skip_commits:
-  message: /changelog/
+  message: /bump version and update changelog/
 image: Visual Studio 2017
 configuration: Release
 clone_folder: c:\EasyLOU
@@ -105,12 +105,13 @@ after_deploy:
 
     git config --global user.name "AppVeyor"
     
-    git checkout master
+    git checkout master -q
 
     git add CHANGELOG.md
 
     git add ./*AssemblyInfo.cs
 
-    git commit -m "changelog"
+    git commit -m "bump version and update changelog"
 
-    git push
+    git push -q
+    
