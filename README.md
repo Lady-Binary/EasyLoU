@@ -52,7 +52,7 @@ Yes, but it has not been extensively tested yet.
 ## Can I multibox?
 
 Yes.  
-You need to open one instance of EasyLOU, lunch a client, and conect EasyLOU to it.  
+You need to open one instance of EasyLOU, lunch a client, and connect EasyLOU to it.  
 Then you can open another instance of EasyLOU, lunch another client, and connect EasyLOU to it.  
 Rinse, and repeat.  
 
