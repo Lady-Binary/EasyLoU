@@ -10,6 +10,7 @@
 #### Enhancements:
 
 - Improve FIND variables, they should be arrays/tables so that it's much easier to use them [#52](https://github.com/Lady-Binary/EasyLOU/issues/52)
+- Add button to open the folder where Player.log can be found [#53](https://github.com/Lady-Binary/EasyLOU/issues/53)
 
 ---
 
