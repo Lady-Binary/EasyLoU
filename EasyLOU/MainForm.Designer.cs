@@ -101,6 +101,7 @@ namespace EasyLOU
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.HelpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.HomeToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.ScriptTab = new System.Windows.Forms.TabPage();
             this.ScriptSplit = new System.Windows.Forms.SplitContainer();
             this.ScriptTextArea = new ICSharpCode.TextEditor.TextEditorControlEx();
@@ -677,7 +678,8 @@ namespace EasyLOU
             this.connectToClientiToolStripButton,
             this.toolStripSeparator7,
             this.HelpToolStripButton,
-            this.HomeToolStripButton});
+            this.HomeToolStripButton,
+            this.toolStripButton1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 55);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(784, 31);
@@ -767,6 +769,16 @@ namespace EasyLOU
             this.HomeToolStripButton.Size = new System.Drawing.Size(28, 28);
             this.HomeToolStripButton.Text = "Go To Website";
             this.HomeToolStripButton.Click += new System.EventHandler(this.HomeToolStripButton_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButton1.Text = "Open Debug Logs";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // ScriptTab
             // 
@@ -1187,6 +1199,7 @@ namespace EasyLOU
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.Panel TargetAriaClientPanel;
         private System.Windows.Forms.Label TargetAriaClientLabel;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
