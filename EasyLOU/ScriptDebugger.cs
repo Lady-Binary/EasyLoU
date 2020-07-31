@@ -137,8 +137,15 @@ namespace EasyLOU
                         else if (MainForm.ClientStatus.Miscellaneous.TryGetValue(index.String, out value)) return DynValue.NewString(value);
                         else if (MainForm.ClientStatus.Find.TryGetValue(index.String, out value))
                         {
-                            string[] values = value.Split(',');
-                            return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, DynValue.NewString));
+                            if (value != "N/A")
+                            {
+                                string[] values = value.Split(',');
+                                return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, DynValue.NewString));
+                            }
+                            else
+                            {
+                                return DynValue.NewString(value);
+                            }
                         }
                     }
                 }
