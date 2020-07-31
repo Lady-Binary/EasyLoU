@@ -2,7 +2,7 @@
 
 # Easy LOU
 
-Instructions: [Wiki](https://github.com/Lady-Binary/EasyLOU/wiki/Instrutions)
+Instructions: [Wiki](https://github.com/Lady-Binary/EasyLOU/wiki/Instructions)
 
 Discord server: https://discord.gg/RWAqYcV
 
