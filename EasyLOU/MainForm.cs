@@ -118,7 +118,10 @@ namespace EasyLOU
                 {
                     StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Remove(StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes[StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Count - 1]);
                 }
-                StatusTreeView.Nodes[ParentKey].Nodes[Key].Expand();
+                if (!StatusTreeView.Nodes[ParentKey].Nodes[Key].IsExpanded)
+                {
+                    StatusTreeView.Nodes[ParentKey].Nodes[Key].Expand();
+                }
             }
             else
             {
