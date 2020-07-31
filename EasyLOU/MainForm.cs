@@ -88,12 +88,61 @@ namespace EasyLOU
             else
                 StatusTreeView.Nodes[ParentKey].Nodes[Key].Text = Key + ": " + Value;
         }
+        private void UpdateAttributeWithArray(String ParentKey, String Key, String Value)
+        {
+            if (!StatusTreeView.Nodes.ContainsKey(ParentKey))
+            {
+                StatusTreeView.Nodes.Add(ParentKey, ParentKey);
+                StatusTreeView.Nodes[ParentKey].Expand();
+            }
+
+            if (!StatusTreeView.Nodes[ParentKey].Nodes.ContainsKey(Key))
+            {
+                StatusTreeView.Nodes[ParentKey].Nodes.Add(Key, Key);
+            }
+
+            if (Value != "N/A")
+            {
+                StatusTreeView.Nodes[ParentKey].Nodes[Key].Text = Key;
+                String[] Values = Value.Split(',');
+                int v = 0;
+                foreach (String Val in Values)
+                {
+                    v++;
+                    if (!StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.ContainsKey(v.ToString()))
+                        StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Add(v.ToString(), "[" + v.ToString() + "] " + Val);
+                    else
+                        StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes[v.ToString()].Text = "[" + v.ToString() + "] " + Val;
+                }
+                while (StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Count > v)
+                {
+                    StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Remove(StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes[StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Count - 1]);
+                }
+                StatusTreeView.Nodes[ParentKey].Nodes[Key].Expand();
+            }
+            else
+            {
+                StatusTreeView.Nodes[ParentKey].Nodes[Key].Text = Key + ": " + Value;
+                if (StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Count > 0)
+                {
+                    StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Clear();
+                }
+            }
+        }
 
         private void UpdateAttributesGroup(Dictionary<String, String> Group, String GroupName)
         {
             foreach (KeyValuePair<String, String> Attribute in Group)
             {
                 UpdateAttribute(GroupName, Attribute.Key, (Attribute.Value != null ? Attribute.Value.ToString() : ""));
+            }
+        }
+
+        private void UpdateAttributesGroupWithArrays(Dictionary<String, String> Group, String GroupName)
+        {
+            foreach (KeyValuePair<String, String> Attribute in Group)
+            {
+                UpdateAttributeWithArray(GroupName, Attribute.Key, (Attribute.Value != null ? Attribute.Value.ToString() : ""));
             }
         }
 
@@ -120,7 +169,7 @@ namespace EasyLOU
                     UpdateAttributesGroup(ClientStatus.StatusBar, "Status Bar");
                     UpdateAttributesGroup(ClientStatus.ContainerInfo, "Container Info");
                     UpdateAttributesGroup(ClientStatus.LastAction, "Last Action");
-                    UpdateAttributesGroup(ClientStatus.Find, "Find");
+                    UpdateAttributesGroupWithArrays(ClientStatus.Find, "Find");
                     UpdateAttributesGroup(ClientStatus.ShopInfo, "Shop Info");
                     UpdateAttributesGroup(ClientStatus.ExtendedInfo, "Extended Info");
                     UpdateAttributesGroup(ClientStatus.ClientInfo, "Client Info");
