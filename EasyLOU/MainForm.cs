@@ -1510,9 +1510,9 @@ namespace EasyLOU
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            var pathWithEnv = @"%USERPROFILE%\AppData\LocalLow\Citadel Studos Inc_\Legends of Aria\";
+            var pathWithEnv = @"%USERPROFILE%\AppData\LocalLow\Citadel Studios Inc_\Legends of Aria\";
             var fileName = Environment.ExpandEnvironmentVariables(pathWithEnv);
-            if(File.Exists(fileName))
+            if(Directory.Exists(fileName))
             {
                 Process.Start("explorer.exe", fileName);
             }
