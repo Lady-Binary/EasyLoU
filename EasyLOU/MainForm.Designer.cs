@@ -116,17 +116,17 @@ namespace EasyLOU
             this.TimerSpinners = new System.Windows.Forms.Timer(this.components);
             this.TimerRefreshScriptVars = new System.Windows.Forms.Timer(this.components);
             this.StatusTreeViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyNameStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.copyValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyValueStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ScriptsTabContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeThisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllScriptsButThisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VarsTreeViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CopyNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.CopyValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.CopyValueVarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TargetAriaClientPanel = new System.Windows.Forms.Panel();
             this.TargetAriaClientLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -948,30 +948,30 @@ namespace EasyLOU
             // 
             this.StatusTreeViewContextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.StatusTreeViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyNameToolStripMenuItem,
+            this.CopyNameStatusToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.copyValueToolStripMenuItem});
+            this.CopyValueStatusToolStripMenuItem});
             this.StatusTreeViewContextMenu.Name = "StatusTreeViewContextMenu";
             this.StatusTreeViewContextMenu.Size = new System.Drawing.Size(138, 54);
             // 
-            // copyNameToolStripMenuItem
+            // CopyNameStatusToolStripMenuItem
             // 
-            this.copyNameToolStripMenuItem.Name = "copyNameToolStripMenuItem";
-            this.copyNameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.copyNameToolStripMenuItem.Text = "Copy Name";
-            this.copyNameToolStripMenuItem.Click += new System.EventHandler(this.copyNameToolStripMenuItem_Click);
+            this.CopyNameStatusToolStripMenuItem.Name = "CopyNameStatusToolStripMenuItem";
+            this.CopyNameStatusToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.CopyNameStatusToolStripMenuItem.Text = "Copy Name";
+            this.CopyNameStatusToolStripMenuItem.Click += new System.EventHandler(this.CopyNameStatusToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(134, 6);
             // 
-            // copyValueToolStripMenuItem
+            // CopyValueStatusToolStripMenuItem
             // 
-            this.copyValueToolStripMenuItem.Name = "copyValueToolStripMenuItem";
-            this.copyValueToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.copyValueToolStripMenuItem.Text = "Copy Value";
-            this.copyValueToolStripMenuItem.Click += new System.EventHandler(this.copyValueToolStripMenuItem_Click);
+            this.CopyValueStatusToolStripMenuItem.Name = "CopyValueStatusToolStripMenuItem";
+            this.CopyValueStatusToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.CopyValueStatusToolStripMenuItem.Text = "Copy Value";
+            this.CopyValueStatusToolStripMenuItem.Click += new System.EventHandler(this.CopyValueStatusToolStripMenuItem_Click);
             // 
             // ScriptsTabContextMenu
             // 
@@ -1008,30 +1008,30 @@ namespace EasyLOU
             // 
             this.VarsTreeViewContextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.VarsTreeViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CopyNameToolStripMenuItem,
+            this.CopyValueToolStripMenuItem,
             this.toolStripSeparator11,
-            this.CopyValueToolStripMenuItem});
+            this.CopyValueVarToolStripMenuItem});
             this.VarsTreeViewContextMenu.Name = "StatusTreeViewContextMenu";
             this.VarsTreeViewContextMenu.Size = new System.Drawing.Size(138, 54);
             // 
-            // CopyNameToolStripMenuItem
+            // CopyValueToolStripMenuItem
             // 
-            this.CopyNameToolStripMenuItem.Name = "CopyNameToolStripMenuItem";
-            this.CopyNameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.CopyNameToolStripMenuItem.Text = "Copy Name";
-            this.CopyNameToolStripMenuItem.Click += new System.EventHandler(this.CopyNameToolStripMenuItem_Click);
+            this.CopyValueToolStripMenuItem.Name = "CopyValueToolStripMenuItem";
+            this.CopyValueToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.CopyValueToolStripMenuItem.Text = "Copy Name";
+            this.CopyValueToolStripMenuItem.Click += new System.EventHandler(this.CopyValueToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(134, 6);
             // 
-            // CopyValueToolStripMenuItem
+            // CopyValueVarToolStripMenuItem
             // 
-            this.CopyValueToolStripMenuItem.Name = "CopyValueToolStripMenuItem";
-            this.CopyValueToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.CopyValueToolStripMenuItem.Text = "Copy Value";
-            this.CopyValueToolStripMenuItem.Click += new System.EventHandler(this.CopyValueToolStripMenuItem_Click);
+            this.CopyValueVarToolStripMenuItem.Name = "CopyValueVarToolStripMenuItem";
+            this.CopyValueVarToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.CopyValueVarToolStripMenuItem.Text = "Copy Value";
+            this.CopyValueVarToolStripMenuItem.Click += new System.EventHandler(this.CopyValueVarToolStripMenuItem_Click);
             // 
             // TargetAriaClientPanel
             // 
@@ -1184,9 +1184,9 @@ namespace EasyLOU
         private System.Windows.Forms.TreeView VarsTreeView;
         private System.Windows.Forms.Timer TimerRefreshScriptVars;
         private System.Windows.Forms.ContextMenuStrip StatusTreeViewContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem copyNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyNameStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem copyValueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyValueStatusToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip ScriptsTabContextMenu;
         private System.Windows.Forms.ToolStripMenuItem closeThisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeAllScriptsToolStripMenuItem;
@@ -1194,9 +1194,9 @@ namespace EasyLOU
         private System.Windows.Forms.SplitContainer ScriptSplit;
         private System.Windows.Forms.TextBox ScriptOutput;
         private System.Windows.Forms.ContextMenuStrip VarsTreeViewContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem CopyNameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem CopyValueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem CopyValueVarToolStripMenuItem;
         private System.Windows.Forms.Panel TargetAriaClientPanel;
         private System.Windows.Forms.Label TargetAriaClientLabel;
         private System.Windows.Forms.ToolStripButton DebugLogsToolStripButton;
