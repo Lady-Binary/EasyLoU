@@ -988,6 +988,21 @@ namespace EasyLOU
             System.Diagnostics.Process.Start("https://github.com/Lady-Binary/EasyLOU");
         }
 
+
+        private void DebugLogsToolStripButton_Click(object sender, EventArgs e)
+        {
+            var pathWithEnv = @"%USERPROFILE%\AppData\LocalLow\Citadel Studios Inc_\Legends of Aria\";
+            var fileName = Environment.ExpandEnvironmentVariables(pathWithEnv);
+            if (Directory.Exists(fileName))
+            {
+                Process.Start("explorer.exe", fileName);
+            }
+            else
+            {
+                MessageBox.Show("Expected path to debug log file not found.\n\nThe usual location is C:\\Users\\<username>\\AppData\\LocalLow\\Citadel Studios Inc_\\Legends of Aria\\Player.log");
+            }
+        }
+
         #endregion SecondaryToolbar
 
         #region Injection
@@ -1252,7 +1267,7 @@ namespace EasyLOU
             }
         }
 
-        private void copyNameToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyNameStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (StatusTreeView.SelectedNode != null && StatusTreeView.SelectedNode.Text.Contains(":"))
             {
@@ -1262,7 +1277,7 @@ namespace EasyLOU
             }
         }
 
-        private void copyValueToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyValueStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (StatusTreeView.SelectedNode != null && StatusTreeView.SelectedNode.Text.Contains(":"))
             {
@@ -1488,7 +1503,7 @@ namespace EasyLOU
             }
         }
 
-        private void CopyNameToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyValueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains(":"))
             {
@@ -1498,27 +1513,13 @@ namespace EasyLOU
             }
         }
 
-        private void CopyValueToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyValueVarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains(":"))
             {
                 int Separator = VarsTreeView.SelectedNode.Text.IndexOf(':');
                 string Value = VarsTreeView.SelectedNode.Text.Substring(Separator + 2, VarsTreeView.SelectedNode.Text.Length - 2 - Separator);
                 Clipboard.SetText(Value);
-            }
-        }
-
-        private void DebugLogsToolStripButton_Click(object sender, EventArgs e)
-        {
-            var pathWithEnv = @"%USERPROFILE%\AppData\LocalLow\Citadel Studios Inc_\Legends of Aria\";
-            var fileName = Environment.ExpandEnvironmentVariables(pathWithEnv);
-            if(Directory.Exists(fileName))
-            {
-                Process.Start("explorer.exe", fileName);
-            }
-            else
-            {
-                MessageBox.Show("Expected path to debug log file not found.\n\nThe usual location is C:\\Users\\<username>\\AppData\\LocalLow\\Citadel Studios Inc_\\Legends of Aria\\Player.log");
             }
         }
     }
