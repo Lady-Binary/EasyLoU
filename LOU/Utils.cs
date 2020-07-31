@@ -31,7 +31,7 @@ namespace LOU
                     foreach (FloatingPanel floatingPanel in AGLMPFPPEDK)
                     {
                         Utils.Log("Panel " + floatingPanel.PanelId);
-                        if (name == null || name == "" || floatingPanel.PanelId.Contains(name))
+                        if (name == null || name == "" || floatingPanel.PanelId.ToLower().Contains(name.ToLower()))
                         {
                             Utils.Log("Panel " + floatingPanel.PanelId + " matches!");
                             FoundPanels.Add(floatingPanel.PanelId, floatingPanel);
