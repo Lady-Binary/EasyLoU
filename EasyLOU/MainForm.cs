@@ -1507,5 +1507,19 @@ namespace EasyLOU
                 Clipboard.SetText(Value);
             }
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var pathWithEnv = @"%USERPROFILE%\AppData\LocalLow\Citadel Studos Inc_\Legends of Aria\";
+            var fileName = Environment.ExpandEnvironmentVariables(pathWithEnv);
+            if(File.Exists(fileName))
+            {
+                Process.Start("explorer.exe", fileName);
+            }
+            else
+            {
+                MessageBox.Show("Expected path to debug log file not found.\n\nThe usual location is C:\\Users\\<username>\\AppData\\LocalLow\\Citadel Studios Inc_\\Legends of Aria\\Player.log");
+            }
+        }
     }
 }
