@@ -147,6 +147,7 @@
     <Content Include="icons\close.ico" />
     <Content Include="icons\copy.ico" />
     <Content Include="icons\cut.ico" />
+    <Content Include="icons\EasyLOU.ico" />
     <Content Include="icons\find.ico" />
     <Content Include="icons\help.ico" />
     <Content Include="icons\home.ico" />
@@ -158,9 +159,11 @@
     <Content Include="icons\reopen.ico" />
     <Content Include="icons\replace.ico" />
     <Content Include="icons\save.ico" />
+    <Content Include="icons\saveall.ico" />
     <Content Include="icons\start.ico" />
     <Content Include="icons\stop.ico" />
     <Content Include="icons\stopall.ico" />
+    <Content Include="icons\uo.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ICSharpCode.TextEditorEx\ICSharpCode.TextEditorEx.csproj">

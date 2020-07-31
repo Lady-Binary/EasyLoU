@@ -101,7 +101,7 @@ namespace EasyLOU
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.HelpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.HomeToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.DebugLogsToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ScriptTab = new System.Windows.Forms.TabPage();
             this.ScriptSplit = new System.Windows.Forms.SplitContainer();
             this.ScriptTextArea = new ICSharpCode.TextEditor.TextEditorControlEx();
@@ -124,9 +124,9 @@ namespace EasyLOU
             this.closeAllScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllScriptsButThisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VarsTreeViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TargetAriaClientPanel = new System.Windows.Forms.Panel();
             this.TargetAriaClientLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -679,7 +679,7 @@ namespace EasyLOU
             this.toolStripSeparator7,
             this.HelpToolStripButton,
             this.HomeToolStripButton,
-            this.toolStripButton1});
+            this.DebugLogsToolStripButton});
             this.toolStrip2.Location = new System.Drawing.Point(0, 55);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(784, 31);
@@ -770,15 +770,15 @@ namespace EasyLOU
             this.HomeToolStripButton.Text = "Go To Website";
             this.HomeToolStripButton.Click += new System.EventHandler(this.HomeToolStripButton_Click);
             // 
-            // toolStripButton1
+            // DebugLogsToolStripButton
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButton1.Text = "Open Debug Logs";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.DebugLogsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DebugLogsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DebugLogsToolStripButton.Image")));
+            this.DebugLogsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DebugLogsToolStripButton.Name = "DebugLogsToolStripButton";
+            this.DebugLogsToolStripButton.Size = new System.Drawing.Size(28, 28);
+            this.DebugLogsToolStripButton.Text = "Open Debug Logs";
+            this.DebugLogsToolStripButton.Click += new System.EventHandler(this.DebugLogsToolStripButton_Click);
             // 
             // ScriptTab
             // 
@@ -1008,30 +1008,30 @@ namespace EasyLOU
             // 
             this.VarsTreeViewContextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.VarsTreeViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem4,
+            this.CopyNameToolStripMenuItem,
             this.toolStripSeparator11,
-            this.toolStripMenuItem5});
+            this.CopyValueToolStripMenuItem});
             this.VarsTreeViewContextMenu.Name = "StatusTreeViewContextMenu";
             this.VarsTreeViewContextMenu.Size = new System.Drawing.Size(138, 54);
             // 
-            // toolStripMenuItem4
+            // CopyNameToolStripMenuItem
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(137, 22);
-            this.toolStripMenuItem4.Text = "Copy Name";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            this.CopyNameToolStripMenuItem.Name = "CopyNameToolStripMenuItem";
+            this.CopyNameToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.CopyNameToolStripMenuItem.Text = "Copy Name";
+            this.CopyNameToolStripMenuItem.Click += new System.EventHandler(this.CopyNameToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(134, 6);
             // 
-            // toolStripMenuItem5
+            // CopyValueToolStripMenuItem
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(137, 22);
-            this.toolStripMenuItem5.Text = "Copy Value";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            this.CopyValueToolStripMenuItem.Name = "CopyValueToolStripMenuItem";
+            this.CopyValueToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.CopyValueToolStripMenuItem.Text = "Copy Value";
+            this.CopyValueToolStripMenuItem.Click += new System.EventHandler(this.CopyValueToolStripMenuItem_Click);
             // 
             // TargetAriaClientPanel
             // 
@@ -1194,12 +1194,12 @@ namespace EasyLOU
         private System.Windows.Forms.SplitContainer ScriptSplit;
         private System.Windows.Forms.TextBox ScriptOutput;
         private System.Windows.Forms.ContextMenuStrip VarsTreeViewContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem CopyNameToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem CopyValueToolStripMenuItem;
         private System.Windows.Forms.Panel TargetAriaClientPanel;
         private System.Windows.Forms.Label TargetAriaClientLabel;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton DebugLogsToolStripButton;
     }
 }
 
