@@ -1,5 +1,18 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.0.0.29 (31/07/2020)
+
+#### Bugfixes:
+
+- Upon disconnection, too many popup messages are displayed [#60](https://github.com/Lady-Binary/EasyLOU/issues/60)
+- ClickButton doesn't work with the Sell buttons of vendors UIs [#54](https://github.com/Lady-Binary/EasyLOU/issues/54)
+
+#### Enhancements:
+
+- Improve FIND variables, they should be arrays/tables so that it's much easier to use them [#52](https://github.com/Lady-Binary/EasyLOU/issues/52)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.28 (30/07/2020)
 *No changelog for this release.*
 
