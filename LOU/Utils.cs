@@ -264,6 +264,18 @@ namespace LOU
             return foundMobiles;
         }
 
+        public static Vector3 CalculateRelativePosition(Transform transform, Transform ancestor)
+        {
+            Vector3 position = transform.localPosition;
+            Transform t = transform.parent;
+            while (t != null && t != ancestor)
+            {
+                position = position + t.localPosition;
+                t = t.parent;
+            }
+            return position;
+        }
+
         #region reflection stuff
         public static object GetInstanceField(Type type, object instance, string fieldName)
         {
@@ -495,7 +507,12 @@ namespace LOU
                 UIButtonMessage comp = c.GetComponent<UIButtonMessage>();
                 LogProps(comp);
             }
-
+            if (c.GetComponent<UIButtonMessage>() != null)
+            {
+                Log("UIEventListener");
+                UIEventListener comp = c.GetComponent<UIEventListener>();
+                LogProps(comp);
+            }
 
             if (c.GetComponent<UILabel>() != null)
             {

@@ -284,19 +284,26 @@ namespace LOU
                                                 {
                                                     Utils.Log("Label " + Label.FJNGNLHHOEI + " found! Searching for collider...");
 
-                                                    // Calculate the label's center
-                                                    float LabelCenterX = Label.transform.localPosition.x + Label.IOGCKBNELGA.x;
-                                                    float LabelCenterY = Label.transform.localPosition.y + Label.IOGCKBNELGA.y;
+                                                    // Calculate the label's center, relative to the dynamic window
+                                                    Vector3 LabelPositionRelativeToDynamicWindow = Utils.CalculateRelativePosition(Label.transform, dynamicWindow.transform);
+                                                    Vector3 LabelCenterRelativeToDynamicWindow = LabelPositionRelativeToDynamicWindow + Label.IOGCKBNELGA; // Label.IOGCKBNELGA is the UIWidget's localCenter property documented here http://tasharen.com/ngui/docs/class_u_i_widget.html
 
                                                     // And search for a collider that is colliding with the label's center
                                                     foreach (BoxCollider Collider in Colliders)
                                                     {
-                                                        float ColliderX1 = Collider.transform.localPosition.x;
-                                                        float ColliderX2 = Collider.transform.localPosition.x + Collider.size.x;
-                                                        float ColliderY1 = Collider.transform.localPosition.y;
-                                                        float ColliderY2 = Collider.transform.localPosition.y - Collider.size.y;
-                                                        if (ColliderX1 <= LabelCenterX && LabelCenterX <= ColliderX2 &&
-                                                            ColliderY2 <= LabelCenterY && LabelCenterY <= ColliderY1)
+                                                        // Calculate the collider's center, relative to the dynamic window
+                                                        Vector3 ColliderPositionRelativeToDynamicWindow = Utils.CalculateRelativePosition(Collider.transform, dynamicWindow.transform);
+                                                        Vector3 ColliderCenterRelativeToDynamicWindow = ColliderPositionRelativeToDynamicWindow + Collider.center;
+                                                        
+                                                        // Calculate collider boundaries
+                                                        float ColliderX1 = ColliderCenterRelativeToDynamicWindow.x - (Collider.size.x / 2);
+                                                        float ColliderX2 = ColliderCenterRelativeToDynamicWindow.x + (Collider.size.x / 2);
+                                                        float ColliderY1 = ColliderCenterRelativeToDynamicWindow.y - (Collider.size.y / 2);
+                                                        float ColliderY2 = ColliderCenterRelativeToDynamicWindow.y + (Collider.size.y / 2);
+
+                                                        // Check if the label's center falls within this collider's boundaries
+                                                        if (ColliderX1 <= LabelCenterRelativeToDynamicWindow.x && LabelCenterRelativeToDynamicWindow.x <= ColliderX2 &&
+                                                            ColliderY1 <= LabelCenterRelativeToDynamicWindow.y && LabelCenterRelativeToDynamicWindow.y <= ColliderY2)
                                                         {
                                                             if (int.TryParse(Collider.name, out int ButtonID))
                                                             {
@@ -966,21 +973,15 @@ namespace LOU
                                     if (dynamicWindow != null)
                                     {
                                         GameObject objectFound = null;
-                                        List<GameObject> Children = new List<GameObject>();
-                                        for (var c = 0; c < dynamicWindow.transform.childCount; c++)
+
+                                        // Search within all the BoxCollider's of the DynamicWindow for a BoxCollider with the given name
+                                        BoxCollider[] BoxColliders = dynamicWindow.GetComponentsInChildren<BoxCollider>();
+                                        foreach (BoxCollider BoxCollider in BoxColliders)
                                         {
-                                            Transform child = dynamicWindow.transform.GetChild(c);
-                                            Children.Add(child.gameObject);
-                                            Utils.Log("Child gameobject name: " + child.gameObject.name);
-                                            if (child.gameObject.name == _buttonName)
+                                            if (BoxCollider.gameObject.name == _buttonName)
                                             {
-                                                Utils.Log("GameObject found!");
-                                                objectFound = child.gameObject;
-                                            }
-                                            Component[] components = child.GetComponents<Component>();
-                                            foreach (Component component in components)
-                                            {
-                                                Utils.Log("Child component: " + component.name + "," + component.GetType().ToString());
+                                                Utils.Log("Collider found!");
+                                                objectFound = BoxCollider.gameObject;
                                             }
                                         }
                                         if (objectFound != null)
@@ -988,9 +989,18 @@ namespace LOU
                                             Utils.Log("OnButtonClicked(" + objectFound.name + ")");
                                             dynamicWindow.OnButtonClicked(objectFound);
                                             break;
+                                        } else
+                                        {
+                                            Utils.Log("BoxCollider " + _buttonName + " not found!");
                                         }
+                                    } else
+                                    {
+                                        Utils.Log("FloatingPanel " + _containerName + " found, but no dynamic window?!");
                                     }
 
+                                } else
+                                {
+                                    Utils.Log("FloatingPanel " + _containerName + " not found!");
                                 }
                             }
                         }
@@ -1535,13 +1545,6 @@ namespace LOU
                     {
                         if (!this.rightMouseDown)
                         {
-                            Utils.Log("Props:");
-                            Utils.LogProps(this.player);
-                            Dictionary<string, object> EBNBHBHNCFC = (Dictionary<string, object>)Utils.GetInstanceField(this.player, "EBNBHBHNCFC");
-                            foreach(string key in EBNBHBHNCFC.Keys)
-                            {
-                                Utils.Log(key + "=" + EBNBHBHNCFC[key]);
-                            }
                         }
                         this.rightMouseDown = true;
                     }
