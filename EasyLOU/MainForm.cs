@@ -1488,7 +1488,7 @@ namespace EasyLOU
             }
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        private void CopyNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains(":"))
             {
@@ -1498,7 +1498,7 @@ namespace EasyLOU
             }
         }
 
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        private void CopyValueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains(":"))
             {
@@ -1508,7 +1508,7 @@ namespace EasyLOU
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void DebugLogsToolStripButton_Click(object sender, EventArgs e)
         {
             var pathWithEnv = @"%USERPROFILE%\AppData\LocalLow\Citadel Studios Inc_\Legends of Aria\";
             var fileName = Environment.ExpandEnvironmentVariables(pathWithEnv);
