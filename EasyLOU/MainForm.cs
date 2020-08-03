@@ -1530,6 +1530,28 @@ namespace EasyLOU
             }
         }
 
+        public delegate void WriteOutputDelegate(String guid, String s);
+        public void WriteOutput(String guid, String s)
+        {
+            foreach (TabPage page in ScriptsTab.TabPages)
+            {
+                if (page.Tag.ToString() == guid)
+                {
+                    Control[] ScriptOutput = page.Controls.Find("ScriptOutput", true);
+                    if (ScriptOutput != null)
+                    {
+                        TextBox ScriptOutputTextBox = (TextBox)ScriptOutput[0];
+                        if (ScriptOutputTextBox.Text.Length > 1024 * 1024 * 100)
+                        {
+                            ScriptOutputTextBox.Text = ScriptOutputTextBox.Text.Remove(0, 1024 * 1024 * 1);
+                        }
+                        ((TextBox)ScriptOutput[0]).AppendText(s);
+                    }
+                    return;
+                }
+            }
+        }
+
         public delegate void ClearOutputDelegate(String guid);
         public void ClearOutput(String guid)
         {

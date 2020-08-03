@@ -48,6 +48,11 @@ namespace EasyLOU
             this.MainForm.Invoke(new MainForm.PrintOutputDelegate(this.MainForm.PrintOutput), new object[] { this.Guid, s });
         }
 
+        void Write(String s)
+        {
+            this.MainForm.Invoke(new MainForm.WriteOutputDelegate(this.MainForm.WriteOutput), new object[] { this.Guid, s });
+        }
+
         void Clear()
         {
             this.MainForm.Invoke(new MainForm.ClearOutputDelegate(this.MainForm.ClearOutput), new object[] { this.Guid });
@@ -199,6 +204,7 @@ namespace EasyLOU
                                 // generic helper methods
                                 this.Script.Globals["sleep"] = (Action<int>)Sleep;
                                 this.Script.Globals["clear"] = (Action)Clear;
+                                this.Script.Globals["write"] = (Action<string>)Write;
 
                                 // other options
                                 this.Script.Options.DebugPrint = Print;
