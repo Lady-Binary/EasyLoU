@@ -48,6 +48,11 @@ namespace EasyLOU
             this.MainForm.Invoke(new MainForm.PrintOutputDelegate(this.MainForm.PrintOutput), new object[] { this.Guid, s });
         }
 
+        void Clear()
+        {
+            this.MainForm.Invoke(new MainForm.ClearOutputDelegate(this.MainForm.ClearOutput), new object[] { this.Guid });
+        }
+
         static DynValue CallBack(ScriptExecutionContext ctx, CallbackArguments args)
         {
             var name = ctx.m_Callback.Name;
@@ -193,6 +198,7 @@ namespace EasyLOU
 
                                 // generic helper methods
                                 this.Script.Globals["sleep"] = (Action<int>)Sleep;
+                                this.Script.Globals["clear"] = (Action)Clear;
 
                                 // other options
                                 this.Script.Options.DebugPrint = Print;
