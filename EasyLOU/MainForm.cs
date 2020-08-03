@@ -1530,6 +1530,24 @@ namespace EasyLOU
             }
         }
 
+        public delegate void ClearOutputDelegate(String guid);
+        public void ClearOutput(String guid)
+        {
+            foreach (TabPage page in ScriptsTab.TabPages)
+            {
+                if (page.Tag.ToString() == guid)
+                {
+                    Control[] ScriptOutput = page.Controls.Find("ScriptOutput", true);
+                    if (ScriptOutput != null)
+                    {
+                        TextBox ScriptOutputTextBox = (TextBox)ScriptOutput[0];
+                        ScriptOutputTextBox.Text = "";
+                    }
+                    return;
+                }
+            }
+        }
+
         private void VarsTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
