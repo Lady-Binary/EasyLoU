@@ -160,6 +160,7 @@
     <Content Include="icons\replace.ico" />
     <Content Include="icons\save.ico" />
     <Content Include="icons\saveall.ico" />
+    <Content Include="icons\scroll.ico" />
     <Content Include="icons\start.ico" />
     <Content Include="icons\stop.ico" />
     <Content Include="icons\stopall.ico" />
