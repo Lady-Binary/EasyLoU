@@ -38,6 +38,27 @@ namespace EasyLOU
             this.Name = Name;
         }
 
+        void WaitForTarget(int? millisecondsTimeout = 5000)
+        {
+            DateTime start = DateTime.UtcNow;
+
+            while ((DateTime.UtcNow - start).TotalMilliseconds < millisecondsTimeout)
+            {
+                if (MainForm.ClientStatus != null &&
+                    MainForm.ClientStatus.Miscellaneous != null &&
+                    MainForm.ClientStatus.Miscellaneous.TryGetValue("TARGETTYPE", out string target))
+                {
+                    if (target != "None")
+                    {
+                        return;
+                    }
+                }
+                Thread.Sleep(50);
+            }
+
+            return;
+        }
+
         void Sleep(int millisecondsTimeout)
         {
             System.Threading.Thread.Sleep(millisecondsTimeout);
@@ -196,6 +217,7 @@ namespace EasyLOU
                                 {
                                     this.Script.Globals[s.ToString()] = DynValue.NewCallback(CallBack, s.ToString());
                                 }
+                                this.Script.Globals["WaitForTarget"] = (Action<int?>)WaitForTarget; // Override: this is implemented client side
 
                                 // LOU status variables
                                 this.Script.Globals.MetaTable = new Table(this.Script);

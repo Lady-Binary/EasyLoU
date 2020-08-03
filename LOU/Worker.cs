@@ -755,6 +755,12 @@ namespace LOU
                         }
                         break;
 
+                    case CommandType.WaitForTarget:
+                        {
+                            // This is implemented client side! See ScriptDebugger.cs in EasyLOU project
+                        }
+                        break;
+
                     case CommandType.AttackSelected:
                         {
                             string _objectId = ExtractParam(ClientCommand.CommandParams, 0);
