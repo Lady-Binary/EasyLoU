@@ -8,20 +8,14 @@ doTree()  - harvests tree, uses prospect tool, and watches for mobs. Will move o
 	    X, Y and Z decimal separator must be a comma and values must be sent as strings e.g. doTree("420,0", "420,1", "420,2")
 ]]--
 
-
-function ExtractFirstId(ids) -- stole this from utils.lua
-    local first_id = nil
-    for id in string.gmatch(ids, "([^,]+)") do
-        first_id = id
-    	break
-    end
-    return first_id
-end
+gateToHouseKey = 10 -- key to cast gate to dropoff location
+dropoffBoxId = <id of dropbox>
+attackSpellKey = 11
 
 function Equip(item) -- stole this from utils.lua
     FindItem (item)
-	local tool_id = ExtractFirstId(FINDITEMID)
-	local cont_id = ExtractFirstId(FINDITEMCNTID)
+	local tool_id = FINDITEMID[1]
+	local cont_id = FINDITEMCNTID[1]
 	if tool_id == nil or tool_id == "N/A" then
 		print(item .. " not found!")
 		return	
@@ -31,7 +25,7 @@ function Equip(item) -- stole this from utils.lua
 		return	
 	end
 	print("Equipping " .. item)
-	SayCustom(".x use " .. tool_id .. " Equip")
+	ContextMenu(tool_id, "Equip")
 end
 
 function MoveEx(x,y,z) -- starts you moving towards coordinates and waits until you're there before continuing
@@ -46,31 +40,36 @@ end
 function dropoff()
 	print('dropping off...')
 	repeat
-		Macro(3) -- this is casting gate from a hotkey to my house
+		Macro(gateToHouseKey) -- this is casting gate from a hotkey to my house
 		sleep(4000)
 		FindPanel("Moongate")
-	until string.match(FINDPANELID, "ConfirmMoongate")
-	ClickButton(FINDPANELID, "0") -- "0" is the confirmation to travel button
+		if FINDPANELID == "N/A" then
+			panelId = FINDPANELID
+		else
+			panelId = FINDPANELID[1]
+		end
+	until string.match(panelId, "ConfirmMoongate")
+	ClickButton(FINDPANELID[1], "0") -- "0" is the confirmation to travel button
 	sleep(3000)
 	FindItem("Logs",tonumber(BACKPACKID)) -- finds all logs in my backpack
-	for id in string.gmatch(FINDITEMID, "([^,]+)") do
+	for id in FINDITEMID do
 		Drag(id)
-		Dropc(<container id you want to drop into>) -- and drops them in a chest at my house
+		Dropc(dropoffBoxId) -- and drops them in a chest at my house
 		sleep(500)
 	end
 	FindItem("Kindling",tonumber(BACKPACKID)) -- moves kindling
-	Drag(FINDITEMID)
-	Dropc(<container id you want to drop into>)
+	Drag(FINDITEMID[1])
+	Dropc(dropoffBoxId)
 	sleep(500)
 	FindItem("Apple",tonumber(BACKPACKID)) -- and apples
-	Drag(FINDITEMID)
-	Dropc(<container id you want to drop into>)
+	Drag(FINDITEMID[1])
+	Dropc(dropoffBoxId)
 	sleep(500)
 	FindItem("Portal") -- and travels back through the moongate
-	UseSelected(tonumber(FINDITEMID))
+	UseSelected(tonumber(FINDITEMID[1]))
 	sleep(1000)
 	FindPanel("Moongate")
-	ClickButton(FINDPANELID, "0")
+	ClickButton(FINDPANELID[1], "0")
 	sleep(3000)
 	Equip("Hatchet") -- don't forget to re-equip your hatchet!
 end
@@ -80,7 +79,7 @@ function defend()
 		local x = CHARPOSX
 		local y = CHARPOSY
 		local z = CHARPOSZ
-		mId_s = ExtractFirstId(MONSTERSID)
+		mId_s = MONSTERSID[1]
 		mId = tonumber(mId_s)
 		Move(x-5,y,z) -- run away a bit
 		sleep(1000)
@@ -89,14 +88,14 @@ function defend()
 		Say('all kill') 
 		TargetDynamic(mId) -- make the pets attack mob (stupid boglings!)
 		for i=1,10 do
-			Macro(10) -- fireball on my hotbar
+			Macro(attackSpellKey) -- fireball on my hotbar
 			TargetDynamic(mId) 
 		end
 		print('mob dead')
 		Equip("hatchet") -- re-equip yourself!
 		MoveEx(x,y,z)
 		FindPermanent("Tree")  -- and re-engage the tree
-		closestId = ExtractFirstId(FINDPERMAID)
+		closestId = FINDPERMAID[1]
 		Macro(28)
 		sleep(500)
 		TargetPermanent(closestId)
@@ -107,7 +106,7 @@ function doTree(x,y,z)
 	Equip("Hatchet")
 	MoveEx(x,y,z)
 	FindPermanent("Tree")  -- find all trees
-	closestId = ExtractFirstId(FINDPERMAID)  -- finds the closest one
+	closestId = FINDPERMAID[1]  -- finds the closest one
 	print('At spot with x/z: ' .. x .. ',' .. z)
 	Macro(28) -- the 'q' key
 	sleep(500)
@@ -117,12 +116,14 @@ function doTree(x,y,z)
 	repeat
 		defend() -- checks for nearby monsters and defends
 		startWeight = CHARWEIGHT
+		print("startWeight" .. startWeight)
 		FindItem("prospector", BACKPACKID)
-		prospectId = ExtractFirstId(FINDITEMID)
+		prospectId = FINDITEMID[1]
 		UseSelected(prospectId)  -- uses prospecting tool from pack on tree
 		TargetPermanent(closestId)
 		sleep(4000)
 		endWeight = CHARWEIGHT
+		print("endWeight" .. endWeight)
 		print('start/end weight: ' .. startWeight .. ','..endWeight)
 	until startWeight == endWeight  -- will move to next tree if, within 4 seconds-ish, weight didn't change (as in the tree is gone)
 	if tonumber(endWeight) > 300 then -- getting full, dropoff time!
@@ -133,53 +134,9 @@ end
 while true do 
 	Macro(30)
 	sleep(4000)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
-	doTree(<spotX>, <spotY>, <spotZ>)
+	doTree(<x>,<y>,<z>) -- add your own tree coordinates
+	doTree(<x>,<y>,<z>)
+	doTree(<x>,<y>,<z>)
+	doTree(<x>,<y>,<z>)
+	... -- a lot of tree coordinates...
 end
