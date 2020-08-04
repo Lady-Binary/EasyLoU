@@ -1,5 +1,22 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.0.0.30 (04/08/2020)
+
+#### Bugfixes:
+
+- Commands.MD missing GetTooltip from table of contents [#72](https://github.com/Lady-Binary/EasyLOU/issues/72)
+- Client disconnects after char selection [#69](https://github.com/Lady-Binary/EasyLOU/issues/69)
+- Align examples and public scripts with the new FIND variables [#65](https://github.com/Lady-Binary/EasyLOU/issues/65)
+
+#### Enhancements:
+
+- New write() command that prints to output log without newline [#74](https://github.com/Lady-Binary/EasyLOU/issues/74)
+- New clear() command to clear EasyLOU output log [#68](https://github.com/Lady-Binary/EasyLOU/issues/68)
+- WaitForTarget() command [#67](https://github.com/Lady-Binary/EasyLOU/issues/67)
+- Add button to open the folder where Player.log can be found [#53](https://github.com/Lady-Binary/EasyLOU/issues/53)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.29 (31/07/2020)
 
 #### Bugfixes:
@@ -194,17 +211,3 @@
 #### Bugfixes:
 
 - BACKPACKWEIGHT should be CHARWEIGHT and take into account equipped items [#19](https://github.com/Lady-Binary/EasyLOU/issues/19)
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.0 (14/07/2020)
-
-#### Bugfixes:
-
-- DoNewClient() doesn't work with Steam launches [#2](https://github.com/Lady-Binary/EasyLOU/issues/2)
-- BACKPACKWEIGHT doesn't take sub-bag weight into account [#1](https://github.com/Lady-Binary/EasyLOU/issues/1)
-
-#### Enhancements:
-
-- TargetLoc parameters [#6](https://github.com/Lady-Binary/EasyLOU/issues/6)
-- Finding "ButtonName" needs to be easier [#3](https://github.com/Lady-Binary/EasyLOU/issues/3)
