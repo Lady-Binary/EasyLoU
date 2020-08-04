@@ -41,14 +41,17 @@ namespace EasyLOU
         void WaitForTarget(int? millisecondsTimeout = 5000)
         {
             DateTime start = DateTime.UtcNow;
+            Thread.Sleep(500); // wait 500ms at minimum
 
             while ((DateTime.UtcNow - start).TotalMilliseconds < millisecondsTimeout)
             {
                 if (MainForm.ClientStatus != null &&
                     MainForm.ClientStatus.Miscellaneous != null &&
-                    MainForm.ClientStatus.Miscellaneous.TryGetValue("TARGETTYPE", out string target))
+                    MainForm.ClientStatus.Miscellaneous.TryGetValue("TARGETTYPE", out string target) &&
+                    MainForm.ClientStatus.Miscellaneous.TryGetValue("TARGETLOADING", out string _targetloading) &&
+                    bool.TryParse(_targetloading, out bool targetloading))
                 {
-                    if (target != "None")
+                    if (target != "None" && !targetloading)
                     {
                         return;
                     }
