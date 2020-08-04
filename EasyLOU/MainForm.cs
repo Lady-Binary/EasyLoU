@@ -156,7 +156,7 @@ namespace EasyLOU
             {
                 StatusTreeView.BeginUpdate();
                 UpdateAttribute("Debug Info", "Timestamp", ClientStatus.TimeStamp.ToString());
-                if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 10000)
+                if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 60000)
                 {
                     MainStatusLabel.ForeColor = Color.Green;
                     MainStatusLabel.Text = string.Format(
