@@ -1,16 +1,7 @@
-function ExtractFirstId(ids)
-    local first_id = nil
-    for id in string.gmatch(ids, "([^,]+)") do
-        first_id = id
-        break
-    end
-    return first_id
-end
-
 function Equip(item)
     FindItem (item)
-    local tool_id = ExtractFirstId(FINDITEMID)
-    local cont_id = ExtractFirstId(FINDITEMCNTID)
+    local tool_id = FINDITEMID[1]
+    local cont_id = FINDITEMCNTID[1]
     
     if tool_id == nil or
         tool_id == "N/A" then
@@ -24,7 +15,7 @@ function Equip(item)
     end
     
     print("Equipping " .. item)
-    SayCustom(".x use " .. tool_id .. " Equip")
+    ContextMenu(tool_id, "Equip")
 end
 
 function doFish(x,y,z)
