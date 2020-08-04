@@ -39,6 +39,7 @@ Commands are not in alphabetic order. Rather, they are (somewhat) grouped by fun
 - [FindPanel](#FindPanel)
 - [FindButton](#FindButton)
 - [ClickButton](#ClickButton)
+- [GetTooltip](#GetTooltip)
 - [SetInput](#SetInput)
 - [SetTargetFrameRate](#SetTargetFrameRate)
 - [SetVSyncCount](#SetVSyncCount)
