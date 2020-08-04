@@ -235,6 +235,7 @@
         <Key word = "TargetLoc" />
         <Key word = "LastTarget" />
         <Key word = "TargetSelf" />
+        <Key word = "WaitForTarget" />
         <Key word = "AttackSelected" />
         <Key word = "UseSelected" />
         <Key word = "ContextMenu" />
