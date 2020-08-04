@@ -1,5 +1,14 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.0.0.31 (04/08/2020)
+
+#### Bugfixes:
+
+- WaitForTarget() should wait until the cursor finished loading [#83](https://github.com/Lady-Binary/EasyLOU/issues/83)
+- syntax highlight for WaitForTarget() not working [#82](https://github.com/Lady-Binary/EasyLOU/issues/82)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.30 (04/08/2020)
 
 #### Bugfixes:
@@ -203,11 +212,3 @@
 #### Bugfixes:
 
 - injection messagebox should appear after the main window was shown [#21](https://github.com/Lady-Binary/EasyLOU/issues/21)
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.1 (15/07/2020)
-
-#### Bugfixes:
-
-- BACKPACKWEIGHT should be CHARWEIGHT and take into account equipped items [#19](https://github.com/Lady-Binary/EasyLOU/issues/19)
