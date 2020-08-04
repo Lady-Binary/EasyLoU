@@ -1359,6 +1359,11 @@ namespace LOU
             {
                 InputController.FBKEBHPKOIC targetType = (InputController.FBKEBHPKOIC)Utils.GetInstanceField(inputController, "BFNLCIMBCJF");
                 ClientStatus.Miscellaneous["TARGETTYPE"] = targetType.ToString();
+                ClientStatus.Miscellaneous["TARGETLOADING"] = inputController.MAHPFOEKHPO.ToString();
+            } else
+            {
+                ClientStatus.Miscellaneous["TARGETTYPE"] = "N/A";
+                ClientStatus.Miscellaneous["TARGETLOADING"] = "N/A";
             }
 
             if (Input.mousePosition != null &&

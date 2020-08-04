@@ -181,6 +181,7 @@
         <Key word = "VSYNCCOUNT" />
         <Key word = "MAINCAMERAMASK" />
         <Key word = "TARGETTYPE" />
+        <Key word = "TARGETLOADING" />
         <Key word = "MOUSEWINDOWX" />
         <Key word = "MOUSEWINDOWY" />
         <Key word = "MOUSEWINDOWZ" />
