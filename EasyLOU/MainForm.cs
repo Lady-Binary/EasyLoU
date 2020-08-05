@@ -40,6 +40,26 @@ namespace EasyLOU
             MainForm.TheMainForm = this;
             InitializeComponent();
             this.Text = "EasyLOU - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            Settings.LoadSettings();
+            Settings.RegisterHotkeys(this.Handle);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.UnregisterHotkeys(this.Handle);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+
+            if (m.Msg == KeyboardHook.WM_HOTKEY)
+            {
+                if (m.WParam.ToInt32() == 1) DoPlay();
+                if (m.WParam.ToInt32() == 2) DoStop();
+                if (m.WParam.ToInt32() == 3) DoStopAll();
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -1613,6 +1633,12 @@ namespace EasyLOU
                 string Value = VarsTreeView.SelectedNode.Text.Substring(Separator + 2, VarsTreeView.SelectedNode.Text.Length - 2 - Separator);
                 Clipboard.SetText(Value);
             }
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.ShowDialog(this);
         }
     }
 }

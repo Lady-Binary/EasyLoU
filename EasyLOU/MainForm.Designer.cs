@@ -129,6 +129,8 @@ namespace EasyLOU
             this.CopyValueVarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TargetAriaClientPanel = new System.Windows.Forms.Panel();
             this.TargetAriaClientLabel = new System.Windows.Forms.Label();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -440,7 +442,9 @@ namespace EasyLOU
             this.varDumpToolStripMenuItem,
             this.manageVarListToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.dontMoveCursorToolStripMenuItem});
+            this.dontMoveCursorToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.settingsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 22);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -451,33 +455,33 @@ namespace EasyLOU
             this.connectToClientToolStripMenuItem.Name = "connectToClientToolStripMenuItem";
             this.connectToClientToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.N)));
-            this.connectToClientToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.connectToClientToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
             this.connectToClientToolStripMenuItem.Text = "Connect to client";
             this.connectToClientToolStripMenuItem.Click += new System.EventHandler(this.connectToClientToolStripMenuItem_Click);
             // 
             // varDumpToolStripMenuItem
             // 
             this.varDumpToolStripMenuItem.Name = "varDumpToolStripMenuItem";
-            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
             this.varDumpToolStripMenuItem.Text = "VarDump";
             this.varDumpToolStripMenuItem.Click += new System.EventHandler(this.varDumpToolStripMenuItem_Click);
             // 
             // manageVarListToolStripMenuItem
             // 
             this.manageVarListToolStripMenuItem.Name = "manageVarListToolStripMenuItem";
-            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
             this.manageVarListToolStripMenuItem.Text = "Manage VarList";
             this.manageVarListToolStripMenuItem.Click += new System.EventHandler(this.manageVarListToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(228, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(236, 6);
             // 
             // dontMoveCursorToolStripMenuItem
             // 
             this.dontMoveCursorToolStripMenuItem.Name = "dontMoveCursorToolStripMenuItem";
-            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
             this.dontMoveCursorToolStripMenuItem.Text = "Don\'t Move Cursor";
             this.dontMoveCursorToolStripMenuItem.Click += new System.EventHandler(this.dontMoveCursorToolStripMenuItem_Click);
             // 
@@ -1053,6 +1057,18 @@ namespace EasyLOU
             this.TargetAriaClientLabel.Text = "Click the window of the Legends of Aria Client you want to connect to";
             this.TargetAriaClientLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(236, 6);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.settingsToolStripMenuItem.Text = "Settings...";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1069,6 +1085,7 @@ namespace EasyLOU
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "EasyLOU";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -1200,6 +1217,8 @@ namespace EasyLOU
         private System.Windows.Forms.Panel TargetAriaClientPanel;
         private System.Windows.Forms.Label TargetAriaClientLabel;
         private System.Windows.Forms.ToolStripButton DebugLogsToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 
