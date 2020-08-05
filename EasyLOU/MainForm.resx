@@ -442,15 +442,15 @@
   <data name="DebugLogsToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHiSURBVDhPhZFRT9pQGIb9D/sHu1n2W3azxItlWZhbCBmV
-        bRRIVSgOrWsHBKFQKkpowU4QtIwQFFSGmsW4xEQXx7bfcBLjxbKrXb2rhWUmHtmbPDcn53vynu+MpXj/
-        I4llLuSgD5tqDC1dHkkjn/iVCXOBsb+J+iYvFphnENwTaBVS+HFY/y8tLQXJ47ljCxTe33/74ilkzoO6
-        GsW3fRPn3RrOOmUq/d4m9t6rELzMfVsQ47z35CBbzQR9B9W09Lvf28BhbRnN5RiVky0DO6vKP8H1rCUF
-        ct6t2peOGzqVs50K2qU0XWAk5shpp2I3aOspKp+bJWxZOxC8zpuCUjxCTloG9is5bGtJKkcfNDTzCQgM
-        RVCMzpLjRtFqsIKPayqVo7qGRi5OF2gSTz6ZBauqDFMRqfTKSzCzUbogL0yTg/UVdK1v6hTTVHrW82pp
-        EWGaIBfhyJ6hwsyIMN6FbExFwtXZdSqLgiVw3BSoswGyrcnWskZjxN8g7KQIlBBLSmIIhfkp6MI09IUZ
-        KrmwD+JL50aEeX53ODpI7JWLTD1+iJBj3F7Yl931Wzltl6Hy7Nfh6CBx1v09G3yNJd4HzWqwa2RHYj35
-        cjg6yLzryYNEgLlc9LtxRWbGeytJbvLnnMsx8QfrRjIVRZIjZQAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHjSURBVDhPhZFRb9JQGIb3H/wH3hh/izcmXhhjcBpCRmWx
+        MARH6UQ6yyiItJTCWGhh3YCxFQlhg23ItphlJks2M1F/Q5NlF8Yrr167gnHJzvBNnpuT8z15z3cm0uGZ
+        hzxNnYshHzYUAW1NHEtzKfkrwwb8E3+z4H1+Pk89BeeeRLuYxo+Dxn9pq2nEPJ5btkAO+wZvp55ADHjQ
+        UOL4tmfgrFfHabdCZNDfwO6KAo6m7toCIUDfEUPeNSnk269Jsd+D/joO6otoLQpEjjd1bC/L/wRXs5KK
+        mme9NfvSUVMjcrpdRacskQXLyYh50q3aDTpamsjnVhmb1g442nldUE5EzOO2jr1qHlvqeyKHH1S0lt6B
+        owiCUnzOPGqWrAYFfFxViBw2VDTzCbJAjYXNT0bRqirCkHki/UoORjZOFhSiQXO/VkDP+qZuSSLSt55X
+        l3iwJEEu8tLc1RUYGR76AmNjyDFcnl2lmuIsgeO6QJnzm1uqaC1rPHriNVgnQSAzXrPMMyhGg9C4V9Dm
+        Z4nkWR/4aed6hHp2ezQ6jDDtMoOP7oNxPLAX9mWndiMnnQoUhv46Gh1G8Lq/Z0MvkAv7oFoNdvTsWLKs
+        /2I0OkzU9fhe0k9dpGbcuCQzS99IKkD9fONyTP4BsWQx+Qb06qYAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="TimerReadClientStatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -472,7 +472,7 @@
     <value>234, 65</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>194</value>
+    <value>131</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
