@@ -47,7 +47,15 @@ namespace EasyLOU
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.UnregisterHotkeys(this.Handle);
+            if (CheckForUnsavedChanges())
+            {
+                Settings.UnregisterHotkeys(this.Handle);
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         protected override void WndProc(ref Message m)
@@ -532,7 +540,7 @@ namespace EasyLOU
             }
         }
 
-        private void DoExit()
+        private bool CheckForUnsavedChanges()
         {
             bool UnsavedChanges = false;
             int SelectedTabIndex = ScriptsTab.SelectedIndex;
@@ -551,11 +559,19 @@ namespace EasyLOU
             {
                 if (MessageBoxEx.Show(MainForm.TheMainForm, "You have unsaved changes. Are you sure you want to exit?", "Exit with unsaved changes", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
-                    return;
+                    return false;
                 }
             }
 
-            Application.Exit();
+            return true;
+        }
+
+        private void DoExit()
+        {
+            if (CheckForUnsavedChanges())
+            {
+                Application.Exit();
+            }
         }
 
         private void DoPlay()
