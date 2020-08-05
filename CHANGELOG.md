@@ -1,5 +1,17 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.0.0.32 (05/08/2020)
+
+#### Bugfixes:
+
+- Prompt user for confirmation on main app close to save files [#85](https://github.com/Lady-Binary/EasyLOU/issues/85)
+
+#### Enhancements:
+
+- create hotkey for start, stop, stopall [#80](https://github.com/Lady-Binary/EasyLOU/issues/80)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.31 (04/08/2020)
 
 #### Bugfixes:
@@ -204,11 +216,3 @@
 
 ## LoA 1.0.0.2 - EasyLOU 1.0.0.3 (15/07/2020)
 *No changelog for this release.*
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.2 (15/07/2020)
-
-#### Bugfixes:
-
-- injection messagebox should appear after the main window was shown [#21](https://github.com/Lady-Binary/EasyLOU/issues/21)
