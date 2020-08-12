@@ -1340,11 +1340,11 @@ namespace LOU
             ClientStatus.ClientInfo["CLIXRES"] = Screen.width.ToString();
             ClientStatus.ClientInfo["CLIYRES"] = Screen.height.ToString();
             ClientStatus.ClientInfo["FULLSCREEN"] = Screen.fullScreen.ToString();
-            ClientStatus.ClientInfo["CLIGAMESTATE"] = this.applicationController != null ? this.applicationController.JOJPMHOLNHA.ToString() : "N/A";
+            ClientStatus.ClientInfo["CLIGAMESTATE"] = this.applicationController?.JOJPMHOLNHA.ToString() ?? "N/A";
             ClientStatus.ClientInfo["SERVER"] = Utils.GetInstanceField(applicationController, "EGBNKJDFBEJ") != null ? (string)Utils.GetInstanceField(applicationController, "EGBNKJDFBEJ") : "N/A";
             ClientStatus.ClientInfo["TARGETFRAMERATE"] = Application.targetFrameRate.ToString();
             ClientStatus.ClientInfo["VSYNCCOUNT"] = QualitySettings.vSyncCount.ToString();
-            ClientStatus.ClientInfo["MAINCAMERAMASK"] = Camera.main.cullingMask.ToString();
+            ClientStatus.ClientInfo["MAINCAMERAMASK"] = Camera.main?.cullingMask.ToString();
 
             if (this.player != null)
             {
