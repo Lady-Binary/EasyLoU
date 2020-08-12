@@ -1394,9 +1394,9 @@ namespace LOU
 
                 ClientStatus.Miscellaneous["MOUSEOVERPERID"] = this.inputController?.HFHBOINDMAJ?.PermanentId.ToString() ?? "N/A";
                 ClientStatus.Miscellaneous["MOUSEOVERNAME"] = this.inputController?.HFHBOINDMAJ?.name ?? "N/A";
-                ClientStatus.Miscellaneous["MOUSEOVEROBJID"] = this.inputController.HFHBOINDMAJ?.DynamicInst?.ObjectId.ToString() ?? "N/A";
-                ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController.HFHBOINDMAJ?.DynamicInst?.name ?? "N/A";
-                ClientStatus.Miscellaneous["MOUSEOVEROBJCNTID"] = this.inputController.HFHBOINDMAJ?.DynamicInst?.ContainerId.ToString() ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJID"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId.ToString() ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.name ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJCNTID"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId.ToString() ?? "N/A";
 
                 UICamera.Raycast(Input.mousePosition);
                 if (UICamera.EHDALGCGPEK != null)
