@@ -1166,7 +1166,6 @@ namespace LOU
                 ClientStatus.CharacterInfo["LEFTHANDNAME"] = this.player.GetEquippedObject("LeftHand") != null ? this.player.GetEquippedObject("LeftHand").name.ToString() : "N/A";
             }
 
-
             if (this.FindItemResults != null && this.FindItemResults.Count > 0)
             {
                 try
@@ -1393,14 +1392,11 @@ namespace LOU
                     ClientStatus.Miscellaneous["MOUSEWORLDZ"] = "N/A";
                 }
 
-                if (this.inputController != null && this.inputController.ObjectPicker != null && this.inputController.ObjectPicker.HFHBOINDMAJ != null)
-                {
-                    ClientStatus.Miscellaneous["MOUSEOVERPERID"] = this.inputController.ObjectPicker.HFHBOINDMAJ.PermanentId.ToString();
-                    ClientStatus.Miscellaneous["MOUSEOVERNAME"] = this.inputController.ObjectPicker.HFHBOINDMAJ.name;
-                    ClientStatus.Miscellaneous["MOUSEOVEROBJID"] = this.inputController.ObjectPicker.HFHBOINDMAJ.DynamicInst != null ? this.inputController.ObjectPicker.HFHBOINDMAJ.DynamicInst.ObjectId.ToString() : "null";
-                    ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController.ObjectPicker.HFHBOINDMAJ.DynamicInst != null ? this.inputController.ObjectPicker.HFHBOINDMAJ.DynamicInst.name : "null";
-                    ClientStatus.Miscellaneous["MOUSEOVEROBJCNTID"] = this.inputController.ObjectPicker.HFHBOINDMAJ.DynamicInst != null ? this.inputController.ObjectPicker.HFHBOINDMAJ.DynamicInst.ContainerId.ToString() : "null";
-                }
+                ClientStatus.Miscellaneous["MOUSEOVERPERID"] = this.inputController?.HFHBOINDMAJ?.PermanentId.ToString() ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVERNAME"] = this.inputController?.HFHBOINDMAJ?.name ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJID"] = this.inputController.HFHBOINDMAJ?.DynamicInst?.ObjectId.ToString() ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController.HFHBOINDMAJ?.DynamicInst?.name ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJCNTID"] = this.inputController.HFHBOINDMAJ?.DynamicInst?.ContainerId.ToString() ?? "N/A";
 
                 UICamera.Raycast(Input.mousePosition);
                 if (UICamera.EHDALGCGPEK != null)
@@ -1444,16 +1440,14 @@ namespace LOU
                     ClientStatus.Miscellaneous["CLICKWORLDY"] = "N/A";
                     ClientStatus.Miscellaneous["CLICKWORLDZ"] = "N/A";
                 }
-
-                if (this.lastMouseClickClientObject != null)
-                {
-                    ClientStatus.Miscellaneous["CLICKPERID"] = this.lastMouseClickClientObject.PermanentId.ToString();
-                    ClientStatus.Miscellaneous["CLICKNAME"] = this.lastMouseClickClientObject.name;
-                    ClientStatus.Miscellaneous["CLICKOBJID"] = this.lastMouseClickClientObject.DynamicInst != null ? this.lastMouseClickClientObject.DynamicInst.ObjectId.ToString() : "null";
-                    ClientStatus.Miscellaneous["CLICKOBJNAME"] = this.lastMouseClickClientObject.DynamicInst != null ? this.lastMouseClickClientObject.DynamicInst.name : "null";
-                    ClientStatus.Miscellaneous["CLICKOBJCNTID"] = this.lastMouseClickClientObject.DynamicInst != null ? this.lastMouseClickClientObject.DynamicInst.ContainerId.ToString() : "null";
-                }
             }
+
+            ClientStatus.Miscellaneous["CLICKPERID"] = this.lastMouseClickClientObject?.PermanentId.ToString() ?? "N/A";
+            ClientStatus.Miscellaneous["CLICKNAME"] = this.lastMouseClickClientObject?.name ?? "N/A";
+            ClientStatus.Miscellaneous["CLICKOBJID"] = this.lastMouseClickClientObject?.DynamicInst?.ObjectId.ToString() ?? "N/A";
+            ClientStatus.Miscellaneous["CLICKOBJNAME"] = this.lastMouseClickClientObject?.DynamicInst?.name ?? "N/A";
+            ClientStatus.Miscellaneous["CLICKOBJCNTID"] = this.lastMouseClickClientObject?.DynamicInst?.ContainerId.ToString() ?? "N/A";
+
             ClientStatus.Miscellaneous["MONSTERSNEARBY"] = "False";
             this.NearbyMonsters = new List<MobileInstance>();
             if (this.player != null)
@@ -1543,7 +1537,7 @@ namespace LOU
                         if (!this.leftMouseDown)
                         {
                             this.lastMouseClickPosition = Input.mousePosition;
-                            this.lastMouseClickClientObject = this.inputController != null && this.inputController.ObjectPicker != null ? this.inputController.ObjectPicker.HFHBOINDMAJ : null;
+                            this.lastMouseClickClientObject = this.inputController?.HFHBOINDMAJ;
                         }
                         this.leftMouseDown = true;
                     }
