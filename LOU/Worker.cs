@@ -1131,7 +1131,7 @@ namespace LOU
                 //Utils.Log("Props:");
                 //Dictionary<string, object> EBNBHBHNCFC = (Dictionary<string, object>)Utils.GetInstanceField(this.player, "EBNBHBHNCFC");
 
-                ClientStatus.CharacterInfo["CHARNAME"] = this.player.name;
+                ClientStatus.CharacterInfo["CHARNAME"] = this.player.EBHEDGHBHGI;
                 ClientStatus.CharacterInfo["CHARID"] = this.player != null ? this.player.ObjectId.ToString() : "N/A";
                 ClientStatus.CharacterInfo["CHARPOSX"] = this.player.transform != null && this.player.transform.position != null ? this.player.transform.position.x.ToString() : "-1";
                 ClientStatus.CharacterInfo["CHARPOSY"] = this.player.transform != null && this.player.transform.position != null ? this.player.transform.position.y.ToString() : "-1";
@@ -1154,16 +1154,16 @@ namespace LOU
                 }
                 ClientStatus.CharacterInfo["CHARWEIGHT"] = CharWeight != 0 ? CharWeight.ToString() : "N/A";
 
-                ClientStatus.CharacterInfo["HEADID"] = this.player.GetEquippedObject("Head") != null ? this.player.GetEquippedObject("Head").DMCIODGEHCN.ToString() : "N/A";
-                ClientStatus.CharacterInfo["HEADNAME"] = this.player.GetEquippedObject("Head") != null ? this.player.GetEquippedObject("Head").name.ToString() : "N/A";
-                ClientStatus.CharacterInfo["CHESTID"] = this.player.GetEquippedObject("Chest") != null ? this.player.GetEquippedObject("Chest").DMCIODGEHCN.ToString() : "N/A";
-                ClientStatus.CharacterInfo["CHESTNAME"] = this.player.GetEquippedObject("Chest") != null ? this.player.GetEquippedObject("Chest").name.ToString() : "N/A";
-                ClientStatus.CharacterInfo["LEGSID"] = this.player.GetEquippedObject("Legs") != null ? this.player.GetEquippedObject("Legs").DMCIODGEHCN.ToString() : "N/A";
-                ClientStatus.CharacterInfo["LEGSNAME"] = this.player.GetEquippedObject("Legs") != null ? this.player.GetEquippedObject("Legs").name.ToString() : "N/A";
-                ClientStatus.CharacterInfo["RIGHTHANDID"] = this.player.GetEquippedObject("RightHand") != null ? this.player.GetEquippedObject("RightHand").DMCIODGEHCN.ToString() : "N/A";
-                ClientStatus.CharacterInfo["RIGHTHANDNAME"] = this.player.GetEquippedObject("RightHand") != null ? this.player.GetEquippedObject("RightHand").name.ToString() : "N/A";
-                ClientStatus.CharacterInfo["LEFTHANDID"] = this.player.GetEquippedObject("LeftHand") != null ? this.player.GetEquippedObject("LeftHand").DMCIODGEHCN.ToString() : "N/A";
-                ClientStatus.CharacterInfo["LEFTHANDNAME"] = this.player.GetEquippedObject("LeftHand") != null ? this.player.GetEquippedObject("LeftHand").name.ToString() : "N/A";
+                ClientStatus.CharacterInfo["HEADID"] = this.player?.GetEquippedObject("Head")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo["HEADNAME"] = this.player?.GetEquippedObject("Head")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
+                ClientStatus.CharacterInfo["CHESTID"] = this.player?.GetEquippedObject("Chest")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo["CHESTNAME"] = this.player?.GetEquippedObject("Chest")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
+                ClientStatus.CharacterInfo["LEGSID"] = this.player?.GetEquippedObject("Legs")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo["LEGSNAME"] = this.player?.GetEquippedObject("Legs")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
+                ClientStatus.CharacterInfo["RIGHTHANDID"] = this.player?.GetEquippedObject("RightHand")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo["RIGHTHANDNAME"] = this.player?.GetEquippedObject("RightHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
+                ClientStatus.CharacterInfo["LEFTHANDID"] = this.player?.GetEquippedObject("LeftHand")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo["LEFTHANDNAME"] = this.player?.GetEquippedObject("LeftHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
             }
 
             if (this.FindItemResults != null && this.FindItemResults.Count > 0)
@@ -1171,7 +1171,7 @@ namespace LOU
                 try
                 {
                     ClientStatus.Find["FINDITEMID"] = String.Join(",", this.FindItemResults.Keys);
-                    ClientStatus.Find["FINDITEMNAME"] = String.Join(",", this.FindItemResults.Values.Select(v => v.name));
+                    ClientStatus.Find["FINDITEMNAME"] = String.Join(",", this.FindItemResults.Values.Select(v => v.EBHEDGHBHGI));
                     ClientStatus.Find["FINDITEMCNTID"] = String.Join(",", this.FindItemResults.Values.Select(v => v.ContainerId.ToString()));
                 }
                 catch (Exception e)
@@ -1290,7 +1290,7 @@ namespace LOU
                 try
                 {
                     ClientStatus.Find["FINDMOBILEID"] = String.Join(",", this.FindMobileResults.Select(v => v.ObjectId));
-                    ClientStatus.Find["FINDMOBILENAME"] = String.Join(",", this.FindMobileResults.Select(v => v.name));
+                    ClientStatus.Find["FINDMOBILENAME"] = String.Join(",", this.FindMobileResults.Select(v => v.EBHEDGHBHGI));
                     ClientStatus.Find["FINDMOBILEHP"] = String.Join(",", this.FindMobileResults.Select(v => v.GetStatByName("Health")));
                     ClientStatus.Find["FINDMOBILEDIST"] = String.Join(",", this.FindMobileResults.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
                     ClientStatus.Find["FINDMOBILETYPE"] = String.Join(",", this.FindMobileResults.Select(v => v.DKCMJFOPPDL));
@@ -1393,9 +1393,8 @@ namespace LOU
                 }
 
                 ClientStatus.Miscellaneous["MOUSEOVERPERID"] = this.inputController?.HFHBOINDMAJ?.PermanentId.ToString() ?? "N/A";
-                ClientStatus.Miscellaneous["MOUSEOVERNAME"] = this.inputController?.HFHBOINDMAJ?.name ?? "N/A";
                 ClientStatus.Miscellaneous["MOUSEOVEROBJID"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId.ToString() ?? "N/A";
-                ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.name ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
                 ClientStatus.Miscellaneous["MOUSEOVEROBJCNTID"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId.ToString() ?? "N/A";
 
                 UICamera.Raycast(Input.mousePosition);
@@ -1469,7 +1468,7 @@ namespace LOU
                     try
                     {
                         ClientStatus.Find["MONSTERSID"] = String.Join(",", this.NearbyMonsters.Select(v => v.ObjectId));
-                        ClientStatus.Find["MONSTERSNAME"] = String.Join(",", this.NearbyMonsters.Select(v => v.name));
+                        ClientStatus.Find["MONSTERSNAME"] = String.Join(",", this.NearbyMonsters.Select(v => v.EBHEDGHBHGI));
                         ClientStatus.Find["MONSTERSHP"] = String.Join(",", this.NearbyMonsters.Select(v => v.GetStatByName("Health")));
                         ClientStatus.Find["MONSTERSDIST"] = String.Join(",", this.NearbyMonsters.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
                     }
