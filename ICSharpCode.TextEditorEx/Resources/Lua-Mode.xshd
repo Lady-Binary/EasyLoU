@@ -151,6 +151,7 @@
         <Key word = "DEFENSE" />
         <Key word = "VITALITY" />
         <Key word = "PRESTIGEXPMAX" />
+        <Key word = "STEALTH" />
         <Key word = "COBJECTID" />
         <Key word = "LOBJECTID" />
         <Key word = "FINDITEMID" />
@@ -170,6 +171,10 @@
         <Key word = "FINDMOBILEHP" />
         <Key word = "FINDMOBILEDIST" />
         <Key word = "FINDMOBILETYPE" />
+        <Key word = "MONSTERSID" />
+        <Key word = "MONSTERSNAME" />
+        <Key word = "MONSTERSHP" />
+        <Key word = "MONSTERSDIST" />
         <Key word = "CLIVER" />
         <Key word = "CLIID" />
         <Key word = "CLIXRES" />
@@ -182,38 +187,24 @@
         <Key word = "MAINCAMERAMASK" />
         <Key word = "TARGETTYPE" />
         <Key word = "TARGETLOADING" />
-        <Key word = "MOUSEWINDOWX" />
-        <Key word = "MOUSEWINDOWY" />
-        <Key word = "MOUSEWINDOWZ" />
-        <Key word = "MOUSEWORLDX" />
-        <Key word = "MOUSEWORLDY" />
-        <Key word = "MOUSEWORLDZ" />
-        <Key word = "MOUSEOVERPERID" />
-        <Key word = "MOUSEOVERNAME" />
-        <Key word = "MOUSEOVEROBJID" />
-        <Key word = "MOUSEOVEROBJNAME" />
-        <Key word = "MOUSEOVEROBJCNTID" />
-        <Key word = "MOUSEOVERUINAME" />
-        <Key word = "MOUSEOVERUIX" />
-        <Key word = "MOUSEOVERUIY" />
         <Key word = "CLICKWINDOWX" />
         <Key word = "CLICKWINDOWY" />
         <Key word = "CLICKWINDOWZ" />
         <Key word = "CLICKWORLDX" />
         <Key word = "CLICKWORLDY" />
         <Key word = "CLICKWORLDZ" />
+        <Key word = "CLICKPERID" />
+        <Key word = "CLICKNAME" />
+        <Key word = "CLICKOBJID" />
+        <Key word = "CLICKOBJNAME" />
+        <Key word = "CLICKOBJCNTID" />
         <Key word = "MONSTERSNEARBY" />
-        <Key word = "MONSTERSID" />
-        <Key word = "MONSTERSNAME" />
-        <Key word = "MONSTERSHP" />
-        <Key word = "MONSTERSDIST" />
         <Key word = "RANDOM" />
         <Key word = "TIME" />
         <Key word = "SCANJOURNALTIME" />
         <Key word = "SCANJOURNALMESSAGE" />
-        <Key word = "COMMANDID" /> 
-        <Key word = "TOOLTIPTEXT" />      
-        
+        <Key word = "COMMANDID" />
+        <Key word = "TOOLTIPTEXT" /> 
       </KeyWords>
 
       <KeyWords name = "EasyLOUCommands"
