@@ -1339,6 +1339,11 @@ namespace EasyLOU
                     StatusTreeView.SelectedNode = e.Node;
                     StatusTreeViewContextMenu.Show(Cursor.Position);
                 }
+                if (!e.Node.Text.Contains(":") && e.Node.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(e.Node.Text))
+                {
+                    StatusTreeView.SelectedNode = e.Node;
+                    StatusTreeViewContextMenu.Show(Cursor.Position);
+                }
             }
         }
         private void StatusTreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -1348,6 +1353,13 @@ namespace EasyLOU
                 if (e.Node.Text.Contains(":"))
                 {
                     int Separator = e.Node.Text.IndexOf(':');
+                    String Value = e.Node.Text.Substring(Separator + 2, e.Node.Text.Length - 2 - Separator);
+                    TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
+                    ScriptTextArea.ActiveTextAreaControl.TextArea.InsertString(Value);
+                }
+                if (!e.Node.Text.Contains(":") && e.Node.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(e.Node.Text))
+                {
+                    int Separator = e.Node.Text.IndexOf(']');
                     String Value = e.Node.Text.Substring(Separator + 2, e.Node.Text.Length - 2 - Separator);
                     TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
                     ScriptTextArea.ActiveTextAreaControl.TextArea.InsertString(Value);
@@ -1363,6 +1375,12 @@ namespace EasyLOU
                 string Value = StatusTreeView.SelectedNode.Text.Substring(0, Separator);
                 Clipboard.SetText(Value);
             }
+            if (!StatusTreeView.SelectedNode.Text.Contains(":") && StatusTreeView.SelectedNode.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(StatusTreeView.SelectedNode.Text))
+            {
+                var match = new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").Match(StatusTreeView.SelectedNode.Text);
+                String Value = match.Value.Substring(1, match.Value.Length - 2);
+                Clipboard.SetText(Value);
+            }
         }
 
         private void CopyValueStatusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1372,6 +1390,15 @@ namespace EasyLOU
                 int Separator = StatusTreeView.SelectedNode.Text.IndexOf(':');
                 string Value = StatusTreeView.SelectedNode.Text.Substring(Separator + 2, StatusTreeView.SelectedNode.Text.Length - 2 - Separator);
                 Clipboard.SetText(Value);
+            }
+            if (!StatusTreeView.SelectedNode.Text.Contains(":") && StatusTreeView.SelectedNode.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(StatusTreeView.SelectedNode.Text))
+            {
+                int Separator = StatusTreeView.SelectedNode.Text.IndexOf(']');
+                if (StatusTreeView.SelectedNode.Text.Length > Separator + 2)
+                {
+                    String Value = StatusTreeView.SelectedNode.Text.Substring(Separator + 2, StatusTreeView.SelectedNode.Text.Length - Separator - 2);
+                    Clipboard.SetText(Value);
+                }
             }
         }
 
