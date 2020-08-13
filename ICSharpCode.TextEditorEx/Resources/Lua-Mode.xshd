@@ -250,6 +250,7 @@
         <Key word = "SetVSyncCount" />
         <Key word = "SetMainCameraMask" />
         <Key word = "GetTooltip" />
+        <Key word = "ResetVars" />
       </KeyWords>
 
     </RuleSet>
