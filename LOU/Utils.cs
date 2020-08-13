@@ -58,9 +58,9 @@ namespace LOU
             Objects = GetDynamicObjects();
             foreach (DynamicObject obj in Objects)
             {
-                if (obj.name.ToLower().Contains(name.ToLower()))
+                if (obj.EBHEDGHBHGI.ToLower().Contains(name.ToLower()))
                 {
-                    Log("Found " + obj.name);
+                    Log("Found " + obj.EBHEDGHBHGI);
                     FoundObjects.Add(obj.ObjectId.ToString(), obj);
                 }
                 //if (FoundObjects.Count == 20)
@@ -80,9 +80,9 @@ namespace LOU
             Objects = ClientObjectManager.DJCGIMIDOPB.GetObjectsInContainer(containerId);
             foreach (DynamicObject obj in Objects)
             {
-                if (name == null || name == "" || obj.name.ToLower().Contains(name.ToLower()))
+                if (name == null || name == "" || obj.EBHEDGHBHGI.ToLower().Contains(name.ToLower()))
                 {
-                    Log("Found " + obj.name);
+                    Log("Found " + obj.EBHEDGHBHGI);
                     FoundObjects.Add(obj.ObjectId.ToString(), obj);
                 }
                 //if (FoundObjects.Count == 20)
@@ -246,7 +246,7 @@ namespace LOU
                     Log("Breaking because of distance.");
                     break;
                 }
-                if (mobile.name != null && mobile.name != "" && (name == "" || mobile.name.ToLower().Contains(name?.ToLower() ?? "")))
+                if (mobile.EBHEDGHBHGI != null && mobile.EBHEDGHBHGI != "" && (name == "" || mobile.EBHEDGHBHGI.ToLower().Contains(name?.ToLower() ?? "")))
                 {
 
                     if (!foundMobiles.Contains(mobile))
@@ -640,7 +640,7 @@ namespace LOU
             }
 
             Type type = obj.GetType();
-            foreach (var f in type.GetFields().Where(f => f.IsPublic | f.IsStatic))
+            foreach (var f in type.GetFields().Where(f => f.IsPrivate | f.IsPublic | f.IsStatic))
             {
                 Log(f.Name + "=" + f.GetValue(obj));
             }
