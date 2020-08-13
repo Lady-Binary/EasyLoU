@@ -270,7 +270,8 @@ namespace LOU
         SetTargetFrameRate,
         SetVSyncCount,
         SetMainCameraMask,
-        GetTooltip
+        GetTooltip,
+        ResetVars
     }
 
     [ProtoContract]

@@ -1108,7 +1108,30 @@ namespace LOU
 
                             this.tooltipText = ttText;
                         }
-                    break;
+                        break;
+
+                    case CommandType.ResetVars:
+                        {
+                            FindItemResults = null;
+                            FindPermanentResults = null;
+                            FindPanelResults = null;
+                            FindButtonResults = null;
+                            FindLabelResults = null;
+                            FindGameObjectResults = null;
+                            FindMobileResults = null;
+                            NearbyMonsters = null;
+
+                            ScanJournalTime = 0;
+                            ScanJournalMessage = null;
+
+                            leftMouseDown = false;
+                            rightMouseDown = false;
+
+                            lastMouseClickPosition = new Vector3();
+                            lastMouseClickClientObject = null;
+                            tooltipText = null;
+                        }
+                        break;
 
                     default:
                         Utils.Log("Not Implemented!");
