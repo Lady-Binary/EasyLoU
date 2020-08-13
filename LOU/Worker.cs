@@ -33,6 +33,7 @@ namespace LOU
         private ApplicationController applicationController;
         private InputController inputController;
         private LocalPlayer player;
+
         private Dictionary<String, DynamicObject> FindItemResults;
         private Dictionary<String, ClientObject> FindPermanentResults;
         private Dictionary<String, FloatingPanel> FindPanelResults;
@@ -41,8 +42,6 @@ namespace LOU
         private Dictionary<String, GameObject> FindGameObjectResults;
         private List<MobileInstance> FindMobileResults;
         private List<MobileInstance> NearbyMonsters;
-
-        private int mainCameraCullingMask;
 
         private float ScanJournalTime;
         private string ScanJournalMessage;
@@ -1110,11 +1109,10 @@ namespace LOU
                             this.tooltipText = ttText;
                         }
                     break;
-                    
+
                     default:
                         Utils.Log("Not Implemented!");
                         break;
-
                     
                 }
             }
@@ -1394,8 +1392,9 @@ namespace LOU
 
                 ClientStatus.Miscellaneous["MOUSEOVERPERID"] = this.inputController?.HFHBOINDMAJ?.PermanentId.ToString() ?? "N/A";
                 ClientStatus.Miscellaneous["MOUSEOVEROBJID"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId.ToString() ?? "N/A";
-                ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
                 ClientStatus.Miscellaneous["MOUSEOVEROBJCNTID"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId.ToString() ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVEROBJNAME"] = this.inputController?.HFHBOINDMAJ?.name ?? "N/A";
+                ClientStatus.Miscellaneous["MOUSEOVERDISPLAYNAME"] = this.inputController?.HFHBOINDMAJ?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
 
                 UICamera.Raycast(Input.mousePosition);
                 if (UICamera.EHDALGCGPEK != null)
@@ -1442,10 +1441,10 @@ namespace LOU
             }
 
             ClientStatus.Miscellaneous["CLICKPERID"] = this.lastMouseClickClientObject?.PermanentId.ToString() ?? "N/A";
-            ClientStatus.Miscellaneous["CLICKNAME"] = this.lastMouseClickClientObject?.name ?? "N/A";
             ClientStatus.Miscellaneous["CLICKOBJID"] = this.lastMouseClickClientObject?.DynamicInst?.ObjectId.ToString() ?? "N/A";
-            ClientStatus.Miscellaneous["CLICKOBJNAME"] = this.lastMouseClickClientObject?.DynamicInst?.name ?? "N/A";
             ClientStatus.Miscellaneous["CLICKOBJCNTID"] = this.lastMouseClickClientObject?.DynamicInst?.ContainerId.ToString() ?? "N/A";
+            ClientStatus.Miscellaneous["CLICKOBJNAME"] = this.lastMouseClickClientObject?.DynamicInst?.name ?? "N/A";
+            ClientStatus.Miscellaneous["CLICKDISPLAYNAME"] = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
 
             ClientStatus.Miscellaneous["MONSTERSNEARBY"] = "False";
             this.NearbyMonsters = new List<MobileInstance>();
