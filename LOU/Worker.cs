@@ -1218,6 +1218,8 @@ namespace LOU
                     ClientStatus.Find["FINDPERMAID"] = String.Join(",", this.FindPermanentResults.Keys);
                     ClientStatus.Find["FINDPERMANAME"] = String.Join(",", this.FindPermanentResults.Values.Select(v => v.name));
                     ClientStatus.Find["FINDPERMADIST"] = String.Join(",", this.FindPermanentResults.Values.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
+                    ClientStatus.Find["FINDPERMATEXTURE"] = String.Join(",", this.FindPermanentResults.Values.Select(v => String.Join(";", v.GetComponentInChildren<Renderer>()?.materials?.Select(m => m.mainTexture.name) ?? new string[] { }) ?? "None"));
+                    ClientStatus.Find["FINDPERMACOLOR"] = String.Join(",", this.FindPermanentResults.Values.Select(v => String.Join(";", v.GetComponentInChildren<Renderer>()?.materials?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) ?? new string[] { }) ?? "None"));
                 }
                 catch (Exception e)
                 {
@@ -1226,6 +1228,8 @@ namespace LOU
                     ClientStatus.Find["FINDPERMAID"] = "N/A";
                     ClientStatus.Find["FINDPERMANAME"] = "N/A";
                     ClientStatus.Find["FINDPERMADIST"] = "N/A";
+                    ClientStatus.Find["FINDPERMATEXTURE"] = "N/A";
+                    ClientStatus.Find["FINDPERMACOLOR"] = "N/A";
                 }
             }
             else
@@ -1233,6 +1237,8 @@ namespace LOU
                 ClientStatus.Find["FINDPERMAID"] = "N/A";
                 ClientStatus.Find["FINDPERMANAME"] = "N/A";
                 ClientStatus.Find["FINDPERMADIST"] = "N/A";
+                ClientStatus.Find["FINDPERMATEXTURE"] = "N/A";
+                ClientStatus.Find["FINDPERMACOLOR"] = "N/A";
             }
 
             if (this.FindPanelResults != null && this.FindPanelResults.Count > 0)
