@@ -11,7 +11,7 @@
 #### Enhancements:
 
 - retrieve permanent objects (e.g. trees and rocks) textures and colors [#89](https://github.com/Lady-Binary/EasyLOU/issues/89)
-- add command to clear variables stored clearVar() [#88](https://github.com/Lady-Binary/EasyLOU/issues/88)
+- add command to clear variables stored ResetVars() [#88](https://github.com/Lady-Binary/EasyLOU/issues/88)
 
 ---
 
