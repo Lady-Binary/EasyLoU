@@ -1,5 +1,20 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.0.0.33 (15/08/2020)
+
+#### Bugfixes:
+
+- right-click contextmenu on GUI not working on FIND variables [#95](https://github.com/Lady-Binary/EasyLOU/issues/95)
+- object names do not refresh when unidentified objects get identified [#94](https://github.com/Lady-Binary/EasyLOU/issues/94)
+- click and mouseover variables not working with objects in containers [#87](https://github.com/Lady-Binary/EasyLOU/issues/87)
+
+#### Enhancements:
+
+- retrieve permanent objects (e.g. trees and rocks) textures and colors [#89](https://github.com/Lady-Binary/EasyLOU/issues/89)
+- add command to clear variables stored clearVar() [#88](https://github.com/Lady-Binary/EasyLOU/issues/88)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.32 (05/08/2020)
 
 #### Bugfixes:
@@ -211,8 +226,3 @@
 
 - Consider merging all dlls into the EasyLOU.exe [#26](https://github.com/Lady-Binary/EasyLOU/issues/26)
 - Need a GetTooltip() function [#23](https://github.com/Lady-Binary/EasyLOU/issues/23)
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.3 (15/07/2020)
-*No changelog for this release.*
