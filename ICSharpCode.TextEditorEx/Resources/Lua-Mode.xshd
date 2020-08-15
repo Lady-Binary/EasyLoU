@@ -160,6 +160,8 @@
         <Key word = "FINDPERMAID" />
         <Key word = "FINDPERMANAME" />
         <Key word = "FINDPERMADIST" />
+        <Key word = "FINDPERMATEXTURE" />
+        <Key word = "FINDPERMACOLOR" />
         <Key word = "FINDPANELID" />
         <Key word = "FINDBUTTONNAME" />
         <Key word = "FINDBUTTONTEXT" />
