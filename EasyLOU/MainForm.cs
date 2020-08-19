@@ -161,19 +161,24 @@ namespace EasyLOU
             }
         }
 
-        private void UpdateAttributesGroup(Dictionary<String, String> Group, String GroupName)
+        private void UpdateAttributesGroup(Object Group, String GroupName)
         {
-            foreach (KeyValuePair<String, String> Attribute in Group)
+            Type GroupType = Group.GetType();
+
+            foreach (var f in GroupType.GetFields().Where(f => f.IsPublic))
             {
-                UpdateAttribute(GroupName, Attribute.Key, (Attribute.Value != null ? Attribute.Value.ToString() : ""));
+                UpdateAttribute(GroupName, f.Name, f?.GetValue(Group)?.ToString() ?? "N/A");
             }
         }
 
-        private void UpdateAttributesGroupWithArrays(Dictionary<String, String> Group, String GroupName)
+
+        private void UpdateAttributesGroupWithArrays(Object Group, String GroupName)
         {
-            foreach (KeyValuePair<String, String> Attribute in Group)
+            Type GroupType = Group.GetType();
+
+            foreach (var f in GroupType.GetFields().Where(f => f.IsPublic))
             {
-                UpdateAttributeWithArray(GroupName, Attribute.Key, (Attribute.Value != null ? Attribute.Value.ToString() : ""));
+                UpdateAttributeWithArray(GroupName, f.Name, f?.GetValue(Group)?.ToString() ?? "N/A");
             }
         }
 
@@ -198,17 +203,10 @@ namespace EasyLOU
                         ClientCommandsMemoryMap.LastMemoryOccupationPerc);
                     UpdateAttributesGroup(ClientStatus.CharacterInfo, "Character Info");
                     UpdateAttributesGroup(ClientStatus.StatusBar, "Status Bar");
-                    UpdateAttributesGroup(ClientStatus.ContainerInfo, "Container Info");
                     UpdateAttributesGroup(ClientStatus.LastAction, "Last Action");
                     UpdateAttributesGroupWithArrays(ClientStatus.Find, "Find");
-                    UpdateAttributesGroup(ClientStatus.ShopInfo, "Shop Info");
-                    UpdateAttributesGroup(ClientStatus.ExtendedInfo, "Extended Info");
                     UpdateAttributesGroup(ClientStatus.ClientInfo, "Client Info");
-                    UpdateAttributesGroup(ClientStatus.CombatInfo, "Combat Info");
-                    UpdateAttributesGroup(ClientStatus.TileInfo, "Tile Info");
-                    UpdateAttributesGroup(ClientStatus.TimeInfo, "Time Info");
                     UpdateAttributesGroup(ClientStatus.Miscellaneous, "Miscellaneous");
-                    UpdateAttributesGroup(ClientStatus.ResultVariables, "Result Variables");
                 }
                 else
                 {
@@ -643,7 +641,8 @@ namespace EasyLOU
 
         private void DoVarDump()
         {
-
+            DumpKeywords();
+            DumpCommands();
         }
 
         private void DoManageVarList()
@@ -874,8 +873,6 @@ namespace EasyLOU
 
         private void manageVarListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DumpKeywords();
-            DumpCommands();
             DoManageVarList();
         }
 
@@ -1438,110 +1435,12 @@ namespace EasyLOU
             string prefix = " <Key word = \"";
             string postfix = "\" />";
             Console.WriteLine("RefreshKeywords()");
-            foreach (String s in (MainForm.ClientStatus.CharacterInfo.Keys))
+            foreach(TreeNode parent in StatusTreeView.Nodes)
             {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.CharacterInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.StatusBar.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.ContainerInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.LastAction.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.Find.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.ShopInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.ExtendedInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.ClientInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.CombatInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.TileInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.TimeInfo.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-            foreach (String s in (MainForm.ClientStatus.Miscellaneous.Keys))
-            {
-                Console.WriteLine(prefix + s + postfix);
-            }
-
-            foreach (String s in (MainForm.ClientStatus.CharacterInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.CharacterInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.StatusBar.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.ContainerInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.LastAction.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.Find.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.ShopInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.ExtendedInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.ClientInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.CombatInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.TileInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.TimeInfo.Keys))
-            {
-                Console.WriteLine(s + ":");
-            }
-            foreach (String s in (MainForm.ClientStatus.Miscellaneous.Keys))
-            {
-                Console.WriteLine(s + ":");
+                foreach(TreeNode child in parent.Nodes)
+                {
+                    Console.WriteLine(prefix + child.Name + postfix);
+                }
             }
         }
 

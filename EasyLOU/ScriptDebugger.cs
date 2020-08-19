@@ -46,12 +46,9 @@ namespace EasyLOU
             while ((DateTime.UtcNow - start).TotalMilliseconds < millisecondsTimeout)
             {
                 if (MainForm.ClientStatus != null &&
-                    MainForm.ClientStatus.Miscellaneous != null &&
-                    MainForm.ClientStatus.Miscellaneous.TryGetValue("TARGETTYPE", out string target) &&
-                    MainForm.ClientStatus.Miscellaneous.TryGetValue("TARGETLOADING", out string _targetloading) &&
-                    bool.TryParse(_targetloading, out bool targetloading))
+                    bool.TryParse(MainForm.ClientStatus.Miscellaneous.TARGETLOADING, out bool targetloading))
                 {
-                    if (target != "None" && !targetloading)
+                    if (MainForm.ClientStatus.Miscellaneous.TARGETTYPE != "None" && !targetloading)
                     {
                         return;
                     }
@@ -154,31 +151,31 @@ namespace EasyLOU
             {
                 lock (MainForm.ClientStatusLock)
                 {
-                    string value;
                     if (MainForm.ClientStatus != null)
                     {
-                        if (MainForm.ClientStatus.CharacterInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.CharacterInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.StatusBar.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.ContainerInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.LastAction.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.ShopInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.ExtendedInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.ClientInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.CombatInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.TileInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.TimeInfo.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.Miscellaneous.TryGetValue(index.String, out value)) return DynValue.NewString(value);
-                        else if (MainForm.ClientStatus.Find.TryGetValue(index.String, out value))
+                        object value;
+                        var props = MainForm.ClientStatus.CharacterInfo.GetType().GetFields();
+                        value = MainForm.ClientStatus.CharacterInfo.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.CharacterInfo) ?? null;
+                        if (value != null) return DynValue.NewString(value.ToString());
+                        value = MainForm.ClientStatus.StatusBar.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.StatusBar) ?? null;
+                        if (value != null) return DynValue.NewString(value.ToString());
+                        value = MainForm.ClientStatus.LastAction.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.LastAction) ?? null;
+                        if (value != null) return DynValue.NewString(value.ToString());
+                        value = MainForm.ClientStatus.ClientInfo.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.ClientInfo) ?? null;
+                        if (value != null) return DynValue.NewString(value.ToString());
+                        value = MainForm.ClientStatus.Miscellaneous.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Miscellaneous) ?? null;
+                        if (value != null) return DynValue.NewString(value.ToString());
+                        value = MainForm.ClientStatus.Find.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Find) ?? null;
+                        if (value != null)
                         {
-                            if (value != "N/A")
+                            if (value.ToString() != "N/A")
                             {
-                                string[] values = value.Split(',');
+                                string[] values = value.ToString().Split(',');
                                 return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, DynValue.NewString));
                             }
                             else
                             {
-                                return DynValue.NewString(value);
+                                return DynValue.NewString(value.ToString());
                             }
                         }
                     }
