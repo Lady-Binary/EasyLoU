@@ -14,43 +14,43 @@ namespace LOU
         public struct CharacterInfoStruct
         {
             [ProtoMember(1)]
-            public string BACKPACKID;
+            public ulong BACKPACKID;
             [ProtoMember(2)]
-            public string CHARDIR;
+            public int CHARDIR;
             [ProtoMember(3)]
-            public string CHARGHOST;
+            public bool CHARGHOST;
             [ProtoMember(4)]
-            public string CHARID;
+            public ulong CHARID;
             [ProtoMember(5)]
             public string CHARNAME;
             [ProtoMember(6)]
-            public string CHARPOSX;
+            public float CHARPOSX;
             [ProtoMember(7)]
-            public string CHARPOSY;
+            public float CHARPOSY;
             [ProtoMember(8)]
-            public string CHARPOSZ;
+            public float CHARPOSZ;
             [ProtoMember(9)]
             public string CHARSTATUS;
             [ProtoMember(10)]
-            public string CHARWEIGHT;
+            public double CHARWEIGHT;
             [ProtoMember(11)]
-            public string CHESTID;
+            public ulong CHESTID;
             [ProtoMember(12)]
             public string CHESTNAME;
             [ProtoMember(13)]
-            public string HEADID;
+            public ulong HEADID;
             [ProtoMember(14)]
             public string HEADNAME;
             [ProtoMember(15)]
-            public string LEFTHANDID;
+            public ulong LEFTHANDID;
             [ProtoMember(16)]
             public string LEFTHANDNAME;
             [ProtoMember(17)]
-            public string LEGSID;
+            public ulong LEGSID;
             [ProtoMember(18)]
             public string LEGSNAME;
             [ProtoMember(19)]
-            public string RIGHTHANDID;
+            public ulong RIGHTHANDID;
             [ProtoMember(20)]
             public string RIGHTHANDNAME;
         }

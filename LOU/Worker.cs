@@ -1152,19 +1152,19 @@ namespace LOU
                 //Utils.Log("Props:");
                 //Dictionary<string, object> EBNBHBHNCFC = (Dictionary<string, object>)Utils.GetInstanceField(this.player, "EBNBHBHNCFC");
 
-                ClientStatus.CharacterInfo.CHARNAME = this.player.EBHEDGHBHGI;
-                ClientStatus.CharacterInfo.CHARID = this.player != null ? this.player.ObjectId.ToString() : "N/A";
-                ClientStatus.CharacterInfo.CHARPOSX = this.player.transform != null && this.player.transform.position != null ? this.player.transform.position.x.ToString() : "-1";
-                ClientStatus.CharacterInfo.CHARPOSY = this.player.transform != null && this.player.transform.position != null ? this.player.transform.position.y.ToString() : "-1";
-                ClientStatus.CharacterInfo.CHARPOSZ = this.player.transform != null && this.player.transform.position != null ? this.player.transform.position.z.ToString() : "-1";
-                ClientStatus.CharacterInfo.CHARDIR = this.player.transform != null && this.player.transform.rotation != null ? this.player.transform.rotation.ToString() : "N/A";
+                ClientStatus.CharacterInfo.CHARNAME = this.player?.EBHEDGHBHGI ?? "N/A";
+                ClientStatus.CharacterInfo.CHARID = this.player?.ObjectId ?? 0;
+                ClientStatus.CharacterInfo.CHARPOSX = this.player?.transform?.position.x ?? 0;
+                ClientStatus.CharacterInfo.CHARPOSY = this.player?.transform?.position.y ?? 0;
+                ClientStatus.CharacterInfo.CHARPOSZ = this.player?.transform?.position.z ?? 0;
+                ClientStatus.CharacterInfo.CHARDIR = 0;
                 ClientStatus.CharacterInfo.CHARSTATUS = "" +
                     (this.player.IsInCombatMode() ? "G" : " ") +
                     (this.player.PLFMFNKLBON == CoreUtil.ShardShared.MobileFrozenState.MoveFrozen || this.player.PLFMFNKLBON == CoreUtil.ShardShared.MobileFrozenState.MoveAndTurnFrozen ? "A" : "");
-                ClientStatus.CharacterInfo.CHARGHOST = this.player.GetObjectProperty("IsDead") != null ? this.player.GetObjectProperty("IsDead").ToString() : "N/A";
-                ClientStatus.CharacterInfo.BACKPACKID = this.player.GetEquippedObject("Backpack") != null ? this.player.GetEquippedObject("Backpack").DMCIODGEHCN.ToString() : "N/A";
+                ClientStatus.CharacterInfo.CHARGHOST = (bool)(this.player?.GetObjectProperty("IsDead") ?? false);
+                ClientStatus.CharacterInfo.BACKPACKID = this.player?.GetEquippedObject("Backpack")?.DMCIODGEHCN ?? 0;
 
-                int CharWeight = 0;
+                double CharWeight = 0;
                 List<EquipmentObject> ICGEHBHPFOA = (List<EquipmentObject>)Utils.GetInstanceField(this.player, "ICGEHBHPFOA");
                 if (ICGEHBHPFOA != null)
                 {
@@ -1173,17 +1173,17 @@ namespace LOU
                         CharWeight += (int)obj.GetComponent<DynamicObject>().IAIEDKKKPPK;
                     }
                 }
-                ClientStatus.CharacterInfo.CHARWEIGHT = CharWeight != 0 ? CharWeight.ToString() : "N/A";
+                ClientStatus.CharacterInfo.CHARWEIGHT = CharWeight;
 
-                ClientStatus.CharacterInfo.HEADID = this.player?.GetEquippedObject("Head")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo.HEADID = this.player?.GetEquippedObject("Head")?.DMCIODGEHCN ?? 0;
                 ClientStatus.CharacterInfo.HEADNAME = this.player?.GetEquippedObject("Head")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.CHESTID = this.player?.GetEquippedObject("Chest")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo.CHESTID = this.player?.GetEquippedObject("Chest")?.DMCIODGEHCN ?? 0;
                 ClientStatus.CharacterInfo.CHESTNAME = this.player?.GetEquippedObject("Chest")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.LEGSID = this.player?.GetEquippedObject("Legs")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo.LEGSID = this.player?.GetEquippedObject("Legs")?.DMCIODGEHCN ?? 0;
                 ClientStatus.CharacterInfo.LEGSNAME = this.player?.GetEquippedObject("Legs")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.RIGHTHANDID = this.player?.GetEquippedObject("RightHand")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo.RIGHTHANDID = this.player?.GetEquippedObject("RightHand")?.DMCIODGEHCN ?? 0;
                 ClientStatus.CharacterInfo.RIGHTHANDNAME = this.player?.GetEquippedObject("RightHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.LEFTHANDID = this.player?.GetEquippedObject("LeftHand")?.DMCIODGEHCN.ToString() ?? "N/A";
+                ClientStatus.CharacterInfo.LEFTHANDID = this.player?.GetEquippedObject("LeftHand")?.DMCIODGEHCN ?? 0;
                 ClientStatus.CharacterInfo.LEFTHANDNAME = this.player?.GetEquippedObject("LeftHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
             }
 
