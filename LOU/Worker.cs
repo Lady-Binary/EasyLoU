@@ -1201,6 +1201,12 @@ namespace LOU
             ClientStatus.StatusBar.PRESTIGEXPMAX = this.player?.GetStatByName("PrestigeXPMax") ?? 0;
             ClientStatus.StatusBar.STEALTH = this.player?.GetStatByName("Stealth") ?? 0;
 
+            // LastAction
+
+            ClientStatus.LastAction.COBJECTID = this.inputController?.BODCEBEPNMH?.ObjectId ?? 0;
+            ClientStatus.LastAction.LOBJECTID = this.inputController?.MFJFNHLOHOI?.ObjectId ?? 0;
+
+
             if (this.FindItemResults != null && this.FindItemResults.Count > 0)
             {
                 try
@@ -1354,26 +1360,6 @@ namespace LOU
                 ClientStatus.Find.FINDMOBILEHP = "N/A";
                 ClientStatus.Find.FINDMOBILEDIST = "N/A";
                 ClientStatus.Find.FINDMOBILETYPE = "N/A";
-            }
-
-            if (inputController != null)
-            {
-                if (inputController.BODCEBEPNMH != null && inputController.BODCEBEPNMH.AOJMJNFMBJO != null)
-                {
-                    ClientStatus.LastAction.COBJECTID = inputController.BODCEBEPNMH.ObjectId.ToString();
-                }
-                else
-                {
-                    ClientStatus.LastAction.COBJECTID = "-1";
-                }
-                if (inputController.MFJFNHLOHOI != null && inputController.MFJFNHLOHOI.AOJMJNFMBJO != null)
-                {
-                    ClientStatus.LastAction.LOBJECTID = inputController.MFJFNHLOHOI.ObjectId.ToString();
-                }
-                else
-                {
-                    ClientStatus.LastAction.LOBJECTID = "-1";
-                }
             }
 
             ClientStatus.ClientInfo.CLIVER = ApplicationController.c_clientVersion ?? "N/A";
