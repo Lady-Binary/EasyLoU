@@ -61,27 +61,27 @@ namespace LOU
         public struct StatusBarStruct
         {
             [ProtoMember(1)]
-            public string AGI;
+            public double AGI;
             [ProtoMember(2)]
-            public string ATTACKSPEED;
+            public double ATTACKSPEED;
             [ProtoMember(3)]
-            public string DEFENSE;
+            public double DEFENSE;
             [ProtoMember(4)]
-            public string HEALTH;
+            public double HEALTH;
             [ProtoMember(5)]
-            public string INT;
+            public double INT;
             [ProtoMember(6)]
-            public string MANA;
+            public double MANA;
             [ProtoMember(7)]
-            public string PRESTIGEXPMAX;
+            public double PRESTIGEXPMAX;
             [ProtoMember(8)]
-            public string STAMINA;
+            public double STAMINA;
             [ProtoMember(9)]
-            public string STEALTH;
+            public double STEALTH;
             [ProtoMember(10)]
-            public string STR;
+            public double STR;
             [ProtoMember(11)]
-            public string VITALITY;
+            public double VITALITY;
         }
         [ProtoMember(3)]
         public StatusBarStruct StatusBar;
