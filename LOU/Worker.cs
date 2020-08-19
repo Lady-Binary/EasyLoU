@@ -1187,6 +1187,20 @@ namespace LOU
                 ClientStatus.CharacterInfo.LEFTHANDNAME = this.player?.GetEquippedObject("LeftHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
             }
 
+            // Status Bar
+
+            ClientStatus.StatusBar.STR = this.player?.GetStatByName("Str") ?? 0;
+            ClientStatus.StatusBar.HEALTH = this.player?.GetStatByName("Health") ?? 0;
+            ClientStatus.StatusBar.INT = this.player?.GetStatByName("Int") ?? 0;
+            ClientStatus.StatusBar.MANA = this.player?.GetStatByName("Mana") ?? 0;
+            ClientStatus.StatusBar.AGI = this.player?.GetStatByName("Agi") ?? 0;
+            ClientStatus.StatusBar.ATTACKSPEED = this.player?.GetStatByName("AttackSpeed") ?? 0;
+            ClientStatus.StatusBar.STAMINA = this.player?.GetStatByName("Stamina") ?? 0;
+            ClientStatus.StatusBar.DEFENSE = this.player?.GetStatByName("Defense") ?? 0;
+            ClientStatus.StatusBar.VITALITY = this.player?.GetStatByName("Vitality") ?? 0;
+            ClientStatus.StatusBar.PRESTIGEXPMAX = this.player?.GetStatByName("PrestigeXPMax") ?? 0;
+            ClientStatus.StatusBar.STEALTH = this.player?.GetStatByName("Stealth") ?? 0;
+
             if (this.FindItemResults != null && this.FindItemResults.Count > 0)
             {
                 try
@@ -1372,21 +1386,6 @@ namespace LOU
             ClientStatus.ClientInfo.TARGETFRAMERATE = Application.targetFrameRate.ToString();
             ClientStatus.ClientInfo.VSYNCCOUNT = QualitySettings.vSyncCount.ToString();
             ClientStatus.ClientInfo.MAINCAMERAMASK = Camera.main?.cullingMask.ToString();
-
-            if (this.player != null)
-            {
-                ClientStatus.StatusBar.STR = this.player.GetStatByName("Str").ToString();
-                ClientStatus.StatusBar.HEALTH = this.player.GetStatByName("Health").ToString();
-                ClientStatus.StatusBar.INT = this.player.GetStatByName("Int").ToString();
-                ClientStatus.StatusBar.MANA = this.player.GetStatByName("Mana").ToString();
-                ClientStatus.StatusBar.AGI = this.player.GetStatByName("Agi").ToString();
-                ClientStatus.StatusBar.ATTACKSPEED = this.player.GetStatByName("AttackSpeed").ToString();
-                ClientStatus.StatusBar.STAMINA = this.player.GetStatByName("Stamina").ToString();
-                ClientStatus.StatusBar.DEFENSE = this.player.GetStatByName("Defense").ToString();
-                ClientStatus.StatusBar.VITALITY = this.player.GetStatByName("Vitality").ToString();
-                ClientStatus.StatusBar.PRESTIGEXPMAX = this.player.GetStatByName("PrestigeXPMax").ToString();
-                ClientStatus.StatusBar.STEALTH = this.player.GetStatByName("Stealth").ToString();
-            }
 
             if (inputController != null)
             {
