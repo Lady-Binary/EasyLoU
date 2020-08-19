@@ -90,9 +90,9 @@ namespace LOU
         public struct LastActionStruct
         {
             [ProtoMember(1)]
-            public string COBJECTID;
+            public ulong COBJECTID;
             [ProtoMember(2)]
-            public string LOBJECTID;
+            public ulong LOBJECTID;
         }
         [ProtoMember(4)]
         public LastActionStruct LastAction;
