@@ -3,6 +3,7 @@ using LOU;
 using Microsoft.Win32;
 using SharpMonoInjector;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -103,83 +104,66 @@ namespace EasyLOU
                 VarsTreeView.Nodes[Key].Text = Key + ": " + Value;
 
         }
-        private void UpdateAttribute(String ParentKey, String Key, String Value)
+        private void UpdateNode(TreeNode Node, object Val)
         {
-            if (!StatusTreeView.Nodes.ContainsKey(ParentKey))
+            if (Val != null)
             {
-                StatusTreeView.Nodes.Add(ParentKey, ParentKey);
-                StatusTreeView.Nodes[ParentKey].Expand();
+                Type ValType = Val.GetType();
+                if (ValType.IsValueType && !ValType.IsPrimitive && !ValType.IsEnum)
+                {
+                    // It's a struct
+                    Node.Text = Node.Name;
+                    int p = 0;
+                    foreach (var field in Val.GetType().GetFields())
+                    {
+                        UpdateOrCreateNode(Node.Nodes, field.Name, field.GetValue(Val));
+                        p++;
+                    }
+                    // Get rid of remaining nodes
+                    while (Node.Nodes.Count > p)
+                    {
+                        Node.Nodes.Remove(Node.Nodes[Node.Nodes.Count - 1]);
+                    }
+                }
+                else if (ValType.IsArray)
+                {
+                    // It's an array
+                    Node.Text = Node.Name;
+                    int i = 0;
+                    foreach (var item in ((IEnumerable)Val).Cast<object>())
+                    {
+                        UpdateOrCreateNode(Node.Nodes, (i + 1).ToString(), item);
+                        i++;
+                    }
+                    // Get rid of remaining nodes
+                    while (Node.Nodes.Count > i)
+                    {
+                        Node.Nodes.Remove(Node.Nodes[Node.Nodes.Count - 1]);
+                    }
+                }
+                else
+                {
+                    // It's something else
+                    Node.Text = Node.Name + "=" + Val.ToString();
+                }
+            } else
+            {
+                Node.Text = Node.Name + "=N/A";
+                if (Node.Nodes.Count > 0) Node.Nodes.Clear();
             }
-
-            if (!StatusTreeView.Nodes[ParentKey].Nodes.ContainsKey(Key))
-                StatusTreeView.Nodes[ParentKey].Nodes.Add(Key, Key + ": " + Value);
+        }
+        private void UpdateOrCreateNode(TreeNodeCollection ParentTreeNodeCollection, String Key, object Val)
+        {
+            TreeNode Node;
+            if (!ParentTreeNodeCollection.ContainsKey(Key))
+            {
+                Node = ParentTreeNodeCollection.Add(Key, "");
+            }
             else
-                StatusTreeView.Nodes[ParentKey].Nodes[Key].Text = Key + ": " + Value;
-        }
-        private void UpdateAttributeWithArray(String ParentKey, String Key, String Value)
-        {
-            if (!StatusTreeView.Nodes.ContainsKey(ParentKey))
             {
-                StatusTreeView.Nodes.Add(ParentKey, ParentKey);
-                StatusTreeView.Nodes[ParentKey].Expand();
+                Node = ParentTreeNodeCollection[Key];
             }
-
-            if (!StatusTreeView.Nodes[ParentKey].Nodes.ContainsKey(Key))
-            {
-                StatusTreeView.Nodes[ParentKey].Nodes.Add(Key, Key);
-            }
-
-            if (Value != "N/A")
-            {
-                StatusTreeView.Nodes[ParentKey].Nodes[Key].Text = Key;
-                String[] Values = Value.Split(',');
-                int v = 0;
-                foreach (String Val in Values)
-                {
-                    v++;
-                    if (!StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.ContainsKey(v.ToString()))
-                        StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Add(v.ToString(), "[" + v.ToString() + "] " + Val);
-                    else
-                        StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes[v.ToString()].Text = "[" + v.ToString() + "] " + Val;
-                }
-                while (StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Count > v)
-                {
-                    StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Remove(StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes[StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Count - 1]);
-                }
-                if (!StatusTreeView.Nodes[ParentKey].Nodes[Key].IsExpanded)
-                {
-                    StatusTreeView.Nodes[ParentKey].Nodes[Key].Expand();
-                }
-            }
-            else
-            {
-                StatusTreeView.Nodes[ParentKey].Nodes[Key].Text = Key + ": " + Value;
-                if (StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Count > 0)
-                {
-                    StatusTreeView.Nodes[ParentKey].Nodes[Key].Nodes.Clear();
-                }
-            }
-        }
-
-        private void UpdateAttributesGroup(Object Group, String GroupName)
-        {
-            Type GroupType = Group.GetType();
-
-            foreach (var f in GroupType.GetFields().Where(f => f.IsPublic))
-            {
-                UpdateAttribute(GroupName, f.Name, f?.GetValue(Group)?.ToString() ?? "N/A");
-            }
-        }
-
-
-        private void UpdateAttributesGroupWithArrays(Object Group, String GroupName)
-        {
-            Type GroupType = Group.GetType();
-
-            foreach (var f in GroupType.GetFields().Where(f => f.IsPublic))
-            {
-                UpdateAttributeWithArray(GroupName, f.Name, f?.GetValue(Group)?.ToString() ?? "N/A");
-            }
+            UpdateNode(Node, Val);
         }
 
         public delegate void UpdateStatusTreeViewDelegate();
@@ -188,7 +172,7 @@ namespace EasyLOU
             lock (ClientStatusLock)
             {
                 StatusTreeView.BeginUpdate();
-                UpdateAttribute("Debug Info", "Timestamp", ClientStatus.TimeStamp.ToString());
+                UpdateOrCreateNode(StatusTreeView.Nodes, "Timestamp", ClientStatus.TimeStamp.ToString());
                 if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 60000)
                 {
                     MainStatusLabel.ForeColor = Color.Green;
@@ -201,12 +185,14 @@ namespace EasyLOU
                         ClientCommandsMemoryMap.LastMemoryOccupation,
                         ClientCommandsMemoryMap.MapSize,
                         ClientCommandsMemoryMap.LastMemoryOccupationPerc);
-                    UpdateAttributesGroup(ClientStatus.CharacterInfo, "Character Info");
-                    UpdateAttributesGroup(ClientStatus.StatusBar, "Status Bar");
-                    UpdateAttributesGroup(ClientStatus.LastAction, "Last Action");
-                    UpdateAttributesGroupWithArrays(ClientStatus.Find, "Find");
-                    UpdateAttributesGroup(ClientStatus.ClientInfo, "Client Info");
-                    UpdateAttributesGroup(ClientStatus.Miscellaneous, "Miscellaneous");
+
+                    //UpdateAttributesGroup(ClientStatus.CharacterInfo, "Character Info");
+                    UpdateOrCreateNode(StatusTreeView.Nodes, "Character Info", ClientStatus.CharacterInfo);
+                    UpdateOrCreateNode(StatusTreeView.Nodes, "Status Bar", ClientStatus.StatusBar);
+                    UpdateOrCreateNode(StatusTreeView.Nodes, "Last Action", ClientStatus.LastAction);
+                    UpdateOrCreateNode(StatusTreeView.Nodes, "Find", ClientStatus.Find);
+                    UpdateOrCreateNode(StatusTreeView.Nodes, "Client Info", ClientStatus.ClientInfo);
+                    UpdateOrCreateNode(StatusTreeView.Nodes, "Miscellaneous", ClientStatus.Miscellaneous);
                 }
                 else
                 {

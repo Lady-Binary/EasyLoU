@@ -4,7 +4,9 @@ using MoonSharp.Interpreter.Debugging;
 using MoonSharp.Interpreter.Loaders;
 using System;
 using System.Diagnostics;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace EasyLOU
@@ -191,8 +193,8 @@ namespace EasyLOU
                             {
                                 if (value.ToString() != "N/A")
                                 {
-                                    string[] values = value.ToString().Split(',');
-                                    return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, DynValue.NewString));
+                                    var values = ((IEnumerable)value).Cast<object>().ToArray();
+                                    return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, UserData.Create));
                                 }
                                 else
                                 {
@@ -242,6 +244,12 @@ namespace EasyLOU
                                 this.Script.Globals["WaitForTarget"] = (Action<int?>)WaitForTarget; // Override: this is implemented client side
 
                                 // LOU status variables
+                                UserData.RegisterType<ClientStatus.FINDBUTTONStruct>();
+                                UserData.RegisterType<ClientStatus.FINDITEMStruct>();
+                                UserData.RegisterType<ClientStatus.FINDLABELStruct>();
+                                UserData.RegisterType<ClientStatus.FINDMOBILEStruct>();
+                                UserData.RegisterType<ClientStatus.FINDPANELStruct>();
+                                UserData.RegisterType<ClientStatus.FINDPERMANENTStruct>();
                                 this.Script.Globals.MetaTable = new Table(this.Script);
                                 this.Script.Globals.MetaTable["__index"] = (Func<Table, DynValue, DynValue>)VarCallBack;
 
