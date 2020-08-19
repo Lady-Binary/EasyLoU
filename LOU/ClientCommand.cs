@@ -256,7 +256,6 @@ namespace LOU
         //SkillLock,
         //StatLock,
         FindMobile,
-        FindGameObject,
         SetUsername,
         SetPassword,
         Login,

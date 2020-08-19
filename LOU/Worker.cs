@@ -39,9 +39,7 @@ namespace LOU
         private Dictionary<String, FloatingPanel> FindPanelResults;
         private Dictionary<int, String> FindButtonResults;
         private Dictionary<int, String> FindLabelResults;
-        private Dictionary<String, GameObject> FindGameObjectResults;
         private List<MobileInstance> FindMobileResults;
-        private List<MobileInstance> NearbyMonsters;
 
         private float ScanJournalTime;
         private string ScanJournalMessage;
@@ -113,7 +111,6 @@ namespace LOU
             this.FindPanelResults = null;
             this.FindButtonResults = null;
             this.FindLabelResults = null;
-            this.FindGameObjectResults = null;
             this.FindMobileResults = null;
             this.lastMouseClickClientObject = null;
         }
@@ -860,17 +857,6 @@ namespace LOU
                         }
                         break;
 
-                    case CommandType.FindGameObject:
-                        {
-                            this.FindGameObjectResults = new Dictionary<string, GameObject>();
-
-                            // Try by Name (and ContainerId if required)
-                            string objectName = ExtractParam(ClientCommand.CommandParams, 0);
-                            this.FindGameObjectResults = Utils.FindGameObjectsByName(objectName);
-
-                            break;
-                        }
-
                     case CommandType.FindMobile:
                         {
                             this.FindMobileResults = new List<MobileInstance>();
@@ -1117,9 +1103,7 @@ namespace LOU
                             FindPanelResults = null;
                             FindButtonResults = null;
                             FindLabelResults = null;
-                            FindGameObjectResults = null;
                             FindMobileResults = null;
-                            NearbyMonsters = null;
 
                             ScanJournalTime = 0;
                             ScanJournalMessage = null;
@@ -1207,160 +1191,92 @@ namespace LOU
             ClientStatus.LastAction.LOBJECTID = this.inputController?.MFJFNHLOHOI?.ObjectId ?? 0;
 
 
-            if (this.FindItemResults != null && this.FindItemResults.Count > 0)
-            {
-                try
-                {
-                    ClientStatus.Find.FINDITEMID = String.Join(",", this.FindItemResults.Keys);
-                    ClientStatus.Find.FINDITEMNAME = String.Join(",", this.FindItemResults.Values.Select(v => v.EBHEDGHBHGI));
-                    ClientStatus.Find.FINDITEMCNTID = String.Join(",", this.FindItemResults.Values.Select(v => v.ContainerId.ToString()));
-                }
-                catch (Exception e)
-                {
-                    Utils.Log(e.ToString());
-                    this.FindItemResults = new Dictionary<string, DynamicObject>();
-                    ClientStatus.Find.FINDITEMID = "N/A";
-                    ClientStatus.Find.FINDITEMNAME = "N/A";
-                    ClientStatus.Find.FINDITEMCNTID = "N/A";
-                }
-            }
-            else
-            {
-                ClientStatus.Find.FINDITEMID = "N/A";
-                ClientStatus.Find.FINDITEMNAME = "N/A";
-                ClientStatus.Find.FINDITEMCNTID = "N/A";
-            }
+            // Find
 
-            if (this.FindPermanentResults != null && this.FindPermanentResults.Count > 0)
-            {
-                try
-                {
-                    ClientStatus.Find.FINDPERMAID = String.Join(",", this.FindPermanentResults.Keys);
-                    ClientStatus.Find.FINDPERMANAME = String.Join(",", this.FindPermanentResults.Values.Select(v => v.name));
-                    ClientStatus.Find.FINDPERMADIST = String.Join(",", this.FindPermanentResults.Values.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
-                    ClientStatus.Find.FINDPERMATEXTURE = String.Join(",", this.FindPermanentResults.Values.Select(v => String.Join(";", v.GetComponentInChildren<Renderer>()?.materials?.Select(m => m.mainTexture.name) ?? new string[] { }) ?? "None"));
-                    ClientStatus.Find.FINDPERMACOLOR = String.Join(",", this.FindPermanentResults.Values.Select(v => String.Join(";", v.GetComponentInChildren<Renderer>()?.materials?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) ?? new string[] { }) ?? "None"));
-                }
-                catch (Exception e)
-                {
-                    Utils.Log(e.ToString());
-                    this.FindPermanentResults = new Dictionary<string, ClientObject>();
-                    ClientStatus.Find.FINDPERMAID = "N/A";
-                    ClientStatus.Find.FINDPERMANAME = "N/A";
-                    ClientStatus.Find.FINDPERMADIST = "N/A";
-                    ClientStatus.Find.FINDPERMATEXTURE = "N/A";
-                    ClientStatus.Find.FINDPERMACOLOR = "N/A";
-                }
-            }
-            else
-            {
-                ClientStatus.Find.FINDPERMAID = "N/A";
-                ClientStatus.Find.FINDPERMANAME = "N/A";
-                ClientStatus.Find.FINDPERMADIST = "N/A";
-                ClientStatus.Find.FINDPERMATEXTURE = "N/A";
-                ClientStatus.Find.FINDPERMACOLOR = "N/A";
-            }
+            ClientStatus.Find.FINDBUTTON =
+                this
+                .FindButtonResults?
+                .Select(f => new ClientStatus.FINDBUTTONStruct() {
+                    NAME = f.Key.ToString(), TEXT = f.Value
+                })
+                .ToArray()
+                ??
+                new ClientStatus.FINDBUTTONStruct[] { }
+                ;
 
-            if (this.FindPanelResults != null && this.FindPanelResults.Count > 0)
-            {
-                try
+            ClientStatus.Find.FINDITEM =
+                this
+                .FindItemResults?
+                .Select(f => new ClientStatus.FINDITEMStruct()
                 {
-                    ClientStatus.Find.FINDPANELID = String.Join(",", this.FindPanelResults.Keys);
-                }
-                catch (Exception e)
-                {
-                    Utils.Log(e.ToString());
-                    this.FindPanelResults = new Dictionary<string, FloatingPanel>();
-                }
-            }
-            else
-            {
-                ClientStatus.Find.FINDPANELID = "N/A";
-            }
+                    CNTID = f.Value.ContainerId,
+                    ID = f.Value.ObjectId,
+                    NAME = f.Value.EBHEDGHBHGI
+                })
+                .ToArray()
+                ??
+                new ClientStatus.FINDITEMStruct[] { }
+                ;
 
-            if (this.FindButtonResults != null && this.FindButtonResults.Count > 0)
-            {
-                try
+            ClientStatus.Find.FINDLABEL =
+                this
+                .FindLabelResults?
+                .Select(f => new ClientStatus.FINDLABELStruct()
                 {
-                    ClientStatus.Find.FINDBUTTONNAME = String.Join(",", this.FindButtonResults.Keys);
-                    ClientStatus.Find.FINDBUTTONTEXT = String.Join(",", this.FindButtonResults.Values);
-                }
-                catch (Exception e)
-                {
-                    Utils.Log(e.ToString());
-                    this.FindButtonResults = new Dictionary<int, string>();
-                }
-            }
-            else
-            {
-                ClientStatus.Find.FINDBUTTONNAME = "N/A";
-                ClientStatus.Find.FINDBUTTONTEXT = "N/A";
-            }
+                    NAME = f.Key.ToString(),
+                    TEXT = f.Value
+                })
+                .ToArray()
+                ??
+                new ClientStatus.FINDLABELStruct[] { }
+                ;
 
-            if (this.FindLabelResults != null && this.FindLabelResults.Count > 0)
-            {
-                try
+            ClientStatus.Find.FINDMOBILE =
+                this
+                .FindMobileResults?
+                .Select(f => new ClientStatus.FINDMOBILEStruct()
                 {
-                    ClientStatus.Find.FINDLABELNAME = String.Join(",", this.FindLabelResults.Keys);
-                    ClientStatus.Find.FINDLABELTEXT = String.Join(",", this.FindLabelResults.Values);
-                }
-                catch (Exception e)
-                {
-                    Utils.Log(e.ToString());
-                    this.FindLabelResults = new Dictionary<int, string>();
-                }
-            }
-            else
-            {
-                ClientStatus.Find.FINDLABELNAME = "N/A";
-                ClientStatus.Find.FINDLABELTEXT = "N/A";
-            }
 
-            if (this.FindGameObjectResults != null && this.FindGameObjectResults.Count > 0)
-            {
-                try
+                    DISTANCE = Vector3.Distance(f.transform.position, this.player.transform.position),
+                    HP = f.GetStatByName("Health"),
+                    ID = f.ObjectId,
+                    NAME = f.EBHEDGHBHGI,
+                    TYPE = f.DKCMJFOPPDL
+                })
+                .ToArray()
+                ??
+                new ClientStatus.FINDMOBILEStruct[] { }
+                ;
+
+            ClientStatus.Find.FINDPANEL =
+                this
+                .FindPanelResults?
+                .Select(f => new ClientStatus.FINDPANELStruct()
                 {
-                    ClientStatus.Find.FINDGAMEOBJECTID = String.Join(",", this.FindGameObjectResults.Keys);
-                }
-                catch (Exception e)
+                    ID = f.Key
+                })
+                .ToArray()
+                ??
+                new ClientStatus.FINDPANELStruct[] { }
+                ;
+
+            ClientStatus.Find.FINDPERMANENT =
+                this
+                .FindPermanentResults?
+                .Select(f => new ClientStatus.FINDPERMANENTStruct()
                 {
-                    Utils.Log(e.ToString());
-                    this.FindGameObjectResults = new Dictionary<string, GameObject>();
-                }
-            }
-            else
-            {
-                ClientStatus.Find.FINDGAMEOBJECTID = "N/A";
-            }
-            if (this.FindMobileResults != null && this.FindMobileResults.Count > 0)
-            {
-                try
-                {
-                    ClientStatus.Find.FINDMOBILEID = String.Join(",", this.FindMobileResults.Select(v => v.ObjectId));
-                    ClientStatus.Find.FINDMOBILENAME = String.Join(",", this.FindMobileResults.Select(v => v.EBHEDGHBHGI));
-                    ClientStatus.Find.FINDMOBILEHP = String.Join(",", this.FindMobileResults.Select(v => v.GetStatByName("Health")));
-                    ClientStatus.Find.FINDMOBILEDIST = String.Join(",", this.FindMobileResults.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
-                    ClientStatus.Find.FINDMOBILETYPE = String.Join(",", this.FindMobileResults.Select(v => v.DKCMJFOPPDL));
-                }
-                catch (Exception e)
-                {
-                    ClientStatus.Find.FINDMOBILEID = "N/A";
-                    ClientStatus.Find.FINDMOBILENAME = "N/A";
-                    ClientStatus.Find.FINDMOBILEHP = "N/A";
-                    ClientStatus.Find.FINDMOBILEDIST = "N/A";
-                    ClientStatus.Find.FINDMOBILETYPE = "N/A";
-                    Utils.Log(e.ToString());
-                    this.FindMobileResults = new List<MobileInstance>();
-                }
-            }
-            else
-            {
-                ClientStatus.Find.FINDMOBILEID = "N/A";
-                ClientStatus.Find.FINDMOBILENAME = "N/A";
-                ClientStatus.Find.FINDMOBILEHP = "N/A";
-                ClientStatus.Find.FINDMOBILEDIST = "N/A";
-                ClientStatus.Find.FINDMOBILETYPE = "N/A";
-            }
+                    COLOR = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) ?? new string[] { }) ?? "",
+                    DISTANCE = Vector3.Distance(f.Value.transform.position, this.player.transform.position),
+                    ID = f.Value.PermanentId,
+                    NAME = f.Value.name,
+                    TEXTURE = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => m.mainTexture.name) ?? new string[] { }) ?? ""
+                })
+                .ToArray()
+                ??
+                new ClientStatus.FINDPERMANENTStruct[] { }
+                ;
+
+            // Client Info
 
             ClientStatus.ClientInfo.CLIVER = ApplicationController.c_clientVersion ?? "N/A";
             ClientStatus.ClientInfo.CLIID = this.ProcessId.ToString();
@@ -1467,57 +1383,25 @@ namespace LOU
             ClientStatus.Miscellaneous.CLICKOBJNAME = this.lastMouseClickClientObject?.DynamicInst?.name ?? "N/A";
             ClientStatus.Miscellaneous.CLICKDISPLAYNAME = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
 
-            ClientStatus.Miscellaneous.MONSTERSNEARBY = "False";
-            this.NearbyMonsters = new List<MobileInstance>();
-            if (this.player != null)
-            {
-                IEnumerable<MobileInstance> Nearby = Utils.GetNearbyMobiles(5);
-                if (Nearby != null)
+            ClientStatus.Miscellaneous.NEARBYMONSTERS =
+                Utils.GetNearbyMobiles(5)?
+                .Where(Mobile =>
+                    Mobile.DKCMJFOPPDL == "Monster" &&
+                    Mobile.BMHLGHANHDL != null &&
+                    !Mobile.GetObjectProperty<bool>("IsDead")
+                    )
+                .Select(f => new ClientStatus.NEARBYMONSTERStruct()
                 {
-                    foreach (var Mobile in Nearby)
-                    {
-                        if (Mobile.DKCMJFOPPDL == "Monster" && Mobile.BMHLGHANHDL != null && Mobile.BMHLGHANHDL["IsDead.ToString()"] == "False")
-                        {
-                            ClientStatus.Miscellaneous.MONSTERSNEARBY = "True";
-                            this.NearbyMonsters.Add(Mobile);
-                        }
-                    }
-                }
-                if (this.NearbyMonsters.Count > 0)
-                {
-                    try
-                    {
-                        ClientStatus.Find.MONSTERSID = String.Join(",", this.NearbyMonsters.Select(v => v.ObjectId));
-                        ClientStatus.Find.MONSTERSNAME = String.Join(",", this.NearbyMonsters.Select(v => v.EBHEDGHBHGI));
-                        ClientStatus.Find.MONSTERSHP = String.Join(",", this.NearbyMonsters.Select(v => v.GetStatByName("Health")));
-                        ClientStatus.Find.MONSTERSDIST = String.Join(",", this.NearbyMonsters.Select(v => Vector3.Distance(v.transform.position, this.player.transform.position)));
-                    }
-                    catch (Exception e)
-                    {
-                        Utils.Log(e.ToString());
-                        this.NearbyMonsters = new List<MobileInstance>();
-                        ClientStatus.Find.MONSTERSID = "N/A";
-                        ClientStatus.Find.MONSTERSNAME = "N/A";
-                        ClientStatus.Find.MONSTERSHP = "N/A";
-                        ClientStatus.Find.MONSTERSDIST = "N/A";
-
-                    }
-                }
-                else
-                {
-                    ClientStatus.Find.MONSTERSID = "N/A";
-                    ClientStatus.Find.MONSTERSNAME = "N/A";
-                    ClientStatus.Find.MONSTERSHP = "N/A";
-                    ClientStatus.Find.MONSTERSDIST = "N/A";
-                }
-            }
-            else
-            {
-                ClientStatus.Find.MONSTERSID = "N/A";
-                ClientStatus.Find.MONSTERSNAME = "N/A";
-                ClientStatus.Find.MONSTERSHP = "N/A";
-                ClientStatus.Find.MONSTERSDIST = "N/A";
-            }
+                    DISTANCE = Vector3.Distance(f.transform.position, this.player.transform.position),
+                    HP = f.GetStatByName("Health"),
+                    ID = f.ObjectId,
+                    NAME = f.EBHEDGHBHGI
+                })
+                .ToArray()
+                ??
+                new ClientStatus.NEARBYMONSTERStruct[] { }
+                ;
+            ClientStatus.Miscellaneous.MONSTERSNEARBY = (ClientStatus.Miscellaneous.NEARBYMONSTERS?.Count() ?? 0) > 0 ? "True" : "False";
 
             ClientStatus.Miscellaneous.RANDOM = new System.Random().Next(0, 1000).ToString();
 

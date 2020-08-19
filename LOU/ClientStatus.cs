@@ -98,54 +98,80 @@ namespace LOU
         public LastActionStruct LastAction;
 
         [ProtoContract]
+        public struct FINDBUTTONStruct
+        {
+            [ProtoMember(1)]
+            public string NAME;
+            [ProtoMember(2)]
+            public string TEXT;
+        }
+        [ProtoContract]
+        public struct FINDITEMStruct
+        {
+            [ProtoMember(1)]
+            public ulong CNTID;
+            [ProtoMember(2)]
+            public ulong ID;
+            [ProtoMember(3)]
+            public string NAME;
+        }
+        [ProtoContract]
+        public struct FINDLABELStruct
+        {
+            [ProtoMember(1)]
+            public string NAME;
+            [ProtoMember(2)]
+            public string TEXT;
+        }
+        [ProtoContract]
+        public struct FINDMOBILEStruct
+        {
+            [ProtoMember(1)]
+            public float DISTANCE;
+            [ProtoMember(2)]
+            public double HP;
+            [ProtoMember(3)]
+            public ulong ID;
+            [ProtoMember(4)]
+            public string NAME;
+            [ProtoMember(5)]
+            public string TYPE;
+        }
+        [ProtoContract]
+        public struct FINDPANELStruct
+        {
+            [ProtoMember(1)]
+            public string ID;
+        }
+        [ProtoContract]
+        public struct FINDPERMANENTStruct
+        {
+            [ProtoMember(1)]
+            public string COLOR;
+            [ProtoMember(2)]
+            public float DISTANCE;
+            [ProtoMember(3)]
+            public int ID;
+            [ProtoMember(4)]
+            public string NAME;
+            [ProtoMember(5)]
+            public string TEXTURE;
+        }
+        [ProtoContract]
         public struct FindStruct
         {
             [ProtoMember(1)]
-            public string FINDBUTTONNAME;
+            public FINDBUTTONStruct[] FINDBUTTON;
             [ProtoMember(2)]
-            public string FINDBUTTONTEXT;
+            public FINDITEMStruct[] FINDITEM;
             [ProtoMember(3)]
-            public string FINDGAMEOBJECTID;
+            public FINDLABELStruct[] FINDLABEL;
             [ProtoMember(4)]
-            public string FINDITEMCNTID;
+            public FINDMOBILEStruct[] FINDMOBILE;
             [ProtoMember(5)]
-            public string FINDITEMID;
+            public FINDPANELStruct[] FINDPANEL;
             [ProtoMember(6)]
-            public string FINDITEMNAME;
-            [ProtoMember(7)]
-            public string FINDLABELNAME;
-            [ProtoMember(8)]
-            public string FINDLABELTEXT;
-            [ProtoMember(9)]
-            public string FINDMOBILEDIST;
-            [ProtoMember(10)]
-            public string FINDMOBILEHP;
-            [ProtoMember(11)]
-            public string FINDMOBILEID;
-            [ProtoMember(12)]
-            public string FINDMOBILENAME;
-            [ProtoMember(13)]
-            public string FINDMOBILETYPE;
-            [ProtoMember(14)]
-            public string FINDPANELID;
-            [ProtoMember(15)]
-            public string FINDPERMACOLOR;
-            [ProtoMember(16)]
-            public string FINDPERMADIST;
-            [ProtoMember(17)]
-            public string FINDPERMAID;
-            [ProtoMember(18)]
-            public string FINDPERMANAME;
-            [ProtoMember(19)]
-            public string FINDPERMATEXTURE;
-            [ProtoMember(20)]
-            public string MONSTERSDIST;
-            [ProtoMember(21)]
-            public string MONSTERSHP;
-            [ProtoMember(22)]
-            public string MONSTERSID;
-            [ProtoMember(23)]
-            public string MONSTERSNAME;
+            public FINDPERMANENTStruct[] FINDPERMANENT;
         }
         [ProtoMember(5)]
         public FindStruct Find;
@@ -178,6 +204,18 @@ namespace LOU
         public ClientInfoStruct ClientInfo;
 
         [ProtoContract]
+        public struct NEARBYMONSTERStruct
+        {
+            [ProtoMember(1)]
+            public double DISTANCE;
+            [ProtoMember(2)]
+            public double HP;
+            [ProtoMember(3)]
+            public ulong ID;
+            [ProtoMember(4)]
+            public string NAME;
+        }
+        [ProtoContract]
         public struct MiscellaneousStruct
         {
             [ProtoMember(1)]
@@ -207,48 +245,50 @@ namespace LOU
             [ProtoMember(13)]
             public string MONSTERSNEARBY;
             [ProtoMember(14)]
-            public string MOUSEOVERCNTID;
+            public NEARBYMONSTERStruct[] NEARBYMONSTERS;
             [ProtoMember(15)]
-            public string MOUSEOVERDISPLAYNAME;
+            public string MOUSEOVERCNTID;
             [ProtoMember(16)]
-            public string MOUSEOVEROBJCNTID;
+            public string MOUSEOVERDISPLAYNAME;
             [ProtoMember(17)]
-            public string MOUSEOVEROBJID;
+            public string MOUSEOVEROBJCNTID;
             [ProtoMember(18)]
-            public string MOUSEOVEROBJNAME;
+            public string MOUSEOVEROBJID;
             [ProtoMember(19)]
-            public string MOUSEOVERPERID;
+            public string MOUSEOVEROBJNAME;
             [ProtoMember(20)]
-            public string MOUSEOVERUINAME;
+            public string MOUSEOVERPERID;
             [ProtoMember(21)]
-            public string MOUSEOVERUIX;
+            public string MOUSEOVERUINAME;
             [ProtoMember(22)]
-            public string MOUSEOVERUIY;
+            public string MOUSEOVERUIX;
             [ProtoMember(23)]
-            public string MOUSEWINDOWX;
+            public string MOUSEOVERUIY;
             [ProtoMember(24)]
-            public string MOUSEWINDOWY;
+            public string MOUSEWINDOWX;
             [ProtoMember(25)]
-            public string MOUSEWINDOWZ;
+            public string MOUSEWINDOWY;
             [ProtoMember(26)]
-            public string MOUSEWORLDX;
+            public string MOUSEWINDOWZ;
             [ProtoMember(27)]
-            public string MOUSEWORLDY;
+            public string MOUSEWORLDX;
             [ProtoMember(28)]
-            public string MOUSEWORLDZ;
+            public string MOUSEWORLDY;
             [ProtoMember(29)]
-            public string RANDOM;
+            public string MOUSEWORLDZ;
             [ProtoMember(30)]
-            public string SCANJOURNALMESSAGE;
+            public string RANDOM;
             [ProtoMember(31)]
-            public string SCANJOURNALTIME;
+            public string SCANJOURNALMESSAGE;
             [ProtoMember(32)]
-            public string TARGETLOADING;
+            public string SCANJOURNALTIME;
             [ProtoMember(33)]
-            public string TARGETTYPE;
+            public string TARGETLOADING;
             [ProtoMember(34)]
-            public string TIME;
+            public string TARGETTYPE;
             [ProtoMember(35)]
+            public string TIME;
+            [ProtoMember(36)]
             public string TOOLTIPTEXT;
         }
         [ProtoMember(7)]
