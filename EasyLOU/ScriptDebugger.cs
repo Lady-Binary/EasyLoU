@@ -6,7 +6,6 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace EasyLOU
 {
@@ -153,29 +152,52 @@ namespace EasyLOU
                 {
                     if (MainForm.ClientStatus != null)
                     {
-                        object value;
-                        var props = MainForm.ClientStatus.CharacterInfo.GetType().GetFields();
+                        object value = null;
                         value = MainForm.ClientStatus.CharacterInfo.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.CharacterInfo) ?? null;
-                        if (value != null) return DynValue.NewString(value.ToString());
-                        value = MainForm.ClientStatus.StatusBar.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.StatusBar) ?? null;
-                        if (value != null) return DynValue.NewString(value.ToString());
-                        value = MainForm.ClientStatus.LastAction.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.LastAction) ?? null;
-                        if (value != null) return DynValue.NewString(value.ToString());
-                        value = MainForm.ClientStatus.ClientInfo.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.ClientInfo) ?? null;
-                        if (value != null) return DynValue.NewString(value.ToString());
-                        value = MainForm.ClientStatus.Miscellaneous.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Miscellaneous) ?? null;
-                        if (value != null) return DynValue.NewString(value.ToString());
-                        value = MainForm.ClientStatus.Find.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Find) ?? null;
+                        if (value == null) value = MainForm.ClientStatus.StatusBar.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.StatusBar) ?? null;
+                        if (value == null) value = MainForm.ClientStatus.LastAction.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.LastAction) ?? null;
+                        if (value == null) value = MainForm.ClientStatus.ClientInfo.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.ClientInfo) ?? null;
+                        if (value == null) value = MainForm.ClientStatus.Miscellaneous.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Miscellaneous) ?? null;
+
                         if (value != null)
                         {
-                            if (value.ToString() != "N/A")
-                            {
-                                string[] values = value.ToString().Split(',');
-                                return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, DynValue.NewString));
-                            }
-                            else
-                            {
+                            if (value is bool)
+                                return DynValue.NewBoolean((bool)value);
+
+                            else if (value is string
+                                || value is char)
                                 return DynValue.NewString(value.ToString());
+
+                            else if (value is sbyte
+                                || value is byte
+                                || value is short
+                                || value is ushort
+                                || value is int
+                                || value is uint
+                                || value is long
+                                || value is ulong
+                                || value is float
+                                || value is double
+                                || value is decimal)
+                                return DynValue.NewNumber(Convert.ToDouble(value));
+
+                            else
+                                return DynValue.NewString(value.ToString());
+                        }
+                        else
+                        {
+                            value = MainForm.ClientStatus.Find.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Find) ?? null;
+                            if (value != null)
+                            {
+                                if (value.ToString() != "N/A")
+                                {
+                                    string[] values = value.ToString().Split(',');
+                                    return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, DynValue.NewString));
+                                }
+                                else
+                                {
+                                    return DynValue.NewString(value.ToString());
+                                }
                             }
                         }
                     }
