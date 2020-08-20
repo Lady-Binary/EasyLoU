@@ -109,11 +109,19 @@ namespace LOU
         public struct FINDITEMStruct
         {
             [ProtoMember(1)]
-            public ulong? CNTID;
+            public double? DISTANCE;
             [ProtoMember(2)]
-            public ulong? ID;
+            public ulong? CNTID;
             [ProtoMember(3)]
+            public ulong? ID;
+            [ProtoMember(4)]
             public string NAME;
+            [ProtoMember(5)]
+            public float? X;
+            [ProtoMember(6)]
+            public float? Y;
+            [ProtoMember(7)]
+            public float? Z;
         }
         [ProtoContract]
         public struct FINDLABELStruct
