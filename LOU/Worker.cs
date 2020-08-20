@@ -1252,7 +1252,10 @@ namespace LOU
                     HP = f.GetStatByName("Health"),
                     ID = f.ObjectId,
                     NAME = f.EBHEDGHBHGI,
-                    TYPE = f.DKCMJFOPPDL
+                    TYPE = f.DKCMJFOPPDL,
+                    X = f.transform?.position.x,
+                    Y = f.transform?.position.y,
+                    Z = f.transform?.position.z
                 })
                 .ToArray();
 

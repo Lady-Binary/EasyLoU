@@ -151,6 +151,9 @@
         <Key word = ".ID" />
         <Key word = ".NAME" />
         <Key word = ".TYPE" />
+        <Key word = ".X" />
+        <Key word = ".Y" />
+        <Key word = ".Z" />
         <Key word = "FINDPANEL" />
         <Key word = ".ID" />
         <Key word = "FINDPERMANENT" />
