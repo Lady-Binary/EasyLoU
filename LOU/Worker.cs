@@ -1289,128 +1289,116 @@ namespace LOU
             ClientStatus.ClientInfo.VSYNCCOUNT = QualitySettings.vSyncCount;
             ClientStatus.ClientInfo.MAINCAMERAMASK = Camera.main?.cullingMask ?? 0;
 
-            if (inputController != null)
+            // Miscellanous
+
+            ClientStatus.Miscellaneous.CLICKOBJ.CNTID = this.lastMouseClickClientObject?.DynamicInst?.ContainerId ?? 0;
+            ClientStatus.Miscellaneous.CLICKOBJ.ID = this.lastMouseClickClientObject?.DynamicInst?.ObjectId ?? 0;
+            ClientStatus.Miscellaneous.CLICKOBJ.NAME = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
+            ClientStatus.Miscellaneous.CLICKOBJ.PERMANENTID = this.lastMouseClickClientObject?.PermanentId ?? 0;
+
+            ClientStatus.Miscellaneous.CLICKWINDOW.X = this.lastMouseClickPosition.x;
+            ClientStatus.Miscellaneous.CLICKWINDOW.Y = this.lastMouseClickPosition.y;
+
+            if (Camera.main != null)
             {
-                InputController.FBKEBHPKOIC targetType = (InputController.FBKEBHPKOIC)Utils.GetInstanceField(inputController, "BFNLCIMBCJF");
-                ClientStatus.Miscellaneous.TARGETTYPE = targetType.ToString();
-                ClientStatus.Miscellaneous.TARGETLOADING = inputController.MAHPFOEKHPO.ToString();
-            } else
-            {
-                ClientStatus.Miscellaneous.TARGETTYPE = "N/A";
-                ClientStatus.Miscellaneous.TARGETLOADING = "N/A";
+                JKDPNLPCCNI.GetSurfaceHit(Camera.main.ScreenPointToRay(this.lastMouseClickPosition), out RaycastHit raycastHit, JKDPNLPCCNI.IMHGKJPOBHP.All);
+                ClientStatus.Miscellaneous.CLICKWORLD.X = raycastHit.point.x;
+                ClientStatus.Miscellaneous.CLICKWORLD.Y = raycastHit.point.y;
+                ClientStatus.Miscellaneous.CLICKWORLD.Z = raycastHit.point.z;
             }
+            else
+            {
+                ClientStatus.Miscellaneous.CLICKWORLD.X = 0;
+                ClientStatus.Miscellaneous.CLICKWORLD.Y = 0;
+                ClientStatus.Miscellaneous.CLICKWORLD.Z = 0;
+            }
+
+            ClientStatus.Miscellaneous.COMMANDID = this.ClientCommandId;
+
+            if (this.player != null)
+            {
+                ClientStatus.Miscellaneous.NEARBYMONSTERS =
+                    Utils.GetNearbyMobiles(5)?
+                    .Where(Mobile =>
+                        Mobile.DKCMJFOPPDL == "Monster" &&
+                        Mobile.BMHLGHANHDL != null &&
+                        !Mobile.GetObjectProperty<bool>("IsDead")
+                        )
+                    .Select(f => new ClientStatus.NEARBYMONSTERStruct()
+                    {
+                        DISTANCE = Vector3.Distance(f.transform.position, this.player.transform.position),
+                        HP = f.GetStatByName("Health"),
+                        ID = f.ObjectId,
+                        NAME = f.EBHEDGHBHGI
+                    })
+                    .ToArray()
+                    ??
+                    new ClientStatus.NEARBYMONSTERStruct[] { }
+                    ;
+                ClientStatus.Miscellaneous.MONSTERSNEARBY = (ClientStatus.Miscellaneous.NEARBYMONSTERS?.Count() ?? 0) > 0;
+            }
+            else
+            {
+                ClientStatus.Miscellaneous.NEARBYMONSTERS = new ClientStatus.NEARBYMONSTERStruct[] { };
+                ClientStatus.Miscellaneous.MONSTERSNEARBY = false;
+            }
+
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.CNTID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId ?? 0;
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.ID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId ?? 0;
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.NAME = this.inputController?.HFHBOINDMAJ?.name ?? "N/A";
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.PERMANENTID = this.inputController?.HFHBOINDMAJ?.PermanentId ?? 0;
+
+            UICamera.Raycast(Input.mousePosition);
+            ClientStatus.Miscellaneous.MOUSEOVERUI.NAME = UICamera.EHDALGCGPEK?.name ?? "N/A";
+            ClientStatus.Miscellaneous.MOUSEOVERUI.X = UICamera.EHDALGCGPEK?.transform?.localPosition.x ?? 0;
+            ClientStatus.Miscellaneous.MOUSEOVERUI.Y = UICamera.EHDALGCGPEK?.transform?.localPosition.y ?? 0;
 
             if (Input.mousePosition != null &&
                 Input.mousePosition.x >= 0 && Input.mousePosition.x <= Screen.width &&
                 Input.mousePosition.y >= 0 && Input.mousePosition.y <= Screen.height)
             {
-                ClientStatus.Miscellaneous.MOUSEWINDOWX = Input.mousePosition.x.ToString();
-                ClientStatus.Miscellaneous.MOUSEWINDOWY = Input.mousePosition.y.ToString();
-                ClientStatus.Miscellaneous.MOUSEWINDOWZ = Input.mousePosition.z.ToString();
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.X = Input.mousePosition.x;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.Y = Input.mousePosition.y;
 
-                RaycastHit raycastHit;
                 if (Camera.main != null)
                 {
-                    JKDPNLPCCNI.GetSurfaceHit(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, JKDPNLPCCNI.IMHGKJPOBHP.All);
-
-                    if (raycastHit.point != null)
-                    {
-                        ClientStatus.Miscellaneous.MOUSEWORLDX = raycastHit.point.x.ToString();
-                        ClientStatus.Miscellaneous.MOUSEWORLDY = raycastHit.point.y.ToString();
-                        ClientStatus.Miscellaneous.MOUSEWORLDZ = raycastHit.point.z.ToString();
-                    }
+                    JKDPNLPCCNI.GetSurfaceHit(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, JKDPNLPCCNI.IMHGKJPOBHP.All);
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = raycastHit.point.x;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = raycastHit.point.y;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = raycastHit.point.z;
                 }
                 else
                 {
-                    ClientStatus.Miscellaneous.MOUSEWORLDX = "N/A";
-                    ClientStatus.Miscellaneous.MOUSEWORLDY = "N/A";
-                    ClientStatus.Miscellaneous.MOUSEWORLDZ = "N/A";
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = 0;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = 0;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = 0;
                 }
-
-                ClientStatus.Miscellaneous.MOUSEOVERPERID = this.inputController?.HFHBOINDMAJ?.PermanentId.ToString() ?? "N/A";
-                ClientStatus.Miscellaneous.MOUSEOVEROBJID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId.ToString() ?? "N/A";
-                ClientStatus.Miscellaneous.MOUSEOVEROBJCNTID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId.ToString() ?? "N/A";
-                ClientStatus.Miscellaneous.MOUSEOVEROBJNAME = this.inputController?.HFHBOINDMAJ?.name ?? "N/A";
-                ClientStatus.Miscellaneous.MOUSEOVERDISPLAYNAME = this.inputController?.HFHBOINDMAJ?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
-
-                UICamera.Raycast(Input.mousePosition);
-                if (UICamera.EHDALGCGPEK != null)
-                {
-                    ClientStatus.Miscellaneous.MOUSEOVERUINAME = UICamera.EHDALGCGPEK.name != null ? UICamera.EHDALGCGPEK.name : "N/A";
-                    ClientStatus.Miscellaneous.MOUSEOVERUIX = UICamera.EHDALGCGPEK?.transform?.localPosition.x != null ? UICamera.EHDALGCGPEK?.transform?.localPosition.x.ToString() : "N/A";
-                    ClientStatus.Miscellaneous.MOUSEOVERUIY = UICamera.EHDALGCGPEK?.transform?.localPosition.y != null ? UICamera.EHDALGCGPEK?.transform?.localPosition.y.ToString() : "N/A";
-                }
-                else
-                {
-                    ClientStatus.Miscellaneous.MOUSEOVERUINAME = "N/A";
-                    ClientStatus.Miscellaneous.MOUSEOVERUIX = "N/A";
-                    ClientStatus.Miscellaneous.MOUSEOVERUIY = "N/A";
-                }
-            }
-            else
+            } else
             {
-
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.X = 0;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.Y = 0;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = 0;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = 0;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = 0;
             }
 
-            if (this.lastMouseClickPosition != null)
-            {
-                ClientStatus.Miscellaneous.CLICKWINDOWX = this.lastMouseClickPosition.x.ToString();
-                ClientStatus.Miscellaneous.CLICKWINDOWY = this.lastMouseClickPosition.y.ToString();
-                ClientStatus.Miscellaneous.CLICKWINDOWZ = this.lastMouseClickPosition.z.ToString();
-                if (Camera.main != null)
-                {
+            ClientStatus.Miscellaneous.RANDOM = new System.Random().Next(0, 1000);
 
-                    RaycastHit raycastHit;
-                    JKDPNLPCCNI.GetSurfaceHit(Camera.main.ScreenPointToRay(this.lastMouseClickPosition), out raycastHit, JKDPNLPCCNI.IMHGKJPOBHP.All);
-                    if (raycastHit.point != null)
-                    {
-                        ClientStatus.Miscellaneous.CLICKWORLDX = raycastHit.point.x.ToString();
-                        ClientStatus.Miscellaneous.CLICKWORLDY = raycastHit.point.y.ToString();
-                        ClientStatus.Miscellaneous.CLICKWORLDZ = raycastHit.point.z.ToString();
-                    }
-                }
-                else
-                {
-                    ClientStatus.Miscellaneous.CLICKWORLDX = "N/A";
-                    ClientStatus.Miscellaneous.CLICKWORLDY = "N/A";
-                    ClientStatus.Miscellaneous.CLICKWORLDZ = "N/A";
-                }
-            }
-
-            ClientStatus.Miscellaneous.CLICKPERID = this.lastMouseClickClientObject?.PermanentId.ToString() ?? "N/A";
-            ClientStatus.Miscellaneous.CLICKOBJID = this.lastMouseClickClientObject?.DynamicInst?.ObjectId.ToString() ?? "N/A";
-            ClientStatus.Miscellaneous.CLICKOBJCNTID = this.lastMouseClickClientObject?.DynamicInst?.ContainerId.ToString() ?? "N/A";
-            ClientStatus.Miscellaneous.CLICKOBJNAME = this.lastMouseClickClientObject?.DynamicInst?.name ?? "N/A";
-            ClientStatus.Miscellaneous.CLICKDISPLAYNAME = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
-
-            ClientStatus.Miscellaneous.NEARBYMONSTERS =
-                Utils.GetNearbyMobiles(5)?
-                .Where(Mobile =>
-                    Mobile.DKCMJFOPPDL == "Monster" &&
-                    Mobile.BMHLGHANHDL != null &&
-                    !Mobile.GetObjectProperty<bool>("IsDead")
-                    )
-                .Select(f => new ClientStatus.NEARBYMONSTERStruct()
-                {
-                    DISTANCE = Vector3.Distance(f.transform.position, this.player.transform.position),
-                    HP = f.GetStatByName("Health"),
-                    ID = f.ObjectId,
-                    NAME = f.EBHEDGHBHGI
-                })
-                .ToArray()
-                ??
-                new ClientStatus.NEARBYMONSTERStruct[] { }
-                ;
-            ClientStatus.Miscellaneous.MONSTERSNEARBY = (ClientStatus.Miscellaneous.NEARBYMONSTERS?.Count() ?? 0) > 0 ? "True" : "False";
-
-            ClientStatus.Miscellaneous.RANDOM = new System.Random().Next(0, 1000).ToString();
-
-            ClientStatus.Miscellaneous.TIME = Time.time.ToString();
-
-            ClientStatus.Miscellaneous.SCANJOURNALTIME = this.ScanJournalTime.ToString();
+            ClientStatus.Miscellaneous.SCANJOURNALTIME = this.ScanJournalTime;
             ClientStatus.Miscellaneous.SCANJOURNALMESSAGE = this.ScanJournalMessage ?? "N/A";
 
-            ClientStatus.Miscellaneous.COMMANDID = this.ClientCommandId.ToString();
+            if (inputController != null)
+            {
+                ClientStatus.Miscellaneous.TARGETLOADING = inputController?.MAHPFOEKHPO ?? false;
+                ClientStatus.Miscellaneous.TARGETTYPE = ((InputController.FBKEBHPKOIC)(Utils.GetInstanceField(inputController, "BFNLCIMBCJF") ?? InputController.FBKEBHPKOIC.None)).ToString();
+            } else
+            {
+                ClientStatus.Miscellaneous.TARGETLOADING = false;
+                ClientStatus.Miscellaneous.TARGETTYPE = "N/A";
+            }
+
+            ClientStatus.Miscellaneous.TIME = Time.time;
+
             ClientStatus.Miscellaneous.TOOLTIPTEXT = this.tooltipText ?? "N/A";
 
             //Utils.Log("UpdateStatus!");
