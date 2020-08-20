@@ -1227,9 +1227,14 @@ namespace LOU
                 .Select(f => new ClientStatus.FINDITEMStruct()
                 {
                     CNTID = f.Value.ContainerId,
+                    DISTANCE = f.Value.ContainerId == 0 ? Vector3.Distance(f.Value.transform.position, this.player.transform.position) : 0,
                     ID = f.Value.ObjectId,
-                    NAME = f.Value.EBHEDGHBHGI
+                    NAME = f.Value.EBHEDGHBHGI,
+                    X = f.Value.transform?.position.x,
+                    Y = f.Value.transform?.position.y,
+                    Z = f.Value.transform?.position.z,
                 })
+                .OrderBy(f => f.DISTANCE)
                 .ToArray();
 
             ClientStatus.Find.FINDLABEL =
@@ -1257,6 +1262,7 @@ namespace LOU
                     Y = f.transform?.position.y,
                     Z = f.transform?.position.z
                 })
+                .OrderBy(f => f.DISTANCE)
                 .ToArray();
 
             ClientStatus.Find.FINDPANEL =
@@ -1285,6 +1291,7 @@ namespace LOU
                     Y = f.Value.transform?.position.y,
                     Z = f.Value.transform?.position.z,
                 })
+                .OrderBy(f => f.DISTANCE)
                 .ToArray();
 
             // Client Info

@@ -140,8 +140,12 @@
         <Key word = ".TEXT" />
         <Key word = "FINDITEM" />
         <Key word = ".CNTID" />
+        <Key word = ".DISTANCE" />
         <Key word = ".ID" />
         <Key word = ".NAME" />
+        <Key word = ".X" />
+        <Key word = ".Y" />
+        <Key word = ".Z" />
         <Key word = "FINDLABEL" />
         <Key word = ".NAME" />
         <Key word = ".TEXT" />
