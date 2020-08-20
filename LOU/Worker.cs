@@ -1131,24 +1131,33 @@ namespace LOU
             ClientStatus ClientStatus = new ClientStatus();
             ClientStatus.TimeStamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
 
-            if (this.player)
+            //Utils.Log("Props:");
+            //Dictionary<string, object> EBNBHBHNCFC = (Dictionary<string, object>)Utils.GetInstanceField(this.player, "EBNBHBHNCFC");
+
+            // Character Info
+
+            ClientStatus.CharacterInfo.CHARNAME = this.player?.EBHEDGHBHGI;
+            ClientStatus.CharacterInfo.CHARID = this.player?.ObjectId;
+            ClientStatus.CharacterInfo.CHARPOSX = this.player?.transform?.position.x;
+            ClientStatus.CharacterInfo.CHARPOSY = this.player?.transform?.position.y;
+            ClientStatus.CharacterInfo.CHARPOSZ = this.player?.transform?.position.z;
+            ClientStatus.CharacterInfo.CHARDIR = null;
+            if (this.player != null)
             {
-                //Utils.Log("Props:");
-                //Dictionary<string, object> EBNBHBHNCFC = (Dictionary<string, object>)Utils.GetInstanceField(this.player, "EBNBHBHNCFC");
-
-                ClientStatus.CharacterInfo.CHARNAME = this.player?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.CHARID = this.player?.ObjectId ?? 0;
-                ClientStatus.CharacterInfo.CHARPOSX = this.player?.transform?.position.x ?? 0;
-                ClientStatus.CharacterInfo.CHARPOSY = this.player?.transform?.position.y ?? 0;
-                ClientStatus.CharacterInfo.CHARPOSZ = this.player?.transform?.position.z ?? 0;
-                ClientStatus.CharacterInfo.CHARDIR = 0;
-                ClientStatus.CharacterInfo.CHARSTATUS = "" +
-                    (this.player.IsInCombatMode() ? "G" : " ") +
+                ClientStatus.CharacterInfo.CHARSTATUS =
+                    (this.player.IsInCombatMode() ? "G" : "") +
                     (this.player.PLFMFNKLBON == CoreUtil.ShardShared.MobileFrozenState.MoveFrozen || this.player.PLFMFNKLBON == CoreUtil.ShardShared.MobileFrozenState.MoveAndTurnFrozen ? "A" : "");
-                ClientStatus.CharacterInfo.CHARGHOST = (bool)(this.player?.GetObjectProperty("IsDead") ?? false);
-                ClientStatus.CharacterInfo.BACKPACKID = this.player?.GetEquippedObject("Backpack")?.DMCIODGEHCN ?? 0;
+            }
+            else
+            {
+                ClientStatus.CharacterInfo.CHARSTATUS = null;
+            }
+            ClientStatus.CharacterInfo.CHARGHOST = (bool?)this.player?.GetObjectProperty("IsDead");
+            ClientStatus.CharacterInfo.BACKPACKID = this.player?.GetEquippedObject("Backpack")?.DMCIODGEHCN;
 
-                double CharWeight = 0;
+            if (this.player != null)
+            {
+                double? CharWeight = 0;
                 List<EquipmentObject> ICGEHBHPFOA = (List<EquipmentObject>)Utils.GetInstanceField(this.player, "ICGEHBHPFOA");
                 if (ICGEHBHPFOA != null)
                 {
@@ -1158,38 +1167,41 @@ namespace LOU
                     }
                 }
                 ClientStatus.CharacterInfo.CHARWEIGHT = CharWeight;
-
-                ClientStatus.CharacterInfo.HEADID = this.player?.GetEquippedObject("Head")?.DMCIODGEHCN ?? 0;
-                ClientStatus.CharacterInfo.HEADNAME = this.player?.GetEquippedObject("Head")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.CHESTID = this.player?.GetEquippedObject("Chest")?.DMCIODGEHCN ?? 0;
-                ClientStatus.CharacterInfo.CHESTNAME = this.player?.GetEquippedObject("Chest")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.LEGSID = this.player?.GetEquippedObject("Legs")?.DMCIODGEHCN ?? 0;
-                ClientStatus.CharacterInfo.LEGSNAME = this.player?.GetEquippedObject("Legs")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.RIGHTHANDID = this.player?.GetEquippedObject("RightHand")?.DMCIODGEHCN ?? 0;
-                ClientStatus.CharacterInfo.RIGHTHANDNAME = this.player?.GetEquippedObject("RightHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
-                ClientStatus.CharacterInfo.LEFTHANDID = this.player?.GetEquippedObject("LeftHand")?.DMCIODGEHCN ?? 0;
-                ClientStatus.CharacterInfo.LEFTHANDNAME = this.player?.GetEquippedObject("LeftHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI ?? "N/A";
             }
+            else
+            {
+                ClientStatus.CharacterInfo.CHARWEIGHT = null;
+            }
+
+            ClientStatus.CharacterInfo.HEADID = this.player?.GetEquippedObject("Head")?.DMCIODGEHCN;
+            ClientStatus.CharacterInfo.HEADNAME = this.player?.GetEquippedObject("Head")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI;
+            ClientStatus.CharacterInfo.CHESTID = this.player?.GetEquippedObject("Chest")?.DMCIODGEHCN;
+            ClientStatus.CharacterInfo.CHESTNAME = this.player?.GetEquippedObject("Chest")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI;
+            ClientStatus.CharacterInfo.LEGSID = this.player?.GetEquippedObject("Legs")?.DMCIODGEHCN;
+            ClientStatus.CharacterInfo.LEGSNAME = this.player?.GetEquippedObject("Legs")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI;
+            ClientStatus.CharacterInfo.RIGHTHANDID = this.player?.GetEquippedObject("RightHand")?.DMCIODGEHCN;
+            ClientStatus.CharacterInfo.RIGHTHANDNAME = this.player?.GetEquippedObject("RightHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI;
+            ClientStatus.CharacterInfo.LEFTHANDID = this.player?.GetEquippedObject("LeftHand")?.DMCIODGEHCN;
+            ClientStatus.CharacterInfo.LEFTHANDNAME = this.player?.GetEquippedObject("LeftHand")?.GetComponent<DynamicObject>()?.EBHEDGHBHGI;
 
             // Status Bar
 
-            ClientStatus.StatusBar.STR = this.player?.GetStatByName("Str") ?? 0;
-            ClientStatus.StatusBar.HEALTH = this.player?.GetStatByName("Health") ?? 0;
-            ClientStatus.StatusBar.INT = this.player?.GetStatByName("Int") ?? 0;
-            ClientStatus.StatusBar.MANA = this.player?.GetStatByName("Mana") ?? 0;
-            ClientStatus.StatusBar.AGI = this.player?.GetStatByName("Agi") ?? 0;
-            ClientStatus.StatusBar.ATTACKSPEED = this.player?.GetStatByName("AttackSpeed") ?? 0;
-            ClientStatus.StatusBar.STAMINA = this.player?.GetStatByName("Stamina") ?? 0;
-            ClientStatus.StatusBar.DEFENSE = this.player?.GetStatByName("Defense") ?? 0;
-            ClientStatus.StatusBar.VITALITY = this.player?.GetStatByName("Vitality") ?? 0;
-            ClientStatus.StatusBar.PRESTIGEXPMAX = this.player?.GetStatByName("PrestigeXPMax") ?? 0;
-            ClientStatus.StatusBar.STEALTH = this.player?.GetStatByName("Stealth") ?? 0;
+            ClientStatus.StatusBar.STR = this.player?.GetStatByName("Str");
+            ClientStatus.StatusBar.HEALTH = this.player?.GetStatByName("Health");
+            ClientStatus.StatusBar.INT = this.player?.GetStatByName("Int");
+            ClientStatus.StatusBar.MANA = this.player?.GetStatByName("Mana");
+            ClientStatus.StatusBar.AGI = this.player?.GetStatByName("Agi");
+            ClientStatus.StatusBar.ATTACKSPEED = this.player?.GetStatByName("AttackSpeed");
+            ClientStatus.StatusBar.STAMINA = this.player?.GetStatByName("Stamina");
+            ClientStatus.StatusBar.DEFENSE = this.player?.GetStatByName("Defense");
+            ClientStatus.StatusBar.VITALITY = this.player?.GetStatByName("Vitality");
+            ClientStatus.StatusBar.PRESTIGEXPMAX = this.player?.GetStatByName("PrestigeXPMax");
+            ClientStatus.StatusBar.STEALTH = this.player?.GetStatByName("Stealth");
 
             // LastAction
 
-            ClientStatus.LastAction.COBJECTID = this.inputController?.BODCEBEPNMH?.ObjectId ?? 0;
-            ClientStatus.LastAction.LOBJECTID = this.inputController?.MFJFNHLOHOI?.ObjectId ?? 0;
-
+            ClientStatus.LastAction.COBJECTID = this.inputController?.BODCEBEPNMH?.ObjectId;
+            ClientStatus.LastAction.LOBJECTID = this.inputController?.MFJFNHLOHOI?.ObjectId;
 
             // Find
 
@@ -1199,10 +1211,7 @@ namespace LOU
                 .Select(f => new ClientStatus.FINDBUTTONStruct() {
                     NAME = f.Key.ToString(), TEXT = f.Value
                 })
-                .ToArray()
-                ??
-                new ClientStatus.FINDBUTTONStruct[] { }
-                ;
+                .ToArray();
 
             ClientStatus.Find.FINDITEM =
                 this
@@ -1213,10 +1222,7 @@ namespace LOU
                     ID = f.Value.ObjectId,
                     NAME = f.Value.EBHEDGHBHGI
                 })
-                .ToArray()
-                ??
-                new ClientStatus.FINDITEMStruct[] { }
-                ;
+                .ToArray();
 
             ClientStatus.Find.FINDLABEL =
                 this
@@ -1226,10 +1232,7 @@ namespace LOU
                     NAME = f.Key.ToString(),
                     TEXT = f.Value
                 })
-                .ToArray()
-                ??
-                new ClientStatus.FINDLABELStruct[] { }
-                ;
+                .ToArray();
 
             ClientStatus.Find.FINDMOBILE =
                 this
@@ -1243,10 +1246,7 @@ namespace LOU
                     NAME = f.EBHEDGHBHGI,
                     TYPE = f.DKCMJFOPPDL
                 })
-                .ToArray()
-                ??
-                new ClientStatus.FINDMOBILEStruct[] { }
-                ;
+                .ToArray();
 
             ClientStatus.Find.FINDPANEL =
                 this
@@ -1255,10 +1255,7 @@ namespace LOU
                 {
                     ID = f.Key
                 })
-                .ToArray()
-                ??
-                new ClientStatus.FINDPANELStruct[] { }
-                ;
+                .ToArray();
 
             ClientStatus.Find.FINDPERMANENT =
                 this
@@ -1271,30 +1268,27 @@ namespace LOU
                     NAME = f.Value.name,
                     TEXTURE = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => m.mainTexture.name) ?? new string[] { }) ?? ""
                 })
-                .ToArray()
-                ??
-                new ClientStatus.FINDPERMANENTStruct[] { }
-                ;
+                .ToArray();
 
             // Client Info
 
-            ClientStatus.ClientInfo.CLIVER = ApplicationController.c_clientVersion ?? "N/A";
+            ClientStatus.ClientInfo.CLIVER = ApplicationController.c_clientVersion;
             ClientStatus.ClientInfo.CLIID = this.ProcessId;
             ClientStatus.ClientInfo.CLIXRES = Screen.width;
             ClientStatus.ClientInfo.CLIYRES = Screen.height;
             ClientStatus.ClientInfo.FULLSCREEN = Screen.fullScreen;
-            ClientStatus.ClientInfo.CLIGAMESTATE = this.applicationController?.JOJPMHOLNHA.ToString() ?? "N/A";
-            ClientStatus.ClientInfo.SERVER = Utils.GetInstanceField(this.applicationController, "EGBNKJDFBEJ")?.ToString() ?? "N/A";
+            ClientStatus.ClientInfo.CLIGAMESTATE = this.applicationController?.JOJPMHOLNHA.ToString();
+            ClientStatus.ClientInfo.SERVER = Utils.GetInstanceField(this.applicationController, "EGBNKJDFBEJ")?.ToString();
             ClientStatus.ClientInfo.TARGETFRAMERATE = Application.targetFrameRate;
             ClientStatus.ClientInfo.VSYNCCOUNT = QualitySettings.vSyncCount;
-            ClientStatus.ClientInfo.MAINCAMERAMASK = Camera.main?.cullingMask ?? 0;
+            ClientStatus.ClientInfo.MAINCAMERAMASK = Camera.main?.cullingMask;
 
             // Miscellanous
 
-            ClientStatus.Miscellaneous.CLICKOBJ.CNTID = this.lastMouseClickClientObject?.DynamicInst?.ContainerId ?? 0;
-            ClientStatus.Miscellaneous.CLICKOBJ.ID = this.lastMouseClickClientObject?.DynamicInst?.ObjectId ?? 0;
-            ClientStatus.Miscellaneous.CLICKOBJ.NAME = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI ?? "N/A";
-            ClientStatus.Miscellaneous.CLICKOBJ.PERMANENTID = this.lastMouseClickClientObject?.PermanentId ?? 0;
+            ClientStatus.Miscellaneous.CLICKOBJ.CNTID = this.lastMouseClickClientObject?.DynamicInst?.ContainerId;
+            ClientStatus.Miscellaneous.CLICKOBJ.ID = this.lastMouseClickClientObject?.DynamicInst?.ObjectId;
+            ClientStatus.Miscellaneous.CLICKOBJ.NAME = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI;
+            ClientStatus.Miscellaneous.CLICKOBJ.PERMANENTID = this.lastMouseClickClientObject?.PermanentId;
 
             ClientStatus.Miscellaneous.CLICKWINDOW.X = this.lastMouseClickPosition.x;
             ClientStatus.Miscellaneous.CLICKWINDOW.Y = this.lastMouseClickPosition.y;
@@ -1308,9 +1302,9 @@ namespace LOU
             }
             else
             {
-                ClientStatus.Miscellaneous.CLICKWORLD.X = 0;
-                ClientStatus.Miscellaneous.CLICKWORLD.Y = 0;
-                ClientStatus.Miscellaneous.CLICKWORLD.Z = 0;
+                ClientStatus.Miscellaneous.CLICKWORLD.X = null;
+                ClientStatus.Miscellaneous.CLICKWORLD.Y = null;
+                ClientStatus.Miscellaneous.CLICKWORLD.Z = null;
             }
 
             ClientStatus.Miscellaneous.COMMANDID = this.ClientCommandId;
@@ -1331,27 +1325,24 @@ namespace LOU
                         ID = f.ObjectId,
                         NAME = f.EBHEDGHBHGI
                     })
-                    .ToArray()
-                    ??
-                    new ClientStatus.NEARBYMONSTERStruct[] { }
-                    ;
+                    .ToArray();
                 ClientStatus.Miscellaneous.MONSTERSNEARBY = (ClientStatus.Miscellaneous.NEARBYMONSTERS?.Count() ?? 0) > 0;
             }
             else
             {
-                ClientStatus.Miscellaneous.NEARBYMONSTERS = new ClientStatus.NEARBYMONSTERStruct[] { };
-                ClientStatus.Miscellaneous.MONSTERSNEARBY = false;
+                ClientStatus.Miscellaneous.NEARBYMONSTERS = null;
+                ClientStatus.Miscellaneous.MONSTERSNEARBY = null;
             }
 
-            ClientStatus.Miscellaneous.MOUSEOVEROBJ.CNTID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId ?? 0;
-            ClientStatus.Miscellaneous.MOUSEOVEROBJ.ID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId ?? 0;
-            ClientStatus.Miscellaneous.MOUSEOVEROBJ.NAME = this.inputController?.HFHBOINDMAJ?.name ?? "N/A";
-            ClientStatus.Miscellaneous.MOUSEOVEROBJ.PERMANENTID = this.inputController?.HFHBOINDMAJ?.PermanentId ?? 0;
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.CNTID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId;
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.ID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId;
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.NAME = this.inputController?.HFHBOINDMAJ?.name;
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.PERMANENTID = this.inputController?.HFHBOINDMAJ?.PermanentId;
 
             UICamera.Raycast(Input.mousePosition);
-            ClientStatus.Miscellaneous.MOUSEOVERUI.NAME = UICamera.EHDALGCGPEK?.name ?? "N/A";
-            ClientStatus.Miscellaneous.MOUSEOVERUI.X = UICamera.EHDALGCGPEK?.transform?.localPosition.x ?? 0;
-            ClientStatus.Miscellaneous.MOUSEOVERUI.Y = UICamera.EHDALGCGPEK?.transform?.localPosition.y ?? 0;
+            ClientStatus.Miscellaneous.MOUSEOVERUI.NAME = UICamera.EHDALGCGPEK?.name;
+            ClientStatus.Miscellaneous.MOUSEOVERUI.X = UICamera.EHDALGCGPEK?.transform?.localPosition.x;
+            ClientStatus.Miscellaneous.MOUSEOVERUI.Y = UICamera.EHDALGCGPEK?.transform?.localPosition.y;
 
             if (Input.mousePosition != null &&
                 Input.mousePosition.x >= 0 && Input.mousePosition.x <= Screen.width &&
@@ -1369,37 +1360,37 @@ namespace LOU
                 }
                 else
                 {
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = 0;
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = 0;
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = 0;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = null;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = null;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = null;
                 }
             } else
             {
-                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.X = 0;
-                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.Y = 0;
-                ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = 0;
-                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = 0;
-                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = 0;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.X = null;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.Y = null;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = null;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = null;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = null;
             }
 
             ClientStatus.Miscellaneous.RANDOM = new System.Random().Next(0, 1000);
 
             ClientStatus.Miscellaneous.SCANJOURNALTIME = this.ScanJournalTime;
-            ClientStatus.Miscellaneous.SCANJOURNALMESSAGE = this.ScanJournalMessage ?? "N/A";
+            ClientStatus.Miscellaneous.SCANJOURNALMESSAGE = this.ScanJournalMessage;
 
             if (inputController != null)
             {
-                ClientStatus.Miscellaneous.TARGETLOADING = inputController?.MAHPFOEKHPO ?? false;
+                ClientStatus.Miscellaneous.TARGETLOADING = inputController.MAHPFOEKHPO;
                 ClientStatus.Miscellaneous.TARGETTYPE = ((InputController.FBKEBHPKOIC)(Utils.GetInstanceField(inputController, "BFNLCIMBCJF") ?? InputController.FBKEBHPKOIC.None)).ToString();
             } else
             {
-                ClientStatus.Miscellaneous.TARGETLOADING = false;
-                ClientStatus.Miscellaneous.TARGETTYPE = "N/A";
+                ClientStatus.Miscellaneous.TARGETLOADING = null;
+                ClientStatus.Miscellaneous.TARGETTYPE = null;
             }
 
             ClientStatus.Miscellaneous.TIME = Time.time;
 
-            ClientStatus.Miscellaneous.TOOLTIPTEXT = this.tooltipText ?? "N/A";
+            ClientStatus.Miscellaneous.TOOLTIPTEXT = this.tooltipText;
 
             //Utils.Log("UpdateStatus!");
             if (this.ProcessId != -1 && ClientStatusMemoryMap != null)
@@ -1461,38 +1452,42 @@ namespace LOU
 
                     this.applicationController = GameObjectSingleton<ApplicationController>.DJCGIMIDOPB;
 
-                    if (this.applicationController != null)
+                    if (this.applicationController?.JOJPMHOLNHA == ApplicationController.IJFOCJIHKHC.Game)
                     {
-                        this.player = this.applicationController.Player;
+                        this.player = this.applicationController?.Player;
+                        this.inputController = InputController.Instance;
+                    }
+                    else
+                    {
+                        this.player = null;
+                        this.inputController = null;
+                    }
 
-                        if (VERBOSE_DEBUG && !this.Intercepting)
+                    if (this.applicationController != null && VERBOSE_DEBUG && !this.Intercepting)
+                    {
+                        // The logic and the obfuscated names used in this logic
+                        // can be inferred by looking at SendMessage() in MessageCore.dll
+                        if (applicationController.GPLIHPHPNKL != null)
                         {
-                            // The logic and the obfuscated names used in this logic
-                            // can be inferred by looking at SendMessage() in MessageCore.dll
-                            if (applicationController != null && applicationController.GPLIHPHPNKL != null)
+                            AOHDPDIPMKO GEDMGBHAEAB = (AOHDPDIPMKO)Utils.GetInstanceField<JFFJBADOENN>(applicationController.GPLIHPHPNKL, "GEDMGBHAEAB");
+                            if (GEDMGBHAEAB != null)
                             {
-                                AOHDPDIPMKO GEDMGBHAEAB = (AOHDPDIPMKO)Utils.GetInstanceField<JFFJBADOENN>(applicationController.GPLIHPHPNKL, "GEDMGBHAEAB");
-                                if (GEDMGBHAEAB != null)
+                                try
                                 {
-                                    try
-                                    {
-                                        Utils.SetInstanceField(GEDMGBHAEAB, "HCBFBBABLDC", true);
-                                        Utils.Log("INTERCEPTING ENABLED!");
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Utils.Log(ex.ToString());
-                                    }
-                                    finally
-                                    {
-                                        this.Intercepting = true;
-                                    }
+                                    Utils.SetInstanceField(GEDMGBHAEAB, "HCBFBBABLDC", true);
+                                    Utils.Log("INTERCEPTING ENABLED!");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Utils.Log(ex.ToString());
+                                }
+                                finally
+                                {
+                                    this.Intercepting = true;
                                 }
                             }
                         }
                     }
-
-                    this.inputController = InputController.Instance;
 
                     Queue<ClientCommand> ClientCommandsQueue = null;
                     ClientCommand[] ClientCommandsArray = null;
