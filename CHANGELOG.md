@@ -1,5 +1,25 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.1.0.0 (20/08/2020)
+
+#### Bugfixes:
+
+- All variables must be strong typed, and not just strings. Use "nil" instead of N/A. [#91](https://github.com/Lady-Binary/EasyLOU/issues/91)
+
+#### Enhancements:
+
+- New TreeState, RockState, and Hue attributes for permanent objects [#101](https://github.com/Lady-Binary/EasyLOU/issues/101)
+- Add X,Y,Z attributes to FINDMOBILEs [#99](https://github.com/Lady-Binary/EasyLOU/issues/99)
+- Add X,Y,Z attributes to FINDPERMANENTs. Add ability to use Move() with PERMANENTID. [#90](https://github.com/Lady-Binary/EasyLOU/issues/90)
+
+#### function (placeholders) {
+			return '';
+        }
+
+- Add X,Y,Z and DISTANCE attributes to FINDITEMs (DISTANCE only for those on the ground) [#100](https://github.com/Lady-Binary/EasyLOU/issues/100)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.33 (15/08/2020)
 
 #### Bugfixes:
@@ -11,7 +31,7 @@
 #### Enhancements:
 
 - retrieve permanent objects (e.g. trees and rocks) textures and colors [#89](https://github.com/Lady-Binary/EasyLOU/issues/89)
-- add command to clear variables stored ResetVars() [#88](https://github.com/Lady-Binary/EasyLOU/issues/88)
+- add command to clear variables stored clearVar() [#88](https://github.com/Lady-Binary/EasyLOU/issues/88)
 
 ---
 
@@ -217,12 +237,3 @@
 #### Enhancements:
 
 - Add application icon [#28](https://github.com/Lady-Binary/EasyLOU/issues/28)
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.4 (15/07/2020)
-
-#### Enhancements:
-
-- Consider merging all dlls into the EasyLOU.exe [#26](https://github.com/Lady-Binary/EasyLOU/issues/26)
-- Need a GetTooltip() function [#23](https://github.com/Lady-Binary/EasyLOU/issues/23)
