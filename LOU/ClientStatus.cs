@@ -226,24 +226,6 @@ namespace LOU
             public float? Y;
         }
         [ProtoContract]
-        public struct WINDOWStruct
-        {
-            [ProtoMember(1)]
-            public float? X;
-            [ProtoMember(2)]
-            public float? Y;
-        }
-        [ProtoContract]
-        public struct WORLDStruct
-        {
-            [ProtoMember(1)]
-            public float? X;
-            [ProtoMember(2)]
-            public float? Y;
-            [ProtoMember(3)]
-            public float? Z;
-        }
-        [ProtoContract]
         public struct NEARBYMONSTERStruct
         {
             [ProtoMember(1)]
@@ -261,36 +243,48 @@ namespace LOU
             [ProtoMember(1)]
             public OBJStruct CLICKOBJ;
             [ProtoMember(2)]
-            public WINDOWStruct CLICKWINDOW;
+            public float? CLICKWINDOWX;
             [ProtoMember(3)]
-            public WORLDStruct CLICKWORLD;
+            public float? CLICKWINDOWY;
             [ProtoMember(4)]
-            public int? COMMANDID;
+            public float? CLICKWORLDX;
             [ProtoMember(5)]
-            public bool? MONSTERSNEARBY;
+            public float? CLICKWORLDY;
             [ProtoMember(6)]
-            public OBJStruct MOUSEOVEROBJ;
+            public float? CLICKWORLDZ;
             [ProtoMember(7)]
-            public UIStruct MOUSEOVERUI;
+            public int? COMMANDID;
             [ProtoMember(8)]
-            public WINDOWStruct MOUSEWINDOWPOS;
+            public bool? MONSTERSNEARBY;
             [ProtoMember(9)]
-            public WORLDStruct MOUSEWORLDPOS;
+            public OBJStruct MOUSEOVEROBJ;
             [ProtoMember(10)]
-            public NEARBYMONSTERStruct[] NEARBYMONSTERS;
+            public UIStruct MOUSEOVERUI;
             [ProtoMember(11)]
-            public int? RANDOM;
+            public float? MOUSEWINDOWPOSX;
             [ProtoMember(12)]
-            public string SCANJOURNALMESSAGE;
+            public float? MOUSEWINDOWPOSY;
             [ProtoMember(13)]
-            public float? SCANJOURNALTIME;
+            public float? MOUSEWORLDPOSX;
             [ProtoMember(14)]
-            public bool? TARGETLOADING;
+            public float? MOUSEWORLDPOSY;
             [ProtoMember(15)]
-            public string TARGETTYPE;
+            public float? MOUSEWORLDPOSZ;
             [ProtoMember(16)]
-            public float? TIME;
+            public NEARBYMONSTERStruct[] NEARBYMONSTERS;
             [ProtoMember(17)]
+            public int? RANDOM;
+            [ProtoMember(18)]
+            public string SCANJOURNALMESSAGE;
+            [ProtoMember(19)]
+            public float? SCANJOURNALTIME;
+            [ProtoMember(20)]
+            public bool? TARGETLOADING;
+            [ProtoMember(21)]
+            public string TARGETTYPE;
+            [ProtoMember(22)]
+            public float? TIME;
+            [ProtoMember(23)]
             public string TOOLTIPTEXT;
         }
         [ProtoMember(7)]
