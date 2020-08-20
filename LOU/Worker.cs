@@ -1290,21 +1290,21 @@ namespace LOU
             ClientStatus.Miscellaneous.CLICKOBJ.NAME = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI;
             ClientStatus.Miscellaneous.CLICKOBJ.PERMANENTID = this.lastMouseClickClientObject?.PermanentId;
 
-            ClientStatus.Miscellaneous.CLICKWINDOW.X = this.lastMouseClickPosition.x;
-            ClientStatus.Miscellaneous.CLICKWINDOW.Y = this.lastMouseClickPosition.y;
+            ClientStatus.Miscellaneous.CLICKWINDOWX = this.lastMouseClickPosition.x;
+            ClientStatus.Miscellaneous.CLICKWINDOWY = this.lastMouseClickPosition.y;
 
             if (Camera.main != null)
             {
                 JKDPNLPCCNI.GetSurfaceHit(Camera.main.ScreenPointToRay(this.lastMouseClickPosition), out RaycastHit raycastHit, JKDPNLPCCNI.IMHGKJPOBHP.All);
-                ClientStatus.Miscellaneous.CLICKWORLD.X = raycastHit.point.x;
-                ClientStatus.Miscellaneous.CLICKWORLD.Y = raycastHit.point.y;
-                ClientStatus.Miscellaneous.CLICKWORLD.Z = raycastHit.point.z;
+                ClientStatus.Miscellaneous.CLICKWORLDX = raycastHit.point.x;
+                ClientStatus.Miscellaneous.CLICKWORLDY = raycastHit.point.y;
+                ClientStatus.Miscellaneous.CLICKWORLDZ = raycastHit.point.z;
             }
             else
             {
-                ClientStatus.Miscellaneous.CLICKWORLD.X = null;
-                ClientStatus.Miscellaneous.CLICKWORLD.Y = null;
-                ClientStatus.Miscellaneous.CLICKWORLD.Z = null;
+                ClientStatus.Miscellaneous.CLICKWORLDX = null;
+                ClientStatus.Miscellaneous.CLICKWORLDY = null;
+                ClientStatus.Miscellaneous.CLICKWORLDZ = null;
             }
 
             ClientStatus.Miscellaneous.COMMANDID = this.ClientCommandId;
@@ -1348,29 +1348,29 @@ namespace LOU
                 Input.mousePosition.x >= 0 && Input.mousePosition.x <= Screen.width &&
                 Input.mousePosition.y >= 0 && Input.mousePosition.y <= Screen.height)
             {
-                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.X = Input.mousePosition.x;
-                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.Y = Input.mousePosition.y;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOSX = Input.mousePosition.x;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOSY = Input.mousePosition.y;
 
                 if (Camera.main != null)
                 {
                     JKDPNLPCCNI.GetSurfaceHit(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, JKDPNLPCCNI.IMHGKJPOBHP.All);
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = raycastHit.point.x;
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = raycastHit.point.y;
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = raycastHit.point.z;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOSX = raycastHit.point.x;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOSY = raycastHit.point.y;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOSZ = raycastHit.point.z;
                 }
                 else
                 {
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = null;
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = null;
-                    ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = null;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOSX = null;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOSY = null;
+                    ClientStatus.Miscellaneous.MOUSEWORLDPOSZ = null;
                 }
             } else
             {
-                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.X = null;
-                ClientStatus.Miscellaneous.MOUSEWINDOWPOS.Y = null;
-                ClientStatus.Miscellaneous.MOUSEWORLDPOS.X = null;
-                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Y = null;
-                ClientStatus.Miscellaneous.MOUSEWORLDPOS.Z = null;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOSX = null;
+                ClientStatus.Miscellaneous.MOUSEWINDOWPOSY = null;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOSX = null;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOSY = null;
+                ClientStatus.Miscellaneous.MOUSEWORLDPOSZ = null;
             }
 
             ClientStatus.Miscellaneous.RANDOM = new System.Random().Next(0, 1000);
