@@ -14,43 +14,43 @@ namespace LOU
         public struct CharacterInfoStruct
         {
             [ProtoMember(1)]
-            public ulong BACKPACKID;
+            public ulong? BACKPACKID;
             [ProtoMember(2)]
-            public int CHARDIR;
+            public int? CHARDIR;
             [ProtoMember(3)]
-            public bool CHARGHOST;
+            public bool? CHARGHOST;
             [ProtoMember(4)]
-            public ulong CHARID;
+            public ulong? CHARID;
             [ProtoMember(5)]
             public string CHARNAME;
             [ProtoMember(6)]
-            public float CHARPOSX;
+            public float? CHARPOSX;
             [ProtoMember(7)]
-            public float CHARPOSY;
+            public float? CHARPOSY;
             [ProtoMember(8)]
-            public float CHARPOSZ;
+            public float? CHARPOSZ;
             [ProtoMember(9)]
             public string CHARSTATUS;
             [ProtoMember(10)]
-            public double CHARWEIGHT;
+            public double? CHARWEIGHT;
             [ProtoMember(11)]
-            public ulong CHESTID;
+            public ulong? CHESTID;
             [ProtoMember(12)]
             public string CHESTNAME;
             [ProtoMember(13)]
-            public ulong HEADID;
+            public ulong? HEADID;
             [ProtoMember(14)]
             public string HEADNAME;
             [ProtoMember(15)]
-            public ulong LEFTHANDID;
+            public ulong? LEFTHANDID;
             [ProtoMember(16)]
             public string LEFTHANDNAME;
             [ProtoMember(17)]
-            public ulong LEGSID;
+            public ulong? LEGSID;
             [ProtoMember(18)]
             public string LEGSNAME;
             [ProtoMember(19)]
-            public ulong RIGHTHANDID;
+            public ulong? RIGHTHANDID;
             [ProtoMember(20)]
             public string RIGHTHANDNAME;
         }
@@ -61,27 +61,27 @@ namespace LOU
         public struct StatusBarStruct
         {
             [ProtoMember(1)]
-            public double AGI;
+            public double? AGI;
             [ProtoMember(2)]
-            public double ATTACKSPEED;
+            public double? ATTACKSPEED;
             [ProtoMember(3)]
-            public double DEFENSE;
+            public double? DEFENSE;
             [ProtoMember(4)]
-            public double HEALTH;
+            public double? HEALTH;
             [ProtoMember(5)]
-            public double INT;
+            public double? INT;
             [ProtoMember(6)]
-            public double MANA;
+            public double? MANA;
             [ProtoMember(7)]
-            public double PRESTIGEXPMAX;
+            public double? PRESTIGEXPMAX;
             [ProtoMember(8)]
-            public double STAMINA;
+            public double? STAMINA;
             [ProtoMember(9)]
-            public double STEALTH;
+            public double? STEALTH;
             [ProtoMember(10)]
-            public double STR;
+            public double? STR;
             [ProtoMember(11)]
-            public double VITALITY;
+            public double? VITALITY;
         }
         [ProtoMember(3)]
         public StatusBarStruct StatusBar;
@@ -90,9 +90,9 @@ namespace LOU
         public struct LastActionStruct
         {
             [ProtoMember(1)]
-            public ulong COBJECTID;
+            public ulong? COBJECTID;
             [ProtoMember(2)]
-            public ulong LOBJECTID;
+            public ulong? LOBJECTID;
         }
         [ProtoMember(4)]
         public LastActionStruct LastAction;
@@ -109,9 +109,9 @@ namespace LOU
         public struct FINDITEMStruct
         {
             [ProtoMember(1)]
-            public ulong CNTID;
+            public ulong? CNTID;
             [ProtoMember(2)]
-            public ulong ID;
+            public ulong? ID;
             [ProtoMember(3)]
             public string NAME;
         }
@@ -127,11 +127,11 @@ namespace LOU
         public struct FINDMOBILEStruct
         {
             [ProtoMember(1)]
-            public float DISTANCE;
+            public float? DISTANCE;
             [ProtoMember(2)]
-            public double HP;
+            public double? HP;
             [ProtoMember(3)]
-            public ulong ID;
+            public ulong? ID;
             [ProtoMember(4)]
             public string NAME;
             [ProtoMember(5)]
@@ -149,9 +149,9 @@ namespace LOU
             [ProtoMember(1)]
             public string COLOR;
             [ProtoMember(2)]
-            public float DISTANCE;
+            public float? DISTANCE;
             [ProtoMember(3)]
-            public int ID;
+            public int? ID;
             [ProtoMember(4)]
             public string NAME;
             [ProtoMember(5)]
@@ -182,23 +182,23 @@ namespace LOU
             [ProtoMember(1)]
             public string CLIGAMESTATE;
             [ProtoMember(2)]
-            public int CLIID;
+            public int? CLIID;
             [ProtoMember(3)]
             public string CLIVER;
             [ProtoMember(4)]
-            public int CLIXRES;
+            public int? CLIXRES;
             [ProtoMember(5)]
-            public int CLIYRES;
+            public int? CLIYRES;
             [ProtoMember(6)]
-            public bool FULLSCREEN;
+            public bool? FULLSCREEN;
             [ProtoMember(7)]
-            public int MAINCAMERAMASK;
+            public int? MAINCAMERAMASK;
             [ProtoMember(8)]
             public string SERVER;
             [ProtoMember(9)]
-            public int TARGETFRAMERATE;
+            public int? TARGETFRAMERATE;
             [ProtoMember(10)]
-            public int VSYNCCOUNT;
+            public int? VSYNCCOUNT;
         }
         [ProtoMember(6)]
         public ClientInfoStruct ClientInfo;
@@ -207,13 +207,13 @@ namespace LOU
         public struct OBJStruct
         {
             [ProtoMember(1)]
-            public ulong CNTID;
+            public ulong? CNTID;
             [ProtoMember(2)]
-            public ulong ID;
+            public ulong? ID;
             [ProtoMember(3)]
             public string NAME;
             [ProtoMember(4)]
-            public int PERMANENTID;
+            public int? PERMANENTID;
         }
         [ProtoContract]
         public struct UIStruct
@@ -221,37 +221,37 @@ namespace LOU
             [ProtoMember(1)]
             public string NAME;
             [ProtoMember(2)]
-            public float X;
+            public float? X;
             [ProtoMember(3)]
-            public float Y;
+            public float? Y;
         }
         [ProtoContract]
         public struct WINDOWStruct
         {
             [ProtoMember(1)]
-            public float X;
+            public float? X;
             [ProtoMember(2)]
-            public float Y;
+            public float? Y;
         }
         [ProtoContract]
         public struct WORLDStruct
         {
             [ProtoMember(1)]
-            public float X;
+            public float? X;
             [ProtoMember(2)]
-            public float Y;
+            public float? Y;
             [ProtoMember(3)]
-            public float Z;
+            public float? Z;
         }
         [ProtoContract]
         public struct NEARBYMONSTERStruct
         {
             [ProtoMember(1)]
-            public double DISTANCE;
+            public double? DISTANCE;
             [ProtoMember(2)]
-            public double HP;
+            public double? HP;
             [ProtoMember(3)]
-            public ulong ID;
+            public ulong? ID;
             [ProtoMember(4)]
             public string NAME;
         }
@@ -265,9 +265,9 @@ namespace LOU
             [ProtoMember(3)]
             public WORLDStruct CLICKWORLD;
             [ProtoMember(4)]
-            public int COMMANDID;
+            public int? COMMANDID;
             [ProtoMember(5)]
-            public bool MONSTERSNEARBY;
+            public bool? MONSTERSNEARBY;
             [ProtoMember(6)]
             public OBJStruct MOUSEOVEROBJ;
             [ProtoMember(7)]
@@ -279,17 +279,17 @@ namespace LOU
             [ProtoMember(10)]
             public NEARBYMONSTERStruct[] NEARBYMONSTERS;
             [ProtoMember(11)]
-            public int RANDOM;
+            public int? RANDOM;
             [ProtoMember(12)]
             public string SCANJOURNALMESSAGE;
             [ProtoMember(13)]
-            public float SCANJOURNALTIME;
+            public float? SCANJOURNALTIME;
             [ProtoMember(14)]
-            public bool TARGETLOADING;
+            public bool? TARGETLOADING;
             [ProtoMember(15)]
             public string TARGETTYPE;
             [ProtoMember(16)]
-            public float TIME;
+            public float? TIME;
             [ProtoMember(17)]
             public string TOOLTIPTEXT;
         }

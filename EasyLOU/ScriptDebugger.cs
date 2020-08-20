@@ -48,7 +48,7 @@ namespace EasyLOU
             {
                 if (MainForm.ClientStatus != null)
                 {
-                    if (MainForm.ClientStatus.Miscellaneous.TARGETTYPE != "None" && !MainForm.ClientStatus.Miscellaneous.TARGETLOADING)
+                    if (MainForm.ClientStatus.Miscellaneous.TARGETTYPE != "None" && !(MainForm.ClientStatus.Miscellaneous.TARGETLOADING ?? false))
                     {
                         return;
                     }
@@ -190,15 +190,11 @@ namespace EasyLOU
                             value = MainForm.ClientStatus.Find.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Find) ?? null;
                             if (value != null)
                             {
-                                if (value.ToString() != "N/A")
-                                {
-                                    var values = ((IEnumerable)value).Cast<object>().ToArray();
-                                    return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, UserData.Create));
-                                }
-                                else
-                                {
-                                    return DynValue.NewString(value.ToString());
-                                }
+                                var values = ((IEnumerable)value).Cast<object>().ToArray();
+                                return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, UserData.Create));
+                            } else
+                            {
+                                return DynValue.NewNil();
                             }
                         }
                     }

@@ -168,7 +168,7 @@ namespace EasyLOU
                 }
             } else
             {
-                Node.Text = Node.Name + "=\"N/A\"";
+                Node.Text = Node.Name + "=nil";
                 if (Node.Nodes.Count > 0) Node.Nodes.Clear();
             }
         }
