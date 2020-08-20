@@ -136,6 +136,12 @@ namespace LOU
             public string NAME;
             [ProtoMember(5)]
             public string TYPE;
+            [ProtoMember(6)]
+            public float? X;
+            [ProtoMember(7)]
+            public float? Y;
+            [ProtoMember(8)]
+            public float? Z;
         }
         [ProtoContract]
         public struct FINDPANELStruct
