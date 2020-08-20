@@ -99,9 +99,9 @@ namespace EasyLOU
         private void UpdateVar(String Key, String Value)
         {
             if (!VarsTreeView.Nodes.ContainsKey(Key))
-                VarsTreeView.Nodes.Add(Key, Key + ": " + Value);
+                VarsTreeView.Nodes.Add(Key, Key + "=" + Value);
             else
-                VarsTreeView.Nodes[Key].Text = Key + ": " + Value;
+                VarsTreeView.Nodes[Key].Text = Key + "=" + Value;
 
         }
         private void UpdateNode(TreeNode Node, object Val)
@@ -143,12 +143,32 @@ namespace EasyLOU
                 }
                 else
                 {
-                    // It's something else
-                    Node.Text = Node.Name + "=" + Val.ToString();
+                    if (Val is bool)
+                        Node.Text = Node.Name + "=" + Val.ToString().ToLower() + "";
+
+                    else if (Val is string
+                        || Val is char)
+                        Node.Text = Node.Name + "=\"" + Val.ToString() + "\"";
+
+                    else if (Val is sbyte
+                        || Val is byte
+                        || Val is short
+                        || Val is ushort
+                        || Val is int
+                        || Val is uint
+                        || Val is long
+                        || Val is ulong
+                        || Val is float
+                        || Val is double
+                        || Val is decimal)
+                        Node.Text = Node.Name + "=" + Val.ToString();
+
+                    else
+                        Node.Text = Node.Name + "=" + Val.ToString();
                 }
             } else
             {
-                Node.Text = Node.Name + "=N/A";
+                Node.Text = Node.Name + "=\"N/A\"";
                 if (Node.Nodes.Count > 0) Node.Nodes.Clear();
             }
         }
@@ -1317,12 +1337,7 @@ namespace EasyLOU
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (e.Node.Text.Contains(":"))
-                {
-                    StatusTreeView.SelectedNode = e.Node;
-                    StatusTreeViewContextMenu.Show(Cursor.Position);
-                }
-                if (!e.Node.Text.Contains(":") && e.Node.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(e.Node.Text))
+                if (e.Node.Text.Contains("="))
                 {
                     StatusTreeView.SelectedNode = e.Node;
                     StatusTreeViewContextMenu.Show(Cursor.Position);
@@ -1333,17 +1348,10 @@ namespace EasyLOU
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (e.Node.Text.Contains(":"))
+                if (e.Node.Text.Contains("="))
                 {
-                    int Separator = e.Node.Text.IndexOf(':');
-                    String Value = e.Node.Text.Substring(Separator + 2, e.Node.Text.Length - 2 - Separator);
-                    TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
-                    ScriptTextArea.ActiveTextAreaControl.TextArea.InsertString(Value);
-                }
-                if (!e.Node.Text.Contains(":") && e.Node.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(e.Node.Text))
-                {
-                    int Separator = e.Node.Text.IndexOf(']');
-                    String Value = e.Node.Text.Substring(Separator + 2, e.Node.Text.Length - 2 - Separator);
+                    int Separator = e.Node.Text.IndexOf('=');
+                    String Value = e.Node.Text.Substring(Separator + 1, e.Node.Text.Length - 1 - Separator);
                     TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
                     ScriptTextArea.ActiveTextAreaControl.TextArea.InsertString(Value);
                 }
@@ -1352,36 +1360,21 @@ namespace EasyLOU
 
         private void CopyNameStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (StatusTreeView.SelectedNode != null && StatusTreeView.SelectedNode.Text.Contains(":"))
+            if (StatusTreeView.SelectedNode != null && StatusTreeView.SelectedNode.Text.Contains("="))
             {
-                int Separator = StatusTreeView.SelectedNode.Text.IndexOf(':');
+                int Separator = StatusTreeView.SelectedNode.Text.IndexOf("=");
                 string Value = StatusTreeView.SelectedNode.Text.Substring(0, Separator);
-                Clipboard.SetText(Value);
-            }
-            if (!StatusTreeView.SelectedNode.Text.Contains(":") && StatusTreeView.SelectedNode.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(StatusTreeView.SelectedNode.Text))
-            {
-                var match = new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").Match(StatusTreeView.SelectedNode.Text);
-                String Value = match.Value.Substring(1, match.Value.Length - 2);
                 Clipboard.SetText(Value);
             }
         }
 
         private void CopyValueStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (StatusTreeView.SelectedNode != null && StatusTreeView.SelectedNode.Text.Contains(":"))
+            if (StatusTreeView.SelectedNode != null && StatusTreeView.SelectedNode.Text.Contains("="))
             {
-                int Separator = StatusTreeView.SelectedNode.Text.IndexOf(':');
-                string Value = StatusTreeView.SelectedNode.Text.Substring(Separator + 2, StatusTreeView.SelectedNode.Text.Length - 2 - Separator);
+                int Separator = StatusTreeView.SelectedNode.Text.IndexOf("=");
+                string Value = StatusTreeView.SelectedNode.Text.Substring(Separator + 1, StatusTreeView.SelectedNode.Text.Length - 1 - Separator);
                 Clipboard.SetText(Value);
-            }
-            if (!StatusTreeView.SelectedNode.Text.Contains(":") && StatusTreeView.SelectedNode.Text.StartsWith("[") && new System.Text.RegularExpressions.Regex("\\[[0-9]+\\]").IsMatch(StatusTreeView.SelectedNode.Text))
-            {
-                int Separator = StatusTreeView.SelectedNode.Text.IndexOf(']');
-                if (StatusTreeView.SelectedNode.Text.Length > Separator + 2)
-                {
-                    String Value = StatusTreeView.SelectedNode.Text.Substring(Separator + 2, StatusTreeView.SelectedNode.Text.Length - Separator - 2);
-                    Clipboard.SetText(Value);
-                }
             }
         }
 
@@ -1522,7 +1515,7 @@ namespace EasyLOU
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (e.Node.Text.Contains(":"))
+                if (e.Node.Text.Contains("="))
                 {
                     VarsTreeView.SelectedNode = e.Node;
                     VarsTreeViewContextMenu.Show(Cursor.Position);
@@ -1533,10 +1526,10 @@ namespace EasyLOU
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (e.Node.Text.Contains(":"))
+                if (e.Node.Text.Contains("="))
                 {
-                    int Separator = e.Node.Text.IndexOf(':');
-                    String Value = e.Node.Text.Substring(Separator + 2, e.Node.Text.Length - 2 - Separator);
+                    int Separator = e.Node.Text.IndexOf("=");
+                    String Value = e.Node.Text.Substring(Separator + 1, e.Node.Text.Length - 1 - Separator);
                     TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
                     ScriptTextArea.ActiveTextAreaControl.TextArea.InsertString(Value);
                 }
@@ -1545,9 +1538,9 @@ namespace EasyLOU
 
         private void CopyValueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains(":"))
+            if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains("="))
             {
-                int Separator = VarsTreeView.SelectedNode.Text.IndexOf(':');
+                int Separator = VarsTreeView.SelectedNode.Text.IndexOf("=");
                 string Value = VarsTreeView.SelectedNode.Text.Substring(0, Separator);
                 Clipboard.SetText(Value);
             }
@@ -1555,10 +1548,10 @@ namespace EasyLOU
 
         private void CopyValueVarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains(":"))
+            if (VarsTreeView.SelectedNode != null && VarsTreeView.SelectedNode.Text.Contains("="))
             {
-                int Separator = VarsTreeView.SelectedNode.Text.IndexOf(':');
-                string Value = VarsTreeView.SelectedNode.Text.Substring(Separator + 2, VarsTreeView.SelectedNode.Text.Length - 2 - Separator);
+                int Separator = VarsTreeView.SelectedNode.Text.IndexOf("=");
+                string Value = VarsTreeView.SelectedNode.Text.Substring(Separator + 1, VarsTreeView.SelectedNode.Text.Length - 1 - Separator);
                 Clipboard.SetText(Value);
             }
         }
