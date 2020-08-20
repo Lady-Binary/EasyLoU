@@ -156,9 +156,15 @@
         <Key word = "FINDPERMANENT" />
         <Key word = ".COLOR" />
         <Key word = ".DISTANCE" />
+        <Key word = ".HUE" />
         <Key word = ".ID" />
         <Key word = ".NAME" />
+        <Key word = ".STONESTATE" />
         <Key word = ".TEXTURE" />
+        <Key word = ".TREESTATE" />
+        <Key word = ".X" />
+        <Key word = ".Y" />
+        <Key word = ".Z" />
         <Key word = "CLIGAMESTATE" />
         <Key word = "CLIID" />
         <Key word = "CLIVER" />
@@ -170,7 +176,7 @@
         <Key word = "TARGETFRAMERATE" />
         <Key word = "VSYNCCOUNT" />
         <Key word = "CLICKOBJ" />
-        <Key word = "CLICKOBJ.ID" />
+        <Key word = "CLICKOBJ.OBJECTID" />
         <Key word = "CLICKOBJ.CNTID" />
         <Key word = "CLICKOBJ.NAME" />
         <Key word = "CLICKOBJ.PERMANENTID" />
@@ -189,7 +195,7 @@
         <Key word = ".ID" />
         <Key word = ".NAME" />
         <Key word = "MOUSEOVEROBJ" />
-        <Key word = "MOUSEOVEROBJ.ID" />
+        <Key word = "MOUSEOVEROBJ.OBJECTID" />
         <Key word = "MOUSEOVEROBJ.CNTID" />
         <Key word = "MOUSEOVEROBJ.NAME" />
         <Key word = "MOUSEOVEROBJ.PERMANENTID" />

@@ -279,12 +279,16 @@ namespace LOU
         #region reflection stuff
         public static object GetInstanceField(Type type, object instance, string fieldName)
         {
+            if (instance == null)
+                return null;
             BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
             FieldInfo field = type.GetField(fieldName, bindFlags);
             return field?.GetValue(instance);
         }
         public static object GetInstanceField<T>(T instance, string fieldName)
         {
+            if (instance == null)
+                return null;
             BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
             FieldInfo field = typeof(T).GetField(fieldName, bindFlags);
             return field?.GetValue(instance);
