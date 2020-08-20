@@ -182,23 +182,23 @@ namespace LOU
             [ProtoMember(1)]
             public string CLIGAMESTATE;
             [ProtoMember(2)]
-            public string CLIID;
+            public int CLIID;
             [ProtoMember(3)]
             public string CLIVER;
             [ProtoMember(4)]
-            public string CLIXRES;
+            public int CLIXRES;
             [ProtoMember(5)]
-            public string CLIYRES;
+            public int CLIYRES;
             [ProtoMember(6)]
-            public string FULLSCREEN;
+            public bool FULLSCREEN;
             [ProtoMember(7)]
-            public string MAINCAMERAMASK;
+            public int MAINCAMERAMASK;
             [ProtoMember(8)]
             public string SERVER;
             [ProtoMember(9)]
-            public string TARGETFRAMERATE;
+            public int TARGETFRAMERATE;
             [ProtoMember(10)]
-            public string VSYNCCOUNT;
+            public int VSYNCCOUNT;
         }
         [ProtoMember(6)]
         public ClientInfoStruct ClientInfo;

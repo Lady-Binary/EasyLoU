@@ -1279,15 +1279,15 @@ namespace LOU
             // Client Info
 
             ClientStatus.ClientInfo.CLIVER = ApplicationController.c_clientVersion ?? "N/A";
-            ClientStatus.ClientInfo.CLIID = this.ProcessId.ToString();
-            ClientStatus.ClientInfo.CLIXRES = Screen.width.ToString();
-            ClientStatus.ClientInfo.CLIYRES = Screen.height.ToString();
-            ClientStatus.ClientInfo.FULLSCREEN = Screen.fullScreen.ToString();
+            ClientStatus.ClientInfo.CLIID = this.ProcessId;
+            ClientStatus.ClientInfo.CLIXRES = Screen.width;
+            ClientStatus.ClientInfo.CLIYRES = Screen.height;
+            ClientStatus.ClientInfo.FULLSCREEN = Screen.fullScreen;
             ClientStatus.ClientInfo.CLIGAMESTATE = this.applicationController?.JOJPMHOLNHA.ToString() ?? "N/A";
-            ClientStatus.ClientInfo.SERVER = Utils.GetInstanceField(applicationController, "EGBNKJDFBEJ") != null ? (string)Utils.GetInstanceField(applicationController, "EGBNKJDFBEJ") : "N/A";
-            ClientStatus.ClientInfo.TARGETFRAMERATE = Application.targetFrameRate.ToString();
-            ClientStatus.ClientInfo.VSYNCCOUNT = QualitySettings.vSyncCount.ToString();
-            ClientStatus.ClientInfo.MAINCAMERAMASK = Camera.main?.cullingMask.ToString();
+            ClientStatus.ClientInfo.SERVER = Utils.GetInstanceField(this.applicationController, "EGBNKJDFBEJ")?.ToString() ?? "N/A";
+            ClientStatus.ClientInfo.TARGETFRAMERATE = Application.targetFrameRate;
+            ClientStatus.ClientInfo.VSYNCCOUNT = QualitySettings.vSyncCount;
+            ClientStatus.ClientInfo.MAINCAMERAMASK = Camera.main?.cullingMask ?? 0;
 
             if (inputController != null)
             {
