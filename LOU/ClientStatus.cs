@@ -204,6 +204,46 @@ namespace LOU
         public ClientInfoStruct ClientInfo;
 
         [ProtoContract]
+        public struct OBJStruct
+        {
+            [ProtoMember(1)]
+            public ulong CNTID;
+            [ProtoMember(2)]
+            public ulong ID;
+            [ProtoMember(3)]
+            public string NAME;
+            [ProtoMember(4)]
+            public int PERMANENTID;
+        }
+        [ProtoContract]
+        public struct UIStruct
+        {
+            [ProtoMember(1)]
+            public string NAME;
+            [ProtoMember(2)]
+            public float X;
+            [ProtoMember(3)]
+            public float Y;
+        }
+        [ProtoContract]
+        public struct WINDOWStruct
+        {
+            [ProtoMember(1)]
+            public float X;
+            [ProtoMember(2)]
+            public float Y;
+        }
+        [ProtoContract]
+        public struct WORLDStruct
+        {
+            [ProtoMember(1)]
+            public float X;
+            [ProtoMember(2)]
+            public float Y;
+            [ProtoMember(3)]
+            public float Z;
+        }
+        [ProtoContract]
         public struct NEARBYMONSTERStruct
         {
             [ProtoMember(1)]
@@ -219,76 +259,38 @@ namespace LOU
         public struct MiscellaneousStruct
         {
             [ProtoMember(1)]
-            public string CLICKDISPLAYNAME;
+            public OBJStruct CLICKOBJ;
             [ProtoMember(2)]
-            public string CLICKOBJCNTID;
+            public WINDOWStruct CLICKWINDOW;
             [ProtoMember(3)]
-            public string CLICKOBJID;
+            public WORLDStruct CLICKWORLD;
             [ProtoMember(4)]
-            public string CLICKOBJNAME;
+            public int COMMANDID;
             [ProtoMember(5)]
-            public string CLICKPERID;
+            public bool MONSTERSNEARBY;
             [ProtoMember(6)]
-            public string CLICKWINDOWX;
+            public OBJStruct MOUSEOVEROBJ;
             [ProtoMember(7)]
-            public string CLICKWINDOWY;
+            public UIStruct MOUSEOVERUI;
             [ProtoMember(8)]
-            public string CLICKWINDOWZ;
+            public WINDOWStruct MOUSEWINDOWPOS;
             [ProtoMember(9)]
-            public string CLICKWORLDX;
+            public WORLDStruct MOUSEWORLDPOS;
             [ProtoMember(10)]
-            public string CLICKWORLDY;
-            [ProtoMember(11)]
-            public string CLICKWORLDZ;
-            [ProtoMember(12)]
-            public string COMMANDID;
-            [ProtoMember(13)]
-            public string MONSTERSNEARBY;
-            [ProtoMember(14)]
             public NEARBYMONSTERStruct[] NEARBYMONSTERS;
-            [ProtoMember(15)]
-            public string MOUSEOVERCNTID;
-            [ProtoMember(16)]
-            public string MOUSEOVERDISPLAYNAME;
-            [ProtoMember(17)]
-            public string MOUSEOVEROBJCNTID;
-            [ProtoMember(18)]
-            public string MOUSEOVEROBJID;
-            [ProtoMember(19)]
-            public string MOUSEOVEROBJNAME;
-            [ProtoMember(20)]
-            public string MOUSEOVERPERID;
-            [ProtoMember(21)]
-            public string MOUSEOVERUINAME;
-            [ProtoMember(22)]
-            public string MOUSEOVERUIX;
-            [ProtoMember(23)]
-            public string MOUSEOVERUIY;
-            [ProtoMember(24)]
-            public string MOUSEWINDOWX;
-            [ProtoMember(25)]
-            public string MOUSEWINDOWY;
-            [ProtoMember(26)]
-            public string MOUSEWINDOWZ;
-            [ProtoMember(27)]
-            public string MOUSEWORLDX;
-            [ProtoMember(28)]
-            public string MOUSEWORLDY;
-            [ProtoMember(29)]
-            public string MOUSEWORLDZ;
-            [ProtoMember(30)]
-            public string RANDOM;
-            [ProtoMember(31)]
+            [ProtoMember(11)]
+            public int RANDOM;
+            [ProtoMember(12)]
             public string SCANJOURNALMESSAGE;
-            [ProtoMember(32)]
-            public string SCANJOURNALTIME;
-            [ProtoMember(33)]
-            public string TARGETLOADING;
-            [ProtoMember(34)]
+            [ProtoMember(13)]
+            public float SCANJOURNALTIME;
+            [ProtoMember(14)]
+            public bool TARGETLOADING;
+            [ProtoMember(15)]
             public string TARGETTYPE;
-            [ProtoMember(35)]
-            public string TIME;
-            [ProtoMember(36)]
+            [ProtoMember(16)]
+            public float TIME;
+            [ProtoMember(17)]
             public string TOOLTIPTEXT;
         }
         [ProtoMember(7)]

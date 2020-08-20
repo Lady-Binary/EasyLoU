@@ -46,10 +46,9 @@ namespace EasyLOU
 
             while ((DateTime.UtcNow - start).TotalMilliseconds < millisecondsTimeout)
             {
-                if (MainForm.ClientStatus != null &&
-                    bool.TryParse(MainForm.ClientStatus.Miscellaneous.TARGETLOADING, out bool targetloading))
+                if (MainForm.ClientStatus != null)
                 {
-                    if (MainForm.ClientStatus.Miscellaneous.TARGETTYPE != "None" && !targetloading)
+                    if (MainForm.ClientStatus.Miscellaneous.TARGETTYPE != "None" && !MainForm.ClientStatus.Miscellaneous.TARGETLOADING)
                     {
                         return;
                     }
