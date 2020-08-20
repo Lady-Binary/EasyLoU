@@ -11,11 +11,6 @@
 - New TreeState, RockState, and Hue attributes for permanent objects [#101](https://github.com/Lady-Binary/EasyLOU/issues/101)
 - Add X,Y,Z attributes to FINDMOBILEs [#99](https://github.com/Lady-Binary/EasyLOU/issues/99)
 - Add X,Y,Z attributes to FINDPERMANENTs. Add ability to use Move() with PERMANENTID. [#90](https://github.com/Lady-Binary/EasyLOU/issues/90)
-
-#### function (placeholders) {
-			return '';
-        }
-
 - Add X,Y,Z and DISTANCE attributes to FINDITEMs (DISTANCE only for those on the ground) [#100](https://github.com/Lady-Binary/EasyLOU/issues/100)
 
 ---
