@@ -593,11 +593,19 @@ namespace LOU
                             string _objectId = ExtractParam(ClientCommand.CommandParams, 0);
                             if (ulong.TryParse(_objectId, out ulong objectId))
                             {
-                                Utils.Log("Moving to objectId=" + objectId.ToString());
                                 ClientObject clientObject = Utils.FindClientObject(objectId);
                                 if (clientObject != null)
                                 {
+                                    Utils.Log("Moving to objectId=" + objectId.ToString());
                                     this.player.SetPathObject(clientObject, LocalPlayer.FHAIDCMBMHC.None);
+                                    return;
+                                }
+                                clientObject = Utils.FindPermanentObject((int)objectId);
+                                if (clientObject != null)
+                                {
+                                    Utils.Log("Moving to permanentId=" + objectId.ToString());
+                                    this.player.SetPathObject(clientObject, LocalPlayer.FHAIDCMBMHC.None);
+                                    break;
                                 }
                                 return;
                             }
@@ -1264,9 +1272,15 @@ namespace LOU
                 {
                     COLOR = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) ?? new string[] { }) ?? "",
                     DISTANCE = Vector3.Distance(f.Value.transform.position, this.player.transform.position),
+                    HUE = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Where(m => m.HasProperty("_Hue")).Select(m => m.GetInt("_Hue").ToString()) ?? new string[] { }) ?? "",
                     ID = f.Value.PermanentId,
                     NAME = f.Value.name,
-                    TEXTURE = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => m.mainTexture.name) ?? new string[] { }) ?? ""
+                    STONESTATE = (int?)Utils.GetInstanceField(f.Value.GetComponent<StoneStateHandler>(), "IKKDABEEPAF"),
+                    TEXTURE = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => m.mainTexture.name) ?? new string[] { }) ?? "",
+                    TREESTATE = (int?)Utils.GetInstanceField(f.Value.GetComponent<TreeStateHandler>(), "IKKDABEEPAF"),
+                    X = f.Value.transform?.position.x,
+                    Y = f.Value.transform?.position.y,
+                    Z = f.Value.transform?.position.z,
                 })
                 .ToArray();
 
@@ -1286,8 +1300,8 @@ namespace LOU
             // Miscellanous
 
             ClientStatus.Miscellaneous.CLICKOBJ.CNTID = this.lastMouseClickClientObject?.DynamicInst?.ContainerId;
-            ClientStatus.Miscellaneous.CLICKOBJ.ID = this.lastMouseClickClientObject?.DynamicInst?.ObjectId;
             ClientStatus.Miscellaneous.CLICKOBJ.NAME = this.lastMouseClickClientObject?.DynamicInst?.EBHEDGHBHGI;
+            ClientStatus.Miscellaneous.CLICKOBJ.OBJECTID = this.lastMouseClickClientObject?.DynamicInst?.ObjectId;
             ClientStatus.Miscellaneous.CLICKOBJ.PERMANENTID = this.lastMouseClickClientObject?.PermanentId;
 
             ClientStatus.Miscellaneous.CLICKWINDOWX = this.lastMouseClickPosition.x;
@@ -1335,8 +1349,8 @@ namespace LOU
             }
 
             ClientStatus.Miscellaneous.MOUSEOVEROBJ.CNTID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ContainerId;
-            ClientStatus.Miscellaneous.MOUSEOVEROBJ.ID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId;
             ClientStatus.Miscellaneous.MOUSEOVEROBJ.NAME = this.inputController?.HFHBOINDMAJ?.name;
+            ClientStatus.Miscellaneous.MOUSEOVEROBJ.OBJECTID = this.inputController?.HFHBOINDMAJ?.DynamicInst?.ObjectId;
             ClientStatus.Miscellaneous.MOUSEOVEROBJ.PERMANENTID = this.inputController?.HFHBOINDMAJ?.PermanentId;
 
             UICamera.Raycast(Input.mousePosition);

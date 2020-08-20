@@ -151,11 +151,24 @@ namespace LOU
             [ProtoMember(2)]
             public float? DISTANCE;
             [ProtoMember(3)]
-            public int? ID;
+            public string HUE;
             [ProtoMember(4)]
-            public string NAME;
+            public int? ID;
             [ProtoMember(5)]
+            public string NAME;
+            [ProtoMember(6)]
+            public int? STONESTATE;
+            [ProtoMember(7)]
             public string TEXTURE;
+            [ProtoMember(8)]
+            public int? TREESTATE;
+            [ProtoMember(9)]
+            public float? X;
+            [ProtoMember(10)]
+            public float? Y;
+            [ProtoMember(11)]
+            public float? Z;
+            
         }
         [ProtoContract]
         public struct FindStruct
@@ -209,9 +222,9 @@ namespace LOU
             [ProtoMember(1)]
             public ulong? CNTID;
             [ProtoMember(2)]
-            public ulong? ID;
-            [ProtoMember(3)]
             public string NAME;
+            [ProtoMember(3)]
+            public ulong? OBJECTID;
             [ProtoMember(4)]
             public int? PERMANENTID;
         }
