@@ -2,7 +2,7 @@
 FindPanel("Character" .. CHARID)
 
 -- Open the character window if it's not open yet
-if FINDPANELID == "N/A" then
+if FINDPANEL == nil then
 	SayCustom(".x ToggleCharacterWindow")
 	sleep(1000)
 end
@@ -11,7 +11,7 @@ end
 FindLabel("Character" .. CHARID, "Hunger")
 
 -- Remove crap from the text
-local Hunger = FINDLABELTEXT[1]
+local Hunger = FINDLABEL[1].TEXT
 Hunger = string.gsub(Hunger, 'Hunger', '')
 Hunger = string.gsub(Hunger, '%b[]', '')
 -- The Hunger variable will contain the hunger level (Full, Peckish, etc.)
