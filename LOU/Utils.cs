@@ -46,7 +46,7 @@ namespace LOU
                 }
             }
 
-            Log("Found total of " + FoundPanels.Count.ToString() + " panels.");
+            //Log("Found total of " + FoundPanels.Count.ToString() + " panels.");
             return FoundPanels;
         }
 
@@ -69,7 +69,7 @@ namespace LOU
                 //    break;
                 //}
             }
-            Log("Found total of " + FoundObjects.Count.ToString() + " items.");
+            //Log("Found total of " + FoundObjects.Count.ToString() + " items.");
             return FoundObjects;
         }
         public static Dictionary<string, DynamicObject> FindDynamicObjectsByName(String name, ulong containerId)
@@ -91,7 +91,7 @@ namespace LOU
                 //    break;
                 //}
             }
-            Log("Found total of " + FoundObjects.Count.ToString() + " items.");
+            //Log("Found total of " + FoundObjects.Count.ToString() + " items.");
             return FoundObjects;
         }
         public static ClientObject FindClientObject(ulong objectId)
@@ -173,7 +173,7 @@ namespace LOU
                 //    break;
                 //}
             }
-            Log("Found total of " + FoundPermanents.Count.ToString() + " permanents.");
+            //Log("Found total of " + FoundPermanents.Count.ToString() + " permanents.");
             return FoundPermanents;
         }
         public static ClientObject FindPermanentObject(int permanentId)

@@ -16,42 +16,44 @@ namespace LOU
             [ProtoMember(1)]
             public ulong? BACKPACKID;
             [ProtoMember(2)]
-            public int? CHARDIR;
+            public string[] CHARBUFFS;
             [ProtoMember(3)]
-            public bool? CHARGHOST;
+            public int? CHARDIR;
             [ProtoMember(4)]
-            public ulong? CHARID;
+            public bool? CHARGHOST;
             [ProtoMember(5)]
-            public string CHARNAME;
+            public ulong? CHARID;
             [ProtoMember(6)]
-            public float? CHARPOSX;
+            public string CHARNAME;
             [ProtoMember(7)]
-            public float? CHARPOSY;
+            public float? CHARPOSX;
             [ProtoMember(8)]
-            public float? CHARPOSZ;
+            public float? CHARPOSY;
             [ProtoMember(9)]
-            public string CHARSTATUS;
+            public float? CHARPOSZ;
             [ProtoMember(10)]
-            public double? CHARWEIGHT;
+            public string CHARSTATUS;
             [ProtoMember(11)]
-            public ulong? CHESTID;
+            public double? CHARWEIGHT;
             [ProtoMember(12)]
-            public string CHESTNAME;
+            public ulong? CHESTID;
             [ProtoMember(13)]
-            public ulong? HEADID;
+            public string CHESTNAME;
             [ProtoMember(14)]
-            public string HEADNAME;
+            public ulong? HEADID;
             [ProtoMember(15)]
-            public ulong? LEFTHANDID;
+            public string HEADNAME;
             [ProtoMember(16)]
-            public string LEFTHANDNAME;
+            public ulong? LEFTHANDID;
             [ProtoMember(17)]
-            public ulong? LEGSID;
+            public string LEFTHANDNAME;
             [ProtoMember(18)]
-            public string LEGSNAME;
+            public ulong? LEGSID;
             [ProtoMember(19)]
-            public ulong? RIGHTHANDID;
+            public string LEGSNAME;
             [ProtoMember(20)]
+            public ulong? RIGHTHANDID;
+            [ProtoMember(21)]
             public string RIGHTHANDNAME;
         }
         [ProtoMember(2)]
