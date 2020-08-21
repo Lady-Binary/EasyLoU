@@ -204,6 +204,70 @@ namespace LOU
         public FindStruct Find;
 
         [ProtoContract]
+        public enum CutomVarTypeEnum
+        {
+            [ProtoEnum]
+            Void = 0,
+            [ProtoEnum]
+            Boolean,
+            [ProtoEnum]
+            Number,
+            [ProtoEnum]
+            String
+        }
+        [ProtoContract]
+        public struct CustomVarStruct
+        {
+            public CustomVarStruct(object Value)
+            {
+                if (Value is Boolean)
+                {
+                    CommandParamType = CutomVarTypeEnum.Boolean;
+                    Boolean = (bool)Value;
+                    Number = null;
+                    String = null;
+
+                } else if (Value is sbyte
+                    || Value is byte
+                    || Value is short
+                    || Value is ushort
+                    || Value is int
+                    || Value is uint
+                    || Value is long
+                    || Value is ulong
+                    || Value is float
+                    || Value is double
+                    || Value is decimal)
+                {
+                    CommandParamType = CutomVarTypeEnum.Number;
+                    Boolean = null;
+                    Number = (double)Value;
+                    String = null;
+                } else if (Value is string)
+                {
+                    CommandParamType = CutomVarTypeEnum.String;
+                    Boolean = null;
+                    Number = null;
+                    String = Value.ToString();
+                } else
+                {
+                    CommandParamType = CutomVarTypeEnum.Void;
+                    Boolean = null;
+                    Number = null;
+                    String = null;
+                }
+
+            }
+            [ProtoMember(1)]
+            public CutomVarTypeEnum CommandParamType;
+            [ProtoMember(2)]
+            public bool? Boolean;
+            [ProtoMember(3)]
+            public double? Number;
+            [ProtoMember(4)]
+            public string String;
+        }
+        [ProtoContract]
         public struct ClientInfoStruct
         {
             [ProtoMember(1)]
@@ -282,36 +346,38 @@ namespace LOU
             [ProtoMember(7)]
             public int? COMMANDID;
             [ProtoMember(8)]
-            public bool? MONSTERSNEARBY;
+            public Dictionary<string, CustomVarStruct> CUSTOMVARS;
             [ProtoMember(9)]
-            public OBJStruct MOUSEOVEROBJ;
+            public bool? MONSTERSNEARBY;
             [ProtoMember(10)]
-            public UIStruct MOUSEOVERUI;
+            public OBJStruct MOUSEOVEROBJ;
             [ProtoMember(11)]
-            public float? MOUSEWINDOWPOSX;
+            public UIStruct MOUSEOVERUI;
             [ProtoMember(12)]
-            public float? MOUSEWINDOWPOSY;
+            public float? MOUSEWINDOWPOSX;
             [ProtoMember(13)]
-            public float? MOUSEWORLDPOSX;
+            public float? MOUSEWINDOWPOSY;
             [ProtoMember(14)]
-            public float? MOUSEWORLDPOSY;
+            public float? MOUSEWORLDPOSX;
             [ProtoMember(15)]
-            public float? MOUSEWORLDPOSZ;
+            public float? MOUSEWORLDPOSY;
             [ProtoMember(16)]
-            public NEARBYMONSTERStruct[] NEARBYMONSTERS;
+            public float? MOUSEWORLDPOSZ;
             [ProtoMember(17)]
-            public int? RANDOM;
+            public NEARBYMONSTERStruct[] NEARBYMONSTERS;
             [ProtoMember(18)]
-            public string SCANJOURNALMESSAGE;
+            public int? RANDOM;
             [ProtoMember(19)]
-            public float? SCANJOURNALTIME;
+            public string SCANJOURNALMESSAGE;
             [ProtoMember(20)]
-            public bool? TARGETLOADING;
+            public float? SCANJOURNALTIME;
             [ProtoMember(21)]
-            public string TARGETTYPE;
+            public bool? TARGETLOADING;
             [ProtoMember(22)]
-            public float? TIME;
+            public string TARGETTYPE;
             [ProtoMember(23)]
+            public float? TIME;
+            [ProtoMember(24)]
             public string TOOLTIPTEXT;
         }
         [ProtoMember(7)]

@@ -270,7 +270,9 @@ namespace LOU
         SetVSyncCount,
         SetMainCameraMask,
         GetTooltip,
-        ResetVars
+        ResetVars,
+        SetCustomVar,
+        ClearCustomVar
     }
 
     [ProtoContract]
@@ -278,10 +280,36 @@ namespace LOU
     {
         [ProtoMember(1)]
         public long TimeStamp;
+
         [ProtoMember(2)]
         public CommandType CommandType;
+
+        [ProtoContract]
+        public enum CommandParamTypeEnum
+        {
+            [ProtoEnum]
+            Void  = 0,
+            [ProtoEnum]
+            Boolean,
+            [ProtoEnum]
+            Number,
+            [ProtoEnum]
+            String
+        }
+        [ProtoContract]
+        public struct CommandParamStruct
+        {
+            [ProtoMember(1)]
+            public CommandParamTypeEnum CommandParamType;
+            [ProtoMember(2)]
+            public bool Boolean;
+            [ProtoMember(3)]
+            public double Number;
+            [ProtoMember(4)]
+            public string String;
+        }
         [ProtoMember(3)]
-        public Dictionary<String, String> CommandParams = new Dictionary<String, String>();
+        public Dictionary<String, CommandParamStruct> CommandParams = new Dictionary<String, CommandParamStruct>();
 
         public ClientCommand()
         {
