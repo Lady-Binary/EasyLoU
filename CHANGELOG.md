@@ -1,5 +1,18 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.1.0.1 (21/08/2020)
+
+#### Bugfixes:
+
+- Update examples with new var names [#102](https://github.com/Lady-Binary/EasyLOU/issues/102)
+
+#### Enhancements:
+
+- Create variables that can be shared between different scripts and EasyLOU instances, via SetVar(name, value) and ClearVar(name)  [#97](https://github.com/Lady-Binary/EasyLOU/issues/97)
+- Add CHARBUFFS variable that lists buffs, hunger, poison, etc. [#92](https://github.com/Lady-Binary/EasyLOU/issues/92)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.1.0.0 (20/08/2020)
 
 #### Bugfixes:
@@ -224,11 +237,3 @@
 #### Enhancements:
 
 - Show memory map occupation on GUI [#30](https://github.com/Lady-Binary/EasyLOU/issues/30)
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.5 (15/07/2020)
-
-#### Enhancements:
-
-- Add application icon [#28](https://github.com/Lady-Binary/EasyLOU/issues/28)
