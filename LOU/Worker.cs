@@ -401,6 +401,7 @@ namespace LOU
                                                     this.FindButtonResults[i] = KFFEBNDBIPA;
                                                 }
 
+                                                // Seems to be ToolTip Text
                                                 string ELGLAFGJGAO = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "ELGLAFGJGAO");
                                                 if (ELGLAFGJGAO != null && ELGLAFGJGAO.ToLower().Contains(_buttonName.ToLower()))
                                                 {
@@ -1255,6 +1256,40 @@ namespace LOU
 
             // Character Info
 
+            ClientStatus.CharacterInfo.BACKPACKID = this.player?.GetEquippedObject("Backpack")?.DMCIODGEHCN;
+
+            List<String> Buffs = new List<string>();
+            FloatingPanel BuffBar = Utils.FindPanelByName("BuffBar")?.FirstOrDefault().Value;
+            if (BuffBar != null)
+            {
+                DynamicWindow window = BuffBar.GetComponent<DynamicWindow>();
+                if (window != null)
+                {
+                    Type KAAFKBBECEF = AssemblyCSharp.GetType("KAAFKBBECEF");
+                    if (KAAFKBBECEF != null)
+                    {
+                        object HGBANEEHBLH = Utils.GetInstanceField(window, "HGBANEEHBLH");
+                        if (HGBANEEHBLH != null)
+                        {
+                            foreach (object o in (HGBANEEHBLH as IEnumerable))
+                            {
+                                object casted = Convert.ChangeType(o, KAAFKBBECEF);
+                                if (casted != null)
+                                {
+                                    string ELGLAFGJGAO = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "ELGLAFGJGAO");
+                                    if (!String.IsNullOrEmpty(ELGLAFGJGAO))
+                                    {
+                                        Buffs.Add(ELGLAFGJGAO.Replace('\n', '|'));
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            ClientStatus.CharacterInfo.CHARBUFFS = Buffs.ToArray();
+
             ClientStatus.CharacterInfo.CHARNAME = this.player?.EBHEDGHBHGI;
             ClientStatus.CharacterInfo.CHARID = this.player?.ObjectId;
             ClientStatus.CharacterInfo.CHARPOSX = this.player?.transform?.position.x;
@@ -1272,7 +1307,6 @@ namespace LOU
                 ClientStatus.CharacterInfo.CHARSTATUS = null;
             }
             ClientStatus.CharacterInfo.CHARGHOST = (bool?)this.player?.GetObjectProperty("IsDead");
-            ClientStatus.CharacterInfo.BACKPACKID = this.player?.GetEquippedObject("Backpack")?.DMCIODGEHCN;
 
             if (this.player != null)
             {
