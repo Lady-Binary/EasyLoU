@@ -1,10 +1,10 @@
 ﻿-- Search for bandages
 FindItem("bandage")
-if FINDITEMID == "N/A" then
+if FINDITEM == nil then
 	print("Bandages not found!")
 	return
 end
-local bandage_id = FINDITEMID[1]
+local bandage_id = FINDITEM[1].ID
 
 -- Example 1
 -- Drag them all

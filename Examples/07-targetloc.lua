@@ -1,7 +1,7 @@
 --Digs with any shovel in your backpack 2 units to the west of your current character location
 
-FindItem("shovel", tonumber(BACKPACKID))
-shovelId = FINDITEMID[1]
+FindItem("shovel", BACKPACKID)
+shovelId = FINDITEM[1].ID
 UseSelected(shovelId)
-TargetLoc(true, tonumber(CHARPOSX) - 2, tonumber(CHARPOSY), tonumber(CHARPOSZ), 0)
+TargetLoc(CHARPOSX - 2, CHARPOSY, CHARPOSZ)
 sleep(1000)

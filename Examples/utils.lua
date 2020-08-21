@@ -40,14 +40,14 @@ end
 
 function Equip(item)
     FindItem (item)
-	local tool_id = ExtractFirstId(FINDITEMID)
-	local cont_id = ExtractFirstId(FINDITEMCNTID)
-	
-	if tool_id == nil or
-		tool_id == "N/A" then
+
+	if FINDITEM == nil then
 		print(item .. " not found!")
 		return	
 	end		
+    
+	local tool_id = FINDITEM[1].ID;
+	local cont_id = FINDITEM[1].CNTID;
 	
 	if tostring(cont_id) == tostring(CHARID) then
 		print(item .. " already equipped!")

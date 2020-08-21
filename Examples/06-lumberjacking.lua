@@ -14,13 +14,13 @@ attackSpellKey = 11
 
 function Equip(item) -- stole this from utils.lua
     FindItem (item)
-	local tool_id = FINDITEMID[1]
-	local cont_id = FINDITEMCNTID[1]
-	if tool_id == nil or tool_id == "N/A" then
+	if FINDITEM == nil then
 		print(item .. " not found!")
 		return	
 	end		
-	if tostring(cont_id) == tostring(CHARID) then
+	local tool_id = FINDITEM[1].ID
+	local cont_id = FINDITEM[1].CNTID
+	if cont_id == CHARID then
 		print(item .. " already equipped!")
 		return	
 	end
@@ -34,7 +34,7 @@ function MoveEx(x,y,z) -- starts you moving towards coordinates and waits until 
 		count = count + 1
 		Move(x,y,z)
 		sleep(300)
-	until ((tonumber(CHARPOSX) == x) and (tonumber(CHARPOSZ) == z)) or count > 30
+	until (CHARPOSX == x and CHARPOSZ == z) or count > 30
 end
 
 function dropoff()
@@ -43,33 +43,33 @@ function dropoff()
 		Macro(gateToHouseKey) -- this is casting gate from a hotkey to my house
 		sleep(4000)
 		FindPanel("Moongate")
-		if FINDPANELID == "N/A" then
-			panelId = FINDPANELID
+		if FINDPANEL == nil then
+			panelId = nil
 		else
-			panelId = FINDPANELID[1]
+			panelId = FINDPANEL[1].ID
 		end
 	until string.match(panelId, "ConfirmMoongate")
-	ClickButton(FINDPANELID[1], "0") -- "0" is the confirmation to travel button
+	ClickButton(FINDPANEL[1].ID, "0") -- "0" is the confirmation to travel button
 	sleep(3000)
-	FindItem("Logs",tonumber(BACKPACKID)) -- finds all logs in my backpack
-	for id in FINDITEMID do
-		Drag(id)
+	FindItem("Logs",BACKPACKID) -- finds all logs in my backpack
+	for k, v in pairs(FINDITEM) do
+		Drag(v.ID)
 		Dropc(dropoffBoxId) -- and drops them in a chest at my house
 		sleep(500)
 	end
-	FindItem("Kindling",tonumber(BACKPACKID)) -- moves kindling
-	Drag(FINDITEMID[1])
+	FindItem("Kindling",BACKPACKID) -- moves kindling
+	Drag(FINDITEM[1].ID)
 	Dropc(dropoffBoxId)
 	sleep(500)
-	FindItem("Apple",tonumber(BACKPACKID)) -- and apples
-	Drag(FINDITEMID[1])
+	FindItem("Apple",BACKPACKID) -- and apples
+	Drag(FINDITEM[1].ID)
 	Dropc(dropoffBoxId)
 	sleep(500)
 	FindItem("Portal") -- and travels back through the moongate
-	UseSelected(tonumber(FINDITEMID[1]))
+	UseSelected(FINDITEM[1].ID)
 	sleep(1000)
 	FindPanel("Moongate")
-	ClickButton(FINDPANELID[1], "0")
+	ClickButton(FINDPANEL[1].ID, "0")
 	sleep(3000)
 	Equip("Hatchet") -- don't forget to re-equip your hatchet!
 end
@@ -79,8 +79,8 @@ function defend()
 		local x = CHARPOSX
 		local y = CHARPOSY
 		local z = CHARPOSZ
-		mId_s = MONSTERSID[1]
-		mId = tonumber(mId_s)
+		mId_s = NEARBYMONSTERS[1].ID
+		mId = mId_s
 		Move(x-5,y,z) -- run away a bit
 		sleep(1000)
 		Say('all follow me') -- get your pets with you
@@ -95,7 +95,7 @@ function defend()
 		Equip("hatchet") -- re-equip yourself!
 		MoveEx(x,y,z)
 		FindPermanent("Tree")  -- and re-engage the tree
-		closestId = FINDPERMAID[1]
+		closestId = FINDPERMANENT[1].ID
 		Macro(28)
 		sleep(500)
 		TargetPermanent(closestId)
@@ -106,7 +106,7 @@ function doTree(x,y,z)
 	Equip("Hatchet")
 	MoveEx(x,y,z)
 	FindPermanent("Tree")  -- find all trees
-	closestId = FINDPERMAID[1]  -- finds the closest one
+	closestId = FINDPERMANENT[1].ID  -- finds the closest one
 	print('At spot with x/z: ' .. x .. ',' .. z)
 	Macro(28) -- the 'q' key
 	sleep(500)
@@ -118,7 +118,7 @@ function doTree(x,y,z)
 		startWeight = CHARWEIGHT
 		print("startWeight" .. startWeight)
 		FindItem("prospector", BACKPACKID)
-		prospectId = FINDITEMID[1]
+		prospectId = FINDITEM[1].ID
 		UseSelected(prospectId)  -- uses prospecting tool from pack on tree
 		TargetPermanent(closestId)
 		sleep(4000)
@@ -126,7 +126,7 @@ function doTree(x,y,z)
 		print("endWeight" .. endWeight)
 		print('start/end weight: ' .. startWeight .. ','..endWeight)
 	until startWeight == endWeight  -- will move to next tree if, within 4 seconds-ish, weight didn't change (as in the tree is gone)
-	if tonumber(endWeight) > 300 then -- getting full, dropoff time!
+	if endWeight > 300 then -- getting full, dropoff time!
 		dropoff()
 	end
 end
