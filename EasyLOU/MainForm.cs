@@ -141,30 +141,40 @@ namespace EasyLOU
                         Node.Nodes.Remove(Node.Nodes[Node.Nodes.Count - 1]);
                     }
                 }
+                else if (Val is Dictionary<string, ClientStatus.CustomVarStruct>)
+                {
+                    // It's a dictionary
+                    Dictionary<string, object> Values = ((Dictionary<string, ClientStatus.CustomVarStruct>)Val).ToDictionary(
+                        v => v.Key,
+                        v => v.Value.CommandParamType == ClientStatus.CutomVarTypeEnum.Boolean ? (object)v.Value.Boolean :
+                            v.Value.CommandParamType == ClientStatus.CutomVarTypeEnum.Number ? (object)v.Value.Number :
+                            v.Value.CommandParamType == ClientStatus.CutomVarTypeEnum.String ? (object)v.Value.String :
+                            (object)null
+                        );
+                    Node.Text = Node.Name;
+                    int i = 0;
+                    foreach (var item in Values)
+                    {
+                        UpdateOrCreateNode(Node.Nodes, item.Key, item.Value);
+                        i++;
+                    }
+                    // Get rid of remaining nodes
+                    while (Node.Nodes.Count > i)
+                    {
+                        Node.Nodes.Remove(Node.Nodes[Node.Nodes.Count - 1]);
+                    }
+                }
+                else if (Val is string || Val is char)
+                {
+                    Node.Text = Node.Name + "=\"" + Val.ToString() + "\"";
+                }
+                else if (Val is bool)
+                {
+                    Node.Text = Node.Name + "=" + Val.ToString().ToLower() + "";
+                }
                 else
                 {
-                    if (Val is bool)
-                        Node.Text = Node.Name + "=" + Val.ToString().ToLower() + "";
-
-                    else if (Val is string
-                        || Val is char)
-                        Node.Text = Node.Name + "=\"" + Val.ToString() + "\"";
-
-                    else if (Val is sbyte
-                        || Val is byte
-                        || Val is short
-                        || Val is ushort
-                        || Val is int
-                        || Val is uint
-                        || Val is long
-                        || Val is ulong
-                        || Val is float
-                        || Val is double
-                        || Val is decimal)
-                        Node.Text = Node.Name + "=" + Val.ToString();
-
-                    else
-                        Node.Text = Node.Name + "=" + Val.ToString();
+                    Node.Text = Node.Name + "=" + Val.ToString();
                 }
             } else
             {

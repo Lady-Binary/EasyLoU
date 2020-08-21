@@ -41,6 +41,8 @@ namespace LOU
         private Dictionary<int, String> FindLabelResults;
         private List<MobileInstance> FindMobileResults;
 
+        private Dictionary<String, object> CustomVars;
+
         private float ScanJournalTime;
         private string ScanJournalMessage;
 
@@ -112,20 +114,82 @@ namespace LOU
             this.FindButtonResults = null;
             this.FindLabelResults = null;
             this.FindMobileResults = null;
+            this.CustomVars = null;
             this.lastMouseClickClientObject = null;
         }
 
-        private String ExtractParam(Dictionary<String, String> Params, int Index)
+        // For backward compatibility with old command implementations - params are always threated as string
+        // Will get rid of this once I've updated all the commands to be strong typed
+        private string ExtractParam(Dictionary<String, ClientCommand.CommandParamStruct> Params, int Index)
         {
             if (Index >= 0 && Index <= (Params.Count - 1))
             {
-                return Params.Values.ElementAt(Index);
+                ClientCommand.CommandParamStruct CommandParam = Params.Values.ElementAt(Index);
+
+                switch (CommandParam.CommandParamType)
+                {
+                    case ClientCommand.CommandParamTypeEnum.Boolean:
+                        return CommandParam.Boolean.ToString();
+                    case ClientCommand.CommandParamTypeEnum.Number:
+                        return CommandParam.Number.ToString();
+                    case ClientCommand.CommandParamTypeEnum.String:
+                        return CommandParam.String;
+                    default:
+                        return null;
+                }
             }
             else
             {
                 return null;
             }
         }
+        private string ExtractStringParam(Dictionary<String, ClientCommand.CommandParamStruct> Params, int Index)
+        {
+            if (Index >= 0 && Index <= (Params.Count - 1))
+            {
+                ClientCommand.CommandParamStruct CommandParam = Params.Values.ElementAt(Index);
+
+                switch (CommandParam.CommandParamType)
+                {
+                    case ClientCommand.CommandParamTypeEnum.Boolean:
+                        return CommandParam.Boolean.ToString();
+                    case ClientCommand.CommandParamTypeEnum.Number:
+                        return CommandParam.Number.ToString();
+                    case ClientCommand.CommandParamTypeEnum.String:
+                        return CommandParam.String.ToString();
+                    default:
+                        return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        private object ExtractObjectParam(Dictionary<String, ClientCommand.CommandParamStruct> Params, int Index)
+        {
+            if (Index >= 0 && Index <= (Params.Count - 1))
+            {
+                ClientCommand.CommandParamStruct CommandParam = Params.Values.ElementAt(Index);
+
+                switch (CommandParam.CommandParamType)
+                {
+                    case ClientCommand.CommandParamTypeEnum.Boolean:
+                        return CommandParam.Boolean;
+                    case ClientCommand.CommandParamTypeEnum.Number:
+                        return CommandParam.Number;
+                    case ClientCommand.CommandParamTypeEnum.String:
+                        return CommandParam.String;
+                    default:
+                        return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         private void ProcessClientCommand(ClientCommand ClientCommand)
         {
@@ -1113,6 +1177,8 @@ namespace LOU
                             FindLabelResults = null;
                             FindMobileResults = null;
 
+                            CustomVars = null;
+
                             ScanJournalTime = 0;
                             ScanJournalMessage = null;
 
@@ -1122,6 +1188,51 @@ namespace LOU
                             lastMouseClickPosition = new Vector3();
                             lastMouseClickClientObject = null;
                             tooltipText = null;
+                        }
+                        break;
+
+                    case CommandType.SetCustomVar:
+                        {
+                            string name = ExtractStringParam(ClientCommand.CommandParams, 0);
+                            object value = ExtractObjectParam(ClientCommand.CommandParams, 1);
+
+                            if (!String.IsNullOrEmpty(name)) {
+                                name = name.ToUpper();
+
+                                if (CustomVars == null)
+                                    CustomVars = new Dictionary<string, object>();
+
+                                if (CustomVars.ContainsKey(name))
+                                {
+                                    CustomVars[name] = value;
+                                    Utils.Log("CustomVar " + name + " exists, setting it to " + value.ToString());
+                                }
+                                else
+                                {
+                                    CustomVars.Add(name, value);
+                                    Utils.Log("CustomVar " + name + " does not exist, creating it with value " + value.ToString());
+                                }
+                            }
+                        }
+                        break;
+
+                    case CommandType.ClearCustomVar:
+                        {
+                            string name = ExtractParam(ClientCommand.CommandParams, 0);
+
+                            if (!String.IsNullOrEmpty(name))
+                            {
+                                name = name.ToUpper();
+
+                                if (CustomVars != null)
+                                {
+                                    if (CustomVars.ContainsKey(name))
+                                    {
+                                        CustomVars.Remove(name);
+                                        Utils.Log("CustomVar " + name + " removed.");
+                                    }
+                                }
+                            }
                         }
                         break;
 
@@ -1332,6 +1443,8 @@ namespace LOU
             }
 
             ClientStatus.Miscellaneous.COMMANDID = this.ClientCommandId;
+
+            ClientStatus.Miscellaneous.CUSTOMVARS = this.CustomVars?.ToDictionary(v => v.Key, v => new ClientStatus.CustomVarStruct(v.Value)) ?? null;
 
             if (this.player != null)
             {

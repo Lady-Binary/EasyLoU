@@ -195,6 +195,7 @@
         <Key word = "CLICKWORLDY" />
         <Key word = "CLICKWORLDZ" />
         <Key word = "COMMANDID" />
+        <Key word = "CUSTOMVARS" />
         <Key word = "MONSTERSNEARBY" />
         <Key word = "NEARBYMONSTERS" />
         <Key word = ".DISTANCE" />
@@ -269,6 +270,8 @@
         <Key word = "SetMainCameraMask" />
         <Key word = "GetTooltip" />
         <Key word = "ResetVars" />
+        <Key word = "SetCustomVar" />
+        <Key word = "ClearCustomVar" />
       </KeyWords>
 
     </RuleSet>

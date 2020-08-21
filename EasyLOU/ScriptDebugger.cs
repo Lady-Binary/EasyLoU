@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using MoonSharp.Interpreter.Interop.Converters;
 
 namespace EasyLOU
 {
@@ -90,14 +91,45 @@ namespace EasyLOU
             {
                 switch (arguments[i].Type)
                 {
+                    case DataType.Boolean:
+                        Command.CommandParams.Add(
+                            i.ToString(),
+                            new ClientCommand.CommandParamStruct()
+                            {
+                                CommandParamType = ClientCommand.CommandParamTypeEnum.Boolean,
+                                Boolean = arguments[i].Boolean
+                            }
+                            );
+                        break;
                     case DataType.Number:
-                        Command.CommandParams.Add(i.ToString(), arguments[i].Number.ToString());
+                        Command.CommandParams.Add(
+                            i.ToString(),
+                            new ClientCommand.CommandParamStruct()
+                            {
+                                CommandParamType = ClientCommand.CommandParamTypeEnum.Number,
+                                Number = arguments[i].Number
+                            }
+                            );
                         break;
                     case DataType.String:
-                        Command.CommandParams.Add(i.ToString(), arguments[i].String);
+                        Command.CommandParams.Add(
+                            i.ToString(),
+                            new ClientCommand.CommandParamStruct()
+                            {
+                                CommandParamType = ClientCommand.CommandParamTypeEnum.String,
+                                String = arguments[i].String
+                            }
+                            );
                         break;
                     default:
-                        Command.CommandParams.Add(i.ToString(), arguments[i].ToString());
+                        Command.CommandParams.Add(
+                            i.ToString(),
+                            new ClientCommand.CommandParamStruct()
+                            {
+                                CommandParamType = ClientCommand.CommandParamTypeEnum.Number,
+                                Number = arguments[i].Number
+                            }
+                            );
                         break;
                 }
             }
@@ -159,43 +191,31 @@ namespace EasyLOU
                         if (value == null) value = MainForm.ClientStatus.LastAction.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.LastAction) ?? null;
                         if (value == null) value = MainForm.ClientStatus.ClientInfo.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.ClientInfo) ?? null;
                         if (value == null) value = MainForm.ClientStatus.Miscellaneous.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Miscellaneous) ?? null;
+                        if (value == null) value = MainForm.ClientStatus.Find.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Find) ?? null;
 
                         if (value != null)
                         {
-                            if (value is bool)
-                                return DynValue.NewBoolean((bool)value);
-
-                            else if (value is string
-                                || value is char)
-                                return DynValue.NewString(value.ToString());
-
-                            else if (value is sbyte
-                                || value is byte
-                                || value is short
-                                || value is ushort
-                                || value is int
-                                || value is uint
-                                || value is long
-                                || value is ulong
-                                || value is float
-                                || value is double
-                                || value is decimal)
-                                return DynValue.NewNumber(Convert.ToDouble(value));
-
-                            else
-                                return DynValue.NewString(value.ToString());
+                            if (value.GetType().IsArray)
+                            {
+                                var values = ((IEnumerable)value).Cast<object>().ToArray();
+                                return DynValue.FromObject(table.OwnerScript, Array.ConvertAll(values, UserData.Create));
+                            }
+                            if (value is Dictionary<string, ClientStatus.CustomVarStruct>)
+                            {
+                                Dictionary<string, object> values = ((Dictionary<string, ClientStatus.CustomVarStruct>)value).ToDictionary(
+                                    v => v.Key,
+                                    v => v.Value.CommandParamType == ClientStatus.CutomVarTypeEnum.Boolean ? (object)v.Value.Boolean :
+                                        v.Value.CommandParamType == ClientStatus.CutomVarTypeEnum.Number ? (object)v.Value.Number :
+                                        v.Value.CommandParamType == ClientStatus.CutomVarTypeEnum.String ? (object)v.Value.String :
+                                        (object)null
+                                    );
+                                return DynValue.FromObject(table.OwnerScript, values);
+                            }
+                            return DynValue.FromObject(table.OwnerScript, value);
                         }
                         else
                         {
-                            value = MainForm.ClientStatus.Find.GetType()?.GetField(index.String)?.GetValue(MainForm.ClientStatus.Find) ?? null;
-                            if (value != null)
-                            {
-                                var values = ((IEnumerable)value).Cast<object>().ToArray();
-                                return DynValue.NewTable(table.OwnerScript, Array.ConvertAll(values, UserData.Create));
-                            } else
-                            {
-                                return DynValue.NewNil();
-                            }
+                            return DynValue.NewNil();
                         }
                     }
                 }
