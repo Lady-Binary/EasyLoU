@@ -1358,86 +1358,151 @@ namespace LOU
 
             // Find
 
-            ClientStatus.Find.FINDBUTTON =
-                this
-                .FindButtonResults?
-                .Select(f => new ClientStatus.FINDBUTTONStruct() {
-                    NAME = f.Key.ToString(), TEXT = f.Value
-                })
-                .ToArray();
+            try {
+                ClientStatus.Find.FINDBUTTON =
+                    this
+                    .FindButtonResults?
+                    .Select(f => new ClientStatus.FINDBUTTONStruct() {
+                        NAME = f.Key.ToString(), TEXT = f.Value
+                    })
+                    .ToArray();
+            }
+            catch (Exception ex)
+            {
+                ClientStatus.Find.FINDBUTTON = null;
+                Utils.Log("Error building FINDBUTTON!");
+                Utils.Log(ex.ToString());
+            }
 
-            ClientStatus.Find.FINDITEM =
-                this
-                .FindItemResults?
-                .Select(f => new ClientStatus.FINDITEMStruct()
-                {
-                    CNTID = f.Value.ContainerId,
-                    DISTANCE = f.Value.ContainerId == 0 ? Vector3.Distance(f.Value.transform.position, this.player.transform.position) : 0,
-                    ID = f.Value.ObjectId,
-                    NAME = f.Value.EBHEDGHBHGI,
-                    X = f.Value.transform?.position.x,
-                    Y = f.Value.transform?.position.y,
-                    Z = f.Value.transform?.position.z,
-                })
-                .OrderBy(f => f.DISTANCE)
-                .ToArray();
+            try {
+                ClientStatus.Find.FINDITEM =
+                    this
+                    .FindItemResults?
+                    .Select(f => new ClientStatus.FINDITEMStruct()
+                    {
+                        CNTID = f.Value.ContainerId,
+                        DISTANCE = f.Value.ContainerId == 0 ? Vector3.Distance(f.Value.transform.position, this.player.transform.position) : 0,
+                        ID = f.Value.ObjectId,
+                        NAME = f.Value.EBHEDGHBHGI,
+                        X = f.Value.transform?.position.x,
+                        Y = f.Value.transform?.position.y,
+                        Z = f.Value.transform?.position.z,
+                    })
+                    .OrderBy(f => f.DISTANCE)
+                    .ToArray();
+            }
+            catch (Exception ex)
+            {
+                ClientStatus.Find.FINDITEM = null;
+                Utils.Log("Error building FINDITEM!");
+                Utils.Log(ex.ToString());
+            }
 
-            ClientStatus.Find.FINDLABEL =
-                this
-                .FindLabelResults?
-                .Select(f => new ClientStatus.FINDLABELStruct()
-                {
-                    NAME = f.Key.ToString(),
-                    TEXT = f.Value
-                })
-                .ToArray();
+            try
+            {
+                ClientStatus.Find.FINDLABEL =
+                    this
+                    .FindLabelResults?
+                    .Select(f => new ClientStatus.FINDLABELStruct()
+                    {
+                        NAME = f.Key.ToString(),
+                        TEXT = f.Value
+                    })
+                    .ToArray();
+            }
+            catch (Exception ex)
+            {
+                ClientStatus.Find.FINDLABEL = null;
+                Utils.Log("Error building FINDLABEL!");
+                Utils.Log(ex.ToString());
+            }
 
-            ClientStatus.Find.FINDMOBILE =
-                this
-                .FindMobileResults?
-                .Select(f => new ClientStatus.FINDMOBILEStruct()
-                {
+            try
+            {
+                ClientStatus.Find.FINDMOBILE =
+                    this
+                    .FindMobileResults?
+                    .Select(f => new ClientStatus.FINDMOBILEStruct()
+                    {
 
-                    DISTANCE = Vector3.Distance(f.transform.position, this.player.transform.position),
-                    HP = f.GetStatByName("Health"),
-                    ID = f.ObjectId,
-                    NAME = f.EBHEDGHBHGI,
-                    TYPE = f.DKCMJFOPPDL,
-                    X = f.transform?.position.x,
-                    Y = f.transform?.position.y,
-                    Z = f.transform?.position.z
-                })
-                .OrderBy(f => f.DISTANCE)
-                .ToArray();
+                        DISTANCE = Vector3.Distance(f.transform.position, this.player.transform.position),
+                        HP = f.GetStatByName("Health"),
+                        ID = f.ObjectId,
+                        NAME = f.EBHEDGHBHGI,
+                        TYPE = f.DKCMJFOPPDL,
+                        X = f.transform?.position.x,
+                        Y = f.transform?.position.y,
+                        Z = f.transform?.position.z
+                    })
+                    .OrderBy(f => f.DISTANCE)
+                    .ToArray();
+            }
+            catch (Exception ex)
+            {
+                ClientStatus.Find.FINDMOBILE = null;
+                Utils.Log("Error building FINDMOBILE!");
+                Utils.Log(ex.ToString());
+            }
 
-            ClientStatus.Find.FINDPANEL =
-                this
-                .FindPanelResults?
-                .Select(f => new ClientStatus.FINDPANELStruct()
-                {
-                    ID = f.Key
-                })
-                .ToArray();
+            try
+            {
+                ClientStatus.Find.FINDPANEL =
+                    this
+                    .FindPanelResults?
+                    .Select(f => new ClientStatus.FINDPANELStruct()
+                    {
+                        ID = f.Key
+                    })
+                    .ToArray();
+            } catch (Exception ex)
+            {
+                ClientStatus.Find.FINDPANEL = null;
+                Utils.Log("Error building FINDPANEL!");
+                Utils.Log(ex.ToString());
+            }
 
-            ClientStatus.Find.FINDPERMANENT =
-                this
-                .FindPermanentResults?
-                .Select(f => new ClientStatus.FINDPERMANENTStruct()
-                {
-                    COLOR = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) ?? new string[] { }) ?? "",
-                    DISTANCE = Vector3.Distance(f.Value.transform.position, this.player.transform.position),
-                    HUE = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Where(m => m.HasProperty("_Hue")).Select(m => m.GetInt("_Hue").ToString()) ?? new string[] { }) ?? "",
-                    ID = f.Value.PermanentId,
-                    NAME = f.Value.name,
-                    STONESTATE = (int?)Utils.GetInstanceField(f.Value.GetComponent<StoneStateHandler>(), "IKKDABEEPAF"),
-                    TEXTURE = String.Join(";", f.Value.GetComponentInChildren<Renderer>()?.materials?.Select(m => m.mainTexture.name) ?? new string[] { }) ?? "",
-                    TREESTATE = (int?)Utils.GetInstanceField(f.Value.GetComponent<TreeStateHandler>(), "IKKDABEEPAF"),
-                    X = f.Value.transform?.position.x,
-                    Y = f.Value.transform?.position.y,
-                    Z = f.Value.transform?.position.z,
-                })
-                .OrderBy(f => f.DISTANCE)
-                .ToArray();
+            try
+            {
+                ClientStatus.Find.FINDPERMANENT =
+                    this
+                    .FindPermanentResults?
+                    .Select(f => new ClientStatus.FINDPERMANENTStruct()
+                    {
+                        COLOR =
+                            f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Color") && m.color != null)?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) != null
+                            ?
+                            String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Color") && m.color != null)?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)))
+                            :
+                            null,
+                        DISTANCE = Vector3.Distance(f.Value.transform.position, this.player.transform.position),
+                        HUE =
+                            f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Hue"))?.Select(m => m.GetInt("_Hue").ToString()) != null
+                            ?
+                            String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Hue"))?.Select(m => m.GetInt("_Hue").ToString()))
+                            :
+                            null,
+                        ID = f.Value?.PermanentId,
+                        NAME = f.Value?.name,
+                        STONESTATE = (int?)Utils.GetInstanceField(f.Value?.GetComponent<StoneStateHandler>(), "IKKDABEEPAF"),
+                        TEXTURE =
+                            f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.mainTexture != null).Select(m => m.mainTexture.name) != null
+                            ?
+                            String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.mainTexture != null).Select(m => m.mainTexture.name))
+                            :
+                            null,
+                        TREESTATE = (int?)Utils.GetInstanceField(f.Value?.GetComponent<TreeStateHandler>(), "IKKDABEEPAF"),
+                        X = f.Value?.transform?.position.x,
+                        Y = f.Value?.transform?.position.y,
+                        Z = f.Value?.transform?.position.z,
+                    })
+                    .OrderBy(f => f.DISTANCE)
+                    .ToArray();
+            } catch (Exception ex)
+            {
+                ClientStatus.Find.FINDPERMANENT = null;
+                Utils.Log("Error building FINDPERMANENT!");
+                Utils.Log(ex.ToString());
+            }
 
             // Client Info
 
