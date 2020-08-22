@@ -1,5 +1,13 @@
 # Changelog
 
+## LoA 1.0.0.4 - EasyLOU 1.1.0.2 (22/08/2020)
+
+#### Bugfixes:
+
+- FindPermanent() makes LOU dll unresponsive and EasyLOU disconnects from the client in presence of perma objects with no texture [#104](https://github.com/Lady-Binary/EasyLOU/issues/104)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.1.0.1 (21/08/2020)
 
 #### Bugfixes:
@@ -229,11 +237,3 @@
 #### Enhancements:
 
 - Expand Max FindItem() [#24](https://github.com/Lady-Binary/EasyLOU/issues/24)
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.6 (16/07/2020)
-
-#### Enhancements:
-
-- Show memory map occupation on GUI [#30](https://github.com/Lady-Binary/EasyLOU/issues/30)
