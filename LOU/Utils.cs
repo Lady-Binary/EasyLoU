@@ -30,10 +30,10 @@ namespace LOU
                 {
                     foreach (FloatingPanel floatingPanel in AGLMPFPPEDK)
                     {
-                        Utils.Log("Panel " + floatingPanel.PanelId);
+                        //Utils.Log("Panel " + floatingPanel.PanelId);
                         if (name == null || name == "" || floatingPanel.PanelId.ToLower().Contains(name.ToLower()))
                         {
-                            Utils.Log("Panel " + floatingPanel.PanelId + " matches!");
+                            //Utils.Log("Panel " + floatingPanel.PanelId + " matches!");
                             FoundPanels.Add(floatingPanel.PanelId, floatingPanel);
                             //if (this.FindPanelResults.Count == 20)
                             //{
@@ -60,7 +60,7 @@ namespace LOU
             {
                 if (obj.EBHEDGHBHGI.ToLower().Contains(name.ToLower()))
                 {
-                    Log("Found " + obj.EBHEDGHBHGI);
+                    //Log("Found " + obj.EBHEDGHBHGI);
                     FoundObjects.Add(obj.ObjectId.ToString(), obj);
                 }
                 //if (FoundObjects.Count == 20)
@@ -82,7 +82,7 @@ namespace LOU
             {
                 if (name == null || name == "" || obj.EBHEDGHBHGI.ToLower().Contains(name.ToLower()))
                 {
-                    Log("Found " + obj.EBHEDGHBHGI);
+                    //Log("Found " + obj.EBHEDGHBHGI);
                     FoundObjects.Add(obj.ObjectId.ToString(), obj);
                 }
                 //if (FoundObjects.Count == 20)
@@ -159,12 +159,12 @@ namespace LOU
             {
                 if (Vector3.Distance(obj.transform.position, GameObjectSingleton<ApplicationController>.DJCGIMIDOPB.Player.transform.position) > distance)
                 {
-                    Log("Breaking because of distance.");
+                    //Log("Breaking because of distance.");
                     break;
                 }
                 if (obj.name != null && obj.name != "" && (name == "" || obj.name.ToLower().Contains(name?.ToLower() ?? "")))
                 {
-                    Log("Found " + obj.name);
+                    //Log("Found " + obj.name);
                     FoundPermanents.Add(obj.PermanentId.ToString(), obj);
                 }
                 //if (FoundPermanents.Count == 20)
@@ -243,7 +243,7 @@ namespace LOU
             {
                 if (Vector3.Distance(mobile.transform.position, GameObjectSingleton<ApplicationController>.DJCGIMIDOPB.Player.transform.position) > distance)
                 {
-                    Log("Breaking because of distance.");
+                    //Log("Breaking because of distance.");
                     break;
                 }
                 if (mobile.EBHEDGHBHGI != null && mobile.EBHEDGHBHGI != "" && (name == "" || mobile.EBHEDGHBHGI.ToLower().Contains(name?.ToLower() ?? "")))
@@ -251,7 +251,7 @@ namespace LOU
 
                     if (!foundMobiles.Contains(mobile))
                     {
-                        Utils.Log("found!");
+                        //Utils.Log("found!");
                         foundMobiles.Add(mobile);
                     }
                 }
