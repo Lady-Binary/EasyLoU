@@ -1241,7 +1241,7 @@ namespace LOU
                         {
                             GameObjectSingleton<ApplicationController>.DJCGIMIDOPB.ExitGame(false, true);
                         }
-                        break;
+                        break; 
 
                     default:
                         Utils.Log("Not Implemented!");
