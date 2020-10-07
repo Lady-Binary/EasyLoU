@@ -1237,6 +1237,12 @@ namespace LOU
                         }
                         break;
 
+                    case CommandType.Logout:
+                        {
+                            GameObjectSingleton<ApplicationController>.DJCGIMIDOPB.ExitGame(false, true);
+                        }
+                        break;
+
                     default:
                         Utils.Log("Not Implemented!");
                         break;
