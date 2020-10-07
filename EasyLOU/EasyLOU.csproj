@@ -117,6 +117,7 @@
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -126,6 +127,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -166,6 +168,8 @@
     <Content Include="icons\openeuo.ico" />
     <Content Include="icons\paste.ico" />
     <Content Include="icons\pause.ico" />
+    <Content Include="icons\pin-black.ico" />
+    <Content Include="icons\pin-blue.ico" />
     <Content Include="icons\reopen.ico" />
     <Content Include="icons\replace.ico" />
     <Content Include="icons\save.ico" />

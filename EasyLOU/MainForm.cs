@@ -35,6 +35,7 @@ namespace EasyLOU
         public static ClientStatus ClientStatus;
 
         private static Dictionary<String, ScriptDebugger> ScriptDebuggers = new Dictionary<string, ScriptDebugger>();
+        public Boolean onTopToggle = false;
 
         public MainForm()
         {
@@ -1570,6 +1571,22 @@ namespace EasyLOU
         {
             Settings settings = new Settings();
             settings.ShowDialog(this);
+        }
+
+        private void pinToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (this.onTopToggle == false)
+            {
+                Form.ActiveForm.TopMost = true;
+                pinToolStripButton.Image = Properties.Resources.pin_blue;
+                this.onTopToggle = true;
+            }
+            else
+            {
+                Form.ActiveForm.TopMost = false;
+                pinToolStripButton.Image = Properties.Resources.pin_black;
+                this.onTopToggle = false;
+            }
         }
     }
 }
