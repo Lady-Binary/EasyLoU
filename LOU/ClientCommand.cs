@@ -272,7 +272,8 @@ namespace LOU
         GetTooltip,
         ResetVars,
         SetCustomVar,
-        ClearCustomVar
+        ClearCustomVar,
+        Logout
     }
 
     [ProtoContract]

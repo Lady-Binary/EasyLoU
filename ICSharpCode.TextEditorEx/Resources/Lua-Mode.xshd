@@ -272,6 +272,7 @@
         <Key word = "ResetVars" />
         <Key word = "SetCustomVar" />
         <Key word = "ClearCustomVar" />
+        <Key word = "Logout" />
       </KeyWords>
 
     </RuleSet>
