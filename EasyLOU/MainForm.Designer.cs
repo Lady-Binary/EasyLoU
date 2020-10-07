@@ -72,6 +72,8 @@ namespace EasyLOU
             this.manageVarListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.dontMoveCursorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.websiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +104,7 @@ namespace EasyLOU
             this.HelpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.HomeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.DebugLogsToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.pinToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ScriptTab = new System.Windows.Forms.TabPage();
             this.ScriptSplit = new System.Windows.Forms.SplitContainer();
             this.ScriptTextArea = new ICSharpCode.TextEditor.TextEditorControlEx();
@@ -129,8 +132,6 @@ namespace EasyLOU
             this.CopyValueVarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TargetAriaClientPanel = new System.Windows.Forms.Panel();
             this.TargetAriaClientLabel = new System.Windows.Forms.Label();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -455,35 +456,47 @@ namespace EasyLOU
             this.connectToClientToolStripMenuItem.Name = "connectToClientToolStripMenuItem";
             this.connectToClientToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.N)));
-            this.connectToClientToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.connectToClientToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.connectToClientToolStripMenuItem.Text = "Connect to client";
             this.connectToClientToolStripMenuItem.Click += new System.EventHandler(this.connectToClientToolStripMenuItem_Click);
             // 
             // varDumpToolStripMenuItem
             // 
             this.varDumpToolStripMenuItem.Name = "varDumpToolStripMenuItem";
-            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.varDumpToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.varDumpToolStripMenuItem.Text = "VarDump";
             this.varDumpToolStripMenuItem.Click += new System.EventHandler(this.varDumpToolStripMenuItem_Click);
             // 
             // manageVarListToolStripMenuItem
             // 
             this.manageVarListToolStripMenuItem.Name = "manageVarListToolStripMenuItem";
-            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.manageVarListToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.manageVarListToolStripMenuItem.Text = "Manage VarList";
             this.manageVarListToolStripMenuItem.Click += new System.EventHandler(this.manageVarListToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(236, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(228, 6);
             // 
             // dontMoveCursorToolStripMenuItem
             // 
             this.dontMoveCursorToolStripMenuItem.Name = "dontMoveCursorToolStripMenuItem";
-            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
+            this.dontMoveCursorToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.dontMoveCursorToolStripMenuItem.Text = "Don\'t Move Cursor";
             this.dontMoveCursorToolStripMenuItem.Click += new System.EventHandler(this.dontMoveCursorToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(228, 6);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.settingsToolStripMenuItem.Text = "Settings...";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -683,7 +696,8 @@ namespace EasyLOU
             this.toolStripSeparator7,
             this.HelpToolStripButton,
             this.HomeToolStripButton,
-            this.DebugLogsToolStripButton});
+            this.DebugLogsToolStripButton,
+            this.pinToolStripButton});
             this.toolStrip2.Location = new System.Drawing.Point(0, 55);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(784, 31);
@@ -783,6 +797,16 @@ namespace EasyLOU
             this.DebugLogsToolStripButton.Size = new System.Drawing.Size(28, 28);
             this.DebugLogsToolStripButton.Text = "Open Debug Logs";
             this.DebugLogsToolStripButton.Click += new System.EventHandler(this.DebugLogsToolStripButton_Click);
+            // 
+            // pinToolStripButton
+            // 
+            this.pinToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pinToolStripButton.Image = global::EasyLOU.Properties.Resources.pin_black;
+            this.pinToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pinToolStripButton.Name = "pinToolStripButton";
+            this.pinToolStripButton.Size = new System.Drawing.Size(28, 28);
+            this.pinToolStripButton.Text = "Always On Top";
+            this.pinToolStripButton.Click += new System.EventHandler(this.pinToolStripButton_Click);
             // 
             // ScriptTab
             // 
@@ -1057,18 +1081,6 @@ namespace EasyLOU
             this.TargetAriaClientLabel.Text = "Click the window of the Legends of Aria Client you want to connect to";
             this.TargetAriaClientLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(236, 6);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(239, 30);
-            this.settingsToolStripMenuItem.Text = "Settings...";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1219,6 +1231,7 @@ namespace EasyLOU
         private System.Windows.Forms.ToolStripButton DebugLogsToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton pinToolStripButton;
     }
 }
 

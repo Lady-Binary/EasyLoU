@@ -442,15 +442,15 @@
   <data name="DebugLogsToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHjSURBVDhPhZFRb9JQGIb3H/wH3hh/izcmXhhjcBpCRmWx
-        MARH6UQ6yyiItJTCWGhh3YCxFQlhg23ItphlJks2M1F/Q5NlF8Yrr167gnHJzvBNnpuT8z15z3cm0uGZ
-        hzxNnYshHzYUAW1NHEtzKfkrwwb8E3+z4H1+Pk89BeeeRLuYxo+Dxn9pq2nEPJ5btkAO+wZvp55ADHjQ
-        UOL4tmfgrFfHabdCZNDfwO6KAo6m7toCIUDfEUPeNSnk269Jsd+D/joO6otoLQpEjjd1bC/L/wRXs5KK
-        mme9NfvSUVMjcrpdRacskQXLyYh50q3aDTpamsjnVhmb1g442nldUE5EzOO2jr1qHlvqeyKHH1S0lt6B
-        owiCUnzOPGqWrAYFfFxViBw2VDTzCbJAjYXNT0bRqirCkHki/UoORjZOFhSiQXO/VkDP+qZuSSLSt55X
-        l3iwJEEu8tLc1RUYGR76AmNjyDFcnl2lmuIsgeO6QJnzm1uqaC1rPHriNVgnQSAzXrPMMyhGg9C4V9Dm
-        Z4nkWR/4aed6hHp2ezQ6jDDtMoOP7oNxPLAX9mWndiMnnQoUhv46Gh1G8Lq/Z0MvkAv7oFoNdvTsWLKs
-        /2I0OkzU9fhe0k9dpGbcuCQzS99IKkD9fONyTP4BsWQx+Qb06qYAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHdSURBVDhPhZFRT9pQGIb9D/sH3pj9lt2YeGGWhbmFEKls
+        QEXUFhyzroziHC2looYW7AaKlhGCgspQsxiXmOji2PYbmhgvll3t6t2xsMyLI3uT5+bkfE/e852BVGRy
+        VHzOXMkci21NQt2Q+1JdS/5KR8Ohgb8R/RNXC8wTCN4x1HMp/Diu/Je6nkLc57vnCNQI23k1/hhy2IeK
+        lsC3QwuXrTIumkUqnfY2Dt5pEALMfUcghQNDMhfcVDj2qKjEf3faWzgur6C2IlE52zGxt67+E9zO+mLM
+        vmxtOpdOqwaVi70SGgWFLigkY/Z5s+Q0aBgpKp9rBeyQHQgBN11wVjdxWMpiV39L5eSDjtraGwgMRZBP
+        zNmn1TxpsIqP7zUqJxUd1WySLtDjEfuTlSNVZViqSKVdXIaVSdAF2diUfbSxihb5pmZeodImzysrIqI0
+        gUYEB6YGKy3CfM07WGocN2e3KS0JROCiCOZC9q4uk2X1x0y+QNRNEah80C6IPHLz0zCEGRgLs1SyURbi
+        M/dWjHk62BvtRprw2NMPh8G7RpyFfdnfuJPzRhEa5//aG+0mEfR+z3B+LEdY6KTBvpnpS4YPXfdGu5n3
+        PHoghZjrpUkvbkjPBu5kMTz+86XHNfYHaJMx1Ji5LP8AAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="TimerReadClientStatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
