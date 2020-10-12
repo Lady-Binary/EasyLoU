@@ -6,12 +6,6 @@
 
 - LogOff command [#108](https://github.com/Lady-Binary/EasyLOU/issues/108)
 
-#### function (placeholders) {
-			return '';
-        }
-
-- Say() doesn't allow custom commands [#109](https://github.com/Lady-Binary/EasyLOU/issues/109)
-
 ---
 
 ## LoA 1.0.0.4 - EasyLOU 1.1.0.2 (22/08/2020)
