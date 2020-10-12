@@ -1,5 +1,19 @@
 # Changelog
 
+## LoA 1.2.0.0 - EasyLOU 1.1.0.3 (12/10/2020)
+
+#### Enhancements:
+
+- LogOff command [#108](https://github.com/Lady-Binary/EasyLOU/issues/108)
+
+#### function (placeholders) {
+			return '';
+        }
+
+- Say() doesn't allow custom commands [#109](https://github.com/Lady-Binary/EasyLOU/issues/109)
+
+---
+
 ## LoA 1.0.0.4 - EasyLOU 1.1.0.2 (22/08/2020)
 
 #### Bugfixes:
@@ -229,11 +243,3 @@
 #### Enhancements:
 
 - do not connect automatically at startup [#33](https://github.com/Lady-Binary/EasyLOU/issues/33)
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.7 (16/07/2020)
-
-#### Enhancements:
-
-- Expand Max FindItem() [#24](https://github.com/Lady-Binary/EasyLOU/issues/24)
