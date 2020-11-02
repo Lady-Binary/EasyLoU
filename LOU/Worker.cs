@@ -38,6 +38,7 @@ namespace LOU
         private Dictionary<String, ClientObject> FindPermanentResults;
         private Dictionary<String, FloatingPanel> FindPanelResults;
         private Dictionary<int, String> FindButtonResults;
+        private List<DynamicWindowTextField> FindInputResults;
         private Dictionary<int, String> FindLabelResults;
         private List<MobileInstance> FindMobileResults;
 
@@ -112,6 +113,7 @@ namespace LOU
             this.FindPermanentResults = null;
             this.FindPanelResults = null;
             this.FindButtonResults = null;
+            this.FindInputResults = null;
             this.FindLabelResults = null;
             this.FindMobileResults = null;
             this.CustomVars = null;
@@ -439,6 +441,46 @@ namespace LOU
 
                             watch.Stop();
                             Utils.Log("FindButton took " + watch.ElapsedMilliseconds.ToString() + "ms");
+                            break;
+                        }
+
+                    case CommandType.FindInput:
+                        {
+                            var watch = new System.Diagnostics.Stopwatch();
+                            watch.Start();
+
+                            this.FindInputResults = new List<DynamicWindowTextField>();
+
+                            string _containerName = ExtractParam(ClientCommand.CommandParams, 0);
+                            string _inputName = ExtractParam(ClientCommand.CommandParams, 1);
+
+                            FloatingPanelManager fpm = FloatingPanelManager.DJCGIMIDOPB;
+                            if (fpm != null)
+                            {
+                                FloatingPanel floatingPanel = fpm.GetPanel(_containerName);
+                                if (floatingPanel != null)
+                                {
+                                    DynamicWindow dynamicWindow = floatingPanel.GetComponent<DynamicWindow>();
+                                    if (dynamicWindow != null)
+                                    {
+                                        DynamicWindowTextField[] Inputs = dynamicWindow.GetComponentsInChildren<DynamicWindowTextField>();
+
+                                        // Let's search for an input containing the given text
+                                        foreach (DynamicWindowTextField Input in Inputs)
+                                        {
+                                            if (string.IsNullOrEmpty(_inputName) || Input.gameObject.name.ToLower().Contains(_inputName.ToLower()))
+                                            {
+                                                Utils.Log("DynamicWindowTextField " + Input.gameObject.name + " found!");
+
+                                                this.FindInputResults.Add(Input);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            watch.Stop();
+                            Utils.Log("FindInput took " + watch.ElapsedMilliseconds.ToString() + "ms");
                             break;
                         }
 
@@ -1175,6 +1217,7 @@ namespace LOU
                             FindPermanentResults = null;
                             FindPanelResults = null;
                             FindButtonResults = null;
+                            FindInputResults = null;
                             FindLabelResults = null;
                             FindMobileResults = null;
 
@@ -1380,7 +1423,26 @@ namespace LOU
                 Utils.Log(ex.ToString());
             }
 
-            try {
+            try
+            {
+                ClientStatus.Find.FINDINPUT =
+                    this
+                    .FindInputResults?
+                    .Select(f => new ClientStatus.FINDINPUTStruct()
+                    {
+                        ID = f.gameObject.name
+                    })
+                    .ToArray();
+            }
+            catch (Exception ex)
+            {
+                ClientStatus.Find.FINDINPUT = null;
+                Utils.Log("Error building FINDINPUT!");
+                Utils.Log(ex.ToString());
+            }
+
+            try
+            {
                 ClientStatus.Find.FINDITEM =
                     this
                     .FindItemResults?

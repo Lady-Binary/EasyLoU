@@ -262,6 +262,7 @@
         <Key word = "CharacterSelect" />
         <Key word = "FindPanel" />
         <Key word = "FindButton" />
+        <Key word = "FindInput" />
         <Key word = "FindLabel" />
         <Key word = "ClickButton" />
         <Key word = "SetInput" />
