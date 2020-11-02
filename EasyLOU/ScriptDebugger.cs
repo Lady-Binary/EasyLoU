@@ -265,6 +265,9 @@ namespace EasyLOU
                                 UserData.RegisterType<ClientStatus.FINDMOBILEStruct>();
                                 UserData.RegisterType<ClientStatus.FINDPANELStruct>();
                                 UserData.RegisterType<ClientStatus.FINDPERMANENTStruct>();
+                                UserData.RegisterType<ClientStatus.OBJStruct>();
+                                UserData.RegisterType<ClientStatus.NEARBYMONSTERStruct>();
+ 
                                 this.Script.Globals.MetaTable = new Table(this.Script);
                                 this.Script.Globals.MetaTable["__index"] = (Func<Table, DynValue, DynValue>)VarCallBack;
 
