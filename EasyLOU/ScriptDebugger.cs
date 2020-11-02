@@ -260,6 +260,7 @@ namespace EasyLOU
 
                                 // LOU status variables
                                 UserData.RegisterType<ClientStatus.FINDBUTTONStruct>();
+                                UserData.RegisterType<ClientStatus.FINDINPUTStruct>();
                                 UserData.RegisterType<ClientStatus.FINDITEMStruct>();
                                 UserData.RegisterType<ClientStatus.FINDLABELStruct>();
                                 UserData.RegisterType<ClientStatus.FINDMOBILEStruct>();

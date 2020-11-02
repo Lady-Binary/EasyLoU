@@ -108,6 +108,12 @@ namespace LOU
             public string TEXT;
         }
         [ProtoContract]
+        public struct FINDINPUTStruct
+        {
+            [ProtoMember(1)]
+            public string ID;
+        }
+        [ProtoContract]
         public struct FINDITEMStruct
         {
             [ProtoMember(1)]
@@ -194,12 +200,14 @@ namespace LOU
             [ProtoMember(2)]
             public FINDITEMStruct[] FINDITEM;
             [ProtoMember(3)]
-            public FINDLABELStruct[] FINDLABEL;
+            public FINDINPUTStruct[] FINDINPUT;
             [ProtoMember(4)]
-            public FINDMOBILEStruct[] FINDMOBILE;
+            public FINDLABELStruct[] FINDLABEL;
             [ProtoMember(5)]
-            public FINDPANELStruct[] FINDPANEL;
+            public FINDMOBILEStruct[] FINDMOBILE;
             [ProtoMember(6)]
+            public FINDPANELStruct[] FINDPANEL;
+            [ProtoMember(7)]
             public FINDPERMANENTStruct[] FINDPERMANENT;
         }
         [ProtoMember(5)]
