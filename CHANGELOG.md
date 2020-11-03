@@ -1,5 +1,16 @@
 # Changelog
 
+## LoA 1.3.0.0 - EasyLOU 1.1.0.5 (03/11/2020)
+
+#### Bugfixes:
+
+- FindButton(), FindInput(), and FindLabel() should return all items if only the panel name is passed as an argument [#115](https://github.com/Lady-Binary/EasyLOU/issues/115)
+- Unable to find Text Entry boxes reliably for SetInput() [#113](https://github.com/Lady-Binary/EasyLOU/issues/113)
+- NEARBYMONSTERS/CLICKOBJ unable to access variables [#112](https://github.com/Lady-Binary/EasyLOU/issues/112)
+- FindItem not clearing previously found objects/table(s) no longer on screen or in pack [#93](https://github.com/Lady-Binary/EasyLOU/issues/93)
+
+---
+
 ## LoA 1.3.0.0 - EasyLOU 1.1.0.4 (13/10/2020)
 
 #### Enhancements:
@@ -237,9 +248,4 @@
 ---
 
 ## LoA 1.0.0.2 - EasyLOU 1.0.0.10 (18/07/2020)
-*No changelog for this release.*
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.9 (17/07/2020)
 *No changelog for this release.*
