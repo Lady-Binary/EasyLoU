@@ -370,7 +370,7 @@ namespace LOU
                             var watch = new System.Diagnostics.Stopwatch();
                             watch.Start();
 
-                            var buttons = new Dictionary<string, ClientStatus.FINDBUTTONStruct>();
+                            List<ClientStatus.FINDBUTTONStruct> buttons = new List<ClientStatus.FINDBUTTONStruct>();
 
                             string _containerName = ExtractParam(ClientCommand.CommandParams, 0);
 
@@ -405,11 +405,11 @@ namespace LOU
                                                     if (int.TryParse(Collider.name, out int ButtonID))
                                                     {
                                                         Utils.Log("Collider " + Collider.name + " found by coordinates!");
-                                                        buttons[ButtonID.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                        buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                         {
                                                             NAME = ButtonID.ToString(),
                                                             TEXT = x.ToString() + "-" + y.ToString()
-                                                        };
+                                                        });
                                                     }
                                                 }
                                             }
@@ -424,7 +424,7 @@ namespace LOU
                                             // Let's search for a label containing the given text
                                             foreach (UILabel Label in Labels)
                                             {
-                                                if (Label.FJNGNLHHOEI.ToLower().Contains(_buttonName.ToLower()))
+                                                if (string.IsNullOrEmpty(_buttonName) || Label.FJNGNLHHOEI.ToLower().Contains(_buttonName.ToLower()))
                                                 {
                                                     Utils.Log("Label " + Label.FJNGNLHHOEI + " found! Searching for collider...");
 
@@ -452,11 +452,11 @@ namespace LOU
                                                             if (int.TryParse(Collider.name, out int ButtonID))
                                                             {
                                                                 Utils.Log("Collider " + Collider.name + " found!");
-                                                                buttons[ButtonID.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                                buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                                 {
                                                                     NAME = ButtonID.ToString(),
                                                                     TEXT = Label.FJNGNLHHOEI
-                                                                };
+                                                                });
                                                             }
                                                         }
                                                     }
@@ -476,70 +476,70 @@ namespace LOU
                                                 object casted = Convert.ChangeType(o, KAAFKBBECEF);
 
                                                 string KFBLLAJBKAD = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "KFBLLAJBKAD");
-                                                if (KFBLLAJBKAD != null && KFBLLAJBKAD.ToLower().Contains(_buttonName.ToLower()))
+                                                if (KFBLLAJBKAD != null && (string.IsNullOrEmpty(_buttonName) || KFBLLAJBKAD.ToLower().Contains(_buttonName.ToLower())))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by KFBLLAJBKAD!");
-                                                    buttons[i.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                    buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                     {
                                                         NAME = i.ToString(),
                                                         TEXT = KFBLLAJBKAD
-                                                    };
+                                                    });
                                                 }
 
                                                 string KFFEBNDBIPA = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "KFFEBNDBIPA");
-                                                if (KFFEBNDBIPA != null && KFFEBNDBIPA.ToLower().Contains(_buttonName.ToLower()))
+                                                if (KFFEBNDBIPA != null && (string.IsNullOrEmpty(_buttonName) || KFFEBNDBIPA.ToLower().Contains(_buttonName.ToLower())))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by KFFEBNDBIPA!");
-                                                    buttons[i.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                    buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                     {
                                                         NAME = i.ToString(),
                                                         TEXT = KFFEBNDBIPA
-                                                    };
+                                                    });
                                                 }
 
                                                 // Seems to be ToolTip Text
                                                 string ELGLAFGJGAO = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "ELGLAFGJGAO");
-                                                if (ELGLAFGJGAO != null && ELGLAFGJGAO.ToLower().Contains(_buttonName.ToLower()))
+                                                if (ELGLAFGJGAO != null && (string.IsNullOrEmpty(_buttonName) || ELGLAFGJGAO.ToLower().Contains(_buttonName.ToLower())))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by ELGLAFGJGAO!");
-                                                    buttons[i.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                    buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                     {
                                                         NAME = i.ToString(),
                                                         TEXT = ELGLAFGJGAO
-                                                    };
+                                                    });
                                                 }
 
                                                 string PDENMACFHFK = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "PDENMACFHFK");
-                                                if (PDENMACFHFK != null && PDENMACFHFK.ToLower().Contains(_buttonName.ToLower()))
+                                                if (PDENMACFHFK != null && (string.IsNullOrEmpty(_buttonName) || PDENMACFHFK.ToLower().Contains(_buttonName.ToLower())))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by PDENMACFHFK!");
-                                                    buttons[i.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                    buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                     {
                                                         NAME = i.ToString(),
                                                         TEXT = PDENMACFHFK
-                                                    };
+                                                    });
                                                 }
 
                                                 string OEFOJOODPBK = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "OEFOJOODPBK");
-                                                if (OEFOJOODPBK != null && OEFOJOODPBK.ToLower().Contains(_buttonName.ToLower()))
+                                                if (OEFOJOODPBK != null && (string.IsNullOrEmpty(_buttonName) || OEFOJOODPBK.ToLower().Contains(_buttonName.ToLower())))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by OEFOJOODPBK!");
-                                                    buttons[i.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                    buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                     {
                                                         NAME = i.ToString(),
                                                         TEXT = OEFOJOODPBK
-                                                    };
+                                                    });
                                                 }
 
                                                 string JCIPDLPHPFB = (string)Utils.GetInstanceField(KAAFKBBECEF, casted, "JCIPDLPHPFB");
-                                                if (JCIPDLPHPFB != null && ELGLAFGJGAO.ToLower().Contains(_buttonName.ToLower()))
+                                                if (JCIPDLPHPFB != null && (string.IsNullOrEmpty(_buttonName) || ELGLAFGJGAO.ToLower().Contains(_buttonName.ToLower())))
                                                 {
                                                     Utils.Log("Found DynamicWindow Action by JCIPDLPHPFB!");
-                                                    buttons[i.ToString()] = new ClientStatus.FINDBUTTONStruct()
+                                                    buttons.Add(new ClientStatus.FINDBUTTONStruct()
                                                     {
                                                         NAME = i.ToString(),
                                                         TEXT = JCIPDLPHPFB
-                                                    };
+                                                    });
                                                 }
 
                                                 i++;
@@ -549,7 +549,7 @@ namespace LOU
                                 }
                             }
 
-                            this.FindButtonResults = buttons?.Values;
+                            this.FindButtonResults = buttons;
 
                             watch.Stop();
                             Utils.Log("FindButton took " + watch.ElapsedMilliseconds.ToString() + "ms");
@@ -605,7 +605,7 @@ namespace LOU
                             var watch = new System.Diagnostics.Stopwatch();
                             watch.Start();
 
-                            Dictionary<int, string> labels = new Dictionary<int, string>();
+                            List<KeyValuePair<int, string>> labels = new List<KeyValuePair<int, string>>();
 
                             string _containerName = ExtractParam(ClientCommand.CommandParams, 0);
 
@@ -660,7 +660,7 @@ namespace LOU
                                                         }
                                                     }
 
-                                                    labels[ButtonID] = FullLabelText;
+                                                    labels.Add(new KeyValuePair<int, string>(ButtonID, FullLabelText));
                                                     break;
                                                 }
                                             }
@@ -701,7 +701,7 @@ namespace LOU
                                                     }
                                                 }
 
-                                                labels[ButtonID] = FullLabelText;
+                                                labels.Add(new KeyValuePair<int, string>(ButtonID, FullLabelText));
                                                 break;
                                             }
                                         }
@@ -713,7 +713,7 @@ namespace LOU
                                         // Let's search for a label containing the given text
                                         foreach (UILabel Label in Labels)
                                         {
-                                            if (Label.FJNGNLHHOEI.ToLower().Contains(_labelText.ToLower()))
+                                            if (string.IsNullOrEmpty(_labelText) || Label.FJNGNLHHOEI.ToLower().Contains(_labelText.ToLower()))
                                             {
                                                 Utils.Log("Label " + Label.FJNGNLHHOEI + " found! Searching for collider...");
 
@@ -755,7 +755,7 @@ namespace LOU
                                                                 }
                                                             }
 
-                                                            labels[ButtonID] = FullLabelText;
+                                                            labels.Add(new KeyValuePair<int, string>(ButtonID, FullLabelText));
                                                             break;
                                                         }
                                                     }
