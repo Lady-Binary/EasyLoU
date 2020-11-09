@@ -103,6 +103,7 @@
             color="Green">
         <Key word = "Timestamp" />
         <Key word = "BACKPACKID" />
+        <Key word = "CHARBUFFS" />
         <Key word = "CHARDIR" />
         <Key word = "CHARGHOST" />
         <Key word = "CHARID" />

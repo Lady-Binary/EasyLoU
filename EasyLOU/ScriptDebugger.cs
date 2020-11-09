@@ -197,8 +197,18 @@ namespace EasyLOU
                         {
                             if (value.GetType().IsArray)
                             {
-                                var values = ((IEnumerable)value).Cast<object>().ToArray();
-                                return DynValue.FromObject(table.OwnerScript, Array.ConvertAll(values, UserData.Create));
+                                if (value != null &&
+                                    value.GetType() != null &&
+                                    value.GetType().GetElementType() != null &&
+                                    (value.GetType().GetElementType().IsPrimitive || value.GetType().GetElementType() == typeof(string)))
+                                {
+                                    return DynValue.FromObject(table.OwnerScript, value);
+                                }
+                                else
+                                {
+                                    var values = ((IEnumerable)value).Cast<object>().ToArray();
+                                    return DynValue.FromObject(table.OwnerScript, Array.ConvertAll(values, UserData.Create));
+                                }
                             }
                             if (value is Dictionary<string, ClientStatus.CustomVarStruct>)
                             {
