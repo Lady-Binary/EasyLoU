@@ -1,5 +1,14 @@
 # Changelog
 
+## LoA 1.3.0.0 - EasyLOU 1.1.0.6 (09/11/2020)
+
+#### Bugfixes:
+
+- CHARBUFFS variable inaccessible in scripts [#117](https://github.com/Lady-Binary/EasyLOU/issues/117)
+- FindItem/FindPermanent/FindMobile by id not working anymore [#116](https://github.com/Lady-Binary/EasyLOU/issues/116)
+
+---
+
 ## LoA 1.3.0.0 - EasyLOU 1.1.0.5 (03/11/2020)
 
 #### Bugfixes:
@@ -243,9 +252,4 @@
 ---
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.11 (18/07/2020)
-*No changelog for this release.*
-
----
-
-## LoA 1.0.0.2 - EasyLOU 1.0.0.10 (18/07/2020)
 *No changelog for this release.*
