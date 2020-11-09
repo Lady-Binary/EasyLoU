@@ -217,7 +217,6 @@ namespace LOU
                                 if (dynamicObject != null)
                                 {
                                     items[objectId.ToString()] = dynamicObject;
-                                    break;
                                 }
                             } else
                             {
@@ -277,7 +276,6 @@ namespace LOU
                                 if (clientObject != null)
                                 {
                                     permanentObjects.Add(permanentId.ToString(), clientObject);
-                                    break;
                                 }
                             }
                             else
@@ -1118,7 +1116,6 @@ namespace LOU
                                 if (mobile != null)
                                 {
                                     mobiles.Add(mobile);
-                                    break;
                                 }
                             } else
                             {
