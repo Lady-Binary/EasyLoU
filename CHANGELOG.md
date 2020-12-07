@@ -1,5 +1,14 @@
 # Changelog
 
+## LoA 1.3.0.0 - EasyLOU 1.1.0.7 (07/12/2020)
+
+#### Bugfixes:
+
+- EasyLOU losing connection to client after Logout() command is executed [#120](https://github.com/Lady-Binary/EasyLOU/issues/120)
+- Client Disconnected after using Recall [#119](https://github.com/Lady-Binary/EasyLOU/issues/119)
+
+---
+
 ## LoA 1.3.0.0 - EasyLOU 1.1.0.6 (09/11/2020)
 
 #### Bugfixes:
@@ -247,9 +256,4 @@
 ---
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.12 (22/07/2020)
-*No changelog for this release.*
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.11 (18/07/2020)
 *No changelog for this release.*
