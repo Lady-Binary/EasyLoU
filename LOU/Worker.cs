@@ -34,13 +34,13 @@ namespace LOU
         private InputController inputController;
         private LocalPlayer player;
 
-        private IEnumerable<ClientStatus.FINDBUTTONStruct> FindButtonResults;
-        private IEnumerable<ClientStatus.FINDINPUTStruct> FindInputResults;
-        private IEnumerable<ClientStatus.FINDITEMStruct> FindItemResults;
-        private IEnumerable<ClientStatus.FINDLABELStruct> FindLabelResults;
-        private IEnumerable<ClientStatus.FINDMOBILEStruct> FindMobileResults;
-        private IEnumerable<ClientStatus.FINDPANELStruct> FindPanelResults;
-        private IEnumerable<ClientStatus.FINDPERMANENTStruct> FindPermanentResults;
+        private ClientStatus.FINDBUTTONStruct[] FindButtonResults;
+        private ClientStatus.FINDINPUTStruct[] FindInputResults;
+        private ClientStatus.FINDITEMStruct[] FindItemResults;
+        private ClientStatus.FINDLABELStruct[] FindLabelResults;
+        private ClientStatus.FINDMOBILEStruct[] FindMobileResults;
+        private ClientStatus.FINDPANELStruct[] FindPanelResults;
+        private ClientStatus.FINDPERMANENTStruct[] FindPermanentResults;
 
         private Dictionary<String, object> CustomVars;
 
@@ -247,7 +247,8 @@ namespace LOU
                                         Y = f.Value.transform?.position.y,
                                         Z = f.Value.transform?.position.z,
                                     })
-                                    .OrderBy(f => f.DISTANCE);
+                                    .OrderBy(f => f.DISTANCE)
+                                    .ToArray();
                             }
                             catch (Exception ex)
                             {
@@ -294,36 +295,37 @@ namespace LOU
                             }
 
                             try {
-                                this.FindPermanentResults =  permanentObjects?.Select(f => new ClientStatus.FINDPERMANENTStruct()
-                                    {
-                                        COLOR =
-                                            f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Color") && m.color != null)?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) != null
-                                            ?
-                                            String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Color") && m.color != null)?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)))
-                                            :
-                                            null,
-                                        DISTANCE = Vector3.Distance(f.Value.transform.position, this.player.transform.position),
-                                        HUE =
-                                            f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Hue"))?.Select(m => m.GetInt("_Hue").ToString()) != null
-                                            ?
-                                            String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Hue"))?.Select(m => m.GetInt("_Hue").ToString()))
-                                            :
-                                            null,
-                                        ID = f.Value?.PermanentId,
-                                        NAME = f.Value?.name,
-                                        STONESTATE = (int?)Utils.GetInstanceField(f.Value?.GetComponent<StoneStateHandler>(), "IKKDABEEPAF"),
-                                        TEXTURE =
-                                            f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.mainTexture != null).Select(m => m.mainTexture.name) != null
-                                            ?
-                                            String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.mainTexture != null).Select(m => m.mainTexture.name))
-                                            :
-                                            null,
-                                        TREESTATE = (int?)Utils.GetInstanceField(f.Value?.GetComponent<TreeStateHandler>(), "IKKDABEEPAF"),
-                                        X = f.Value?.transform?.position.x,
-                                        Y = f.Value?.transform?.position.y,
-                                        Z = f.Value?.transform?.position.z,
-                                    })
-                                    .OrderBy(f => f.DISTANCE);
+                                this.FindPermanentResults = permanentObjects?.Select(f => new ClientStatus.FINDPERMANENTStruct()
+                                {
+                                    COLOR =
+                                           f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Color") && m.color != null)?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)) != null
+                                           ?
+                                           String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Color") && m.color != null)?.Select(m => ColorUtility.ToHtmlStringRGBA(m.color)))
+                                           :
+                                           null,
+                                    DISTANCE = Vector3.Distance(f.Value.transform.position, this.player.transform.position),
+                                    HUE =
+                                           f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Hue"))?.Select(m => m.GetInt("_Hue").ToString()) != null
+                                           ?
+                                           String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.HasProperty("_Hue"))?.Select(m => m.GetInt("_Hue").ToString()))
+                                           :
+                                           null,
+                                    ID = f.Value?.PermanentId,
+                                    NAME = f.Value?.name,
+                                    STONESTATE = (int?)Utils.GetInstanceField(f.Value?.GetComponent<StoneStateHandler>(), "IKKDABEEPAF"),
+                                    TEXTURE =
+                                           f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.mainTexture != null).Select(m => m.mainTexture.name) != null
+                                           ?
+                                           String.Join(",", f.Value?.GetComponentInChildren<Renderer>()?.materials?.Where(m => m != null && m.mainTexture != null).Select(m => m.mainTexture.name))
+                                           :
+                                           null,
+                                    TREESTATE = (int?)Utils.GetInstanceField(f.Value?.GetComponent<TreeStateHandler>(), "IKKDABEEPAF"),
+                                    X = f.Value?.transform?.position.x,
+                                    Y = f.Value?.transform?.position.y,
+                                    Z = f.Value?.transform?.position.z,
+                                })
+                                .OrderBy(f => f.DISTANCE)
+                                .ToArray();
                             } catch (Exception ex)
                             {
                                 this.FindPermanentResults = null;
@@ -350,7 +352,8 @@ namespace LOU
                                     panels?.Select(f => new ClientStatus.FINDPANELStruct()
                                     {
                                         ID = f.Key
-                                    });
+                                    })
+                                    .ToArray();
                             } catch (Exception ex)
                             {
                                 this.FindPanelResults = null;
@@ -547,7 +550,7 @@ namespace LOU
                                 }
                             }
 
-                            this.FindButtonResults = buttons;
+                            this.FindButtonResults = buttons.ToArray();
 
                             watch.Stop();
                             Utils.Log("FindButton took " + watch.ElapsedMilliseconds.ToString() + "ms");
@@ -591,7 +594,7 @@ namespace LOU
                                 }
                             }
 
-                            this.FindInputResults = inputs;
+                            this.FindInputResults = inputs.ToArray();
 
                             watch.Stop();
                             Utils.Log("FindInput took " + watch.ElapsedMilliseconds.ToString() + "ms");
@@ -1562,13 +1565,13 @@ namespace LOU
 
             // Find
 
-            ClientStatus.Find.FINDBUTTON = this.FindButtonResults?.ToArray();
-            ClientStatus.Find.FINDINPUT = this.FindInputResults?.ToArray();
-            ClientStatus.Find.FINDITEM = this.FindItemResults?.ToArray();
-            ClientStatus.Find.FINDLABEL = this.FindLabelResults?.ToArray();
-            ClientStatus.Find.FINDMOBILE = this.FindMobileResults?.ToArray();
-            ClientStatus.Find.FINDPANEL = this.FindPanelResults?.ToArray();
-            ClientStatus.Find.FINDPERMANENT = this.FindPermanentResults?.ToArray();
+            ClientStatus.Find.FINDBUTTON = this.FindButtonResults;
+            ClientStatus.Find.FINDINPUT = this.FindInputResults;
+            ClientStatus.Find.FINDITEM = this.FindItemResults;
+            ClientStatus.Find.FINDLABEL = this.FindLabelResults;
+            ClientStatus.Find.FINDMOBILE = this.FindMobileResults;
+            ClientStatus.Find.FINDPANEL = this.FindPanelResults;
+            ClientStatus.Find.FINDPERMANENT = this.FindPermanentResults;
 
             // Client Info
 
