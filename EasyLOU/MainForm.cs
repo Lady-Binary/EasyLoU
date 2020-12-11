@@ -1,4 +1,4 @@
-﻿using ICSharpCode.TextEditor;
+using ICSharpCode.TextEditor;
 using LOU;
 using Microsoft.Win32;
 using SharpMonoInjector;
@@ -11,7 +11,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
+using menelabs.core;
 
 namespace EasyLOU
 {
@@ -381,11 +383,19 @@ namespace EasyLOU
                 {
                     String filePath = openFileDialog.FileName;
                     String fileName = Path.GetFileName(filePath);
+                    String directryName = Path.GetDirectoryName(filePath);
                     DoNew();
                     ScriptsTab.SelectedTab.Text = fileName;
                     TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
                     ScriptTextArea.Tag = filePath;
                     ScriptTextArea.LoadFile(filePath);
+
+                    FileSystemSafeWatcher watcher = new FileSystemSafeWatcher();
+                    watcher.Path = directryName;
+                    watcher.Filter = fileName;
+                    watcher.NotifyFilter = NotifyFilters.LastWrite;
+                    watcher.Changed += OnFileChanged;
+                    watcher.EnableRaisingEvents = true;
                 }
             }
             catch (Exception ex)
@@ -395,9 +405,77 @@ namespace EasyLOU
 
         }
 
+        private void OnFileChanged(object source, FileSystemEventArgs e)
+        {
+            foreach (TabPage tabPageCollection in ScriptsTab.TabPages)
+            {
+                Control[] Controls = tabPageCollection.Controls.Find("ScriptTextArea", true);
+                if (Controls.Count() > 0)
+                {
+                    ScriptTextArea = (TextEditorControlEx)Controls[0];
+                    if (ScriptTextArea.FileName == e.FullPath) {
+                        if (Settings.getAutoReloadFromDisk())
+                        {
+                            LoadFileThreadSafe(ScriptTextArea, "LoadFile", ScriptTextArea.FileName);
+                            PrintGlobalOutput("File: " + ScriptTextArea.FileName + " reloaded from disk");
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+        private delegate void LoadFileThreadSafeDelegate(TextEditorControlEx control, string propertyName, string propertyValue);
+        public static void LoadFileThreadSafe(TextEditorControlEx control, string propertyName, string propertyValue)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new LoadFileThreadSafeDelegate(LoadFileThreadSafe), new object[] { control, propertyName, propertyValue });
+            }
+            else
+            {
+                do
+                {
+                    Thread.Sleep(100);
+                }
+                while (IsFileLocked(control.FileName));
+
+                control.LoadFile(control.FileName);
+            }
+        }
+
+        private static bool IsFileLocked(String filePath)
+        {
+            FileInfo file = new FileInfo(filePath);
+            FileStream stream = null;
+
+            try
+            {
+                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+
+            return false;
+        }
+
         private void DoReopen()
         {
-            MessageBoxEx.Show(MainForm.TheMainForm, "Not implemented!");
+            TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
+
+            var confirmResult =  MessageBoxEx.Show(MainForm.TheMainForm, "Are you sure you want to reload " + ScriptTextArea.FileName + " from disk?", "Confirm reload", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                ScriptTextArea.LoadFile(ScriptTextArea.FileName);
+            }
         }
 
         private void DoSave()
@@ -1478,6 +1556,43 @@ namespace EasyLOU
                         ((TextBox)ScriptOutput[0]).AppendText(s + Environment.NewLine);
                     }
                     return;
+                }
+            }
+        }
+
+        public delegate void PrintGlobalOutputDelegate(String s);
+        public void PrintGlobalOutput(String s)
+        {
+            Control[] ScriptOutputs = Controls.Find("ScriptOutput", true);
+            foreach (TextBox ScriptOutput in ScriptOutputs)
+            {
+                if (ScriptOutput != null)
+                {
+                    if (ScriptOutput.Text.Length > 1024 * 1024 * 100)
+                    {
+                        PrintGlobalThreadSafe(ScriptOutput, "Text", ScriptOutput.Text.Remove(0, 1024 * 1024 * 1));
+                    }
+                    PrintGlobalThreadSafe(ScriptOutput, "AppendText", s + Environment.NewLine);
+                }
+            }
+        }
+
+        private delegate void PrintGlobalThreadSafeDelegate(TextBox control, string propertyName, string propertyValue);
+        public static void PrintGlobalThreadSafe(TextBox control, string propertyName, string propertyValue)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new PrintGlobalThreadSafeDelegate(PrintGlobalThreadSafe), new object[] { control, propertyName, propertyValue });
+            }
+            else
+            {
+                if(propertyName == "Text")
+                {
+                    control.Text = propertyValue;
+                }
+                if (propertyName == "AppendText")
+                {
+                    control.AppendText(propertyValue);
                 }
             }
         }

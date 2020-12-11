@@ -48,6 +48,7 @@
             this.StopScriptHotkeyLabel = new System.Windows.Forms.Label();
             this.StartScriptHotkeyAltModifierCheckBox = new System.Windows.Forms.CheckBox();
             this.StopAllScriptsHotkeyAltModifierCheckBox = new System.Windows.Forms.CheckBox();
+            this.AutoReloadFromDiskCheckBox = new System.Windows.Forms.CheckBox();
             this.SettingsOkButton = new System.Windows.Forms.Button();
             this.SettingsCancelButton = new System.Windows.Forms.Button();
             this.SettingsTableLayoutPanel.SuspendLayout();
@@ -88,8 +89,9 @@
             this.SettingsTableLayoutPanel.Controls.Add(this.StopScriptHotkeyLabel, 0, 1);
             this.SettingsTableLayoutPanel.Controls.Add(this.StartScriptHotkeyAltModifierCheckBox, 2, 0);
             this.SettingsTableLayoutPanel.Controls.Add(this.StopAllScriptsHotkeyAltModifierCheckBox, 2, 2);
-            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsOkButton, 5, 3);
-            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsCancelButton, 4, 3);
+            this.SettingsTableLayoutPanel.Controls.Add(this.AutoReloadFromDiskCheckBox, 0, 3);
+            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsOkButton, 5, 4);
+            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsCancelButton, 4, 4);
             this.SettingsTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SettingsTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.SettingsTableLayoutPanel.Name = "SettingsTableLayoutPanel";
@@ -275,6 +277,16 @@
             this.StopAllScriptsHotkeyAltModifierCheckBox.Text = "Alt";
             this.StopAllScriptsHotkeyAltModifierCheckBox.UseVisualStyleBackColor = true;
             // 
+            // AutoReloadFromDiskCheckBox
+            // 
+            this.AutoReloadFromDiskCheckBox.AutoSize = true;
+            this.AutoReloadFromDiskCheckBox.Location = new System.Drawing.Point(303, 71);
+            this.AutoReloadFromDiskCheckBox.Name = "AutoReloadFromDiskCheckBox";
+            this.AutoReloadFromDiskCheckBox.Size = new System.Drawing.Size(38, 17);
+            this.AutoReloadFromDiskCheckBox.TabIndex = 14;
+            this.AutoReloadFromDiskCheckBox.Text = "Auto reload from disk";
+            this.AutoReloadFromDiskCheckBox.UseVisualStyleBackColor = true;
+            // 
             // SettingsOkButton
             // 
             this.SettingsOkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -340,5 +352,6 @@
         private System.Windows.Forms.CheckBox StartScriptHotkeyShiftModifierCheckBox;
         private System.Windows.Forms.CheckBox StartScriptHotkeyControlModifierCheckBox;
         private System.Windows.Forms.CheckBox StopAllScriptsHotkeyAltModifierCheckBox;
+        private System.Windows.Forms.CheckBox AutoReloadFromDiskCheckBox;
     }
 }

@@ -24,6 +24,9 @@ namespace EasyLOU
         public static Keys StopAllScriptsHotkey = Keys.F10;
         public static int StopAllScriptsHotkeyModifiers = (int)KeyModifiers.None;
 
+        public static Boolean AutoReloadFromDisk = false;
+
+
         public Settings()
         {
             InitializeComponent();
@@ -47,6 +50,17 @@ namespace EasyLOU
 
             StopAllScriptsHotkey = (Keys)Enum.Parse(typeof(Keys), (string)EasyLOUKey.GetValue("StopAllScriptsHotkey", "None"));
             StopAllScriptsHotkeyModifiers = (int)EasyLOUKey.GetValue("StopAllScriptsHotkeyModifiers", KeyModifiers.None);
+
+            var AutoReloadFromDiskValue = EasyLOUKey.GetValue("AutoReloadFromDisk", false);
+            if (AutoReloadFromDiskValue == null)
+            {
+                AutoReloadFromDisk = false;
+            }
+            else
+            {
+                AutoReloadFromDisk = Convert.ToBoolean(AutoReloadFromDiskValue);
+            }
+            
         }
 
         public static void SaveSettings()
@@ -67,6 +81,8 @@ namespace EasyLOU
 
             EasyLOUKey.SetValue("StopAllScriptsHotkey", StopAllScriptsHotkey);
             EasyLOUKey.SetValue("StopAllScriptsHotkeyModifiers", StopAllScriptsHotkeyModifiers);
+
+            EasyLOUKey.SetValue("AutoReloadFromDisk", AutoReloadFromDisk, RegistryValueKind.DWord);
         }
 
         public static void RegisterHotkeys(IntPtr Handle)
@@ -133,6 +149,9 @@ namespace EasyLOU
             StopAllScriptsHotkeyControlModifierCheckBox.Checked = (StopAllScriptsHotkeyModifiers & (int)KeyModifiers.Control) > 0;
             StopAllScriptsHotkeyShiftModifierCheckBox.Checked = (StopAllScriptsHotkeyModifiers & (int)KeyModifiers.Shift) > 0;
             StopAllScriptsHotkeyWindowsModifierCheckBox.Checked = (StopAllScriptsHotkeyModifiers & (int)KeyModifiers.Windows) > 0;
+
+            AutoReloadFromDiskCheckBox.Checked = AutoReloadFromDisk ? (bool)AutoReloadFromDisk : (bool)false;
+
         }
 
         private void SettingsOkButton_Click(object sender, EventArgs e)
@@ -158,6 +177,8 @@ namespace EasyLOU
             if (StopAllScriptsHotkeyShiftModifierCheckBox.Checked) StopAllScriptsHotkeyModifiers |= (int)KeyModifiers.Shift;
             if (StopAllScriptsHotkeyWindowsModifierCheckBox.Checked) StopAllScriptsHotkeyModifiers |= (int)KeyModifiers.Windows;
 
+            AutoReloadFromDisk = AutoReloadFromDiskCheckBox.Checked;
+
             SaveSettings();
 
             UnregisterHotkeys(HotkeysWindowHandle);
@@ -169,6 +190,28 @@ namespace EasyLOU
         private void SettingsCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public static Boolean getAutoReloadFromDisk()
+        {
+            RegistryKey SoftwareKey = Registry.CurrentUser.OpenSubKey("Software", true);
+
+            RegistryKey EasyLOUKey = SoftwareKey.OpenSubKey("EasyLOU", true);
+            if (EasyLOUKey == null)
+            {
+                EasyLOUKey = SoftwareKey.CreateSubKey("EasyLOU", true);
+            }
+
+            var AutoReloadFromDiskValue = EasyLOUKey.GetValue("AutoReloadFromDisk", false);
+
+            if (AutoReloadFromDiskValue == null)
+            {
+                return false;
+            }
+            else
+            {
+               return Convert.ToBoolean(AutoReloadFromDiskValue);
+            }
         }
     }
 }
