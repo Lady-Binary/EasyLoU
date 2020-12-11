@@ -510,11 +510,18 @@ namespace EasyLOU
                             saveFileDialog.FileNames.Length > 0)
                 {
                     String filePath = saveFileDialog.FileName;
+                    String directryName = Path.GetDirectoryName(filePath);
                     String fileName = Path.GetFileName(filePath);
                     TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
                     ScriptTextArea.Tag = filePath;
                     ScriptTextArea.SaveFile(filePath);
                     ScriptsTab.SelectedTab.Text = fileName;
+                    FileSystemSafeWatcher watcher = new FileSystemSafeWatcher();
+                    watcher.Path = directryName;
+                    watcher.Filter = fileName;
+                    watcher.NotifyFilter = NotifyFilters.LastWrite;
+                    watcher.Changed += OnFileChanged;
+                    watcher.EnableRaisingEvents = true;
                 }
             }
             catch (Exception ex)
