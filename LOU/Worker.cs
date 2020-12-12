@@ -1,4 +1,4 @@
-﻿using CoreUtil;
+using CoreUtil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -363,6 +363,23 @@ namespace LOU
 
                             watch.Stop();
                             Utils.Log("FindPanel took " + watch.ElapsedMilliseconds.ToString() + "ms");
+                            break;
+                        }
+
+                    case CommandType.ClosePanel:
+                        {
+                            var watch = new System.Diagnostics.Stopwatch();
+                            watch.Start();
+
+                            string _panelnName = ExtractParam(ClientCommand.CommandParams, 0);
+
+                            FloatingPanelManager fpm = FloatingPanelManager.DJCGIMIDOPB;
+                            if (fpm != null)
+                            {
+                                FloatingPanel FloatingPanel = fpm.GetPanel(_panelnName);
+                                FloatingPanel.CloseWindow();
+                            }
+
                             break;
                         }
 
