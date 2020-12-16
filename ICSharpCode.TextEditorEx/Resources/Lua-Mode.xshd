@@ -275,6 +275,7 @@
         <Key word = "SetCustomVar" />
         <Key word = "ClearCustomVar" />
         <Key word = "Logout" />
+        <Key word = "ClosePanel" />
       </KeyWords>
 
     </RuleSet>
