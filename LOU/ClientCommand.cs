@@ -274,7 +274,8 @@ namespace LOU
         ResetVars,
         SetCustomVar,
         ClearCustomVar,
-        Logout
+        Logout,
+        ClosePanel
     }
 
     [ProtoContract]
