@@ -377,7 +377,10 @@ namespace LOU
                             if (fpm != null)
                             {
                                 FloatingPanel FloatingPanel = fpm.GetPanel(_panelnName);
-                                FloatingPanel.CloseWindow();
+                                if (FloatingPanel != null)
+                                {
+                                    FloatingPanel.CloseWindow();
+                                }
                             }
 
                             break;
