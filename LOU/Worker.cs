@@ -192,7 +192,6 @@ namespace LOU
             }
         }
 
-
         private void ProcessClientCommand(ClientCommand ClientCommand)
         {
             if (ClientCommand != null && ClientCommand.TimeStamp != LastClientCommandTimestamp && ClientCommand.CommandType != CommandType.NOP)
