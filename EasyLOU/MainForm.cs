@@ -1,5 +1,5 @@
 ﻿using ICSharpCode.TextEditor;
-using LOU;
+using LoU;
 using Microsoft.Win32;
 using SharpMonoInjector;
 using System;
@@ -1147,7 +1147,7 @@ namespace EasyLOU
         {
             var MonoModule = GetMonoModule(ProcessId);
 
-            String AssemblyPath = "LOU.dll";
+            String AssemblyPath = "LoU.dll";
 
             IntPtr handle = Native.OpenProcess(ProcessAccessRights.PROCESS_ALL_ACCESS, false, ProcessId);
 
@@ -1177,7 +1177,7 @@ namespace EasyLOU
             {
                 try
                 {
-                    IntPtr asm = injector.Inject(file, "LOU", "Loader", "Load");
+                    IntPtr asm = injector.Inject(file, "LoU", "Loader", "Load");
                     MainStatusLabel.ForeColor = Color.Orange;
                     MainStatusLabel.Text = "Injection on " + ProcessId.ToString() + " successful";
                 }
@@ -1441,20 +1441,20 @@ namespace EasyLOU
             string postfix = "\" />";
             Console.WriteLine("RefreshKeywords()");
 
-            string s = string.Join(",", Enum.GetNames(typeof(LOU.CommandType)));
+            string s = string.Join(",", Enum.GetNames(typeof(LoU.CommandType)));
 
-            foreach (String c in Enum.GetNames(typeof(LOU.CommandType)))
+            foreach (String c in Enum.GetNames(typeof(LoU.CommandType)))
             {
                 Debug.Print("- [" + c + "](#" + c + ")");
             }
 
-            foreach (String c in Enum.GetNames(typeof(LOU.CommandType)))
+            foreach (String c in Enum.GetNames(typeof(LoU.CommandType)))
             {
                 Debug.Print("## " + c);
                 Debug.Print("Description");
             }
 
-            foreach (String c in Enum.GetNames(typeof(LOU.CommandType)))
+            foreach (String c in Enum.GetNames(typeof(LoU.CommandType)))
             {
                 Debug.Print(prefix + c + postfix);
             }

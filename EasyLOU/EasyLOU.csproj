@@ -185,6 +185,10 @@
       <Project>{2d18be89-d210-49eb-a9dd-2246fbb3df6d}</Project>
       <Name>ICSharpCode.TextEditorEx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LoU\LoU.csproj">
+      <Project>{99e17151-042b-499d-b752-5b185ab289fa}</Project>
+      <Name>LoU</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoonSharp.Interpreter\MoonSharp.Interpreter.net35-client.csproj">
       <Project>{91ea9b9d-fe03-4273-bdaf-8ad42ede1e59}</Project>
       <Name>MoonSharp.Interpreter.net35-client</Name>
