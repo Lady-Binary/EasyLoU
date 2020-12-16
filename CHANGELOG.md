@@ -1,5 +1,13 @@
 # Changelog
 
+## LoA 1.4.0.0 - EasyLOU 1.1.0.8 (16/12/2020)
+
+#### Enhancements:
+
+- New ClosePanel() command [#128](https://github.com/Lady-Binary/EasyLOU/issues/128)
+
+---
+
 ## LoA 1.3.0.0 - EasyLOU 1.1.0.7 (07/12/2020)
 
 #### Bugfixes:
@@ -251,9 +259,4 @@
 ---
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.13 (22/07/2020)
-*No changelog for this release.*
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.12 (22/07/2020)
 *No changelog for this release.*
