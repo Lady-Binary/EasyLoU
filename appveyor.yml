@@ -11,7 +11,7 @@ image: Visual Studio 2017
 configuration: Release
 clone_folder: c:\EasyLoU
 install:
-  - ps: git pull --recurse-submodules
+  - ps: git submodule update --init --recursive
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
