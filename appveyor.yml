@@ -3,7 +3,7 @@ pull_requests:
   do_not_increment_build_number: true
 branches:
   only:
-  - master
+  - main
 skip_tags: true
 skip_commits:
   message: /bump version and update changelog/
@@ -89,7 +89,7 @@ deploy:
     secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
   artifact: EasyLoU-$(APPVEYOR_BUILD_VERSION).zip
   on:
-    branch: master
+    branch: main
 after_deploy:
 - ps: >-
     npm install github-release-notes -g
@@ -107,7 +107,7 @@ after_deploy:
 
     git config --global user.name "AppVeyor"
     
-    git checkout master -q
+    git checkout main -q
 
     git add CHANGELOG.md
 
