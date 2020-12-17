@@ -1,3 +1,3 @@
 [submodule "LoU"]
 	path = LoU
-	url = git@github.com:Lady-Binary/LoU.git
+	url = https://github.com/Lady-Binary/LoU.git
