@@ -24,6 +24,9 @@ environment:
 cache: c:\downloads
 before_build:
 - ps: >-
+    git pull --recurse-submodules
+
+
     if (!(Test-Path "c:\downloads")) {
       mkdir c:\downloads
     }
