@@ -10,6 +10,8 @@ skip_commits:
 image: Visual Studio 2017
 configuration: Release
 clone_folder: c:\EasyLoU
+install:
+  - ps: git pull --recurse-submodules
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -24,9 +26,6 @@ environment:
 cache: c:\downloads
 before_build:
 - ps: >-
-    git pull --recurse-submodules
-
-
     if (!(Test-Path "c:\downloads")) {
       mkdir c:\downloads
     }
