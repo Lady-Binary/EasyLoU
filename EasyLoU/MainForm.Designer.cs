@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EasyLOU
+namespace EasyLoU
 {
     partial class MainForm
     {
@@ -801,7 +801,7 @@ namespace EasyLOU
             // pinToolStripButton
             // 
             this.pinToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pinToolStripButton.Image = global::EasyLOU.Properties.Resources.pin_black;
+            this.pinToolStripButton.Image = global::EasyLoU.Properties.Resources.pin_black;
             this.pinToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pinToolStripButton.Name = "pinToolStripButton";
             this.pinToolStripButton.Size = new System.Drawing.Size(28, 28);
@@ -1096,7 +1096,7 @@ namespace EasyLOU
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
-            this.Text = "EasyLOU";
+            this.Text = "EasyLoU";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

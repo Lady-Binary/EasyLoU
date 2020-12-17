@@ -1,4 +1,4 @@
-﻿namespace EasyLOU
+﻿namespace EasyLoU
 {
     partial class Settings
     {

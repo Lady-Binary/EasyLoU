@@ -1,4 +1,4 @@
-﻿using LOU;
+﻿using LoU;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Debugging;
 using MoonSharp.Interpreter.Loaders;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading;
 using MoonSharp.Interpreter.Interop.Converters;
 
-namespace EasyLOU
+namespace EasyLoU
 {
     class ScriptDebugger : IDebugger
     {
@@ -86,7 +86,7 @@ namespace EasyLOU
             var arguments = args.GetArray();
             // do stuff
 
-            ClientCommand Command = new ClientCommand((LOU.CommandType)Enum.Parse(typeof(LOU.CommandType), name));
+            ClientCommand Command = new ClientCommand((LoU.CommandType)Enum.Parse(typeof(LoU.CommandType), name));
             for (int i = 0; i < arguments.Length; i++)
             {
                 switch (arguments[i].Type)

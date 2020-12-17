@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace EasyLOU
+namespace EasyLoU
 {
     static class Program
     {
