@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace EasyLOU
+namespace EasyLoU
 {
     public partial class MainForm : Form
     {
@@ -41,7 +41,7 @@ namespace EasyLOU
         {
             MainForm.TheMainForm = this;
             InitializeComponent();
-            this.Text = "EasyLOU - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            this.Text = "EasyLoU - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             Settings.LoadSettings();
             Settings.RegisterHotkeys(this.Handle);
@@ -674,12 +674,12 @@ namespace EasyLOU
 
         private void DoHelp()
         {
-            System.Diagnostics.Process.Start("https://lmgtfy.com/?q=easylou+help");
+            System.Diagnostics.Process.Start("https://lmgtfy.com/?q=EasyLoU+help");
         }
 
         private void DoWebsite()
         {
-            System.Diagnostics.Process.Start("https://lmgtfy.com/?q=easylou+website");
+            System.Diagnostics.Process.Start("https://lmgtfy.com/?q=EasyLoU+website");
         }
 
         private void DoConnectToClient()
@@ -1066,7 +1066,7 @@ namespace EasyLOU
         {
             if (!MainStatusLabel.Text.StartsWith("Connected to"))
             {
-                if (MessageBoxEx.Show(MainForm.TheMainForm, "EasyLOU not connected to any client. Run this script anyway?", "Client not connected", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                if (MessageBoxEx.Show(MainForm.TheMainForm, "EasyLoU not connected to any client. Run this script anyway?", "Client not connected", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 {
                     return;
                 }
@@ -1082,12 +1082,12 @@ namespace EasyLOU
 
         private void HelpToolStripButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/Lady-Binary/EasyLOU/issues");
+            System.Diagnostics.Process.Start("https://github.com/Lady-Binary/EasyLoU/issues");
         }
 
         private void HomeToolStripButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/Lady-Binary/EasyLOU");
+            System.Diagnostics.Process.Start("https://github.com/Lady-Binary/EasyLoU");
         }
 
 
@@ -1198,12 +1198,12 @@ namespace EasyLOU
         {
             RegistryKey SoftwareKey = Registry.CurrentUser.OpenSubKey("Software", true);
 
-            RegistryKey key = SoftwareKey.OpenSubKey("EasyLOU", true);
+            RegistryKey key = SoftwareKey.OpenSubKey("EasyLoU", true);
 
             if (key == null)
             {
-                SoftwareKey.CreateSubKey("EasyLOU");
-                key = SoftwareKey.OpenSubKey("EasyLOU", true);
+                SoftwareKey.CreateSubKey("EasyLoU");
+                key = SoftwareKey.OpenSubKey("EasyLoU", true);
             }
 
             return key.GetValue("ExePath");
@@ -1213,12 +1213,12 @@ namespace EasyLOU
         {
             RegistryKey SoftwareKey = Registry.CurrentUser.OpenSubKey("Software", true);
 
-            RegistryKey key = SoftwareKey.OpenSubKey("EasyLOU", true);
+            RegistryKey key = SoftwareKey.OpenSubKey("EasyLoU", true);
 
             if (key == null)
             {
-                SoftwareKey.CreateSubKey("EasyLOU");
-                key = SoftwareKey.OpenSubKey("EasyLOU", true);
+                SoftwareKey.CreateSubKey("EasyLoU");
+                key = SoftwareKey.OpenSubKey("EasyLoU", true);
             }
 
             key.SetValue(KeyName, KeyValue);

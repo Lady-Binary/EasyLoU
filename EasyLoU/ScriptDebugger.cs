@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading;
 using MoonSharp.Interpreter.Interop.Converters;
 
-namespace EasyLOU
+namespace EasyLoU
 {
     class ScriptDebugger : IDebugger
     {

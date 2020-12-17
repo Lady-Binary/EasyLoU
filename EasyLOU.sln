@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyLOU", "EasyLOU\EasyLOU.csproj", "{FA306F00-F6FE-485B-BDFD-6B05B89D4799}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyLoU", "EasyLoU\EasyLoU.csproj", "{FA306F00-F6FE-485B-BDFD-6B05B89D4799}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonSharp.Interpreter.net35-client", "MoonSharp.Interpreter\MoonSharp.Interpreter.net35-client.csproj", "{91EA9B9D-FE03-4273-BDAF-8AD42EDE1E59}"
 EndProject

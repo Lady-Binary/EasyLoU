@@ -97,7 +97,7 @@
         <Key word = "while" />
       </KeyWords>
 
-      <KeyWords name = "EasyLOUVars"
+      <KeyWords name = "EasyLoUVars"
             bold="true"
             italic="false"
             color="Green">
@@ -227,7 +227,7 @@
         <Key word = "TOOLTIPTEXT" />
       </KeyWords>
 
-      <KeyWords name = "EasyLOUCommands"
+      <KeyWords name = "EasyLoUCommands"
             bold="true"
             italic="false"
             color="DarkOrange">
