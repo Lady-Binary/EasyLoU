@@ -1,4 +1,4 @@
-version: 1.1.0.{build}
+version: 1.2.0.{build}
 pull_requests:
   do_not_increment_build_number: true
 branches:
@@ -9,7 +9,7 @@ skip_commits:
   message: /bump version and update changelog/
 image: Visual Studio 2017
 configuration: Release
-clone_folder: c:\EasyLOU
+clone_folder: c:\EasyLoU
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -17,7 +17,7 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 environment:
-  LOA_VERSION: 1.0.0.4
+  LOA_VERSION: 1.4.0.0
   GITHUB_TOKEN:
     secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
   nodejs_version: 10.21.0
@@ -60,32 +60,32 @@ before_build:
 
     # copy dlls to the libs folder
 
-    cp c:\downloads\*.dll $pwd\LOU\libs\
+    cp c:\downloads\*.dll $pwd\LoU\libs\
 
-    ls $pwd\LOU\libs\
+    ls $pwd\LoU\libs\
 
 
     # nuget restore needed for some projects
 
     nuget restore
 build:
-  project: c:\EasyLOU\EasyLOU.sln
+  project: c:\EasyLoU\EasyLoU.sln
   verbosity: minimal
 after_build:
 - ps: >-
-    $artifact = "EasyLOU-$env:APPVEYOR_BUILD_VERSION.zip"
+    $artifact = "EasyLoU-$env:APPVEYOR_BUILD_VERSION.zip"
 
 
-    7z a -tzip $artifact $pwd\Examples\ $pwd\EasyLOU\bin\Release\ILMerge\EasyLOU.exe $pwd\EasyLOU\bin\Release\LOU.dll
+    7z a -tzip $artifact $pwd\Examples\ $pwd\EasyLoU\bin\Release\ILMerge\EasyLoU.exe $pwd\EasyLoU\bin\Release\LoU.dll
 artifacts:
-- path: EasyLOU-$(APPVEYOR_BUILD_VERSION).zip
+- path: EasyLoU-$(APPVEYOR_BUILD_VERSION).zip
 deploy:
 - provider: GitHub
   tag: $(APPVEYOR_BUILD_VERSION)
-  release: EasyLOU v$(APPVEYOR_BUILD_VERSION) - Client v$(LOA_VERSION)
+  release: EasyLoU v$(APPVEYOR_BUILD_VERSION) - Client v$(LOA_VERSION)
   auth_token:
     secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
-  artifact: EasyLOU-$(APPVEYOR_BUILD_VERSION).zip
+  artifact: EasyLoU-$(APPVEYOR_BUILD_VERSION).zip
   on:
     branch: master
 after_deploy:
