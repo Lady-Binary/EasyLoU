@@ -6,7 +6,7 @@ using System.Security.Permissions;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace EasyLOU
+namespace EasyLoU
 {
     [Flags]
     public enum KeyModifiers

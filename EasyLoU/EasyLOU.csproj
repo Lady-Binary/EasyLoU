@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FA306F00-F6FE-485B-BDFD-6B05B89D4799}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>EasyLOU</RootNamespace>
-    <AssemblyName>EasyLOU</AssemblyName>
+    <RootNamespace>EasyLoU</RootNamespace>
+    <AssemblyName>EasyLoU</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -185,9 +185,9 @@
       <Project>{2d18be89-d210-49eb-a9dd-2246fbb3df6d}</Project>
       <Name>ICSharpCode.TextEditorEx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LOU\LOU.csproj">
+    <ProjectReference Include="..\LoU\LoU.csproj">
       <Project>{99e17151-042b-499d-b752-5b185ab289fa}</Project>
-      <Name>LOU</Name>
+      <Name>LoU</Name>
     </ProjectReference>
     <ProjectReference Include="..\MoonSharp.Interpreter\MoonSharp.Interpreter.net35-client.csproj">
       <Project>{91ea9b9d-fe03-4273-bdaf-8ad42ede1e59}</Project>
