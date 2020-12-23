@@ -1,4 +1,4 @@
-﻿using LoU;
+using LoU;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Debugging;
 using MoonSharp.Interpreter.Loaders;
@@ -29,6 +29,7 @@ namespace EasyLoU
         private Thread ScriptThread;
         private Script Script;
         private List<DynamicExpression> m_Dynamics = new List<DynamicExpression>();
+        private Dictionary<String, Boolean> PreviousKeyPresses;
 
         public object varsLock = new object();
         public Dictionary<string, string> vars = new Dictionary<string, string>();
@@ -38,7 +39,8 @@ namespace EasyLoU
             this.MainForm = MainForm;
             this.Guid = Guid;
             this.Name = Name;
-        }
+            PreviousKeyPresses = new Dictionary<String, Boolean>();
+    }
 
         void WaitForTarget(int? millisecondsTimeout = 5000)
         {
@@ -58,6 +60,35 @@ namespace EasyLoU
             }
 
             return;
+        }
+
+        DynValue GetHotKey(string key)
+        {
+            foreach(ClientStatus.HOTKEYStruct hotkey in MainForm.ClientStatus.Miscellaneous.HOTKEYS)
+            {
+                if(hotkey.KEY == key)
+                {
+                    return DynValue.NewBoolean(hotkey.VALUE);
+                }
+            }
+            return DynValue.NewBoolean(false);
+        }
+
+        DynValue GetKeyPress(string key)
+        {
+
+            bool newValue = GetHotKey(key).Boolean;
+          
+            if (!PreviousKeyPresses.ContainsKey(key) || newValue != PreviousKeyPresses[key]) {
+                PreviousKeyPresses[key] = GetHotKey(key).Boolean;
+                if (newValue == true)
+                {
+                    return DynValue.NewBoolean(true);
+                }
+            }
+
+            return DynValue.NewBoolean(false);
+
         }
 
         void Sleep(int millisecondsTimeout)
@@ -273,6 +304,9 @@ namespace EasyLoU
                                     this.Script.Globals[s.ToString()] = DynValue.NewCallback(CallBack, s.ToString());
                                 }
                                 this.Script.Globals["WaitForTarget"] = (Action<int?>)WaitForTarget; // Override: this is implemented client side
+                                this.Script.Globals["GetHotKey"] = (Func<string, DynValue>)GetHotKey; // Override: this is implemented client side
+                                this.Script.Globals["GetKeyPress"] = (Func<string, DynValue>)GetKeyPress; // Override: this is implemented client side
+
 
                                 // LOU status variables
                                 UserData.RegisterType<ClientStatus.FINDBUTTONStruct>();
@@ -284,6 +318,7 @@ namespace EasyLoU
                                 UserData.RegisterType<ClientStatus.FINDPERMANENTStruct>();
                                 UserData.RegisterType<ClientStatus.OBJStruct>();
                                 UserData.RegisterType<ClientStatus.NEARBYMONSTERStruct>();
+                                UserData.RegisterType<ClientStatus.HOTKEYStruct>();
  
                                 this.Script.Globals.MetaTable = new Table(this.Script);
                                 this.Script.Globals.MetaTable["__index"] = (Func<Table, DynValue, DynValue>)VarCallBack;

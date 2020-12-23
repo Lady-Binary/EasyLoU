@@ -225,6 +225,7 @@
         <Key word = "TARGETTYPE" />
         <Key word = "TIME" />
         <Key word = "TOOLTIPTEXT" />
+        <Key word = "HOTKEYS" />     
       </KeyWords>
 
       <KeyWords name = "EasyLoUCommands"
@@ -276,6 +277,9 @@
         <Key word = "ClearCustomVar" />
         <Key word = "Logout" />
         <Key word = "ClosePanel" />
+        <Key word = "RegisterHotKey" />
+        <Key word = "GetHotKey" />
+        <Key word = "GetKeyPress" />
       </KeyWords>
 
     </RuleSet>
