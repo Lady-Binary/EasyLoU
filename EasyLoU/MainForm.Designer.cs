@@ -908,7 +908,7 @@ namespace EasyLoU
             // TimerReadClientStatus
             // 
             this.TimerReadClientStatus.Enabled = true;
-            this.TimerReadClientStatus.Interval = 1000;
+            this.TimerReadClientStatus.Interval = 10;
             this.TimerReadClientStatus.Tick += new System.EventHandler(this.TimerReadClientStatus_Tick);
             // 
             // MainSplit
