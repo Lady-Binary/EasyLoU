@@ -280,6 +280,7 @@
         <Key word = "RegisterHotKey" />
         <Key word = "GetHotKey" />
         <Key word = "GetKeyPress" />
+        <Key word = "SetCommandsPerSecond" />
       </KeyWords>
 
     </RuleSet>
