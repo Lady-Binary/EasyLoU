@@ -276,6 +276,14 @@
         <Key word = "ClearCustomVar" />
         <Key word = "Logout" />
         <Key word = "ClosePanel" />
+        <Key word = "StopScript" />
+        <Key word = "StartScript" />
+        <Key word = "RestartScript" />
+        <Key word = "PauseScript" />
+        <Key word = "StopAllScripts" />
+        <Key word = "StopOtherScripts" />
+        <Key word = "StartAllScripts" />
+        
       </KeyWords>
 
     </RuleSet>
