@@ -1588,5 +1588,11 @@ namespace EasyLoU
                 this.onTopToggle = false;
             }
         }
+
+        public void setTimerReadClientStatusInterval(int value)
+        {
+            this.TimerReadClientStatus.Interval = value;
+            MainForm.TheMainForm.Invoke(new MainForm.ResetTimerReadClientStatusDelegate(MainForm.TheMainForm.ResetTimerReadClientStatus));
+        }
     }
 }

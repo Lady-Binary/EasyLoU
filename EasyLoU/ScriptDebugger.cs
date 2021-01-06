@@ -80,12 +80,18 @@ namespace EasyLoU
             this.MainForm.Invoke(new MainForm.ClearOutputDelegate(this.MainForm.ClearOutput), new object[] { this.Guid });
         }
 
-        static DynValue CallBack(ScriptExecutionContext ctx, CallbackArguments args)
+        DynValue CallBack(ScriptExecutionContext ctx, CallbackArguments args)
         {
             var name = ctx.m_Callback.Name;
+            
             var arguments = args.GetArray();
-            // do stuff
 
+            //Also set the update speed on the client if we're changing in the game.
+            if (name == "SetCommandsPerSecond" && arguments.Length > 0 && arguments[0].Type == DataType.Number)
+            {
+                this.SetCommandsPerSecond((int) arguments[0].Number);
+            }
+               
             ClientCommand Command = new ClientCommand((LoU.CommandType)Enum.Parse(typeof(LoU.CommandType), name));
             for (int i = 0; i < arguments.Length; i++)
             {
