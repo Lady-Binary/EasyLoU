@@ -589,13 +589,9 @@ namespace EasyLoU
             }
         }
 
-        public delegate void DoPlayDelegate(String guid = null);
-        public void DoPlay(String guid = null)
+        private void DoPlay()
         {
-            if (string.IsNullOrWhiteSpace(guid))
-            {
-                guid = ScriptsTab.SelectedTab.Tag.ToString();
-            }
+            String guid = ScriptsTab.SelectedTab.Tag.ToString();
             ScriptDebugger Debugger;
             if (ScriptDebuggers.ContainsKey(guid))
             {
