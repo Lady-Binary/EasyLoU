@@ -91,6 +91,11 @@ namespace EasyLoU
 
         }
 
+        void SetCommandsPerSecond(int value)
+        {
+            MainForm.setTimerReadClientStatusInterval(1000 / value);
+        }
+
         void Sleep(int millisecondsTimeout)
         {
             System.Threading.Thread.Sleep(millisecondsTimeout);
