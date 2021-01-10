@@ -74,7 +74,7 @@ namespace EasyLoU
             return DynValue.NewBoolean(false);
         }
 
-        DynValue GetKeyPress(string key)
+        DynValue OnHotKey(string key)
         {
             bool oldValue = PreviousKeyPresses.ContainsKey(key) && PreviousKeyPresses[key];
             bool newValue = IsHotKeyDown(key).Boolean;
@@ -306,7 +306,7 @@ namespace EasyLoU
                                 }
                                 this.Script.Globals["WaitForTarget"] = (Action<int?>)WaitForTarget; // Override: this is implemented client side
                                 this.Script.Globals["IsHotKeyDown"] = (Func<string, DynValue>)IsHotKeyDown; // Override: this is implemented client side
-                                this.Script.Globals["GetKeyPress"] = (Func<string, DynValue>)GetKeyPress; // Override: this is implemented client side
+                                this.Script.Globals["OnHotKey"] = (Func<string, DynValue>)OnHotKey; // Override: this is implemented client side
 
 
                                 // LOU status variables

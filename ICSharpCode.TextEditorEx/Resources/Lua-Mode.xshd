@@ -291,7 +291,7 @@
         <Key word = "ClosePanel" />
         <Key word = "RegisterHotKey" />
         <Key word = "IsHotKeyDown" />
-        <Key word = "GetKeyPress" />
+        <Key word = "OnHotKey" />
       </KeyWords>
 
     </RuleSet>
