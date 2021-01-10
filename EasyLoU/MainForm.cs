@@ -1589,6 +1589,7 @@ namespace EasyLoU
             }
         }
 
+        public delegate void setTimerReadClientStatusIntervalDelegate(int value);
         public void setTimerReadClientStatusInterval(int value)
         {
             this.TimerReadClientStatus.Interval = value;

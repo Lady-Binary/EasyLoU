@@ -89,7 +89,7 @@ namespace EasyLoU
 
         void SetCommandsPerSecond(int value)
         {
-            MainForm.setTimerReadClientStatusInterval(1000 / value);
+            this.MainForm.Invoke(new MainForm.setTimerReadClientStatusIntervalDelegate(this.MainForm.setTimerReadClientStatusInterval), new object[] { 1000 / value });
         }
 
         void Sleep(int millisecondsTimeout)
