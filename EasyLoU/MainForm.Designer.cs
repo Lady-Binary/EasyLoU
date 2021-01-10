@@ -908,7 +908,7 @@ namespace EasyLoU
             // TimerReadClientStatus
             // 
             this.TimerReadClientStatus.Enabled = true;
-            this.TimerReadClientStatus.Interval = 10;
+            this.TimerReadClientStatus.Interval = 100;
             this.TimerReadClientStatus.Tick += new System.EventHandler(this.TimerReadClientStatus_Tick);
             // 
             // MainSplit
@@ -1234,5 +1234,3 @@ namespace EasyLoU
         private System.Windows.Forms.ToolStripButton pinToolStripButton;
     }
 }
-
- 
