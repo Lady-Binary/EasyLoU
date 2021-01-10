@@ -76,15 +76,12 @@ namespace EasyLoU
 
         DynValue GetKeyPress(string key)
         {
-
+            bool oldValue = PreviousKeyPresses.ContainsKey(key) && PreviousKeyPresses[key];
             bool newValue = IsHotKeyDown(key).Boolean;
           
-            if (!PreviousKeyPresses.ContainsKey(key) || newValue != PreviousKeyPresses[key]) {
-                PreviousKeyPresses[key] = IsHotKeyDown(key).Boolean;
-                if (newValue == true)
-                {
-                    return DynValue.NewBoolean(true);
-                }
+            if (newValue != oldValue) {
+                PreviousKeyPresses[key] = newValue;
+                return DynValue.NewBoolean(newValue);
             }
 
             return DynValue.NewBoolean(false);
