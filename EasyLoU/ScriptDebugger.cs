@@ -87,9 +87,9 @@ namespace EasyLoU
             return DynValue.NewBoolean(false);
         }
 
-        void SetCommandsPerSecond(int value)
+        void SetSpeed(int value)
         {
-            this.MainForm.Invoke(new MainForm.setTimerReadClientStatusIntervalDelegate(this.MainForm.setTimerReadClientStatusInterval), new object[] { 1000 / value });
+            this.MainForm.Invoke(new MainForm.SetTimerReadClientStatusIntervalDelegate(this.MainForm.SetTimerReadClientStatusInterval), new object[] { 1000 / value });
         }
 
         void Sleep(int millisecondsTimeout)
@@ -119,9 +119,9 @@ namespace EasyLoU
             var arguments = args.GetArray();
 
             //Also set the update speed on the client if we're changing in the game.
-            if (name == "SetCommandsPerSecond" && arguments.Length > 0 && arguments[0].Type == DataType.Number)
+            if (name == "SetSpeed" && arguments.Length > 0 && arguments[0].Type == DataType.Number)
             {
-                this.SetCommandsPerSecond((int) arguments[0].Number);
+                this.SetSpeed((int) arguments[0].Number);
             }
                
             ClientCommand Command = new ClientCommand((LoU.CommandType)Enum.Parse(typeof(LoU.CommandType), name));

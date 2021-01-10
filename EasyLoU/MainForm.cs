@@ -1589,8 +1589,8 @@ namespace EasyLoU
             }
         }
 
-        public delegate void setTimerReadClientStatusIntervalDelegate(int value);
-        public void setTimerReadClientStatusInterval(int value)
+        public delegate void SetTimerReadClientStatusIntervalDelegate(int value);
+        public void SetTimerReadClientStatusInterval(int value)
         {
             this.TimerReadClientStatus.Interval = value;
             MainForm.TheMainForm.Invoke(new MainForm.ResetTimerReadClientStatusDelegate(MainForm.TheMainForm.ResetTimerReadClientStatus));
