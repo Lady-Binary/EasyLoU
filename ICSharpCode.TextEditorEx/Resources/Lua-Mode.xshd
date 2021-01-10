@@ -102,6 +102,8 @@
             italic="false"
             color="Green">
         <Key word = "Timestamp" />
+        
+        <!--Character Info-->
         <Key word = "BACKPACKID" />
         <Key word = "CHARBUFFS" />
         <Key word = "CHARDIR" />
@@ -123,6 +125,8 @@
         <Key word = "LEGSNAME" />
         <Key word = "RIGHTHANDID" />
         <Key word = "RIGHTHANDNAME" />
+        
+        <!--Status Bar-->
         <Key word = "AGI" />
         <Key word = "ATTACKSPEED" />
         <Key word = "DEFENSE" />
@@ -134,8 +138,12 @@
         <Key word = "STEALTH" />
         <Key word = "STR" />
         <Key word = "VITALITY" />
+
+        <!--Last Action-->
         <Key word = "COBJECTID" />
         <Key word = "LOBJECTID" />
+
+        <!--Find-->
         <Key word = "FINDBUTTON" />
         <Key word = ".NAME" />
         <Key word = ".TEXT" />
@@ -173,6 +181,8 @@
         <Key word = ".X" />
         <Key word = ".Y" />
         <Key word = ".Z" />
+
+        <!--Client Info-->
         <Key word = "CLIGAMESTATE" />
         <Key word = "CLIID" />
         <Key word = "CLIVER" />
@@ -183,6 +193,8 @@
         <Key word = "SERVER" />
         <Key word = "TARGETFRAMERATE" />
         <Key word = "VSYNCCOUNT" />
+
+        <!--Miscellaneous-->
         <Key word = "CLICKOBJ" />
         <Key word = "CLICKOBJ.OBJECTID" />
         <Key word = "CLICKOBJ.CNTID" />
@@ -197,6 +209,7 @@
         <Key word = "CLICKWORLDZ" />
         <Key word = "COMMANDID" />
         <Key word = "CUSTOMVARS" />
+        <Key word = "HOTKEYS" />
         <Key word = "MONSTERSNEARBY" />
         <Key word = "NEARBYMONSTERS" />
         <Key word = ".DISTANCE" />
@@ -224,8 +237,7 @@
         <Key word = "TARGETLOADING" />
         <Key word = "TARGETTYPE" />
         <Key word = "TIME" />
-        <Key word = "TOOLTIPTEXT" />
-        <Key word = "HOTKEYS" />     
+        <Key word = "TOOLTIPTEXT" /> 
       </KeyWords>
 
       <KeyWords name = "EasyLoUCommands"
