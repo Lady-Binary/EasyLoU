@@ -62,7 +62,7 @@ namespace EasyLoU
             return;
         }
 
-        DynValue GetHotKey(string key)
+        DynValue IsHotKeyDown(string key)
         {
             foreach(ClientStatus.HOTKEYStruct hotkey in MainForm.ClientStatus.Miscellaneous.HOTKEYS)
             {
@@ -77,10 +77,10 @@ namespace EasyLoU
         DynValue GetKeyPress(string key)
         {
 
-            bool newValue = GetHotKey(key).Boolean;
+            bool newValue = IsHotKeyDown(key).Boolean;
           
             if (!PreviousKeyPresses.ContainsKey(key) || newValue != PreviousKeyPresses[key]) {
-                PreviousKeyPresses[key] = GetHotKey(key).Boolean;
+                PreviousKeyPresses[key] = IsHotKeyDown(key).Boolean;
                 if (newValue == true)
                 {
                     return DynValue.NewBoolean(true);
@@ -88,7 +88,6 @@ namespace EasyLoU
             }
 
             return DynValue.NewBoolean(false);
-
         }
 
         void SetCommandsPerSecond(int value)
@@ -309,7 +308,7 @@ namespace EasyLoU
                                     this.Script.Globals[s.ToString()] = DynValue.NewCallback(CallBack, s.ToString());
                                 }
                                 this.Script.Globals["WaitForTarget"] = (Action<int?>)WaitForTarget; // Override: this is implemented client side
-                                this.Script.Globals["GetHotKey"] = (Func<string, DynValue>)GetHotKey; // Override: this is implemented client side
+                                this.Script.Globals["IsHotKeyDown"] = (Func<string, DynValue>)IsHotKeyDown; // Override: this is implemented client side
                                 this.Script.Globals["GetKeyPress"] = (Func<string, DynValue>)GetKeyPress; // Override: this is implemented client side
 
 
