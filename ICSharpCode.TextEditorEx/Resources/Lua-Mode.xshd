@@ -292,6 +292,7 @@
         <Key word = "RegisterHotKey" />
         <Key word = "IsHotKeyDown" />
         <Key word = "OnHotKey" />
+        <Key word = "SetSpeed" />
       </KeyWords>
 
     </RuleSet>
