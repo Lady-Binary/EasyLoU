@@ -10,10 +10,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using menelabs.core;
 
 namespace EasyLoU
 {
@@ -383,19 +383,12 @@ namespace EasyLoU
                 {
                     String filePath = openFileDialog.FileName;
                     String fileName = Path.GetFileName(filePath);
-                    String directryName = Path.GetDirectoryName(filePath);
                     DoNew();
                     ScriptsTab.SelectedTab.Text = fileName;
                     TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
-                    ScriptTextArea.Tag = filePath;
+                    string sha1 = CalcSha1(filePath);
+                    ScriptTextArea.Tag = new Tuple<string, string>(filePath, sha1);
                     ScriptTextArea.LoadFile(filePath);
-
-                    FileSystemSafeWatcher watcher = new FileSystemSafeWatcher();
-                    watcher.Path = directryName;
-                    watcher.Filter = fileName;
-                    watcher.NotifyFilter = NotifyFilters.LastWrite;
-                    watcher.Changed += OnFileChanged;
-                    watcher.EnableRaisingEvents = true;
                 }
             }
             catch (Exception ex)
@@ -405,26 +398,92 @@ namespace EasyLoU
 
         }
 
-        private void OnFileChanged(object source, FileSystemEventArgs e)
+        private static string CalcSha1(string filePath)
         {
-            foreach (TabPage tabPageCollection in ScriptsTab.TabPages)
+            try
             {
-                Control[] Controls = tabPageCollection.Controls.Find("ScriptTextArea", true);
-                if (Controls.Count() > 0)
+                using (FileStream fs = new FileStream(filePath, FileMode.Open))
+                using (BufferedStream bs = new BufferedStream(fs))
                 {
-                    ScriptTextArea = (TextEditorControlEx)Controls[0];
-                    if (ScriptTextArea.FileName == e.FullPath) {
-                        if (Settings.getAutoReloadFromDisk())
+                    using (SHA1Managed sha1 = new SHA1Managed())
+                    {
+                        byte[] hash = sha1.ComputeHash(bs);
+                        StringBuilder formatted = new StringBuilder(2 * hash.Length);
+                        foreach (byte b in hash)
                         {
-                            LoadFileThreadSafe(ScriptTextArea, "LoadFile", ScriptTextArea.FileName);
-                            PrintGlobalOutput("File: " + ScriptTextArea.FileName + " reloaded from disk");
+                            formatted.AppendFormat("{0:X2}", b);
                         }
+                        return formatted.ToString();
                     }
                 }
-
+            } catch (Exception ex)
+            {
+                return "";
             }
         }
 
+        private bool CheckFileChanged(int TabIndex)
+        {
+            TabPage ScriptPage = ScriptsTab.TabPages[TabIndex];
+            TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptPage.Controls.Find("ScriptTextArea", true)[0]);
+
+            if (ScriptTextArea.Tag != null && ScriptTextArea.Tag.ToString() != "new")
+            {
+                if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
+                {
+                    string filePath = Tag.Item1;
+                    string oldSha1 = Tag.Item2;
+                    string newSha1 = CalcSha1(filePath);
+                    if (oldSha1 != newSha1)
+                    {
+                        ScriptsTab.SelectedIndex = TabIndex;
+                        ScriptDebuggers.TryGetValue(ScriptPage.Tag.ToString(), out ScriptDebugger Debugger);
+                        DialogResult confirmResult;
+                        if (Debugger != null && (Debugger.Status == ScriptDebugger.DebuggerStatus.Paused || Debugger.Status == ScriptDebugger.DebuggerStatus.Running))
+                        {
+                            confirmResult = MessageBoxEx.Show(MainForm.TheMainForm, $"{ScriptTextArea.FileName} changed on disk. Stop it and reload it from disk?", "Confirm stop and reload", MessageBoxButtons.YesNo);
+                        }
+                        else
+                        {
+                            confirmResult = MessageBoxEx.Show(MainForm.TheMainForm, $"{ScriptTextArea.FileName} changed on disk. Reload it from disk?", "Confirm reload", MessageBoxButtons.YesNo);
+                        }
+                        if (confirmResult == DialogResult.Yes)
+                        {
+                            if (Debugger != null)
+                            {
+                                Debugger.Stop();
+                            }
+                            RefreshToolStripStatus();
+
+                            ScriptTextArea.LoadFile(ScriptTextArea.FileName);
+                            ScriptTextArea.Tag = new Tuple<string, string>(filePath, newSha1);
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool CheckAnyFileChanged()
+        {
+            bool FileChanged = false;
+
+            int SelectedTabIndex = ScriptsTab.SelectedIndex;
+            for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
+            {
+                try
+                {
+                    FileChanged = CheckFileChanged(TabIndex);
+                } catch (Exception ex)
+                {
+
+                }
+            }
+            ScriptsTab.SelectedIndex = SelectedTabIndex;
+
+            return FileChanged;
+        }
 
         private delegate void LoadFileThreadSafeDelegate(TextEditorControlEx control, string propertyName, string propertyValue);
         public static void LoadFileThreadSafe(TextEditorControlEx control, string propertyName, string propertyValue)
@@ -471,17 +530,28 @@ namespace EasyLoU
         {
             TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
 
-            var confirmResult =  MessageBoxEx.Show(MainForm.TheMainForm, "Are you sure you want to reload " + ScriptTextArea.FileName + " from disk?", "Confirm reload", MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
+            if (ScriptTextArea.Tag != null && ScriptTextArea.Tag.ToString() != "new")
             {
-                ScriptTextArea.LoadFile(ScriptTextArea.FileName);
+                if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
+                {
+                    var confirmResult = MessageBoxEx.Show(MainForm.TheMainForm, "Are you sure you want to reload " + ScriptTextArea.FileName + " from disk?", "Confirm reload", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        string filePath = Tag.Item1;
+                        string sha1 = CalcSha1(filePath);
+                        ScriptTextArea.Tag = new Tuple<string, string>(filePath, sha1);
+                        ScriptTextArea.LoadFile(ScriptTextArea.FileName);
+                        ScriptTextArea.Document.UndoStack.ClearAll();
+                        RefreshChangedStatus();
+                    }
+                }
             }
         }
 
         private void DoSave()
         {
             TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
-            if ("new" == ScriptTextArea.Tag.ToString())
+            if (ScriptTextArea.Tag != null && "new" == ScriptTextArea.Tag.ToString())
             {
                 DoSaveAs();
             }
@@ -489,9 +559,16 @@ namespace EasyLoU
             {
                 try
                 {
-                    ScriptTextArea.SaveFile(ScriptTextArea.Tag.ToString());
-                    ScriptTextArea.Document.UndoStack.ClearAll();
-                    RefreshChangedStatus();
+                    if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
+                    {
+                        string filePath = Tag.Item1;
+                        string oldSha1 = Tag.Item2;
+                        ScriptTextArea.SaveFile(Tag.Item1);
+                        string newSha1 = CalcSha1(Tag.Item1);
+                        ScriptTextArea.Tag = new Tuple<string, string>(Tag.Item1, newSha1);
+                        ScriptTextArea.Document.UndoStack.ClearAll();
+                        RefreshChangedStatus();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -513,15 +590,12 @@ namespace EasyLoU
                     String directryName = Path.GetDirectoryName(filePath);
                     String fileName = Path.GetFileName(filePath);
                     TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
-                    ScriptTextArea.Tag = filePath;
                     ScriptTextArea.SaveFile(filePath);
+                    string newSha1 = CalcSha1(filePath);
+                    ScriptTextArea.Tag = new Tuple<string, string>(filePath, newSha1);
                     ScriptsTab.SelectedTab.Text = fileName;
-                    FileSystemSafeWatcher watcher = new FileSystemSafeWatcher();
-                    watcher.Path = directryName;
-                    watcher.Filter = fileName;
-                    watcher.NotifyFilter = NotifyFilters.LastWrite;
-                    watcher.Changed += OnFileChanged;
-                    watcher.EnableRaisingEvents = true;
+                    ScriptTextArea.Document.UndoStack.ClearAll();
+                    RefreshChangedStatus();
                 }
             }
             catch (Exception ex)
@@ -942,6 +1016,9 @@ namespace EasyLoU
             {
                 DoNew();
                 ScriptsTab.SelectedIndex = ScriptsTab.TabPages.Count - 2;
+            } else
+            {
+                CheckFileChanged(ScriptsTab.SelectedIndex);
             }
             RefreshToolStripStatus();
             VarsTreeView.Nodes.Clear();
@@ -1716,6 +1793,11 @@ namespace EasyLoU
         {
             this.TimerReadClientStatus.Interval = value;
             MainForm.TheMainForm.Invoke(new MainForm.ResetTimerReadClientStatusDelegate(MainForm.TheMainForm.ResetTimerReadClientStatus));
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            CheckAnyFileChanged();
         }
     }
 }

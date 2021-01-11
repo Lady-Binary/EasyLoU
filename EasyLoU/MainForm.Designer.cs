@@ -908,7 +908,6 @@ namespace EasyLoU
             // TimerReadClientStatus
             // 
             this.TimerReadClientStatus.Enabled = true;
-            this.TimerReadClientStatus.Interval = 100;
             this.TimerReadClientStatus.Tick += new System.EventHandler(this.TimerReadClientStatus_Tick);
             // 
             // MainSplit
@@ -1097,6 +1096,7 @@ namespace EasyLoU
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "EasyLoU";
+            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
