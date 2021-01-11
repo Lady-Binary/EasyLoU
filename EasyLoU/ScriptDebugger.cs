@@ -64,7 +64,12 @@ namespace EasyLoU
 
         DynValue IsHotKeyDown(string key)
         {
-            foreach(ClientStatus.HOTKEYStruct hotkey in MainForm.ClientStatus.Miscellaneous.HOTKEYS)
+            if (MainForm.ClientStatus?.Miscellaneous.HOTKEYS == null)
+            {
+                return DynValue.NewBoolean(false);
+            }
+
+            foreach (ClientStatus.HOTKEYStruct hotkey in MainForm.ClientStatus?.Miscellaneous.HOTKEYS)
             {
                 if(hotkey.KEY == key)
                 {
