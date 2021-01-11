@@ -24,9 +24,6 @@ namespace EasyLoU
         public static Keys StopAllScriptsHotkey = Keys.F10;
         public static int StopAllScriptsHotkeyModifiers = (int)KeyModifiers.None;
 
-        public static Boolean AutoReloadFromDisk = false;
-
-
         public Settings()
         {
             InitializeComponent();
@@ -50,16 +47,6 @@ namespace EasyLoU
 
             StopAllScriptsHotkey = (Keys)Enum.Parse(typeof(Keys), (string)EasyLoUKey.GetValue("StopAllScriptsHotkey", "None"));
             StopAllScriptsHotkeyModifiers = (int)EasyLoUKey.GetValue("StopAllScriptsHotkeyModifiers", KeyModifiers.None);
-
-            var AutoReloadFromDiskValue = EasyLoUKey.GetValue("AutoReloadFromDisk", false);
-            if (AutoReloadFromDiskValue == null)
-            {
-                AutoReloadFromDisk = false;
-            }
-            else
-            {
-                AutoReloadFromDisk = Convert.ToBoolean(AutoReloadFromDiskValue);
-            }
             
         }
 
@@ -81,8 +68,6 @@ namespace EasyLoU
 
             EasyLoUKey.SetValue("StopAllScriptsHotkey", StopAllScriptsHotkey);
             EasyLoUKey.SetValue("StopAllScriptsHotkeyModifiers", StopAllScriptsHotkeyModifiers);
-
-            EasyLoUKey.SetValue("AutoReloadFromDisk", AutoReloadFromDisk, RegistryValueKind.DWord);
         }
 
         public static void RegisterHotkeys(IntPtr Handle)
@@ -149,9 +134,6 @@ namespace EasyLoU
             StopAllScriptsHotkeyControlModifierCheckBox.Checked = (StopAllScriptsHotkeyModifiers & (int)KeyModifiers.Control) > 0;
             StopAllScriptsHotkeyShiftModifierCheckBox.Checked = (StopAllScriptsHotkeyModifiers & (int)KeyModifiers.Shift) > 0;
             StopAllScriptsHotkeyWindowsModifierCheckBox.Checked = (StopAllScriptsHotkeyModifiers & (int)KeyModifiers.Windows) > 0;
-
-            AutoReloadFromDiskCheckBox.Checked = AutoReloadFromDisk ? (bool)AutoReloadFromDisk : (bool)false;
-
         }
 
         private void SettingsOkButton_Click(object sender, EventArgs e)
@@ -176,8 +158,6 @@ namespace EasyLoU
             if (StopAllScriptsHotkeyControlModifierCheckBox.Checked) StopAllScriptsHotkeyModifiers |= (int)KeyModifiers.Control;
             if (StopAllScriptsHotkeyShiftModifierCheckBox.Checked) StopAllScriptsHotkeyModifiers |= (int)KeyModifiers.Shift;
             if (StopAllScriptsHotkeyWindowsModifierCheckBox.Checked) StopAllScriptsHotkeyModifiers |= (int)KeyModifiers.Windows;
-
-            AutoReloadFromDisk = AutoReloadFromDiskCheckBox.Checked;
 
             SaveSettings();
 
