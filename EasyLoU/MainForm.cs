@@ -422,6 +422,27 @@ namespace EasyLoU
             }
         }
 
+        private bool IsFileChanged(int TabIndex)
+        {
+            TabPage ScriptPage = ScriptsTab.TabPages[TabIndex];
+            TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptPage.Controls.Find("ScriptTextArea", true)[0]);
+
+            if (ScriptTextArea.Tag != null && ScriptTextArea.Tag.ToString() != "new")
+            {
+                if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
+                {
+                    string filePath = Tag.Item1;
+                    string oldSha1 = Tag.Item2;
+                    string newSha1 = CalcSha1(filePath);
+                    if (oldSha1 != newSha1)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private bool CheckFileChanged(int TabIndex)
         {
             TabPage ScriptPage = ScriptsTab.TabPages[TabIndex];
@@ -436,7 +457,6 @@ namespace EasyLoU
                     string newSha1 = CalcSha1(filePath);
                     if (oldSha1 != newSha1)
                     {
-                        ScriptsTab.SelectedIndex = TabIndex;
                         ScriptDebuggers.TryGetValue(ScriptPage.Tag.ToString(), out ScriptDebugger Debugger);
                         DialogResult confirmResult;
                         if (Debugger != null && (Debugger.Status == ScriptDebugger.DebuggerStatus.Paused || Debugger.Status == ScriptDebugger.DebuggerStatus.Running))
@@ -474,7 +494,10 @@ namespace EasyLoU
             {
                 try
                 {
-                    FileChanged = CheckFileChanged(TabIndex);
+                    if (IsFileChanged(TabIndex))
+                    {
+                        ScriptsTab.SelectedIndex = TabIndex;
+                    }
                 } catch (Exception ex)
                 {
 
