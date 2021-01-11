@@ -1,4 +1,4 @@
-﻿using LoU;
+using LoU;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Debugging;
 using MoonSharp.Interpreter.Loaders;
@@ -29,6 +29,7 @@ namespace EasyLoU
         private Thread ScriptThread;
         private Script Script;
         private List<DynamicExpression> m_Dynamics = new List<DynamicExpression>();
+        private Dictionary<String, Boolean> PreviousKeyPresses;
 
         public object varsLock = new object();
         public Dictionary<string, string> vars = new Dictionary<string, string>();
@@ -38,7 +39,8 @@ namespace EasyLoU
             this.MainForm = MainForm;
             this.Guid = Guid;
             this.Name = Name;
-        }
+            PreviousKeyPresses = new Dictionary<String, Boolean>();
+    }
 
         void WaitForTarget(int? millisecondsTimeout = 5000)
         {
@@ -58,6 +60,41 @@ namespace EasyLoU
             }
 
             return;
+        }
+
+        DynValue IsHotKeyDown(string key)
+        {
+            if (MainForm.ClientStatus?.Miscellaneous.HOTKEYS == null)
+            {
+                return DynValue.NewBoolean(false);
+            }
+
+            foreach (ClientStatus.HOTKEYStruct hotkey in MainForm.ClientStatus?.Miscellaneous.HOTKEYS)
+            {
+                if(hotkey.KEY == key)
+                {
+                    return DynValue.NewBoolean(hotkey.VALUE);
+                }
+            }
+            return DynValue.NewBoolean(false);
+        }
+
+        DynValue OnHotKey(string key)
+        {
+            bool oldValue = PreviousKeyPresses.ContainsKey(key) && PreviousKeyPresses[key];
+            bool newValue = IsHotKeyDown(key).Boolean;
+          
+            if (newValue != oldValue) {
+                PreviousKeyPresses[key] = newValue;
+                return DynValue.NewBoolean(newValue);
+            }
+
+            return DynValue.NewBoolean(false);
+        }
+
+        void SetSpeed(int value)
+        {
+            this.MainForm.Invoke(new MainForm.SetTimerReadClientStatusIntervalDelegate(this.MainForm.SetTimerReadClientStatusInterval), new object[] { 1000 / value });
         }
 
         void Sleep(int millisecondsTimeout)
@@ -80,12 +117,18 @@ namespace EasyLoU
             this.MainForm.Invoke(new MainForm.ClearOutputDelegate(this.MainForm.ClearOutput), new object[] { this.Guid });
         }
 
-        static DynValue CallBack(ScriptExecutionContext ctx, CallbackArguments args)
+        DynValue CallBack(ScriptExecutionContext ctx, CallbackArguments args)
         {
             var name = ctx.m_Callback.Name;
+            
             var arguments = args.GetArray();
-            // do stuff
 
+            //Also set the update speed on the client if we're changing in the game.
+            if (name == "SetSpeed" && arguments.Length > 0 && arguments[0].Type == DataType.Number)
+            {
+                this.SetSpeed((int) arguments[0].Number);
+            }
+               
             ClientCommand Command = new ClientCommand((LoU.CommandType)Enum.Parse(typeof(LoU.CommandType), name));
             for (int i = 0; i < arguments.Length; i++)
             {
@@ -267,6 +310,9 @@ namespace EasyLoU
                                     this.Script.Globals[s.ToString()] = DynValue.NewCallback(CallBack, s.ToString());
                                 }
                                 this.Script.Globals["WaitForTarget"] = (Action<int?>)WaitForTarget; // Override: this is implemented client side
+                                this.Script.Globals["IsHotKeyDown"] = (Func<string, DynValue>)IsHotKeyDown; // Override: this is implemented client side
+                                this.Script.Globals["OnHotKey"] = (Func<string, DynValue>)OnHotKey; // Override: this is implemented client side
+
 
                                 // LOU status variables
                                 UserData.RegisterType<ClientStatus.FINDBUTTONStruct>();
@@ -278,6 +324,7 @@ namespace EasyLoU
                                 UserData.RegisterType<ClientStatus.FINDPERMANENTStruct>();
                                 UserData.RegisterType<ClientStatus.OBJStruct>();
                                 UserData.RegisterType<ClientStatus.NEARBYMONSTERStruct>();
+                                UserData.RegisterType<ClientStatus.HOTKEYStruct>();
  
                                 this.Script.Globals.MetaTable = new Table(this.Script);
                                 this.Script.Globals.MetaTable["__index"] = (Func<Table, DynValue, DynValue>)VarCallBack;

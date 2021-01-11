@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,6 +47,7 @@ namespace EasyLoU
 
             StopAllScriptsHotkey = (Keys)Enum.Parse(typeof(Keys), (string)EasyLoUKey.GetValue("StopAllScriptsHotkey", "None"));
             StopAllScriptsHotkeyModifiers = (int)EasyLoUKey.GetValue("StopAllScriptsHotkeyModifiers", KeyModifiers.None);
+            
         }
 
         public static void SaveSettings()
@@ -169,6 +170,28 @@ namespace EasyLoU
         private void SettingsCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public static Boolean getAutoReloadFromDisk()
+        {
+            RegistryKey SoftwareKey = Registry.CurrentUser.OpenSubKey("Software", true);
+
+            RegistryKey EasyLoUKey = SoftwareKey.OpenSubKey("EasyLoU", true);
+            if (EasyLoUKey == null)
+            {
+                EasyLoUKey = SoftwareKey.CreateSubKey("EasyLoU", true);
+            }
+
+            var AutoReloadFromDiskValue = EasyLoUKey.GetValue("AutoReloadFromDisk", false);
+
+            if (AutoReloadFromDiskValue == null)
+            {
+                return false;
+            }
+            else
+            {
+               return Convert.ToBoolean(AutoReloadFromDiskValue);
+            }
         }
     }
 }

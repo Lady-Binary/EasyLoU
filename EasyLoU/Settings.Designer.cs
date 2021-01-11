@@ -88,8 +88,8 @@
             this.SettingsTableLayoutPanel.Controls.Add(this.StopScriptHotkeyLabel, 0, 1);
             this.SettingsTableLayoutPanel.Controls.Add(this.StartScriptHotkeyAltModifierCheckBox, 2, 0);
             this.SettingsTableLayoutPanel.Controls.Add(this.StopAllScriptsHotkeyAltModifierCheckBox, 2, 2);
-            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsOkButton, 5, 3);
-            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsCancelButton, 4, 3);
+            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsOkButton, 5, 4);
+            this.SettingsTableLayoutPanel.Controls.Add(this.SettingsCancelButton, 4, 4);
             this.SettingsTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SettingsTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.SettingsTableLayoutPanel.Name = "SettingsTableLayoutPanel";
@@ -98,6 +98,7 @@
             this.SettingsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.SettingsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.SettingsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.SettingsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.SettingsTableLayoutPanel.Size = new System.Drawing.Size(634, 157);
             this.SettingsTableLayoutPanel.TabIndex = 1;
             // 
