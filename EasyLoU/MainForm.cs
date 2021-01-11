@@ -443,11 +443,10 @@ namespace EasyLoU
             return false;
         }
 
-        private bool CheckFileChanged(int TabIndex)
+        private void AskForReload(int TabIndex)
         {
             TabPage ScriptPage = ScriptsTab.TabPages[TabIndex];
             TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptPage.Controls.Find("ScriptTextArea", true)[0]);
-
             if (ScriptTextArea.Tag != null && ScriptTextArea.Tag.ToString() != "new")
             {
                 if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
@@ -478,11 +477,9 @@ namespace EasyLoU
                             ScriptTextArea.LoadFile(ScriptTextArea.FileName);
                             ScriptTextArea.Tag = new Tuple<string, string>(filePath, newSha1);
                         }
-                        return true;
                     }
                 }
             }
-            return false;
         }
 
         private bool CheckAnyFileChanged()
@@ -497,6 +494,7 @@ namespace EasyLoU
                     if (IsFileChanged(TabIndex))
                     {
                         ScriptsTab.SelectedIndex = TabIndex;
+                        AskForReload(TabIndex);
                     }
                 } catch (Exception ex)
                 {
@@ -1056,9 +1054,6 @@ namespace EasyLoU
             {
                 DoNew();
                 ScriptsTab.SelectedIndex = ScriptsTab.TabPages.Count - 2;
-            } else
-            {
-                CheckFileChanged(ScriptsTab.SelectedIndex);
             }
             RefreshToolStripStatus();
             VarsTreeView.Nodes.Clear();
@@ -1608,14 +1603,21 @@ namespace EasyLoU
 
         private void ScriptsTab_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; ++TabIndex)
             {
-                for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; ++TabIndex)
+                if (ScriptsTab.GetTabRect(TabIndex).Contains(e.Location))
                 {
-                    if (ScriptsTab.GetTabRect(TabIndex).Contains(e.Location))
+                    if (e.Button == MouseButtons.Right)
                     {
                         ScriptsTab.SelectedIndex = TabIndex;
                         ScriptsTabContextMenu.Show(Cursor.Position);
+                    } else if (e.Button == MouseButtons.Left)
+                    {
+                        if (IsFileChanged(TabIndex))
+                        {
+                            ScriptsTab.SelectedIndex = TabIndex;
+                            AskForReload(TabIndex);
+                        }
                     }
                 }
             }
