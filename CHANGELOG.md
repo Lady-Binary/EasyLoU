@@ -1,5 +1,19 @@
 # Changelog
 
+## LoA 1.4.0.0 - EasyLOU 1.2.0.1 (11/01/2021)
+
+#### Bugfixes:
+
+- LoU engine improperly logging command parameters to player.log [#143](https://github.com/Lady-Binary/EasyLoU/issues/143)
+
+#### Enhancements:
+
+- Increase default speed of client status updates [#141](https://github.com/Lady-Binary/EasyLoU/issues/141)
+- New SetSpeed() command to make scripts update status more quickly. [#139](https://github.com/Lady-Binary/EasyLoU/issues/139)
+- New hotkey capabilities: RegisterHotKey(), OnHotKey(), IsHotKeyDown() [#126](https://github.com/Lady-Binary/EasyLoU/issues/126)
+
+---
+
 ## LoA 1.4.0.0 - EasyLOU 1.2.0.0 (17/12/2020)
 
 #### Enhancements:
@@ -260,8 +274,3 @@
 #### Enhancements:
 
 - Improve error handling [#42](https://github.com/Lady-Binary/EasyLOU/issues/42)
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.14 (22/07/2020)
-*No changelog for this release.*
