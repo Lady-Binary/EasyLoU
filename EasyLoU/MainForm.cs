@@ -528,15 +528,32 @@ namespace EasyLoU
 
         private void DoReopen()
         {
-            TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
+            int SelectedTabIndex = ScriptsTab.SelectedIndex;
+            TabPage ScriptPage = ScriptsTab.TabPages[SelectedTabIndex];
+            TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptPage.Controls.Find("ScriptTextArea", true)[0]);
 
             if (ScriptTextArea.Tag != null && ScriptTextArea.Tag.ToString() != "new")
             {
                 if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
                 {
-                    var confirmResult = MessageBoxEx.Show(MainForm.TheMainForm, "Are you sure you want to reload " + ScriptTextArea.FileName + " from disk?", "Confirm reload", MessageBoxButtons.YesNo);
+                    ScriptDebuggers.TryGetValue(ScriptPage.Tag.ToString(), out ScriptDebugger Debugger);
+                    DialogResult confirmResult;
+                    if (Debugger != null && (Debugger.Status == ScriptDebugger.DebuggerStatus.Paused || Debugger.Status == ScriptDebugger.DebuggerStatus.Running))
+                    {
+                        confirmResult = MessageBoxEx.Show(MainForm.TheMainForm, $"Are you sure you want to stop and reload {ScriptTextArea.FileName}?", "Confirm stop and reload", MessageBoxButtons.YesNo);
+                    }
+                    else
+                    {
+                        confirmResult = MessageBoxEx.Show(MainForm.TheMainForm, $"Are you sure you want to reload {ScriptTextArea.FileName}?", "Confirm reload", MessageBoxButtons.YesNo);
+                    }
                     if (confirmResult == DialogResult.Yes)
                     {
+                        if (Debugger != null)
+                        {
+                            Debugger.Stop();
+                        }
+                        RefreshToolStripStatus();
+
                         string filePath = Tag.Item1;
                         string sha1 = CalcSha1(filePath);
                         ScriptTextArea.Tag = new Tuple<string, string>(filePath, sha1);
