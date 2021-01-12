@@ -106,7 +106,7 @@ after_deploy:
     git config --global user.email "ladybinary@protonmail.com"
 
     git config --global user.name "AppVeyor"
-    
+
     git checkout main -q
 
     git add CHANGELOG.md
@@ -116,4 +116,3 @@ after_deploy:
     git commit -m "bump version and update changelog"
 
     git push -q
-    
