@@ -1,5 +1,19 @@
 # Changelog
 
+## LoA 1.4.0.0 - EasyLOU 1.2.1.0 (12/01/2021)
+
+#### Bugfixes:
+
+- Fix version number - was supposed to be 1.2.1.0 [#146](https://github.com/Lady-Binary/EasyLoU/issues/146)
+
+#### Enhancements:
+
+- Refactoring - break down SharpMonoInjector into a separate repo as a submodule enhancement  [#148](https://github.com/Lady-Binary/EasyLoU/issues/148)
+- Improve README and instructions [#145](https://github.com/Lady-Binary/EasyLoU/issues/145)
+- Automatically reload a script from disk if it has been changed by another application [#144](https://github.com/Lady-Binary/EasyLoU/issues/144)
+
+---
+
 ## LoA 1.4.0.0 - EasyLOU 1.2.0.1 (11/01/2021)
 
 #### Bugfixes:
@@ -266,11 +280,3 @@
 #### Enhancements:
 
 - HUNGER variable [#41](https://github.com/Lady-Binary/EasyLOU/issues/41)
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.15 (22/07/2020)
-
-#### Enhancements:
-
-- Improve error handling [#42](https://github.com/Lady-Binary/EasyLOU/issues/42)
