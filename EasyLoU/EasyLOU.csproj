@@ -193,7 +193,7 @@
       <Project>{91ea9b9d-fe03-4273-bdaf-8ad42ede1e59}</Project>
       <Name>MoonSharp.Interpreter.net35-client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMonoInjector\SharpMonoInjector.csproj">
+    <ProjectReference Include="..\SharpMonoInjector\src\SharpMonoInjector\SharpMonoInjector.csproj">
       <Project>{4a1b44f7-447c-4441-bfa8-b6fced65b4bd}</Project>
       <Name>SharpMonoInjector</Name>
     </ProjectReference>

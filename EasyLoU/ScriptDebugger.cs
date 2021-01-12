@@ -304,7 +304,7 @@ namespace EasyLoU
 
                                 ((ScriptLoaderBase)Script.Options.ScriptLoader).ModulePaths = new string[] { path + "\\?" };
 
-                                // LOU commands
+                                // LoU commands
                                 foreach (var s in Enum.GetValues(typeof(CommandType)))
                                 {
                                     this.Script.Globals[s.ToString()] = DynValue.NewCallback(CallBack, s.ToString());
@@ -314,7 +314,7 @@ namespace EasyLoU
                                 this.Script.Globals["OnHotKey"] = (Func<string, DynValue>)OnHotKey; // Override: this is implemented client side
 
 
-                                // LOU status variables
+                                // LoU status variables
                                 UserData.RegisterType<ClientStatus.FINDBUTTONStruct>();
                                 UserData.RegisterType<ClientStatus.FINDINPUTStruct>();
                                 UserData.RegisterType<ClientStatus.FINDITEMStruct>();

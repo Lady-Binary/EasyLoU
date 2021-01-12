@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonSharp.Interpreter.net35
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.TextEditorEx", "ICSharpCode.TextEditorEx\ICSharpCode.TextEditorEx.csproj", "{2D18BE89-D210-49EB-A9DD-2246FBB3DF6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpMonoInjector", "SharpMonoInjector\SharpMonoInjector.csproj", "{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoU", "LoU\LoU.csproj", "{99E17151-042B-499D-B752-5B185AB289FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpMonoInjector", "SharpMonoInjector\src\SharpMonoInjector\SharpMonoInjector.csproj", "{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

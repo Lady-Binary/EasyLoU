@@ -506,47 +506,6 @@ namespace EasyLoU
             return FileChanged;
         }
 
-        private delegate void LoadFileThreadSafeDelegate(TextEditorControlEx control, string propertyName, string propertyValue);
-        public static void LoadFileThreadSafe(TextEditorControlEx control, string propertyName, string propertyValue)
-        {
-            if (control.InvokeRequired)
-            {
-                control.Invoke(new LoadFileThreadSafeDelegate(LoadFileThreadSafe), new object[] { control, propertyName, propertyValue });
-            }
-            else
-            {
-                do
-                {
-                    Thread.Sleep(100);
-                }
-                while (IsFileLocked(control.FileName));
-
-                control.LoadFile(control.FileName);
-            }
-        }
-
-        private static bool IsFileLocked(String filePath)
-        {
-            FileInfo file = new FileInfo(filePath);
-            FileStream stream = null;
-
-            try
-            {
-                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-            finally
-            {
-                if (stream != null)
-                    stream.Close();
-            }
-
-            return false;
-        }
-
         private void DoReopen()
         {
             int SelectedTabIndex = ScriptsTab.SelectedIndex;
