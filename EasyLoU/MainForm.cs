@@ -1804,42 +1804,4 @@ namespace EasyLoU
             {
                 int Separator = VarsTreeView.SelectedNode.Text.IndexOf("=");
                 string Value = VarsTreeView.SelectedNode.Text.Substring(Separator + 1, VarsTreeView.SelectedNode.Text.Length - 1 - Separator);
-                Clipboard.SetText(Value);
-            }
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings settings = new Settings();
-            settings.ShowDialog(this);
-        }
-
-        private void pinToolStripButton_Click(object sender, EventArgs e)
-        {
-            if (this.onTopToggle == false)
-            {
-                Form.ActiveForm.TopMost = true;
-                pinToolStripButton.Image = Properties.Resources.pin_blue;
-                this.onTopToggle = true;
-            }
-            else
-            {
-                Form.ActiveForm.TopMost = false;
-                pinToolStripButton.Image = Properties.Resources.pin_black;
-                this.onTopToggle = false;
-            }
-        }
-
-        public delegate void SetTimerReadClientStatusIntervalDelegate(int value);
-        public void SetTimerReadClientStatusInterval(int value)
-        {
-            this.TimerReadClientStatus.Interval = value;
-            MainForm.TheMainForm.Invoke(new MainForm.ResetTimerReadClientStatusDelegate(MainForm.TheMainForm.ResetTimerReadClientStatus));
-        }
-
-        private void MainForm_Activated(object sender, EventArgs e)
-        {
-            CheckAnyFileChanged();
-        }
-    }
-}
+                Clipboard.SetTex
