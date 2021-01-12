@@ -506,47 +506,6 @@ namespace EasyLoU
             return FileChanged;
         }
 
-        private delegate void LoadFileThreadSafeDelegate(TextEditorControlEx control, string propertyName, string propertyValue);
-        public static void LoadFileThreadSafe(TextEditorControlEx control, string propertyName, string propertyValue)
-        {
-            if (control.InvokeRequired)
-            {
-                control.Invoke(new LoadFileThreadSafeDelegate(LoadFileThreadSafe), new object[] { control, propertyName, propertyValue });
-            }
-            else
-            {
-                do
-                {
-                    Thread.Sleep(100);
-                }
-                while (IsFileLocked(control.FileName));
-
-                control.LoadFile(control.FileName);
-            }
-        }
-
-        private static bool IsFileLocked(String filePath)
-        {
-            FileInfo file = new FileInfo(filePath);
-            FileStream stream = null;
-
-            try
-            {
-                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-            finally
-            {
-                if (stream != null)
-                    stream.Close();
-            }
-
-            return false;
-        }
-
         private void DoReopen()
         {
             int SelectedTabIndex = ScriptsTab.SelectedIndex;
@@ -1804,4 +1763,42 @@ namespace EasyLoU
             {
                 int Separator = VarsTreeView.SelectedNode.Text.IndexOf("=");
                 string Value = VarsTreeView.SelectedNode.Text.Substring(Separator + 1, VarsTreeView.SelectedNode.Text.Length - 1 - Separator);
-                Clipboard.SetTex
+                Clipboard.SetText(Value);
+            }
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.ShowDialog(this);
+        }
+
+        private void pinToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (this.onTopToggle == false)
+            {
+                Form.ActiveForm.TopMost = true;
+                pinToolStripButton.Image = Properties.Resources.pin_blue;
+                this.onTopToggle = true;
+            }
+            else
+            {
+                Form.ActiveForm.TopMost = false;
+                pinToolStripButton.Image = Properties.Resources.pin_black;
+                this.onTopToggle = false;
+            }
+        }
+
+        public delegate void SetTimerReadClientStatusIntervalDelegate(int value);
+        public void SetTimerReadClientStatusInterval(int value)
+        {
+            this.TimerReadClientStatus.Interval = value;
+            MainForm.TheMainForm.Invoke(new MainForm.ResetTimerReadClientStatusDelegate(MainForm.TheMainForm.ResetTimerReadClientStatus));
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            CheckAnyFileChanged();
+        }
+    }
+}
