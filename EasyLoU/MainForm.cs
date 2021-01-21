@@ -760,7 +760,7 @@ namespace EasyLoU
                 ScriptDebuggers.Add(guid, Debugger);
             }
             TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
-            Debugger.Play(ScriptTextArea.Text, Path.GetDirectoryName(ScriptTextArea.Tag.ToString()));
+            Debugger.Play(ScriptTextArea.Text, Path.GetDirectoryName(ScriptTextArea.FileName.ToString()));
             RefreshToolStripStatus();
         }
         private void DoPause()
