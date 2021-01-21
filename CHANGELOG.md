@@ -1,5 +1,13 @@
 # Changelog
 
+## LoA 1.4.0.0 - EasyLoU 1.2.1.1 (21/01/2021)
+
+#### Bugfixes:
+
+- Require doesn't work since version 1.2.1  [#150](https://github.com/Lady-Binary/EasyLoU/issues/150)
+
+---
+
 ## LoA 1.4.0.0 - EasyLOU 1.2.1.0 (12/01/2021)
 
 #### Bugfixes:
@@ -272,11 +280,3 @@
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.17 (23/07/2020)
 *No changelog for this release.*
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.16 (23/07/2020)
-
-#### Enhancements:
-
-- HUNGER variable [#41](https://github.com/Lady-Binary/EasyLOU/issues/41)
