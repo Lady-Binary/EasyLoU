@@ -1,5 +1,13 @@
 # Changelog
 
+## LoA 1.4.0.0 - EasyLoU 1.2.1.2 (29/01/2021)
+
+#### Enhancements:
+
+- Update EasyLoU to work together with LoU Auto-Map [#155](https://github.com/Lady-Binary/EasyLoU/issues/155)
+
+---
+
 ## LoA 1.4.0.0 - EasyLoU 1.2.1.1 (21/01/2021)
 
 #### Bugfixes:
@@ -275,8 +283,3 @@
 #### Enhancements:
 
 - Create a ContextMenu() or ItemOption() command [#46](https://github.com/Lady-Binary/EasyLOU/issues/46)
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.17 (23/07/2020)
-*No changelog for this release.*
