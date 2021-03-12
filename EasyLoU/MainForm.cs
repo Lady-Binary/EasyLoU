@@ -769,27 +769,39 @@ namespace EasyLoU
 
             RefreshToolStripStatus();
         }
-        private void DoPause()
+
+        public delegate void DoPauseDelegate(String guid = null);
+        public void DoPause(String guid = null)
         {
+            if (string.IsNullOrWhiteSpace(guid))
+            {
+                guid = ScriptsTab.SelectedTab.Tag.ToString();
+            }
             ScriptDebugger Debugger;
-            if (ScriptDebuggers.TryGetValue(ScriptsTab.SelectedTab.Tag.ToString(), out Debugger))
+            if (ScriptDebuggers.TryGetValue(guid, out Debugger))
             {
                 Debugger.Pause();
             }
             RefreshToolStripStatus();
         }
 
-        private void DoStop()
+        public delegate void DoStopDelegate(String guid = null);
+        public void DoStop(String guid = null)
         {
+            if (string.IsNullOrWhiteSpace(guid))
+            {
+                guid = ScriptsTab.SelectedTab.Tag.ToString();
+            }
             ScriptDebugger Debugger;
-            if (ScriptDebuggers.TryGetValue(ScriptsTab.SelectedTab.Tag.ToString(), out Debugger))
+            if (ScriptDebuggers.TryGetValue(guid, out Debugger))
             {
                 Debugger.Stop();
             }
             RefreshToolStripStatus();
         }
 
-        private void DoStopAll()
+        public delegate void DoStopAllDelegate();
+        public void DoStopAll()
         {
             for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
             {
@@ -802,11 +814,39 @@ namespace EasyLoU
             RefreshToolStripStatus();
         }
 
-        private void DoStopAllButThis()
+        public delegate void DoStartAllDelegate();
+        public void DoStartAll()
         {
             for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
             {
-                if (TabIndex != ScriptsTab.SelectedIndex)
+                ScriptDebugger Debugger;
+                String guid = ScriptsTab.TabPages[TabIndex].Tag.ToString();
+                if (ScriptDebuggers.ContainsKey(guid))
+                {
+                    Debugger = ScriptDebuggers[guid];
+                    Debugger.Name = ScriptsTab.TabPages[TabIndex].Text;
+                }
+                else
+                {
+                    Debugger = new ScriptDebugger(this, guid, ScriptsTab.TabPages[TabIndex].Text);
+                    ScriptDebuggers.Add(guid, Debugger);
+                }
+                TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.TabPages[TabIndex].Controls.Find("ScriptTextArea", true)[0]);
+                Debugger.Play(ScriptTextArea.Text, Path.GetDirectoryName(ScriptTextArea.Tag.ToString()));
+            }
+            RefreshToolStripStatus();
+        }
+
+        public delegate void DoStopAllButThisDelegate(String guid = null);
+        public void DoStopAllButThis(String guid = null)
+        {
+            if (string.IsNullOrWhiteSpace(guid))
+            {
+                guid = ScriptsTab.SelectedTab.Tag.ToString();
+            }
+            for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
+            {
+                if (ScriptsTab.TabPages[TabIndex].Tag.ToString() != guid)
                 {
                     ScriptDebugger Debugger;
                     if (ScriptDebuggers.TryGetValue(ScriptsTab.TabPages[TabIndex].Tag.ToString(), out Debugger))
