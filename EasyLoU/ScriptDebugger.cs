@@ -370,7 +370,7 @@ namespace EasyLoU
                                 this.Script.Globals["PauseScript"] = (Action<string>)PauseScript;
                                 this.Script.Globals["StopScript"] = (Action<string>)StopScript;
                                 this.Script.Globals["StopAllScripts"] = (Action)StopAllScripts;
-                                this.Script.Globals["StopOtherScripts"] = (Action)StopAllScriptsButThis;
+                                this.Script.Globals["StopAllScriptsButThis"] = (Action)StopAllScriptsButThis;
 
                                 // other options
                                 this.Script.Options.DebugPrint = Print;

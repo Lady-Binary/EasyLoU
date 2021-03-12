@@ -298,7 +298,7 @@
         <Key word = "PauseScript" />
         <Key word = "StopScript" />
         <Key word = "StopAllScripts" />
-        <Key word = "StopOtherScripts" />
+        <Key word = "StopAllScriptsButThis" />
       </KeyWords>
 
     </RuleSet>
