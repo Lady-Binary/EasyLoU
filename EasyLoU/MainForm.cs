@@ -745,38 +745,56 @@ namespace EasyLoU
             }
         }
 
-        private void DoPlay()
+        private TabPage FindScriptByNameOrGuid(string nameOrGuid)
         {
-            String guid = ScriptsTab.SelectedTab.Tag.ToString();
+            for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
+            {
+                if (System.Text.RegularExpressions.Regex.Replace(ScriptsTab.TabPages[TabIndex].Text, $"[◴◷◶◵*]", "") == nameOrGuid ||
+                    ScriptsTab.TabPages[TabIndex].Tag.ToString() == nameOrGuid)
+                {
+                    return ScriptsTab.TabPages[TabIndex];
+                }
+            }
+            throw new ArgumentException($"Script name or guid {nameOrGuid} not found.");
+        }
+
+        public delegate void DoPlayDelegate(String scriptNameOrGuid = null);
+        public void DoPlay(string scriptNameOrGuid = null)
+        {
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            TextEditorControlEx SelectedScriptTextArea = (SelectedScriptTab.Controls.Find("ScriptTextArea", true)[0] as TextEditorControlEx);
+
+            String guid = SelectedScriptTab.Tag.ToString();
+            String name = SelectedScriptTab.Text;
+            String path =
+                SelectedScriptTextArea != null && SelectedScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1)
+                ?
+                Tag.Item1
+                :
+                System.Reflection.Assembly.GetExecutingAssembly().Location;
+
             ScriptDebugger Debugger;
             if (ScriptDebuggers.ContainsKey(guid))
             {
                 Debugger = ScriptDebuggers[guid];
-                Debugger.Name = ScriptsTab.SelectedTab.Text;
+                Debugger.Name = name;
             }
             else
             {
-                Debugger = new ScriptDebugger(this, guid, ScriptsTab.SelectedTab.Text);
+                Debugger = new ScriptDebugger(this, guid, name);
                 ScriptDebuggers.Add(guid, Debugger);
             }
-            TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
-            string filePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
-            {
-                filePath = Tag.Item1;
-            }
-            Debugger.Play(ScriptTextArea.Text, Path.GetDirectoryName(filePath));
+            Debugger.Play(SelectedScriptTextArea.Text, Path.GetDirectoryName(path));
 
             RefreshToolStripStatus();
         }
 
-        public delegate void DoPauseDelegate(String guid = null);
-        public void DoPause(String guid = null)
+        public delegate void DoPauseDelegate(String scriptNameOrGuid = null);
+        public void DoPause(String scriptNameOrGuid = null)
         {
-            if (string.IsNullOrWhiteSpace(guid))
-            {
-                guid = ScriptsTab.SelectedTab.Tag.ToString();
-            }
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            string guid = SelectedScriptTab.Tag.ToString();
+
             ScriptDebugger Debugger;
             if (ScriptDebuggers.TryGetValue(guid, out Debugger))
             {
@@ -785,13 +803,12 @@ namespace EasyLoU
             RefreshToolStripStatus();
         }
 
-        public delegate void DoStopDelegate(String guid = null);
-        public void DoStop(String guid = null)
+        public delegate void DoStopDelegate(String scriptNameOrGuid = null);
+        public void DoStop(String scriptNameOrGuid = null)
         {
-            if (string.IsNullOrWhiteSpace(guid))
-            {
-                guid = ScriptsTab.SelectedTab.Tag.ToString();
-            }
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            string guid = SelectedScriptTab.Tag.ToString();
+
             ScriptDebugger Debugger;
             if (ScriptDebuggers.TryGetValue(guid, out Debugger))
             {
@@ -837,13 +854,12 @@ namespace EasyLoU
             RefreshToolStripStatus();
         }
 
-        public delegate void DoStopAllButThisDelegate(String guid = null);
-        public void DoStopAllButThis(String guid = null)
+        public delegate void DoStopAllButThisDelegate(String scriptNameOrGuid = null);
+        public void DoStopAllButThis(String scriptNameOrGuid = null)
         {
-            if (string.IsNullOrWhiteSpace(guid))
-            {
-                guid = ScriptsTab.SelectedTab.Tag.ToString();
-            }
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            string guid = SelectedScriptTab.Tag.ToString();
+
             for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
             {
                 if (ScriptsTab.TabPages[TabIndex].Tag.ToString() != guid)
