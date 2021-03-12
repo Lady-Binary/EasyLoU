@@ -112,9 +112,9 @@ namespace EasyLoU
             this.MainForm.Invoke(new MainForm.WriteOutputDelegate(this.MainForm.WriteOutput), new object[] { this.Guid, s});
         }
 
-        void StartAllScripts()
+        void PlayAllScripts()
         {
-            this.MainForm.Invoke(new MainForm.DoStartAllDelegate(this.MainForm.DoStartAll), new object[] { });
+            this.MainForm.Invoke(new MainForm.DoPlayAllDelegate(this.MainForm.DoPlayAll), new object[] { });
         }
 
         void StopScript(string scriptName)
@@ -137,7 +137,7 @@ namespace EasyLoU
             this.MainForm.Invoke(new MainForm.DoPauseDelegate(this.MainForm.DoPause), new object[] { scriptName });
         }
 
-        void StartScript(string scriptName)
+        void PlayScript(string scriptName)
         {
             this.MainForm.Invoke(new MainForm.DoPlayDelegate(this.MainForm.DoPlay), new object[] { scriptName });
         }
@@ -363,12 +363,14 @@ namespace EasyLoU
                                 this.Script.Globals["sleep"] = (Action<int>)Sleep;
                                 this.Script.Globals["clear"] = (Action)Clear;
                                 this.Script.Globals["write"] = (Action<string>)Write;
+
+                                // script control methods
+                                this.Script.Globals["PlayScript"] = (Action<string>)PlayScript;
+                                this.Script.Globals["PlayAllScripts"] = (Action)PlayAllScripts;
                                 this.Script.Globals["PauseScript"] = (Action<string>)PauseScript;
-                                this.Script.Globals["StartScript"] = (Action<string>)StartScript;
                                 this.Script.Globals["StopScript"] = (Action<string>)StopScript;
                                 this.Script.Globals["StopAllScripts"] = (Action)StopAllScripts;
                                 this.Script.Globals["StopOtherScripts"] = (Action)StopAllScriptsButThis;
-                                this.Script.Globals["StartAllScripts"] = (Action)StartAllScripts;
 
                                 // other options
                                 this.Script.Options.DebugPrint = Print;

@@ -831,8 +831,8 @@ namespace EasyLoU
             RefreshToolStripStatus();
         }
 
-        public delegate void DoStartAllDelegate();
-        public void DoStartAll()
+        public delegate void DoPlayAllDelegate();
+        public void DoPlayAll()
         {
             for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
             {

@@ -293,13 +293,12 @@
         <Key word = "IsHotKeyDown" />
         <Key word = "OnHotKey" />
         <Key word = "SetSpeed" />
-        <Key word = "StopScript" />
-        <Key word = "StartScript" />
-        <Key word = "RestartScript" />
+        <Key word = "PlayScript" />
+        <Key word = "PlayAllScripts" />
         <Key word = "PauseScript" />
+        <Key word = "StopScript" />
         <Key word = "StopAllScripts" />
         <Key word = "StopOtherScripts" />
-        <Key word = "StartAllScripts" />
       </KeyWords>
 
     </RuleSet>
