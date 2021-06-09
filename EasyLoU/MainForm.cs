@@ -902,6 +902,20 @@ namespace EasyLoU
 
         private void DoConnectToClient()
         {
+            /*
+			// This code is useful for attaching to the first available client
+			
+			var allProcesses = Process.GetProcesses();
+            foreach (var process in allProcesses)
+            {
+                if (process.ProcessName.Contains("Aria"))
+                {
+                    // Attempt connection (or injection, if needed)
+                    ConnectToClient((int)process.Id);
+                    return;
+                }
+            }*/
+
             TargetAriaClientPanel.Dock = DockStyle.Fill;
             TargetAriaClientPanel.Visible = true;
 
