@@ -552,7 +552,7 @@ namespace EasyLoU
                                 default:
                                     if (watchItem.Name != "...")
                                     {
-                                        this.vars.Add(watchItem.Name.ToString(), (watchItem.Value ?? DynValue.Void).ToDebugPrintString());
+                                        this.vars[watchItem.Name.ToString()] = (watchItem.Value ?? DynValue.Void).ToDebugPrintString();
                                     }
                                     break;
                             }
