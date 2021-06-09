@@ -19,7 +19,7 @@ namespace EasyLoU
 {
     public partial class MainForm : Form
     {
-        public const string MINIMUM_LOU_VERSION = "1.4.0.0";
+        public const string MINIMUM_LOU_VERSION = "1.3.0.0";
 
         public static MainForm TheMainForm;
 
