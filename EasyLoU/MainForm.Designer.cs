@@ -106,6 +106,7 @@ namespace EasyLoU
             this.DebugLogsToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pinToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ScriptTab = new System.Windows.Forms.TabPage();
+            this.ScriptTextArea = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.ScriptSplit = new System.Windows.Forms.SplitContainer();
             this.ScriptOutput = new System.Windows.Forms.TextBox();
             this.StatusTreeView = new System.Windows.Forms.TreeView();
@@ -137,6 +138,7 @@ namespace EasyLoU
             this.toolStrip2.SuspendLayout();
             this.ScriptTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptSplit)).BeginInit();
+            this.ScriptSplit.Panel1.SuspendLayout();
             this.ScriptSplit.Panel2.SuspendLayout();
             this.ScriptSplit.SuspendLayout();
             this.ScriptsTab.SuspendLayout();
@@ -826,7 +828,11 @@ namespace EasyLoU
             this.ScriptSplit.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptSplit.Name = "ScriptSplit";
             this.ScriptSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            //
+            // ScriptSplit.Panel1
             // 
+            this.ScriptSplit.Panel1.Controls.Add(this.ScriptTextArea);
+            //
             // ScriptSplit.Panel2
             // 
             this.ScriptSplit.Panel2.Controls.Add(this.ScriptOutput);
@@ -834,6 +840,23 @@ namespace EasyLoU
             this.ScriptSplit.SplitterDistance = 210;
             this.ScriptSplit.SplitterWidth = 3;
             this.ScriptSplit.TabIndex = 1;
+            // 
+            // ScriptTextArea
+            // 
+            this.ScriptTextArea.ContextMenuEnabled = true;
+            this.ScriptTextArea.ContextMenuShowDefaultIcons = true;
+            this.ScriptTextArea.ContextMenuShowShortCutKeys = true;
+            this.ScriptTextArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScriptTextArea.FoldingStrategy = "Indent";
+            this.ScriptTextArea.Font = new System.Drawing.Font("Courier New", 10F);
+            this.ScriptTextArea.Location = new System.Drawing.Point(0, 0);
+            this.ScriptTextArea.Margin = new System.Windows.Forms.Padding(2);
+            this.ScriptTextArea.Name = "ScriptTextArea";
+            this.ScriptTextArea.Size = new System.Drawing.Size(477, 210);
+            this.ScriptTextArea.SyntaxHighlighting = "Lua";
+            this.ScriptTextArea.TabIndex = 0;
+            this.ScriptTextArea.Tag = "new";
+            this.ScriptTextArea.TextChanged += new System.EventHandler(this.ScriptTextArea_TextChanged);
             // 
             // ScriptOutput
             // 
@@ -1084,6 +1107,8 @@ namespace EasyLoU
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.ScriptTab.ResumeLayout(false);
+            this.ScriptSplit.Panel1.ResumeLayout(false);
+            this.ScriptSplit.Panel1.PerformLayout();
             this.ScriptSplit.Panel2.ResumeLayout(false);
             this.ScriptSplit.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptSplit)).EndInit();
