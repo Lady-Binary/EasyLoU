@@ -19,6 +19,8 @@ namespace EasyLoU
 {
     public partial class MainForm : Form
     {
+        public const string MINIMUM_LOU_VERSION = "1.4.0.0";
+
         public static MainForm TheMainForm;
 
         public static int CurrentClientProcessId = -1;
@@ -900,6 +902,33 @@ namespace EasyLoU
             System.Diagnostics.Process.Start("https://lmgtfy.com/?q=EasyLoU+website");
         }
 
+        public bool CheckVersion()
+        {
+            if (CurrentClientProcessId == -1 || ClientStatusMemoryMap == null)
+                return false;
+
+            RefreshClientStatus();
+
+            if (new Version(ClientStatus.ClientInfo.LOUVER) < new Version(MINIMUM_LOU_VERSION))
+            {
+                MessageBox.Show("This Legends of Aria client was injected with an unsupported version of LoU.dll: " +
+                    "as a result, EasyLoU may or may not work as expected.\n" +
+                    "\n" +
+                    "Please close and restart both the Legends of Aria client and EasyLoU and re-inject the client.\n" +
+                    "\n" +
+                    "If you are using EasyLoU and LoUAM simultaneously, please make sure they are both up-to-date.\n" +
+                    "\n" +
+                    "The latest versions of EasyLoU and LoUAM can be found at:" +
+                    "\n" +
+                    "https://github.com/Lady-Binary/");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void DoConnectToClient()
         {
             /*
@@ -957,8 +986,14 @@ namespace EasyLoU
                 Debug.WriteLine("Clicked pid=" + processId.ToString());
 
                 // Attempt connection (or injection, if needed)
-                ConnectToClient((int)processId);
-                return true;
+                bool connected = ConnectToClient((int)processId);
+
+                if (connected)
+                {
+                    CheckVersion();
+                }
+
+                return connected;
             };
 
             // Prepare cursor image
@@ -1471,7 +1506,7 @@ namespace EasyLoU
             }
         }
 
-        private void ConnectToClient(int ProcessId)
+        private bool ConnectToClient(int ProcessId)
         {
             MainStatusLabel.ForeColor = Color.Orange;
             MainStatusLabel.Text += " Connecting to " + ProcessId.ToString() + "...";
@@ -1492,14 +1527,14 @@ namespace EasyLoU
                 // Client already patched, memorymaps open already all good
                 MainStatusLabel.ForeColor = Color.Green;
                 MainStatusLabel.Text = "Connection successful.";
-                return;
+                return true;
             }
 
             if (MessageBoxEx.Show(MainForm.TheMainForm, "Client " + ProcessId.ToString() + " not yet injected. Inject now?", "Client not yet injected", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
                 MainStatusLabel.ForeColor = Color.Red;
                 MainStatusLabel.Text = "Connection aborted.";
-                return;
+                return false;
             }
 
             MainStatusLabel.ForeColor = Color.Orange;
@@ -1514,11 +1549,12 @@ namespace EasyLoU
                 // Client already patched, memorymaps open already all good
                 MainStatusLabel.ForeColor = Color.Green;
                 MainStatusLabel.Text = "Connection successful.";
-                return;
+                return true;
             }
 
             MainStatusLabel.ForeColor = Color.Red;
             MainStatusLabel.Text = "Connection failed.";
+            return false;
         }
         #endregion
 

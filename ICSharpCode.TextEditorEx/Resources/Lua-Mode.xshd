@@ -189,6 +189,7 @@
         <Key word = "CLIXRES" />
         <Key word = "CLIYRES" />
         <Key word = "FULLSCREEN" />
+        <Key word = "LOUVER" />
         <Key word = "MAINCAMERAMASK" />
         <Key word = "SERVER" />
         <Key word = "TARGETFRAMERATE" />
