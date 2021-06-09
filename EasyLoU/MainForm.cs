@@ -351,7 +351,7 @@ namespace EasyLoU
             NewScriptTextArea.Dock = System.Windows.Forms.DockStyle.Fill;
             NewScriptTextArea.FoldingStrategy = "Indent";
             NewScriptTextArea.Font = new System.Drawing.Font("Courier New", 10F);
-            NewScriptTextArea.HideVScrollBarIfPossible = true;
+            NewScriptTextArea.HideVScrollBarIfPossible = false;
             NewScriptTextArea.Location = new System.Drawing.Point(3, 3);
             NewScriptTextArea.Name = "ScriptTextArea";
             NewScriptTextArea.Size = new System.Drawing.Size(486, 294);
