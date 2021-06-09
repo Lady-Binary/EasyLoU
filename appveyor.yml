@@ -19,7 +19,7 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 environment:
-  LOA_VERSION: 1.4.0.0
+  LOA_VERSION: 1.4.1.0
   GITHUB_TOKEN:
     secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
   nodejs_version: 10.21.0
@@ -30,14 +30,11 @@ before_build:
       mkdir c:\downloads
     }
 
-
     ls c:\downloads
 
+    $url = "https://cdn.legendsofaria.com/Legends%20of%20Aria-$env:LOA_VERSION.zip"
 
-    $url = "https://cdn.legendsofaria.com/LegendsOfAria-$env:LOA_VERSION.zip"
-
-    $file = "c:\downloads\LegendsOfAria-$env:LOA_VERSION.zip"
-
+    $file = "c:\downloads\Legends of Aria-$env:LOA_VERSION.zip"
 
     # check if we ever downloaded dlls for the current loa version
 
@@ -59,13 +56,11 @@ before_build:
       7z a -tzip $file c:\downloads\*.dll
     }
 
-
     # copy dlls to the libs folder
 
     cp c:\downloads\*.dll $pwd\LoU\libs\
 
     ls $pwd\LoU\libs\
-
 
     # nuget restore needed for some projects
 
