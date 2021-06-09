@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -1410,11 +1411,35 @@ namespace EasyLoU
             return MonoModule;
         }
 
+        private byte[] ReadDllFromFile(string AssemblyPath)
+        {
+            File.ReadAllBytes(AssemblyPath);
+            return null;
+        }
+        private byte[] ReadDllFromCompressedResources(string ResourceName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            using (var compressedStream = assembly.GetManifestResourceStream(ResourceName))
+            {
+                if (compressedStream != null)
+                {
+                    using (var decompressedStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
+                    using (var output = new MemoryStream())
+                    {
+                        if (decompressedStream != null)
+                        {
+                            decompressedStream.CopyTo(output);
+                            return output.ToArray();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         private void Inject(int ProcessId)
         {
             var MonoModule = GetMonoModule(ProcessId);
-
-            String AssemblyPath = "LoU.dll";
 
             IntPtr handle = Native.OpenProcess(ProcessAccessRights.PROCESS_ALL_ACCESS, false, ProcessId);
 
@@ -1427,18 +1452,36 @@ namespace EasyLoU
 
             byte[] file;
 
+            // Once we're happy with hoe Fody.Costura works, we can get rid of this
+            //try
+            //{
+            //    file = File.ReadAllBytes(AssemblyPath);
+            //}
+            //catch (IOException)
+            //{
+            //    MainStatusLabel.ForeColor = Color.Red;
+            //    MainStatusLabel.Text = "Failed to read the file " + AssemblyPath;
+
+            //    return;
+            //}
+
+            //MainStatusLabel.Text = "Injecting " + Path.GetFileName(AssemblyPath);
+
+            // New method, where the dll is embedded by Fody.Costura
+            String ResourceName = "costura.lou.dll.compressed";
             try
             {
-                file = File.ReadAllBytes(AssemblyPath);
+                file = ReadDllFromCompressedResources(ResourceName);
             }
             catch (IOException)
             {
                 MainStatusLabel.ForeColor = Color.Red;
-                MainStatusLabel.Text = "Failed to read the file " + AssemblyPath;
+                MainStatusLabel.Text = $"Failed to read the resource {ResourceName}";
+
                 return;
             }
 
-            MainStatusLabel.Text = "Injecting " + Path.GetFileName(AssemblyPath);
+            MainStatusLabel.Text = "Injecting " + Path.GetFileName(ResourceName);
 
             using (Injector injector = new Injector(handle, MonoModule))
             {
