@@ -25,7 +25,7 @@ EasyLoU is a totally free tool inspired by EasyUO, the popular premiere macroing
 ## Instructions
 
 - From the [Releases](https://github.com/Lady-Binary/EasyLoU/releases) tab here on GitHub, download the archive containing the latest build and extract it
-- Place the two extracted files EasyLoU.exe and LoU.dll in the folder where the file Assembly-CSharp.dll resides (usually C:\Program Files\Legends of Aria Launcher\Legends of Aria\Legends of Aria_Data\Managed or \steamapps\common\Legends of Aria\Legends of Aria_Data\Managed)
+- Place the extracted file EasyLoU.exe wherever you prefer (it can be on your Desktop, in your Downloads foler, or in any other folder - doesn't really matter)
 - Launch EasyLoU.exe
 - Launch your Legends of Aria Client
 - Wait for your Legends of Aria Client login page to show up
@@ -43,7 +43,7 @@ EasyLoU is a totally free tool inspired by EasyUO, the popular premiere macroing
 
 For two reasons:  
 - The name EasyLoA was already taken by https://github.com/MythikGN/EasyLoA :)
-- As a tribute to the [Legends of Ultima](https://www.legendsofultima.online/) community server.    
+- As a tribute to the [Legends of Ultima](https://www.legendsofultima.online/) community server.
 
 ## What can I do with EasyLoU?
 
