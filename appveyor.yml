@@ -9,6 +9,7 @@ skip_commits:
   message: /bump version and update changelog/
 image: Visual Studio 2017
 configuration: Release
+platform: x64
 clone_folder: c:\EasyLoU
 install:
   - git submodule update --init --recursive
@@ -92,7 +93,6 @@ after_deploy:
     gren release --token $env:GITHUB_TOKEN --override
 
     gren changelog --token $env:GITHUB_TOKEN --override
-
 
     git config --global credential.helper store
 
