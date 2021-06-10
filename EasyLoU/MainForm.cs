@@ -962,10 +962,13 @@ namespace EasyLoU
                 MouseHook.HookEnd();
                 MouseHook.MouseDown -= handler;
 
+                // This is for when scaling is >100%
+                double factor = MouseHook.getScalingFactor();
+
                 // Get clicked coord
                 MouseHook.POINT p;
-                p.x = x;
-                p.y = y;
+                p.x = (int)((double)x / factor);
+                p.y = (int)((double)y / factor);
                 Debug.WriteLine("Clicked x=" + x.ToString() + " y=" + y.ToString());
 
                 // Get clicked window handler, window title

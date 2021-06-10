@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -73,6 +74,15 @@ namespace EasyLoU
         public static extern bool SetSystemCursor(IntPtr hcur, uint id);
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SystemParametersInfo(int uiAction, int uiParam, IntPtr pvParam, int fWinIni);
+        [DllImport("gdi32.dll")]
+        static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+        public enum DeviceCap
+        {
+            VERTRES = 10,
+            DESKTOPVERTRES = 117,
+
+            // http://pinvoke.net/default.aspx/gdi32/GetDeviceCaps.html
+        }
 
         private static IntPtr _hookID = IntPtr.Zero;
 
@@ -119,6 +129,18 @@ namespace EasyLoU
         public static void HookEnd()
         {
             UnhookWindowsHookEx(_hookID);
+        }
+
+        public static float getScalingFactor()
+        {
+            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+            IntPtr desktop = g.GetHdc();
+            int LogicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+            int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+
+            float ScreenScalingFactor = (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+
+            return ScreenScalingFactor; // 1.25 = 125%
         }
     }
 }
