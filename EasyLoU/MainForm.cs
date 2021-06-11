@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -19,6 +20,8 @@ namespace EasyLoU
 {
     public partial class MainForm : Form
     {
+        public static string MINIMUM_LOU_VERSION;
+
         public static MainForm TheMainForm;
 
         public static int CurrentClientProcessId = -1;
@@ -47,6 +50,17 @@ namespace EasyLoU
 
             Settings.LoadSettings();
             Settings.RegisterHotkeys(this.Handle);
+
+            try
+            {
+                var file = ReadDllFromCompressedResources("costura.lou.dll.compressed");
+                var assembly = System.Reflection.Assembly.Load(file);
+                var assemblyVersion = assembly.GetName().Version;
+                MINIMUM_LOU_VERSION = $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.MajorRevision}.0";
+            } catch (Exception ex)
+            {
+                MINIMUM_LOU_VERSION = "0.0.0.0";
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -349,7 +363,7 @@ namespace EasyLoU
             NewScriptTextArea.Dock = System.Windows.Forms.DockStyle.Fill;
             NewScriptTextArea.FoldingStrategy = "Indent";
             NewScriptTextArea.Font = new System.Drawing.Font("Courier New", 10F);
-            NewScriptTextArea.HideVScrollBarIfPossible = true;
+            NewScriptTextArea.HideVScrollBarIfPossible = false;
             NewScriptTextArea.Location = new System.Drawing.Point(3, 3);
             NewScriptTextArea.Name = "ScriptTextArea";
             NewScriptTextArea.Size = new System.Drawing.Size(486, 294);
@@ -745,51 +759,80 @@ namespace EasyLoU
             }
         }
 
-        private void DoPlay()
+        private TabPage FindScriptByNameOrGuid(string nameOrGuid)
         {
-            String guid = ScriptsTab.SelectedTab.Tag.ToString();
+            for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
+            {
+                if (System.Text.RegularExpressions.Regex.Replace(ScriptsTab.TabPages[TabIndex].Text, $"[◴◷◶◵*]", "") == nameOrGuid ||
+                    ScriptsTab.TabPages[TabIndex].Tag.ToString() == nameOrGuid)
+                {
+                    return ScriptsTab.TabPages[TabIndex];
+                }
+            }
+            throw new ArgumentException($"Script name or guid {nameOrGuid} not found.");
+        }
+
+        public delegate void DoPlayDelegate(String scriptNameOrGuid = null);
+        public void DoPlay(string scriptNameOrGuid = null)
+        {
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            TextEditorControlEx SelectedScriptTextArea = (SelectedScriptTab.Controls.Find("ScriptTextArea", true)[0] as TextEditorControlEx);
+
+            String guid = SelectedScriptTab.Tag.ToString();
+            String name = SelectedScriptTab.Text;
+            String path =
+                SelectedScriptTextArea != null && SelectedScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1)
+                ?
+                Tag.Item1
+                :
+                System.Reflection.Assembly.GetExecutingAssembly().Location;
+
             ScriptDebugger Debugger;
             if (ScriptDebuggers.ContainsKey(guid))
             {
                 Debugger = ScriptDebuggers[guid];
-                Debugger.Name = ScriptsTab.SelectedTab.Text;
+                Debugger.Name = name;
             }
             else
             {
-                Debugger = new ScriptDebugger(this, guid, ScriptsTab.SelectedTab.Text);
+                Debugger = new ScriptDebugger(this, guid, name);
                 ScriptDebuggers.Add(guid, Debugger);
             }
-            TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.SelectedTab.Controls.Find("ScriptTextArea", true)[0]);
-            string filePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            if (ScriptTextArea.Tag is Tuple<string, string> Tag && Tag.Item1 != "" && File.Exists(Tag.Item1))
-            {
-                filePath = Tag.Item1;
-            }
-            Debugger.Play(ScriptTextArea.Text, Path.GetDirectoryName(filePath));
+            Debugger.Play(SelectedScriptTextArea.Text, Path.GetDirectoryName(path));
 
             RefreshToolStripStatus();
         }
-        private void DoPause()
+
+        public delegate void DoPauseDelegate(String scriptNameOrGuid = null);
+        public void DoPause(String scriptNameOrGuid = null)
         {
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            string guid = SelectedScriptTab.Tag.ToString();
+
             ScriptDebugger Debugger;
-            if (ScriptDebuggers.TryGetValue(ScriptsTab.SelectedTab.Tag.ToString(), out Debugger))
+            if (ScriptDebuggers.TryGetValue(guid, out Debugger))
             {
                 Debugger.Pause();
             }
             RefreshToolStripStatus();
         }
 
-        private void DoStop()
+        public delegate void DoStopDelegate(String scriptNameOrGuid = null);
+        public void DoStop(String scriptNameOrGuid = null)
         {
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            string guid = SelectedScriptTab.Tag.ToString();
+
             ScriptDebugger Debugger;
-            if (ScriptDebuggers.TryGetValue(ScriptsTab.SelectedTab.Tag.ToString(), out Debugger))
+            if (ScriptDebuggers.TryGetValue(guid, out Debugger))
             {
                 Debugger.Stop();
             }
             RefreshToolStripStatus();
         }
 
-        private void DoStopAll()
+        public delegate void DoStopAllDelegate();
+        public void DoStopAll()
         {
             for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
             {
@@ -802,11 +845,38 @@ namespace EasyLoU
             RefreshToolStripStatus();
         }
 
-        private void DoStopAllButThis()
+        public delegate void DoPlayAllDelegate();
+        public void DoPlayAll()
         {
             for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
             {
-                if (TabIndex != ScriptsTab.SelectedIndex)
+                ScriptDebugger Debugger;
+                String guid = ScriptsTab.TabPages[TabIndex].Tag.ToString();
+                if (ScriptDebuggers.ContainsKey(guid))
+                {
+                    Debugger = ScriptDebuggers[guid];
+                    Debugger.Name = ScriptsTab.TabPages[TabIndex].Text;
+                }
+                else
+                {
+                    Debugger = new ScriptDebugger(this, guid, ScriptsTab.TabPages[TabIndex].Text);
+                    ScriptDebuggers.Add(guid, Debugger);
+                }
+                TextEditorControlEx ScriptTextArea = ((TextEditorControlEx)ScriptsTab.TabPages[TabIndex].Controls.Find("ScriptTextArea", true)[0]);
+                Debugger.Play(ScriptTextArea.Text, Path.GetDirectoryName(ScriptTextArea.Tag.ToString()));
+            }
+            RefreshToolStripStatus();
+        }
+
+        public delegate void DoStopAllButThisDelegate(String scriptNameOrGuid = null);
+        public void DoStopAllButThis(String scriptNameOrGuid = null)
+        {
+            TabPage SelectedScriptTab = string.IsNullOrWhiteSpace(scriptNameOrGuid) ? ScriptsTab.SelectedTab : FindScriptByNameOrGuid(scriptNameOrGuid);
+            string guid = SelectedScriptTab.Tag.ToString();
+
+            for (int TabIndex = 0; TabIndex < ScriptsTab.TabCount - 1; TabIndex++)
+            {
+                if (ScriptsTab.TabPages[TabIndex].Tag.ToString() != guid)
                 {
                     ScriptDebugger Debugger;
                     if (ScriptDebuggers.TryGetValue(ScriptsTab.TabPages[TabIndex].Tag.ToString(), out Debugger))
@@ -844,8 +914,49 @@ namespace EasyLoU
             System.Diagnostics.Process.Start("https://lmgtfy.com/?q=EasyLoU+website");
         }
 
+        public bool CheckVersion()
+        {
+            if (CurrentClientProcessId == -1 || ClientStatusMemoryMap == null)
+                return false;
+
+            RefreshClientStatus();
+
+            if (new Version(ClientStatus.ClientInfo.LOUVER) < new Version(MINIMUM_LOU_VERSION))
+            {
+                MessageBox.Show("This Legends of Aria client was injected with an unsupported version of LoU.dll: " +
+                    "as a result, EasyLoU may or may not work as expected.\n" +
+                    "\n" +
+                    "Please close and restart both the Legends of Aria client and EasyLoU and re-inject the client.\n" +
+                    "\n" +
+                    "If you are using EasyLoU and LoUAM simultaneously, please make sure they are both up-to-date.\n" +
+                    "\n" +
+                    "The latest versions of EasyLoU and LoUAM can be found at:" +
+                    "\n" +
+                    "https://github.com/Lady-Binary/");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void DoConnectToClient()
         {
+            /*
+			// This code is useful for attaching to the first available client
+			
+			var allProcesses = Process.GetProcesses();
+            foreach (var process in allProcesses)
+            {
+                if (process.ProcessName.Contains("Aria"))
+                {
+                    // Attempt connection (or injection, if needed)
+                    ConnectToClient((int)process.Id);
+                    return;
+                }
+            }*/
+
             TargetAriaClientPanel.Dock = DockStyle.Fill;
             TargetAriaClientPanel.Visible = true;
 
@@ -862,10 +973,13 @@ namespace EasyLoU
                 MouseHook.HookEnd();
                 MouseHook.MouseDown -= handler;
 
+                // This is for when scaling is >100%
+                double factor = MouseHook.getScalingFactor();
+
                 // Get clicked coord
                 MouseHook.POINT p;
-                p.x = x;
-                p.y = y;
+                p.x = (int)((double)x / factor);
+                p.y = (int)((double)y / factor);
                 Debug.WriteLine("Clicked x=" + x.ToString() + " y=" + y.ToString());
 
                 // Get clicked window handler, window title
@@ -887,8 +1001,14 @@ namespace EasyLoU
                 Debug.WriteLine("Clicked pid=" + processId.ToString());
 
                 // Attempt connection (or injection, if needed)
-                ConnectToClient((int)processId);
-                return true;
+                bool connected = ConnectToClient((int)processId);
+
+                if (connected)
+                {
+                    CheckVersion();
+                }
+
+                return connected;
             };
 
             // Prepare cursor image
@@ -1305,11 +1425,35 @@ namespace EasyLoU
             return MonoModule;
         }
 
+        private byte[] ReadDllFromFile(string AssemblyPath)
+        {
+            File.ReadAllBytes(AssemblyPath);
+            return null;
+        }
+        private byte[] ReadDllFromCompressedResources(string ResourceName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            using (var compressedStream = assembly.GetManifestResourceStream(ResourceName))
+            {
+                if (compressedStream != null)
+                {
+                    using (var decompressedStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
+                    using (var output = new MemoryStream())
+                    {
+                        if (decompressedStream != null)
+                        {
+                            decompressedStream.CopyTo(output);
+                            return output.ToArray();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         private void Inject(int ProcessId)
         {
             var MonoModule = GetMonoModule(ProcessId);
-
-            String AssemblyPath = "LoU.dll";
 
             IntPtr handle = Native.OpenProcess(ProcessAccessRights.PROCESS_ALL_ACCESS, false, ProcessId);
 
@@ -1322,18 +1466,36 @@ namespace EasyLoU
 
             byte[] file;
 
+            // Once we're happy with hoe Fody.Costura works, we can get rid of this
+            //try
+            //{
+            //    file = File.ReadAllBytes(AssemblyPath);
+            //}
+            //catch (IOException)
+            //{
+            //    MainStatusLabel.ForeColor = Color.Red;
+            //    MainStatusLabel.Text = "Failed to read the file " + AssemblyPath;
+
+            //    return;
+            //}
+
+            //MainStatusLabel.Text = "Injecting " + Path.GetFileName(AssemblyPath);
+
+            // New method, where the dll is embedded by Fody.Costura
+            String ResourceName = "costura.lou.dll.compressed";
             try
             {
-                file = File.ReadAllBytes(AssemblyPath);
+                file = ReadDllFromCompressedResources(ResourceName);
             }
             catch (IOException)
             {
                 MainStatusLabel.ForeColor = Color.Red;
-                MainStatusLabel.Text = "Failed to read the file " + AssemblyPath;
+                MainStatusLabel.Text = $"Failed to read the resource {ResourceName}";
+
                 return;
             }
 
-            MainStatusLabel.Text = "Injecting " + Path.GetFileName(AssemblyPath);
+            MainStatusLabel.Text = "Injecting " + Path.GetFileName(ResourceName);
 
             using (Injector injector = new Injector(handle, MonoModule))
             {
@@ -1401,7 +1563,7 @@ namespace EasyLoU
             }
         }
 
-        private void ConnectToClient(int ProcessId)
+        private bool ConnectToClient(int ProcessId)
         {
             MainStatusLabel.ForeColor = Color.Orange;
             MainStatusLabel.Text += " Connecting to " + ProcessId.ToString() + "...";
@@ -1422,14 +1584,14 @@ namespace EasyLoU
                 // Client already patched, memorymaps open already all good
                 MainStatusLabel.ForeColor = Color.Green;
                 MainStatusLabel.Text = "Connection successful.";
-                return;
+                return true;
             }
 
             if (MessageBoxEx.Show(MainForm.TheMainForm, "Client " + ProcessId.ToString() + " not yet injected. Inject now?", "Client not yet injected", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
                 MainStatusLabel.ForeColor = Color.Red;
                 MainStatusLabel.Text = "Connection aborted.";
-                return;
+                return false;
             }
 
             MainStatusLabel.ForeColor = Color.Orange;
@@ -1444,11 +1606,12 @@ namespace EasyLoU
                 // Client already patched, memorymaps open already all good
                 MainStatusLabel.ForeColor = Color.Green;
                 MainStatusLabel.Text = "Connection successful.";
-                return;
+                return true;
             }
 
             MainStatusLabel.ForeColor = Color.Red;
             MainStatusLabel.Text = "Connection failed.";
+            return false;
         }
         #endregion
 

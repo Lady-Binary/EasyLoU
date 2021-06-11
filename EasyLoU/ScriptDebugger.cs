@@ -109,7 +109,37 @@ namespace EasyLoU
 
         void Write(String s)
         {
-            this.MainForm.Invoke(new MainForm.WriteOutputDelegate(this.MainForm.WriteOutput), new object[] { this.Guid, s });
+            this.MainForm.Invoke(new MainForm.WriteOutputDelegate(this.MainForm.WriteOutput), new object[] { this.Guid, s});
+        }
+
+        void PlayAllScripts()
+        {
+            this.MainForm.Invoke(new MainForm.DoPlayAllDelegate(this.MainForm.DoPlayAll), new object[] { });
+        }
+
+        void StopScript(string scriptName)
+        {
+            this.MainForm.Invoke(new MainForm.DoStopDelegate(this.MainForm.DoStop), new object[] { scriptName });
+        }
+
+        void StopAllScripts()
+        {
+            this.MainForm.Invoke(new MainForm.DoStopAllDelegate(this.MainForm.DoStopAll), new object[] {});
+        }
+
+        void StopAllScriptsButThis()
+        {
+            this.MainForm.Invoke(new MainForm.DoStopAllButThisDelegate(this.MainForm.DoStopAllButThis), new object[] { this.Guid });
+        }
+
+        void PauseScript(string scriptName)
+        {
+            this.MainForm.Invoke(new MainForm.DoPauseDelegate(this.MainForm.DoPause), new object[] { scriptName });
+        }
+
+        void PlayScript(string scriptName)
+        {
+            this.MainForm.Invoke(new MainForm.DoPlayDelegate(this.MainForm.DoPlay), new object[] { scriptName });
         }
 
         void Clear()
@@ -334,6 +364,14 @@ namespace EasyLoU
                                 this.Script.Globals["clear"] = (Action)Clear;
                                 this.Script.Globals["write"] = (Action<string>)Write;
 
+                                // script control methods
+                                this.Script.Globals["PlayScript"] = (Action<string>)PlayScript;
+                                this.Script.Globals["PlayAllScripts"] = (Action)PlayAllScripts;
+                                this.Script.Globals["PauseScript"] = (Action<string>)PauseScript;
+                                this.Script.Globals["StopScript"] = (Action<string>)StopScript;
+                                this.Script.Globals["StopAllScripts"] = (Action)StopAllScripts;
+                                this.Script.Globals["StopAllScriptsButThis"] = (Action)StopAllScriptsButThis;
+
                                 // other options
                                 this.Script.Options.DebugPrint = Print;
 
@@ -514,7 +552,7 @@ namespace EasyLoU
                                 default:
                                     if (watchItem.Name != "...")
                                     {
-                                        this.vars.Add(watchItem.Name.ToString(), (watchItem.Value ?? DynValue.Void).ToDebugPrintString());
+                                        this.vars[watchItem.Name.ToString()] = (watchItem.Value ?? DynValue.Void).ToDebugPrintString();
                                     }
                                     break;
                             }

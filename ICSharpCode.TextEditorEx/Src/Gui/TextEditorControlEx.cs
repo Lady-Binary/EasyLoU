@@ -69,6 +69,10 @@ namespace ICSharpCode.TextEditor
                 {
                     ActiveTextAreaControl.ShowScrollBars(Orientation.Vertical, false);
                 }
+                else if (!ActiveTextAreaControl.VScrollBar.Visible && vScrollBarIsNeeded)
+                {
+                    ActiveTextAreaControl.ShowScrollBars(Orientation.Vertical, true);
+                }
             }
         }
 

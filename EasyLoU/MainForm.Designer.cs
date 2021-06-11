@@ -58,7 +58,7 @@ namespace EasyLoU
             this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,8 +106,8 @@ namespace EasyLoU
             this.DebugLogsToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pinToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ScriptTab = new System.Windows.Forms.TabPage();
-            this.ScriptSplit = new System.Windows.Forms.SplitContainer();
             this.ScriptTextArea = new ICSharpCode.TextEditor.TextEditorControlEx();
+            this.ScriptSplit = new System.Windows.Forms.SplitContainer();
             this.ScriptOutput = new System.Windows.Forms.TextBox();
             this.StatusTreeView = new System.Windows.Forms.TreeView();
             this.ScriptsTab = new System.Windows.Forms.TabControl();
@@ -373,7 +373,7 @@ namespace EasyLoU
             // controlsToolStripMenuItem
             // 
             this.controlsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.startToolStripMenuItem,
+            this.playToolStripMenuItem,
             this.pauseToolStripMenuItem,
             this.stopToolStripMenuItem,
             this.stopAllToolStripMenuItem,
@@ -385,55 +385,55 @@ namespace EasyLoU
             this.controlsToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
             this.controlsToolStripMenuItem.Text = "Control";
             // 
-            // startToolStripMenuItem
+            // playToolStripMenuItem
             // 
-            this.startToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startToolStripMenuItem.Image")));
-            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.startToolStripMenuItem.Text = "Start";
+            this.playToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("playToolStripMenuItem.Image")));
+            this.playToolStripMenuItem.Name = "playToolStripMenuItem";
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.playToolStripMenuItem.Text = "Play";
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pauseToolStripMenuItem.Image")));
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.pauseToolStripMenuItem.Text = "Pause";
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopToolStripMenuItem.Image")));
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stopToolStripMenuItem.Text = "Stop";
             // 
             // stopAllToolStripMenuItem
             // 
             this.stopAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopAllToolStripMenuItem.Image")));
             this.stopAllToolStripMenuItem.Name = "stopAllToolStripMenuItem";
-            this.stopAllToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.stopAllToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stopAllToolStripMenuItem.Text = "Stop All";
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(185, 6);
             // 
             // stepOverToolStripMenuItem
             // 
             this.stepOverToolStripMenuItem.Name = "stepOverToolStripMenuItem";
-            this.stepOverToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.stepOverToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stepOverToolStripMenuItem.Text = "Step Over";
             // 
             // stepOutToolStripMenuItem
             // 
             this.stepOutToolStripMenuItem.Name = "stepOutToolStripMenuItem";
-            this.stepOutToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.stepOutToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stepOutToolStripMenuItem.Text = "Step Out";
             // 
             // stepIntoToolStripMenuItem
             // 
             this.stepIntoToolStripMenuItem.Name = "stepIntoToolStripMenuItem";
-            this.stepIntoToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.stepIntoToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.stepIntoToolStripMenuItem.Text = "Step Into";
             // 
             // toolsToolStripMenuItem
@@ -712,7 +712,7 @@ namespace EasyLoU
             this.PlayToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PlayToolStripButton.Name = "PlayToolStripButton";
             this.PlayToolStripButton.Size = new System.Drawing.Size(28, 28);
-            this.PlayToolStripButton.Text = "Start";
+            this.PlayToolStripButton.Text = "Play";
             this.PlayToolStripButton.Click += new System.EventHandler(this.PlayToolStripButton_Click);
             // 
             // PauseToolStripButton
@@ -817,7 +817,7 @@ namespace EasyLoU
             this.ScriptTab.Padding = new System.Windows.Forms.Padding(2);
             this.ScriptTab.Size = new System.Drawing.Size(481, 427);
             this.ScriptTab.TabIndex = 0;
-            this.ScriptTab.Tag = "new";
+            this.ScriptTab.Tag = "56d24dfa-3b82-4742-8668-3703bb67ec1a";
             this.ScriptTab.Text = "new1";
             this.ScriptTab.UseVisualStyleBackColor = true;
             // 
@@ -828,11 +828,11 @@ namespace EasyLoU
             this.ScriptSplit.Margin = new System.Windows.Forms.Padding(2);
             this.ScriptSplit.Name = "ScriptSplit";
             this.ScriptSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
+            //
             // ScriptSplit.Panel1
             // 
             this.ScriptSplit.Panel1.Controls.Add(this.ScriptTextArea);
-            // 
+            //
             // ScriptSplit.Panel2
             // 
             this.ScriptSplit.Panel2.Controls.Add(this.ScriptOutput);
@@ -1108,6 +1108,7 @@ namespace EasyLoU
             this.toolStrip2.PerformLayout();
             this.ScriptTab.ResumeLayout(false);
             this.ScriptSplit.Panel1.ResumeLayout(false);
+            this.ScriptSplit.Panel1.PerformLayout();
             this.ScriptSplit.Panel2.ResumeLayout(false);
             this.ScriptSplit.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptSplit)).EndInit();
@@ -1158,7 +1159,7 @@ namespace EasyLoU
         private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem controlsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopAllToolStripMenuItem;
