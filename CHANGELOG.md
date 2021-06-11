@@ -17,12 +17,6 @@
 - Check for minimum supported LoU version [#157](https://github.com/Lady-Binary/EasyLoU/issues/157)
 - Add the ability to stop or restart scripts via a lua function [#130](https://github.com/Lady-Binary/EasyLoU/issues/130)
 
-#### function (placeholders) {
-			return '';
-        }
-
-- Bug: Loading Modules Issue... [#161](https://github.com/Lady-Binary/EasyLoU/issues/161)
-
 ---
 
 ## LoA 1.4.0.0 - EasyLoU 1.2.1.2 (29/01/2021)
