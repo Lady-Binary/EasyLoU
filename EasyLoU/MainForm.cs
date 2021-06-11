@@ -20,7 +20,7 @@ namespace EasyLoU
 {
     public partial class MainForm : Form
     {
-        public const string MINIMUM_LOU_VERSION = "1.3.0.0";
+        public static string MINIMUM_LOU_VERSION;
 
         public static MainForm TheMainForm;
 
@@ -50,6 +50,17 @@ namespace EasyLoU
 
             Settings.LoadSettings();
             Settings.RegisterHotkeys(this.Handle);
+
+            try
+            {
+                var file = ReadDllFromCompressedResources("costura.lou.dll.compressed");
+                var assembly = System.Reflection.Assembly.Load(file);
+                var assemblyVersion = assembly.GetName().Version;
+                MINIMUM_LOU_VERSION = $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.MajorRevision}.0";
+            } catch (Exception ex)
+            {
+                MINIMUM_LOU_VERSION = "0.0.0.0";
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
