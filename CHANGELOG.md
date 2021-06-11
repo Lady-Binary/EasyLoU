@@ -13,7 +13,6 @@
 - EasyLoU does not require to be placed in the Aria folder anymore, can be placed anywhere [#165](https://github.com/Lady-Binary/EasyLoU/issues/165)
 - Add compatibility with LoU Auto-Map 1.0.0.0 [#163](https://github.com/Lady-Binary/EasyLoU/issues/163)
 - Add compatibility with Aria client 1.4.1.0 [#162](https://github.com/Lady-Binary/EasyLoU/issues/162)
-- New PlayScript, PlayAllScripts, PauseScript, StopScript, StopAllScripts, StopAllScriptsButThis commands [#159](https://github.com/Lady-Binary/EasyLoU/issues/159)
 - Check for minimum supported LoU version [#157](https://github.com/Lady-Binary/EasyLoU/issues/157)
 - Add the ability to stop or restart scripts via a lua function [#130](https://github.com/Lady-Binary/EasyLoU/issues/130)
 
