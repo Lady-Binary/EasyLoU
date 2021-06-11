@@ -1,5 +1,30 @@
 # Changelog
 
+## LoA 1.4.1.0 - EasyLoU 1.3.0.0 (11/06/2021)
+
+#### Bugfixes:
+
+- Fix issue with targeting the Aria client when scaling >100% is enabled [#158](https://github.com/Lady-Binary/EasyLoU/issues/158)
+- Fix issue with FindMobile not working in some cases [#154](https://github.com/Lady-Binary/EasyLoU/issues/154)
+- Fix issue with disappearing vertical scrollbar [#149](https://github.com/Lady-Binary/EasyLoU/issues/149)
+
+#### Enhancements:
+
+- EasyLoU does not require to be placed in the Aria folder anymore, can be placed anywhere [#165](https://github.com/Lady-Binary/EasyLoU/issues/165)
+- Add compatibility with LoU Auto-Map 1.0.0.0 [#163](https://github.com/Lady-Binary/EasyLoU/issues/163)
+- Add compatibility with Aria client 1.4.1.0 [#162](https://github.com/Lady-Binary/EasyLoU/issues/162)
+- New PlayScript, PlayAllScripts, PauseScript, StopScript, StopAllScripts, StopAllScriptsButThis commands [#159](https://github.com/Lady-Binary/EasyLoU/issues/159)
+- Check for minimum supported LoU version [#157](https://github.com/Lady-Binary/EasyLoU/issues/157)
+- Add the ability to stop or restart scripts via a lua function [#130](https://github.com/Lady-Binary/EasyLoU/issues/130)
+
+#### function (placeholders) {
+			return '';
+        }
+
+- Bug: Loading Modules Issue... [#161](https://github.com/Lady-Binary/EasyLoU/issues/161)
+
+---
+
 ## LoA 1.4.0.0 - EasyLoU 1.2.1.2 (29/01/2021)
 
 #### Enhancements:
@@ -275,11 +300,3 @@
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.19 (27/07/2020)
 *No changelog for this release.*
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.18 (25/07/2020)
-
-#### Enhancements:
-
-- Create a ContextMenu() or ItemOption() command [#46](https://github.com/Lady-Binary/EasyLOU/issues/46)
