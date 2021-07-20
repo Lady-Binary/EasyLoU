@@ -222,13 +222,7 @@ namespace EasyLoU
                 UpdateOrCreateNode(StatusTreeView.Nodes, "Timestamp", ClientStatus.TimeStamp.ToString());
                 if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 60000)
                 {
-                    string title = string.Format(
-                        "EasyLoU - {0} - {1}",
-                        Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-                        ExtractNameFromCharInfo(ClientStatus.CharacterInfo.CHARNAME));
-
-                    if (Text != title)
-                        Text = title;
+                    Text = ExtractNameFromCharInfo(ClientStatus.CharacterInfo.CHARNAME);
 
                     MainStatusLabel.ForeColor = Color.Green;
                     MainStatusLabel.Text = string.Format(
@@ -269,16 +263,20 @@ namespace EasyLoU
                 return "N/A";
 
             string fullName = ClientStatus.CharacterInfo.CHARNAME;
+            string name = "N/A";
 
-            Regex regex = new Regex(@"\[.*\](?<Name>.*)\[.*\]");
-
-            Match match = regex.Match(input);
-            if (match.Success)
+            if (input != null)
             {
-                return match.Groups[1].Value;
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\[.*\](?<Name>.*)\[.*\]");
+
+                System.Text.RegularExpressions.Match match = regex.Match(input);
+                if (match.Success)
+                {
+                    name = match.Groups[1].Value;
+                }
             }
 
-            return input;
+            return string.Format("EasyLoU - {0} - {1}",Assembly.GetExecutingAssembly().GetName().Version.ToString(),name);
         }
 
         public static void RefreshClientStatus()
