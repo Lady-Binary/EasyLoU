@@ -258,14 +258,11 @@ namespace EasyLoU
         }
 
         private string ExtractNameFromCharInfo(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-                return "N/A";
-
+        {          
             string fullName = ClientStatus.CharacterInfo.CHARNAME;
             string name = "N/A";
 
-            if (input != null)
+            if (!string.IsNullOrEmpty(input))
             {
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\[.*\](?<Name>.*)\[.*\]");
 
