@@ -259,7 +259,6 @@ namespace EasyLoU
 
         private string ExtractNameFromCharInfo(string input)
         {          
-            string fullName = ClientStatus.CharacterInfo.CHARNAME;
             string name = "N/A";
 
             if (!string.IsNullOrEmpty(input))
