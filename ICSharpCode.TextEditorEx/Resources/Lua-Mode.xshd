@@ -233,8 +233,10 @@
         <Key word = "MOUSEWORLDY" />
         <Key word = "MOUSEWORLDZ" />
         <Key word = "RANDOM" />
-        <Key word = "SCANJOURNALMESSAGE" />
-        <Key word = "SCANJOURNALTIME" />
+        <Key word = "SCANCHATJOURNALMESSAGE" />
+        <Key word = "SCANCHATJOURNALTIME" />
+        <Key word = "SCANSYSTEMJOURNALMESSAGE" />
+        <Key word = "SCANSYSTEMJOURNALTIME" />
         <Key word = "TARGETLOADING" />
         <Key word = "TARGETTYPE" />
         <Key word = "TIME" />
@@ -279,7 +281,8 @@
         <Key word = "ResetVars" />
         <Key word = "Say" />
         <Key word = "SayCustom" />
-        <Key word = "ScanJournal" />
+        <Key word = "ScanChatJournal" />
+        <Key word = "ScanSystemJournal" />
         <Key word = "SelectServer" />
         <Key word = "SetCustomVar" />
         <Key word = "SetInput" />
