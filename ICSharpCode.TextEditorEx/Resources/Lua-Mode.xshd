@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <SyntaxDefinition name = "Lua"
                   extensions = ".lua">
   <Properties>
@@ -9,7 +9,7 @@
   <Digits name = "Digits"
           bold = "false"
           italic = "false"
-          color = "Blue"/>
+          color = "#2a5711"/>
 
   <RuleSets>
     <RuleSet ignorecase="false">
@@ -18,7 +18,7 @@
       <Span name = "BlockComment"
             bold = "false"
             italic = "false"
-            color = "Green"
+            color = "#7ba864"
             stopateol = "false">
         <Begin>--[[</Begin>
         <End>]]</End>
@@ -26,8 +26,8 @@
 
       <Span name = "LineComment"
             bold = "false"
-            italic = "false"
-            color = "Green"
+            italic = "true"
+            color = "#7ba864"
             stopateol = "true">
         <Begin>--</Begin>
       </Span>
@@ -35,26 +35,25 @@
       <Span name = "String"
             bold = "false"
             italic = "false"
-            color = "Red"
+            color = "#cc1400"
             stopateol = "true">
         <Begin>"</Begin>
         <End>"</End>
       </Span>
 
+			<KeyWords name = "truefalse"
+                bold = "false"
+                italic = "false"
+                color = "#3d562f">
+				<Key word = "false" />
+				<Key word = "true" />
+			</KeyWords>
+
       <KeyWords name = "Punctuation"
                 bold = "false"
                 italic = "false"
-                color = "DarkGreen">
-        <Key word = "?" />
-        <Key word = "," />
-        <Key word = "." />
-        <Key word = ";" />
-        <Key word = "(" />
-        <Key word = ")" />
-        <Key word = "[" />
-        <Key word = "]" />
-        <Key word = "{" />
-        <Key word = "}" />
+                color = "#004a73">
+        <Key word = ".." />
         <Key word = "+" />
         <Key word = "-" />
         <Key word = "/" />
@@ -64,23 +63,18 @@
         <Key word = "&gt;" />
         <Key word = "^" />
         <Key word = "=" />
-        <Key word = "~" />
-        <Key word = "!" />
-        <Key word = "|" />
-        <Key word = "&amp;" />
       </KeyWords>
 
       <KeyWords name = "Keywords"
                 bold="true"
                 italic="false"
-                color="Blue">
+                color="#005db8">
         <Key word = "and" />
         <Key word = "break" />
         <Key word = "do" />
         <Key word = "else" />
         <Key word = "elseif" />
         <Key word = "end" />
-        <Key word = "false" />
         <Key word = "for" />
         <Key word = "function" />
         <Key word = "if" />
@@ -92,17 +86,186 @@
         <Key word = "repeat" />
         <Key word = "return" />
         <Key word = "then" />
-        <Key word = "true" />
         <Key word = "until" />
         <Key word = "while" />
       </KeyWords>
 
-      <KeyWords name = "EasyLoUVars"
-            bold="true"
-            italic="false"
-            color="Green">
-        <Key word = "Timestamp" />
-        
+
+			<KeyWords name = "ModuleFunctions"
+		bold="true"
+		italic="false"
+		color="Purple">
+				<Key word = "sleep" />
+				
+				<Key word = "type" />
+				<Key word = "assert" />
+				<Key word = "collectgarbage" />
+				<Key word = "error" />
+				<Key word = "tostring" />
+				<Key word = "select" />
+				<Key word = "tonumber" />
+				<Key word = "print" />
+
+				<Key word = "bit32" />
+				<Key word = "bit32.extract" />
+				<Key word = "bit32.ValidatePosWith" />
+				<Key word = "bit32.arshift" />
+				<Key word = "bit32.rshift" />
+				<Key word = "bit32.lshift" />
+				<Key word = "bit32.band" />
+				<Key word = "bit32.btest" />
+				<Key word = "bit32.bor" />
+				<Key word = "bit32.bnot" />
+				<Key word = "bit32.bxor" />
+				<Key word = "bit32.lrotate" />
+				<Key word = "bit32.rrotate" />
+				
+				<Key word = "coroutine" />
+				<Key word = "coroutine.create" />
+				<Key word = "coroutine.yield" />
+				<Key word = "coroutine.wrap" />
+				<Key word = "coroutine.__wrap_wrapper" />
+				<Key word = "coroutine.resume" />
+				<Key word = "coroutine.running" />
+				<Key word = "coroutine.status" />
+
+				<Key word = "debug" />
+				<Key word = "debug.debug" />
+				<Key word = "debug.getuservalue" />
+				<Key word = "debug.setuservalue" />
+				<Key word = "debug.getregistry" />
+				<Key word = "debug.getmetatable" />
+				<Key word = "debug.setmetatable" />
+				<Key word = "debug.getupvalue" />
+				<Key word = "debug.upvalueid" />
+				<Key word = "debug.setupvalue" />
+				<Key word = "debug.upvaluejoin" />
+				<Key word = "debug.traceback" />
+				
+				<Key word = "dynamic" />
+				<Key word = "dynamic.eval" />
+				<Key word = "dynamic.prepare" />
+				
+				<Key word = "pcall" />
+				<Key word = "xpcall" />
+
+				<Key word = "io" />
+				<Key word = "io.close" />
+				<Key word = "io.flush" />
+				<Key word = "io.input" />
+				<Key word = "io.output" />
+				<Key word = "io.lines" />
+				<Key word = "io.open" />
+				<Key word = "io.type" />
+				<Key word = "io.read" />
+				<Key word = "io.write" />
+				<Key word = "io.tmpfile" />
+
+				<Key word = "json" />
+				<Key word = "json.parse" />
+				<Key word = "json.serialize" />
+				<Key word = "json.isnull" />
+				
+				<Key word = "math" />
+				<Key word = "math.abs" />
+				<Key word = "math.acos" />
+				<Key word = "math.asin" />
+				<Key word = "math.atan" />
+				<Key word = "math.atan2" />
+				<Key word = "math.ceil" />
+				<Key word = "math.cos" />
+				<Key word = "math.cosh" />
+				<Key word = "math.deg" />
+				<Key word = "math.exp" />
+				<Key word = "math.floor" />
+				<Key word = "math.fmod" />
+				<Key word = "math.frexp" />
+				<Key word = "math.ldexp" />
+				<Key word = "math.lod" />
+				<Key word = "math.max" />
+				<Key word = "math.min" />
+				<Key word = "math.modf" />
+				<Key word = "math.pow" />
+				<Key word = "math.rad" />
+				<Key word = "math.random" />
+				<Key word = "math.randomseed" />
+				<Key word = "math.sin" />
+				<Key word = "math.sinh" />
+				<Key word = "math.sqrt" />
+				<Key word = "math.tan" />
+				<Key word = "math.tanh" />
+
+				<Key word = "setmetatable" />
+				<Key word = "getmetatable" />
+				<Key word = "rawget" />
+				<Key word = "rawset" />
+				<Key word = "rawequal" />
+				<Key word = "rawlen" />
+				
+        <Key word = "os" />
+				<Key word = "os.execute" />
+				<Key word = "os.exit" />
+				<Key word = "os.getenv" />
+				<Key word = "os.remove" />
+				<Key word = "os.rename" />
+				<Key word = "os.setlocale" />
+				<Key word = "os.tmpname" />
+        <Key word = "os.time" />
+				<Key word = "os.date" />
+
+				<Key word = "string" />
+				<Key word = "string.dump" />
+				<Key word = "string.@char" />
+				<Key word = "string.@byte" />
+				<Key word = "string.unicode" />
+				<Key word = "string.len" />
+				<Key word = "string.match" />
+				<Key word = "string.gmatch" />
+				<Key word = "string.gsub" />
+				<Key word = "string.find" />
+				<Key word = "string.lower" />
+				<Key word = "string.upper" />
+				<Key word = "string.rep" />
+				<Key word = "string.format" />
+				<Key word = "string.reverse" />
+				<Key word = "string.sub" />
+				<Key word = "string.startsWith" />
+				<Key word = "string.endsWith" />
+				<Key word = "string.contains" />
+
+				<Key word = "ipairs" />
+				<Key word = "pairs" />
+				<Key word = "next" />
+				<Key word = "__next_i" />
+
+				<Key word = "table" />
+				<Key word = "table.pack" />
+				<Key word = "table.unpack" />
+				<Key word = "table.sort" />
+				<Key word = "table.insert" />
+				<Key word = "table.remove" />
+				<Key word = "table.concat" />
+				<Key word = "pack" />
+				<Key word = "unpack" />
+
+				<Key word = "_G" />
+				<Key word = "_VERSION" />
+				<Key word = "_MOONSHARP" />
+				<Key word = "_MOONSHARP.version" />
+				<Key word = "_MOONSHARP.luacompat" />
+				<Key word = "_MOONSHARP.platform" />
+				<Key word = "_MOONSHARP.is_aot" />
+				<Key word = "_MOONSHARP.is_unity" />
+				<Key word = "_MOONSHARP.is_mono" />
+				<Key word = "_MOONSHARP.is_clr4" />
+				<Key word = "_MOONSHARP.is_pcl" />
+				<Key word = "_MOONSHARP.banner" />
+			</KeyWords>
+			
+			<KeyWords name = "EasyLoUVars"
+		bold="true"
+		italic="false"
+		color="DarkOrange">
         <!--Character Info-->
         <Key word = "BACKPACKID" />
         <Key word = "CHARBUFFS" />
@@ -125,23 +288,19 @@
         <Key word = "LEGSNAME" />
         <Key word = "RIGHTHANDID" />
         <Key word = "RIGHTHANDNAME" />
-        
-        <!--Status Bar-->
-        <Key word = "AGI" />
-        <Key word = "ATTACKSPEED" />
-        <Key word = "DEFENSE" />
-        <Key word = "HEALTH" />
-        <Key word = "INT" />
-        <Key word = "MANA" />
-        <Key word = "PRESTIGEXPMAX" />
-        <Key word = "STAMINA" />
-        <Key word = "STEALTH" />
-        <Key word = "STR" />
-        <Key word = "VITALITY" />
 
-        <!--Last Action-->
-        <Key word = "COBJECTID" />
-        <Key word = "LOBJECTID" />
+				<!--Status Bar-->
+				<Key word = "AGI" />
+				<Key word = "ATTACKSPEED" />
+				<Key word = "DEFENSE" />
+				<Key word = "HEALTH" />
+				<Key word = "INT" />
+				<Key word = "MANA" />
+				<Key word = "PRESTIGEXPMAX" />
+				<Key word = "STAMINA" />
+				<Key word = "STEALTH" />
+				<Key word = "STR" />
+				<Key word = "VITALITY" />
 
         <!--Find-->
         <Key word = "FINDBUTTON" />
@@ -181,6 +340,10 @@
         <Key word = ".X" />
         <Key word = ".Y" />
         <Key word = ".Z" />
+
+				<!--Last Action-->
+				<Key word = "COBJECTID" />
+				<Key word = "LOBJECTID" />
 
         <!--Client Info-->
         <Key word = "CLIGAMESTATE" />
@@ -244,7 +407,7 @@
       <KeyWords name = "EasyLoUCommands"
             bold="true"
             italic="false"
-            color="DarkOrange">
+            color="Purple">
         <Key word = "AttackSelected" />
         <Key word = "CharacterSelect" />
         <Key word = "ClearCustomVar" />
