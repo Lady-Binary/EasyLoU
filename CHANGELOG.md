@@ -1,5 +1,21 @@
 # Changelog
 
+## LoA 1.4.1.0 - EasyLoU 1.3.0.1 (28/02/2023)
+
+#### Enhancements:
+
+- Improve syntax highlight [#186](https://github.com/Lady-Binary/EasyLoU/issues/186)
+- Move ScanJournal into two separate commands, ScanChatJournal and ScanSystemJournal [#183](https://github.com/Lady-Binary/EasyLoU/issues/183)
+- Add current character name to the EasyLoU window [#174](https://github.com/Lady-Binary/EasyLoU/issues/174)
+
+#### function (placeholders) {
+			return '';
+        }
+
+- .csproj files not existent in the repos [#181](https://github.com/Lady-Binary/EasyLoU/issues/181)
+
+---
+
 ## LoA 1.4.1.0 - EasyLoU 1.3.0.0 (11/06/2021)
 
 #### Bugfixes:
@@ -13,9 +29,9 @@
 - EasyLoU does not require to be placed in the Aria folder anymore, can be placed anywhere [#165](https://github.com/Lady-Binary/EasyLoU/issues/165)
 - Add compatibility with LoU Auto-Map 1.0.0.0 [#163](https://github.com/Lady-Binary/EasyLoU/issues/163)
 - Add compatibility with Aria client 1.4.1.0 [#162](https://github.com/Lady-Binary/EasyLoU/issues/162)
+- New PlayScript, PlayAllScripts, PauseScript, StopScript, StopAllScripts, StopAllScriptsButThis commands [#159](https://github.com/Lady-Binary/EasyLoU/issues/159)
 - Check for minimum supported LoU version [#157](https://github.com/Lady-Binary/EasyLoU/issues/157)
 - Add the ability to stop or restart scripts via a lua function [#130](https://github.com/Lady-Binary/EasyLoU/issues/130)
-
 ---
 
 ## LoA 1.4.0.0 - EasyLoU 1.2.1.2 (29/01/2021)
@@ -287,9 +303,4 @@
 ---
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.20 (27/07/2020)
-*No changelog for this release.*
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.19 (27/07/2020)
 *No changelog for this release.*
