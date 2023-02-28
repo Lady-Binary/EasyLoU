@@ -22,7 +22,7 @@ assembly_info:
 environment:
   LOA_VERSION: 1.4.1.0
   GITHUB_TOKEN:
-    secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
+    secure: mPV5k4Dfx3gXB1zFlC373VKWr1ZsTfTkKF3HqKhborSDolrI3FFJ53t2AnavsXxx
   nodejs_version: 10.21.0
 cache: c:\downloads
 before_build:
@@ -82,7 +82,7 @@ deploy:
   tag: $(APPVEYOR_BUILD_VERSION)
   release: EasyLoU v$(APPVEYOR_BUILD_VERSION) - Client v$(LOA_VERSION)
   auth_token:
-    secure: sqTYrWpGf17/5azepe0y67oNb6bB4rWC8S7g2Ck1v3Mvkuyz7QuTn8Q2gpVqFciz
+    secure: mPV5k4Dfx3gXB1zFlC373VKWr1ZsTfTkKF3HqKhborSDolrI3FFJ53t2AnavsXxx
   artifact: EasyLoU-$(APPVEYOR_BUILD_VERSION).zip
   on:
     branch: main
