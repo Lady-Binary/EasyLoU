@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.TextEditorEx", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoU", "LoU\LoU.csproj", "{99E17151-042B-499D-B752-5B185AB289FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpMonoInjector", "SharpMonoInjector\src\SharpMonoInjector\SharpMonoInjector.csproj", "{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -53,14 +51,6 @@ Global
 		{99E17151-042B-499D-B752-5B185AB289FA}.Devp4|x64.Build.0 = Debug|x64
 		{99E17151-042B-499D-B752-5B185AB289FA}.Release|x64.ActiveCfg = Release|x64
 		{99E17151-042B-499D-B752-5B185AB289FA}.Release|x64.Build.0 = Release|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Debug|x64.ActiveCfg = Debug|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Debug|x64.Build.0 = Debug|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Dev|x64.ActiveCfg = Debug|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Dev|x64.Build.0 = Debug|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Devp4|x64.ActiveCfg = Debug|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Devp4|x64.Build.0 = Debug|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Release|x64.ActiveCfg = Release|x64
-		{4A1B44F7-447C-4441-BFA8-B6FCED65B4BD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
