@@ -222,6 +222,8 @@ namespace EasyLoU
                 UpdateOrCreateNode(StatusTreeView.Nodes, "Timestamp", ClientStatus.TimeStamp.ToString());
                 if (new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - ClientStatus.TimeStamp <= 60000)
                 {
+                    Text = ExtractNameFromCharInfo(ClientStatus.CharacterInfo.CHARNAME);
+
                     MainStatusLabel.ForeColor = Color.Green;
                     MainStatusLabel.Text = string.Format(
                         "Connected to {0}.  ClientStatus MemMap: {1}/{2} ({3:0.00}%). ClientCommands MemMap: {4}/{5} ({6:0.00}%).",
@@ -253,6 +255,24 @@ namespace EasyLoU
                 }
                 StatusTreeView.EndUpdate();
             }
+        }
+
+        private string ExtractNameFromCharInfo(string input)
+        {          
+            string name = "N/A";
+
+            if (!string.IsNullOrEmpty(input))
+            {
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\[.*\](?<Name>.*)\[.*\]");
+
+                System.Text.RegularExpressions.Match match = regex.Match(input);
+                if (match.Success)
+                {
+                    name = match.Groups[1].Value;
+                }
+            }
+
+            return string.Format("EasyLoU - {0} - {1}",Assembly.GetExecutingAssembly().GetName().Version.ToString(),name);
         }
 
         public static void RefreshClientStatus()
