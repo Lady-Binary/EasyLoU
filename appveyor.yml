@@ -74,7 +74,7 @@ after_build:
     $artifact = "EasyLoU-$env:APPVEYOR_BUILD_VERSION.zip"
 
 
-    7z a -tzip $artifact $pwd\Examples\ $pwd\EasyLoU\bin\x64\Release\EasyLoU.exe
+    7z a -tzip $artifact $pwd\Examples\ $pwd\EasyLoU_Launcher\bin\x64\Release\EasyLoU_Launcher.exe
 artifacts:
 - path: EasyLoU-$(APPVEYOR_BUILD_VERSION).zip
 deploy:
