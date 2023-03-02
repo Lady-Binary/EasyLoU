@@ -26,6 +26,39 @@ class Program
         return new string(stringChars);
     }
 
+    /// <summary>
+    ///     Search for a process named SoB_Launcher, and return its executable file path.
+    /// </summary>
+    /// <returns>The SoB_Launcher executable file path.</returns>
+    private static string GetSoBLauncherFilePath()
+    {
+        Console.WriteLine("Checking if SoB_Launcher is running...");
+
+        var sobLauncherProcess = Process.GetProcessesByName("SoB_Launcher");
+        if (sobLauncherProcess == null || sobLauncherProcess.Length == 0)
+        {
+            Console.WriteLine();
+            Console.WriteLine("ERROR: SoB_Launcher not found.");
+            Console.WriteLine("Please start the SoB_Launcher first, then launch the game client, and then start EasyLoU_Launcher.");
+            Console.WriteLine();
+            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
+            ConsoleKeyInfo key = Console.ReadKey();
+            Console.WriteLine();
+            if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
+            {
+                Environment.Exit(-1);
+            }
+
+            return "";
+        }
+
+        string sobLauncherFileName = sobLauncherProcess[0].MainModule.FileName;
+
+        Console.WriteLine($"...SoB_Launcher found {sobLauncherFileName}, all good, we can continue.");
+
+        return sobLauncherFileName;
+    }
+
     static void Main(string[] args)
     {
         string rceditPath = Path.Combine(Path.GetTempPath(), "rcedit-x64.exe");
@@ -36,29 +69,14 @@ class Program
         Console.WriteLine($"EasyLoU_Launcher v{version} - made by Lady Binary with \u2665");
         Console.WriteLine();
 
-        Console.WriteLine("Checking if SoB_Launcher is running...");
-        var sobLauncherProcess = Process.GetProcessesByName("SoB_Launcher");
-        if (sobLauncherProcess == null || sobLauncherProcess.Length == 0)
-        {
-            Console.WriteLine();
-            Console.WriteLine("ERROR: SoB_Launcher not found.");
-            Console.WriteLine("Please start the SoB_Launcher first, then launch the game client, and then start EasyLoU_Launcher.");
-            Console.WriteLine();
-            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
-            ConsoleKeyInfo key = Console.ReadKey();
-            if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
-            {
-                Environment.Exit(-1);
-            }
-            Console.WriteLine();
-        } else
-        {
-            Console.WriteLine("...SoB_Launcher found, all good, we can continue.");
+        var sobLauncherFileName = GetSoBLauncherFilePath();
 
-            Console.WriteLine();
+        Console.WriteLine();
+
+        if (sobLauncherFileName != "")
+        {
 
             Console.WriteLine("Checking SoB_Launcher version...");
-            string sobLauncherFileName = sobLauncherProcess[0].MainModule.FileName;
             var KNOWN_SOBLAUNCHER_HASHES = new System.Collections.ArrayList() {
                 "08ba8c5c4d2bfc5c0558774d850a45f102667eb24f1f58cc41805017dcc98dae", // Released 2023-02-28
                 "c049b38b7a3a28ea44e2dcc7451a6ae25de5f17ab0383b3fa26c24fb412213bf" // Released 2023-03-02
