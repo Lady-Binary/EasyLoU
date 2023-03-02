@@ -65,6 +65,7 @@ class Program
             if (sobLauncherHash != KNOWN_SOBLAUNCHER_HASH)
             {
                 Console.WriteLine("WARNING: it looks like SoB_Launcher was updated!");
+                Console.WriteLine($"SoB_Launcher hash: {sobLauncherHash}");
                 Console.WriteLine("This means it may contain new anticheat features that could put you in danger.");
                 Console.WriteLine("Please ask for guidance on the EasyLoU Discord before proceeding.");
                 Console.WriteLine();
