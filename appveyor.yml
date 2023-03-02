@@ -76,7 +76,7 @@ after_build:
 
     7z a -tzip $artifact $pwd\Examples\ $pwd\EasyLoU_Launcher\bin\x64\Release\Launcher.exe
 artifacts:
-- path: EasyLoU-$(APPVEYOR_BUILD_VERSION).zip
+- path: Launcher-$(APPVEYOR_BUILD_VERSION).zip
 deploy:
 - provider: GitHub
   tag: $(APPVEYOR_BUILD_VERSION)
