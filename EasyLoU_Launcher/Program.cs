@@ -98,7 +98,7 @@ class Program
             {
                 Environment.Exit(-1);
             }
-            Console.WriteLine("...SoB_Launcher is not found, but you decided to continue AT YOUR OWN RISK.");
+            Console.WriteLine("...SoB_Launcher was not found, but you decided to continue AT YOUR OWN RISK.");
             return "";
         }
 
