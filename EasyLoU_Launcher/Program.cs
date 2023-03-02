@@ -59,10 +59,13 @@ class Program
 
             Console.WriteLine("Checking SoB_Launcher version...");
             string sobLauncherFileName = sobLauncherProcess[0].MainModule.FileName;
-            string KNOWN_SOBLAUNCHER_HASH = "08ba8c5c4d2bfc5c0558774d850a45f102667eb24f1f58cc41805017dcc98dae";
+            var KNOWN_SOBLAUNCHER_HASHES = new System.Collections.ArrayList() {
+                "08ba8c5c4d2bfc5c0558774d850a45f102667eb24f1f58cc41805017dcc98dae", // Released 2023-02-28
+                "c049b38b7a3a28ea44e2dcc7451a6ae25de5f17ab0383b3fa26c24fb412213bf" // Released 2023-03-02
+            };
             BufferedStream inputStream = new BufferedStream(File.OpenRead(sobLauncherFileName), 1200000);
             string sobLauncherHash = BitConverter.ToString(new SHA256Managed().ComputeHash(inputStream)).Replace("-", string.Empty).ToLowerInvariant();
-            if (sobLauncherHash != KNOWN_SOBLAUNCHER_HASH)
+            if (!KNOWN_SOBLAUNCHER_HASHES.Contains(sobLauncherHash))
             {
                 Console.WriteLine("WARNING: it looks like SoB_Launcher was updated!");
                 Console.WriteLine($"SoB_Launcher hash: {sobLauncherHash}");
