@@ -92,11 +92,39 @@ class Program
         Console.WriteLine("...SoB_Launcher version is known, all good, we can continue.");
     }
 
+    /// <summary>
+    ///     Prepares the EasyLoU executable into a temp folder, waiting to be patched.
+    /// </summary>
+    /// <returns>The EasyLoU executable file path.</returns>
+    private static string StageEasyLoU()
+    {
+        Console.WriteLine("Staging EasyLoU into temporary folder...");
+
+        string easyLoUPath = Path.Combine(Path.GetTempPath(), GenerateRandomString(16) + ".exe");
+        File.WriteAllBytes(easyLoUPath, EasyLoU_Launcher.Resources.EasyLoU);
+
+        Console.WriteLine($"...{easyLoUPath} ready to be patched!");
+
+        return easyLoUPath;
+    }
+
+    /// <summary>
+    ///     Prepares the rcedit executable into a temp folder, waiting to patch EasyLoU.
+    /// </summary>
+    /// <returns>The rcedit executable file path.</returns>
+    private static string StageRcedit()
+    {
+        Console.WriteLine("Staging rcedit into temporary folder...");
+
+        string rceditPath = Path.Combine(Path.GetTempPath(), "rcedit-x64.exe");
+        File.WriteAllBytes(rceditPath, EasyLoU_Launcher.Resources.rcedit_x64);
+
+        Console.WriteLine($"...{rceditPath} ready to be patched!");
+
+        return rceditPath;
+    }
     static void Main(string[] args)
     {
-        string rceditPath = Path.Combine(Path.GetTempPath(), "rcedit-x64.exe");
-        string easyLoUPath = Path.Combine(Path.GetTempPath(), GenerateRandomString(8) + ".exe");
-
         var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         Console.WriteLine();
         Console.WriteLine($"EasyLoU_Launcher v{version} - made by Lady Binary with \u2665");
@@ -109,19 +137,15 @@ class Program
         if (sobLauncherFileName != "")
         {
             CheckSoBLauncherVersion(sobLauncherFileName);
+
+            Console.WriteLine();
         }
 
-        Console.WriteLine();
-
-        Console.WriteLine("Staging EasyLoU into temporary folder...");
-        File.WriteAllBytes(rceditPath, EasyLoU_Launcher.Resources.rcedit_x64);
-        Console.WriteLine($"...{easyLoUPath} ready to be patched!");
+        var easyLoUPath = StageEasyLoU();
 
         Console.WriteLine();
 
-        Console.WriteLine("Staging the patching tool rc-edit into temporary folder...");
-        File.WriteAllBytes(easyLoUPath, EasyLoU_Launcher.Resources.EasyLoU);
-        Console.WriteLine($"...{rceditPath} ready to be launched!");
+        var rceditPath = StageRcedit();
         
         Console.WriteLine();
 
