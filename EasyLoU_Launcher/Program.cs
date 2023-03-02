@@ -225,10 +225,16 @@ class Program
         $" --set-version-string \"ProductName\" \"{GenerateRandomString(8)}\"" +
         $" --set-version-string \"ProductVersion\" \"{GenerateRandomString(8)}\"";
         ///Console.WriteLine($"...executing command: {rceditPath} {rceditCommand}...");
-        Process.Start(rceditPath, rceditCommand);
-
-        Console.WriteLine("...waiting 5 seconds for the patch to be applied...");
-        System.Threading.Thread.Sleep(5000);
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = rceditPath,
+                Arguments = rceditCommand
+            }
+        };
+        process.Start();
+        process.WaitForExit();
 
         Console.WriteLine("...EasyLoU successfully patched!");
     }
