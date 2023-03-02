@@ -59,6 +59,39 @@ class Program
         return sobLauncherFileName;
     }
 
+    /// <summary>
+    ///     Check if the SoB_Launcher executable is a known version or not.
+    /// </summary>
+    /// <param name="sobLauncherFileName">The SoB_Launcher executable file path.</param>
+    private static void CheckSoBLauncherVersion(string sobLauncherFileName)
+    {
+        Console.WriteLine("Checking SoB_Launcher version...");
+
+        var KNOWN_SOBLAUNCHER_HASHES = new System.Collections.ArrayList() {
+                "08ba8c5c4d2bfc5c0558774d850a45f102667eb24f1f58cc41805017dcc98dae", // Released 2023-02-28
+                "c049b38b7a3a28ea44e2dcc7451a6ae25de5f17ab0383b3fa26c24fb412213bf" // Released 2023-03-02
+            };
+        BufferedStream inputStream = new BufferedStream(File.OpenRead(sobLauncherFileName), 1200000);
+        string sobLauncherHash = BitConverter.ToString(new SHA256Managed().ComputeHash(inputStream)).Replace("-", string.Empty).ToLowerInvariant();
+        if (!KNOWN_SOBLAUNCHER_HASHES.Contains(sobLauncherHash))
+        {
+            Console.WriteLine("WARNING: it looks like SoB_Launcher was updated!");
+            Console.WriteLine($"New SoB_Launcher hash: {sobLauncherHash}");
+            Console.WriteLine("This means it may contain new anticheat features that could put you in danger.");
+            Console.WriteLine("Please ask for guidance on the EasyLoU Discord before proceeding.");
+            Console.WriteLine();
+            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
+            ConsoleKeyInfo key = Console.ReadKey();
+            Console.WriteLine();
+            if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
+            {
+                Environment.Exit(-1);
+            }
+        }
+
+        Console.WriteLine("...SoB_Launcher version is known, all good, we can continue.");
+    }
+
     static void Main(string[] args)
     {
         string rceditPath = Path.Combine(Path.GetTempPath(), "rcedit-x64.exe");
@@ -75,33 +108,7 @@ class Program
 
         if (sobLauncherFileName != "")
         {
-
-            Console.WriteLine("Checking SoB_Launcher version...");
-            var KNOWN_SOBLAUNCHER_HASHES = new System.Collections.ArrayList() {
-                "08ba8c5c4d2bfc5c0558774d850a45f102667eb24f1f58cc41805017dcc98dae", // Released 2023-02-28
-                "c049b38b7a3a28ea44e2dcc7451a6ae25de5f17ab0383b3fa26c24fb412213bf" // Released 2023-03-02
-            };
-            BufferedStream inputStream = new BufferedStream(File.OpenRead(sobLauncherFileName), 1200000);
-            string sobLauncherHash = BitConverter.ToString(new SHA256Managed().ComputeHash(inputStream)).Replace("-", string.Empty).ToLowerInvariant();
-            if (!KNOWN_SOBLAUNCHER_HASHES.Contains(sobLauncherHash))
-            {
-                Console.WriteLine("WARNING: it looks like SoB_Launcher was updated!");
-                Console.WriteLine($"SoB_Launcher hash: {sobLauncherHash}");
-                Console.WriteLine("This means it may contain new anticheat features that could put you in danger.");
-                Console.WriteLine("Please ask for guidance on the EasyLoU Discord before proceeding.");
-                Console.WriteLine();
-                Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
-                ConsoleKeyInfo key = Console.ReadKey();
-                if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
-                {
-                    Environment.Exit(-1);
-                }
-                Console.WriteLine();
-            }
-            else
-            {
-                Console.WriteLine("...SoB_Launcher version is known, all good, we can continue.");
-            }
+            CheckSoBLauncherVersion(sobLauncherFileName);
         }
 
         Console.WriteLine();
