@@ -7,7 +7,7 @@
     <ProjectGuid>{EEF3ADED-E6CF-468C-A545-8A1A0C9A25FB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>EasyLoU_Launcher</RootNamespace>
-    <AssemblyName>EasyLoU_Launcher</AssemblyName>
+    <AssemblyName>Launcher</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
