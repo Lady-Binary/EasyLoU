@@ -71,7 +71,7 @@ build:
   verbosity: minimal
 after_build:
 - ps: >-
-    $artifact = "EasyLoU-$env:APPVEYOR_BUILD_VERSION.zip"
+    $artifact = "Launcher-$env:APPVEYOR_BUILD_VERSION.zip"
 
 
     7z a -tzip $artifact $pwd\Examples\ $pwd\EasyLoU_Launcher\bin\x64\Release\Launcher.exe
