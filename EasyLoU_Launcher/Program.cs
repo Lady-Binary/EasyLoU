@@ -38,7 +38,7 @@ class Program
         if (sobLauncherProcess == null || sobLauncherProcess.Length == 0)
         {
             Console.WriteLine();
-            Console.WriteLine("ERROR: SoB_Launcher not found.");
+            Console.WriteLine("WARNING: SoB_Launcher not found.");
             Console.WriteLine("Please start the SoB_Launcher first, then launch the game client, and then start EasyLoU_Launcher.");
             Console.WriteLine();
             Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
@@ -48,12 +48,11 @@ class Program
             {
                 Environment.Exit(-1);
             }
-
+            Console.WriteLine("...SoB_Launcher is not found, but you decided to continue AT YOUR OWN RISK.");
             return "";
         }
 
         string sobLauncherFileName = sobLauncherProcess[0].MainModule.FileName;
-
         Console.WriteLine($"...SoB_Launcher found {sobLauncherFileName}, all good, we can continue.");
 
         return sobLauncherFileName;
@@ -75,6 +74,7 @@ class Program
         string sobLauncherHash = BitConverter.ToString(new SHA256Managed().ComputeHash(inputStream)).Replace("-", string.Empty).ToLowerInvariant();
         if (!KNOWN_SOBLAUNCHER_HASHES.Contains(sobLauncherHash))
         {
+            Console.WriteLine();
             Console.WriteLine("WARNING: it looks like SoB_Launcher was updated!");
             Console.WriteLine($"New SoB_Launcher hash: {sobLauncherHash}");
             Console.WriteLine("This means it may contain new anticheat features that could put you in danger.");
@@ -87,6 +87,8 @@ class Program
             {
                 Environment.Exit(-1);
             }
+            Console.WriteLine("...SoB_Launcher version is not known, but you decided to continue AT YOUR OWN RISK.");
+            return;
         }
 
         Console.WriteLine("...SoB_Launcher version is known, all good, we can continue.");
