@@ -431,10 +431,6 @@
       <Project>{99e17151-042b-499d-b752-5b185ab289fa}</Project>
       <Name>LoU</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMonoInjector\src\SharpMonoInjector\SharpMonoInjector.csproj">
-      <Project>{4a1b44f7-447c-4441-bfa8-b6fced65b4bd}</Project>
-      <Name>SharpMonoInjector</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />
