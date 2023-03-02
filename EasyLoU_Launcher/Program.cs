@@ -44,9 +44,13 @@ class Program
             Console.WriteLine("ERROR: SoB_Launcher not found.");
             Console.WriteLine("Please start the SoB_Launcher first, then launch the game client, and then start EasyLoU_Launcher.");
             Console.WriteLine();
-            Console.WriteLine("Please hit Enter to terminate.");
-            Console.ReadLine();
-            Environment.Exit(-1);
+            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
+            {
+                Environment.Exit(-1);
+            }
+            Console.WriteLine();
         }
 
         string sobLauncherFileName = sobLauncherProcess[0].MainModule.FileName;
