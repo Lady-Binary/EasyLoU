@@ -9,7 +9,7 @@ class Program
     private static Random random = new Random();
 
     /// <summary>
-    ///     Generates a random alphanumeric string.
+    ///     Generate a random alphanumeric string.
     /// </summary>
     /// <param name="length">Length of the string</param>
     /// <returns>A randomly generated string.</returns>
@@ -93,7 +93,7 @@ class Program
     }
 
     /// <summary>
-    ///     Prepares the EasyLoU executable into a temp folder, waiting to be patched.
+    ///     Prepare the EasyLoU executable into a temp folder, waiting to be patched.
     /// </summary>
     /// <returns>The EasyLoU executable file path.</returns>
     private static string StageEasyLoU()
@@ -109,7 +109,7 @@ class Program
     }
 
     /// <summary>
-    ///     Prepares the rcedit executable into a temp folder, waiting to patch EasyLoU.
+    ///     Prepare the rcedit executable into a temp folder, waiting to patch EasyLoU.
     /// </summary>
     /// <returns>The rcedit executable file path.</returns>
     private static string StageRcedit()
@@ -123,6 +123,48 @@ class Program
 
         return rceditPath;
     }
+
+    /// <summary>
+    ///     Patch the EasyLoU executable via rcedit to further evade the anti-cheat.
+    /// </summary>
+    /// <param name="rceditPath">The rcedit executable file path.</param>
+    /// <param name="easyLoUPath">The EasyLoU executable file path.</param>
+    private static void PatchEasyLoU(string rceditPath, string easyLoUPath)
+    {
+        Console.WriteLine("Patching EasyLoU via rcedit to further evade anti-cheat...");
+
+        string rceditCommand = $"\"{easyLoUPath}\"" +
+        $" --set-version-string \"Comments\" \"{GenerateRandomString(8)}\"" +
+        $" --set-version-string \"CompanyName\" \"{GenerateRandomString(8)}\"" +
+        $" --set-version-string \"FileDescription\" \"{GenerateRandomString(8)}\"" +
+        //$" --set-version-string \"FileVersion\" \"{GenerateRandomString(8)}\"" + // this doesn't really work
+        $" --set-version-string \"InternalName\" \"{GenerateRandomString(8)}\"" +
+        $" --set-version-string \"LegalCopyright\" \"{GenerateRandomString(8)}\"" +
+        $" --set-version-string \"LegalTrademarks\" \"{GenerateRandomString(8)}\"" +
+        $" --set-version-string \"OriginalFilename\" \"{GenerateRandomString(8)}\"" +
+        $" --set-version-string \"ProductName\" \"{GenerateRandomString(8)}\"" +
+        $" --set-version-string \"ProductVersion\" \"{GenerateRandomString(8)}\"";
+        ///Console.WriteLine($"...executing command: {rceditPath} {rceditCommand}...");
+        Process.Start(rceditPath, rceditCommand);
+
+        Console.WriteLine("...waiting 5 seconds for the patch to be applied...");
+        System.Threading.Thread.Sleep(5000);
+
+        Console.WriteLine("...EasyLoU successfully patched!");
+    }
+
+    /// <summary>
+    ///     Launch EasyLoU.
+    /// </summary>
+    private static void StartEasyLoU(string easyLoUPath)
+    {
+        Console.WriteLine("Starting EasyLoU ...");
+
+        Process.Start(easyLoUPath);
+
+        Console.WriteLine("...EasyLoU started, all good! It is safe to close this window now.");
+    }
+
     static void Main(string[] args)
     {
         var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -149,36 +191,15 @@ class Program
         
         Console.WriteLine();
 
-        Console.WriteLine("Patching EasyLoU via rc-edit to evade anti-cheat...");
-
-        string rceditCommand = $"\"{easyLoUPath}\"" +
-        $" --set-version-string \"Comments\" \"{GenerateRandomString(8)}\"" +
-        $" --set-version-string \"CompanyName\" \"{GenerateRandomString(8)}\"" +
-        $" --set-version-string \"FileDescription\" \"{GenerateRandomString(8)}\"" +
-        //$" --set-version-string \"FileVersion\" \"{GenerateRandomString(8)}\"" + // this doesn't really work
-        $" --set-version-string \"InternalName\" \"{GenerateRandomString(8)}\"" +
-        $" --set-version-string \"LegalCopyright\" \"{GenerateRandomString(8)}\"" +
-        $" --set-version-string \"LegalTrademarks\" \"{GenerateRandomString(8)}\"" +
-        $" --set-version-string \"OriginalFilename\" \"{GenerateRandomString(8)}\"" +
-        $" --set-version-string \"ProductName\" \"{GenerateRandomString(8)}\"" +
-        $" --set-version-string \"ProductVersion\" \"{GenerateRandomString(8)}\"";
-        ///Console.WriteLine($"...executing command: {rceditPath} {rceditCommand}...");
-        Process.Start(rceditPath, rceditCommand);
-
-        Console.WriteLine("...waiting 5 seconds for the patch to be applied...");
-        System.Threading.Thread.Sleep(5000);
-
-        Console.WriteLine("...EasyLoU successfully patched!");
+        PatchEasyLoU(rceditPath, easyLoUPath);
 
         Console.WriteLine();
 
-        Console.WriteLine("Starting EasyLoU ...");
-        Process.Start(easyLoUPath);
-        Console.WriteLine("...EasyLoU started, all good! It is safe to close this window now.");
+        StartEasyLoU(easyLoUPath);
 
         Console.WriteLine();
 
-        Console.WriteLine("Please hit Enter to close this window.");
+        Console.WriteLine("All good, please hit Enter to close this window.");
         Console.ReadLine();
     }
 }
