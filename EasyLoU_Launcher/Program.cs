@@ -27,6 +27,56 @@ class Program
     }
 
     /// <summary>
+    ///     Ensure we are running from temp folder.
+    ///     If we are not, then copy the current executable into temp, execute it from there,
+    ///     and kill the current process.
+    ///     WARNING: this is done only in DEBUG mode in order to facilitate debugging and troubleshooting.
+    ///     WARNING: running in DEBUG mode and bypassing this could put you AT RISK of getting caught.
+    /// </summary>
+    private static void EnsureRunningFromTemp()
+    {
+#if DEBUG
+        Console.WriteLine("WARNING: We are running in DEBUG mode and therefore we are not going to migrate to temp.");
+        Console.WriteLine("This is only for debugging mode and could put you at risk.");
+        Console.WriteLine();
+        Console.WriteLine("Press 'y' if you know what you are doing and would like to continue AT YOUR OWN RISK.");
+        ConsoleKeyInfo key = Console.ReadKey();
+        Console.WriteLine();
+        if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
+        {
+            Environment.Exit(-1);
+        }
+#else
+        Console.WriteLine("Checking if we are running from temp folder...");
+
+        string ourPath = Process.GetCurrentProcess().MainModule.FileName;
+        if (!ourPath.ToLower().Contains(Path.GetTempPath().ToLower()))
+        {
+            Console.WriteLine($"...we are not running from temp folder but from {ourPath} instead, need to migrate!");
+
+            Console.WriteLine();
+
+            string tempPath = Path.Combine(Path.GetTempPath(), GenerateRandomString(16) + ".exe");
+            Console.WriteLine($"Migrating to {tempPath}...");
+            if (tempPath.ToLower().Contains("easylou"))
+            {
+                Console.WriteLine("ERROR: something is off, the temp folder path contains the string EasyLoU.");
+                Console.WriteLine("We will certainly get caught by the anti-cheat and need to terminate now.");
+                Console.WriteLine("Please hit Enter to close this window.");
+                Console.ReadLine();
+                Environment.Exit(-1);
+            }
+            File.Copy(ourPath, tempPath);
+            Process.Start(tempPath);
+            Console.WriteLine($"...migration to {tempPath} complete, killing current process!");
+            Environment.Exit(0);
+        }
+
+        Console.WriteLine($"...we are running from {ourPath}, all good!");
+#endif
+    }
+
+    /// <summary>
     ///     Search for a process named SoB_Launcher, and return its executable file path.
     /// </summary>
     /// <returns>The SoB_Launcher executable file path.</returns>
@@ -41,7 +91,7 @@ class Program
             Console.WriteLine("WARNING: SoB_Launcher not found.");
             Console.WriteLine("Please start the SoB_Launcher first, then launch the game client, and then start EasyLoU_Launcher.");
             Console.WriteLine();
-            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
+            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue AT YOUR OWN RISK.");
             ConsoleKeyInfo key = Console.ReadKey();
             Console.WriteLine();
             if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
@@ -80,7 +130,7 @@ class Program
             Console.WriteLine("This means it may contain new anticheat features that could put you in danger.");
             Console.WriteLine("Please ask for guidance on the EasyLoU Discord before proceeding.");
             Console.WriteLine();
-            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue at your own risk.");
+            Console.WriteLine("Press 'y' if you know what you are doing and would like to continue AT YOUR OWN RISK.");
             ConsoleKeyInfo key = Console.ReadKey();
             Console.WriteLine();
             if (key.Key.ToString() != "y" && key.Key.ToString() != "Y")
@@ -172,6 +222,10 @@ class Program
         var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         Console.WriteLine();
         Console.WriteLine($"EasyLoU_Launcher v{version} - made by Lady Binary with \u2665");
+        Console.WriteLine();
+
+        EnsureRunningFromTemp();
+
         Console.WriteLine();
 
         var sobLauncherFileName = GetSoBLauncherFilePath();
