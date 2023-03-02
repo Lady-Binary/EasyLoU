@@ -153,6 +153,20 @@ class Program
         Console.WriteLine("Staging EasyLoU into temporary folder...");
 
         string easyLoUPath = Path.Combine(Path.GetTempPath(), GenerateRandomString(16) + ".exe");
+
+        Console.WriteLine($"...preparing Windows Defender exclusion for {easyLoUPath}...");
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "powershell",
+                Arguments = $"powershell -inputformat none -outputformat none -NonInteractive -Command Add-MpPreference -ExclusionPath \"{easyLoUPath}\""
+            }
+        };
+        process.Start();
+        process.WaitForExit();
+
+        Console.WriteLine($"...copying EasyLoU to {easyLoUPath}...");
         File.WriteAllBytes(easyLoUPath, EasyLoU_Launcher.Resources.EasyLoU);
 
         Console.WriteLine($"...{easyLoUPath} ready to be patched!");
@@ -169,9 +183,23 @@ class Program
         Console.WriteLine("Staging rcedit into temporary folder...");
 
         string rceditPath = Path.Combine(Path.GetTempPath(), "rcedit-x64.exe");
+
+        Console.WriteLine($"...preparing Windows Defender exclusion for {rceditPath}...");
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "powershell",
+                Arguments = $"powershell -inputformat none -outputformat none -NonInteractive -Command Add-MpPreference -ExclusionPath \"{rceditPath}\""
+            }
+        };
+        process.Start();
+        process.WaitForExit();
+
+        Console.WriteLine($"...copying rcedit to {rceditPath}...");
         File.WriteAllBytes(rceditPath, EasyLoU_Launcher.Resources.rcedit_x64);
 
-        Console.WriteLine($"...{rceditPath} ready to be patched!");
+        Console.WriteLine($"...{rceditPath} ready to patch!");
 
         return rceditPath;
     }
