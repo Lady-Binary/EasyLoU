@@ -248,7 +248,7 @@ class Program
 
         Process.Start(easyLoUPath);
 
-        Console.WriteLine("...EasyLoU started, all good! It is safe to close this window now.");
+        Console.WriteLine("...EasyLoU started, all good!");
     }
 
     static void Main(string[] args)
