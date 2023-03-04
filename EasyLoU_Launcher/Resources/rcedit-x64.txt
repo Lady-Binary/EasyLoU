@@ -1,0 +1,8 @@
+rcedit is a command line tool to edit resources of exe file on Windows.
+
+rcedit-x64.exe was downloaded from https://github.com/electron/rcedit/releases/tag/v1.1.1
+you can verify its integrity by comparing its sha256 with the hash below:
+
+sha256:
+02e8e8c5d430d8b768980f517b62d7792d690982b9ba0f7e04163cbc1a6e7915  rcedit-x64.exe
+

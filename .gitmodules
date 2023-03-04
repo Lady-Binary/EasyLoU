@@ -1,6 +1,3 @@
 [submodule "LoU"]
 	path = LoU
 	url = https://github.com/Lady-Binary/LoU.git
-[submodule "SharpMonoInjector"]
-	path = SharpMonoInjector
-	url = https://github.com/Lady-Binary/SharpMonoInjector.git
