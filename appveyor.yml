@@ -83,7 +83,7 @@ deploy:
   release: EasyLoU v$(APPVEYOR_BUILD_VERSION) - Client v$(LOA_VERSION)
   auth_token:
     secure: mPV5k4Dfx3gXB1zFlC373VKWr1ZsTfTkKF3HqKhborSDolrI3FFJ53t2AnavsXxx
-  artifact: EasyLoU-$(APPVEYOR_BUILD_VERSION).zip
+  artifact: Launcher-$(APPVEYOR_BUILD_VERSION).zip
   on:
     branch: main
 after_deploy:
