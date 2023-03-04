@@ -1,5 +1,10 @@
 # Changelog
 
+## LoA 1.4.1.0 - EasyLoU 1.4.0.1 (04/03/2023)
+*No changelog for this release.*
+
+---
+
 ## LoA 1.4.1.0 - EasyLoU 1.4.0.0 (04/03/2023)
 
 #### Enhancements:
@@ -297,9 +302,4 @@
 ---
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.22 (28/07/2020)
-*No changelog for this release.*
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.21 (27/07/2020)
 *No changelog for this release.*
