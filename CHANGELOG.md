@@ -1,5 +1,15 @@
 # Changelog
 
+## LoA 1.4.1.0 - EasyLoU 1.4.0.0 (04/03/2023)
+
+#### Enhancements:
+
+- AntiCheat defense - patch EasyLoU at runtime [#189](https://github.com/Lady-Binary/EasyLoU/issues/189)
+-  AntiCheat defense - move MoonSharp into main EasyLoU project [#188](https://github.com/Lady-Binary/EasyLoU/issues/188)
+- AntiCheat defense - move SharpMonoInjector into main EasyLoU project [#187](https://github.com/Lady-Binary/EasyLoU/issues/187)
+
+---
+
 ## LoA 1.4.1.0 - EasyLoU 1.3.0.1 (28/02/2023)
 
 #### Enhancements:
@@ -7,12 +17,6 @@
 - Improve syntax highlight [#186](https://github.com/Lady-Binary/EasyLoU/issues/186)
 - Move ScanJournal into two separate commands, ScanChatJournal and ScanSystemJournal [#183](https://github.com/Lady-Binary/EasyLoU/issues/183)
 - Add current character name to the EasyLoU window [#174](https://github.com/Lady-Binary/EasyLoU/issues/174)
-
-#### function (placeholders) {
-			return '';
-        }
-
-- .csproj files not existent in the repos [#181](https://github.com/Lady-Binary/EasyLoU/issues/181)
 
 ---
 
@@ -298,9 +302,4 @@
 ---
 
 ## LoA 1.0.0.4 - EasyLOU 1.0.0.21 (27/07/2020)
-*No changelog for this release.*
-
----
-
-## LoA 1.0.0.4 - EasyLOU 1.0.0.20 (27/07/2020)
 *No changelog for this release.*
